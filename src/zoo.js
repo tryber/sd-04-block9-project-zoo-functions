@@ -1,68 +1,47 @@
 /*
 eslint no-unused-vars: [
-  "error",
+  'error',
   {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
+    'args': 'none',
+    'vars': 'local',
+    'varsIgnorePattern': 'data'
   }
 ]
 */
-//starting!
+// starting!
 
 const data = require("./data");
 
-function animalsByIds(ids) {
-  // seu código aqui
-}
+const animalsByIds = (...ids) => {
+  if (!ids) return [];
+  return data.animals.filter((animal) => ids.includes(animal.id));
+};
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
+console.log(animalsByIds());
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const animalsOlderThan = (animal, age) => {};
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const employeeByName = (employeeName) => {};
 
-function isManager(id) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => {};
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const isManager = (id) => {};
 
-function animalCount(species) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {};
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+const animalCount = (species) => {};
 
-function animalMap(options) {
-  // seu código aqui
-}
+const entryCalculator = (entrants) => {};
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const animalMap = (options) => {};
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const schedule = (dayName) => {};
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const oldestFromFirstSpecies = (id) => {};
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {};
+
+const employeeCoverage = (idOrName) => {};
 
 module.exports = {
   entryCalculator,
