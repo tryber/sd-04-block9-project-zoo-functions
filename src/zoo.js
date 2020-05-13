@@ -19,13 +19,13 @@ const animalsOlderThan = (animal, age) =>
 data.animals.find(elemento => elemento.name === animal)
 .residents.every(elemento => elemento.age > age);
 
-const employeeByName = (employeeName) => data.employees.find(({firstName, lastName}) =>
+const employeeByName = employeeName => data.employees.find(( {firstName, lastName} ) =>
 firstName === employeeName || lastName === employeeName) || {};
 
 const createEmployee = (personalInfo, associatedWith) => ({
   ...personalInfo,
   ...associatedWith,
-})
+});
 
 
 function isManager(id) {
