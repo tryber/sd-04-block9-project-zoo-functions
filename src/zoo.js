@@ -66,9 +66,28 @@ const entryCalculator = entrants =>
   : 0
 );
 
-function animalMap(options) {
-  // seu código aqui
-}
+const residentsName = (specie, sorted, sex) => {
+  const obj = {};
+  obj[specie] = data.animals
+    .find(element => element.name === specie).residents;
+  if (sex) obj[specie] = obj[specie].filter(resident => resident.sex === sex);
+  obj[specie] = obj[specie].map(({ name }) => name);
+  if (sorted) obj[specie].sort();
+  return obj;
+};
+
+const animalMap = (options = {}) => {
+  const { includeNames, sex, sorted } = options;
+  return data.animals.reduce((animal, { name, location }) => {
+    if (!animal[location]) animal[location] = [];
+    if (!includeNames) {
+      animal[location].push(name);
+    } else {
+      animal[location].push(residentsName(name, sorted, sex));
+    }
+    return animal;
+  }, {});
+};
 
 function schedule(dayName) {
   // seu código aqui
