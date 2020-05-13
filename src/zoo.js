@@ -33,14 +33,13 @@ const isManager = id =>
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-const animalCount = (species = '') => {
-  return (species) ?
-  data.animals.find(a => a.name === species).residents.length:
+const animalCount = (species = '') =>
+  (species) ?
+  data.animals.find(a => a.name === species).residents.length :
   data.animals.reduce((r, a) => {
     r[a.name] = a.residents.length;
     return r;
   }, {});
-};
 
 const entryCalculator = (entrants) => {};
 
