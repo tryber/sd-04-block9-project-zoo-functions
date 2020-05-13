@@ -27,12 +27,20 @@ const createEmployee = (personalInfo, associatedWith) => ({
 });
 
 const isManager = id =>
-  data.employees.some(({managers}) =>
+  data.employees.some(({ managers }) =>
     managers.find(index => index === id));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+
+class Employee {
+  constructor(id, firstName, lastName, managers = [], responsibleFor = []) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.managers = managers;
+    this.responsibleFor = responsibleFor;
+  }
 }
+const addEmployee = (...parameters) => data.employees.push(new Employee(...parameters));
 
 function animalCount(species) {
   // seu código aqui
