@@ -78,9 +78,14 @@ data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 //  Sem parâmetros, returna animais e suas quantidades
 //  Com o nome de uma espécie de animal, retorna somente a quantidade
 
-function animalCount(species) {
-  // seu código aqui
-}
+const animalCount = (species) => {
+  const bichos = {};
+  data.animals.forEach(element => (bichos[element.name] = element.residents.length));
+  if (species) {
+    return bichos[species];
+  }
+  return bichos;
+};
 
 //  =======================================================================
 
