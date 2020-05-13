@@ -20,9 +20,11 @@ const animalsOlderThan = (animal, age) =>
     .find(element => animal === element.name)
     .residents.every(obj => obj.age >= age);
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const employeeByName = function (name) {
+  return name ?
+  data.employees.find(element => element.firstName === name || element.lastName === name)
+  : {};
+};
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
