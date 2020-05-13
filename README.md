@@ -11,9 +11,9 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com/tryber/sd-0x-block9-project-zoo-functions.git`.
+  * `git clone https://github.com/tryber/sd-04-block9-project-zoo-functions.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-0x-block9-project-zoo-functions`
+    * `cd sd-04-block9-project-zoo-functions`
 
 2. Crie uma branch a partir da branch `master`
   * Verifique que você está na branch `master`
@@ -42,17 +42,25 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
   * Usando o exemplo anterior: `git push -u origin exemplo-zoo-functions`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-0x-block9-project-zoo-functions/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-04-block9-project-zoo-functions/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-0x-block9-project-zoo-functions/pulls) e confira que o seu _Pull Request_ está criado.
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-04-block9-project-zoo-functions/pulls) e confira que o seu _Pull Request_ está criado.
 
 ### Correção automatizada
 
-Você irá perceber que, ao realizar novos `commits` no seu _Pull Request_, eles serão automaticamente analisados pelo _CodeClimate_ e pelo TravisCI_. Se atente para os comentários do _CodeClimate_ que irão conter dicas valiosas de como deixar seu código melhor! Você pode também explorar o _TravisCI_ para obter informações sobre quais _assertions_ ainda precisa adereçar em seu projeto.
+Você irá perceber que, ao realizar novos `commits` no seu _Pull Request_, eles serão automaticamente analisados pelo _CodeClimate_ e pelo _TravisCI_.
+
+Se atente para os comentários do _CodeClimate_ que irão conter **dicas valiosas** de como deixar seu código melhor! Você pode também explorar o _TravisCI_ para obter informações sobre quais _assertions_ ainda precisa adereçar em seu projeto.
+
+---
+
+### Data de Entrega
+
+O projeto tem até a seguinte data: `21/05/2020 - 14:00h`. Para ser entregue a avaliação final.
 
 ---
 
@@ -148,12 +156,12 @@ Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão 
 
 ### DEPOIS DE TERMINAR O DESENVOLVIMENTO (OPCIONAL)
 
-Para **"entregar"** seu projeto, siga os passos a seguir:
+Para disponibilizar seu projeto para [**Code Review**](https://course.betrybe.com/real-life-engineer/code-review/), siga os passos a seguir
 
 * Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas
   * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**
   * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-0x`
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-04`
 
 Se ainda houver alguma dúvida sobre como entregar seu projeto, [aqui tem um video explicativo](https://vimeo.com/362189205).
 
