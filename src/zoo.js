@@ -36,6 +36,8 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  // Testa se o id passado é de um gerente
+  return data.employees.some(element => element.managers.some(man => man === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
