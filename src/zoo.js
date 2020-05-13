@@ -36,9 +36,11 @@ const employeeByName = function (name) {
   : {};
 };
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+// 4- Implemente a função createEmployee:
+// Cria um novo colaborador a partir de objetos contendo informações pessoais, gerentes e animais
+// gerenciados
+
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 function isManager(id) {
   // seu código aqui
