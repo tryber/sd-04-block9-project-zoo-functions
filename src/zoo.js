@@ -46,8 +46,12 @@ function employeeByName(employeeName) {
 //  employeeByName();
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  console.log(personalInfo, associatedWith);
+  const newEmployee = Object.assign(personalInfo, associatedWith);
+  return newEmployee;
 }
+
+//console.log(createEmployee({nome: 'teste'}, {idade: 'teste2'}));
 
 function isManager(id) {
   // seu código aqui
