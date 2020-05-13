@@ -29,10 +29,10 @@ const animalsByIds = (...ids) =>
 //  Ao passar o nome de uma espécie e uma idade, testa se todos os animais
 //  desta espécie possuem a idade mínima especificada
 
-const animalsOlderThan = (animal, age) => {
-
-
-};
+const animalsOlderThan = (animal, age) =>
+  data.animals
+    .find(e => animal === e.name)
+    .residents.every(e => e.age >= age);
 
 //  =======================================================================
 
