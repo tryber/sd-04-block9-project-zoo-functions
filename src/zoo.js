@@ -24,11 +24,16 @@ function animalsOlderThan(animal, age) {
   return result;
 
 }
-console.log(animalsOlderThan('penguins', 10));
+// console.log(animalsOlderThan('penguins', 10));
 
 function employeeByName(employeeName) {
   // seu código aqui
+  if(!employeeName) return {};
+  const func = data.employees.find(elemento => employeeName === elemento.firstName || employeeName === elemento.lastName);
+  return func;
 }
+//console.log(employeeByName(''));
+
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
