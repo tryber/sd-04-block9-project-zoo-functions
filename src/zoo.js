@@ -65,6 +65,7 @@ const entryCalculator = entrants =>
   .reduce((total, quantity) => (total + (data.prices[quantity] * entrants[quantity])), 0)
   : 0
 );
+
 function animalMap(options) {
   // seu código aqui
 }
@@ -77,9 +78,11 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = percentage =>
+  Object.keys(data.prices).forEach((price) => {
+    (data.prices[price] = Math.round(data.prices[price] *
+    ((percentage / 100) + 1) * 100) / 100);
+  });
 
 function employeeCoverage(idOrName) {
   // seu código aqui
