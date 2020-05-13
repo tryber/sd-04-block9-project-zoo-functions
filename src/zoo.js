@@ -4,15 +4,16 @@ eslint no-unused-vars: [
   {
     "args": "none",
     "vars": "local",
-    "varsIgnorePattern": "data" 
+    "varsIgnorePattern": "data"
   }
 ]
 */
 
 const data = require('./data');
 
-function animalsByIds(ids) {
+function animalsByIds(...ids) {
   // seu código aqui
+  return data.animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
@@ -64,17 +65,17 @@ function employeeCoverage(idOrName) {
 }
 
 module.exports = {
-  entryCalculator,
-  schedule,
+  addEmployee,
   animalCount,
   animalMap,
   animalsByIds,
+  animalsOlderThan,
+  createEmployee,
   employeeByName,
   employeeCoverage,
-  addEmployee,
-  isManager,
-  animalsOlderThan,
-  oldestFromFirstSpecies,
+  entryCalculator,
   increasePrices,
-  createEmployee,
+  isManager,
+  oldestFromFirstSpecies,
+  schedule,
 };
