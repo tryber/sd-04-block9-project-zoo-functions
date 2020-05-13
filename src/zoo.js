@@ -21,7 +21,14 @@ function animalsOlderThan(animal, age) {
   return filteredAnimals.residents.every(({ age: trueAge }) => trueAge >= age);
 }
 
+/* Sem parâmetros, retorna um objeto vazio
+Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+Quando provido o último nome do funcionário, retorna o objeto do funcionário */
+
 function employeeByName(employeeName) {
+  if (!employeeName) return {};
+  return data.employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
