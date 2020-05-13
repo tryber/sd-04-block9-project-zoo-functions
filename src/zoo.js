@@ -42,9 +42,23 @@ class Employee {
 }
 const addEmployee = (...parameters) => data.employees.push(new Employee(...parameters));
 
-function animalCount(species) {
-  // seu código aqui
-}
+  // CC NÃO DEIXA ASSIM
+  // const animalCount = species =>
+  //   species ? data.animals.find(({ name }) =>
+  //     name === species).residents.length : data.animals.reduce((acc, animal) => {
+  //       acc[animal.name] = animal.residents.length;
+  //       return acc;
+  //     }, {});
+
+const animalCount = (species) => {
+  if (species) {
+    return data.animals.find(({ name }) => name === species).residents.length;
+  }
+  return data.animals.reduce((acc, animal) => {
+    acc[animal.name] = animal.residents.length;
+    return acc;
+  }, {});
+};
 
 function entryCalculator(entrants) {
   // seu código aqui
