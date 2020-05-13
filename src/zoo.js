@@ -58,8 +58,24 @@ function entryCalculator(entrants) {
     Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * data.prices[curr]), 0);
 }
 
-function animalMap(options) {
+function toPushMap(info, options) {
+  let result = info.name;
+  if (options != null && options.includeNames) {
+    const names = info.residents.filter(resi => !options.sex || resi.sex === options.sex)
+      .map(resi => resi.name);
+    result = { [info.name]: names };
+    if (options.sorted) result[info.name].sort();
+  }
+  return result;
+}
+
+function animalMap(options) {// preciso refatorar não gostei do resultado por mais que esteja funcional
   // seu código aqui
+  return data.animals.reduce((acc, curr) => {
+    if (!acc[curr.location]) acc[curr.location] = [];
+    acc[curr.location].push(toPushMap(curr, options));
+    return acc;
+  }, {});
 }
 
 function schedule(dayName) {
