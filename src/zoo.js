@@ -4,7 +4,7 @@ eslint no-unused-vars: [
   {
     "args": "none",
     "vars": "local",
-    "varsIgnorePattern": "data"
+    "varsIgnorePattern": "data" 
   }
 ]
 */
