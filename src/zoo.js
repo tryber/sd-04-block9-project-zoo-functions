@@ -20,9 +20,7 @@ const data = require('./data');
 const animalsByIds = (...ids) =>
   data.animals.filter(animal => ids.find(id => id === animal.id));
 
-
 //  =======================================================================
-
 
 //  ====REQUISITO 2========================================================
 
@@ -36,19 +34,19 @@ const animalsOlderThan = (animal, age) =>
 
 //  =======================================================================
 
-
 //  ====REQUISITO 3========================================================
 
 //  Sem parâmetros, retorna um objeto vazio
 //  Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
 //  Quando provido o último nome do funcionário, retorna o objeto do funcionário
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const employeeByName = function (name) {
+  return name ?
+  data.employees.find(element => element.firstName === name || element.lastName === name)
+  : {};
+};
 
 //  =======================================================================
-
 
 //  ====REQUISITO 4========================================================
 
@@ -61,7 +59,6 @@ function createEmployee(personalInfo, associatedWith) {
 
 //  =======================================================================
 
-
 //  ====REQUISITO 5========================================================
 
 //  Testa se o id passado é de um gerente
@@ -71,7 +68,6 @@ function isManager(id) {
 }
 
 //  =======================================================================
-
 
 //  ====REQUISITO 6========================================================
 
@@ -83,7 +79,6 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 //  =======================================================================
 
-
 //  ====REQUISITO 7========================================================
 
 //  Sem parâmetros, returna animais e suas quantidades
@@ -94,7 +89,6 @@ function animalCount(species) {
 }
 
 //  =======================================================================
-
 
 //  ====REQUISITO 8========================================================
 
@@ -109,9 +103,7 @@ function entryCalculator(entrants) {
 
 //  =======================================================================
 
-
 //  ====REQUISITO 9========================================================
-
 
 //  Sem parâmetros, retorna animais categorizados por localização
 //  Com opções especificadas, retorna nomes de animais
@@ -125,7 +117,6 @@ function animalMap(options) {
 
 //  =======================================================================
 
-
 //  ====REQUISITO 10========================================================
 
 //  Sem parâmetros, retorna um cronograma legível para humanos
@@ -137,7 +128,6 @@ function schedule(dayName) {
 }
 
 //  =======================================================================
-
 
 //  ====REQUISITO 11=======================================================
 
@@ -151,7 +141,6 @@ function oldestFromFirstSpecies(id) {
 
 //  =======================================================================
 
-
 //  ====REQUISITO 12=======================================================
 
 //  Ao passar uma porcentagem, incrementa todos os preços, arrendondados em
@@ -162,7 +151,6 @@ function increasePrices(percentage) {
 }
 
 //  =======================================================================
-
 
 //  ====REQUISITO 13=======================================================
 
