@@ -51,7 +51,7 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee;
 }
 
-//console.log(createEmployee({nome: 'teste'}, {idade: 'teste2'}));
+// console.log(createEmployee({nome: 'teste'}, {idade: 'teste2'}));
 
 function isManager(id) {
   // seu código aqui
