@@ -62,7 +62,6 @@ Se atente para os comentários do _CodeClimate_ que irão conter **dicas valiosa
 
 O projeto tem até a seguinte data: `21/05/2020 - 14:00h`. Para ser entregue a avaliação final.
 
----
 
 ## O que deverá ser desenvolvido
 
@@ -70,7 +69,7 @@ O projeto tem até a seguinte data: `21/05/2020 - 14:00h`. Para ser entregue a a
 
 ## Requisitos do projeto
 
-Vocẽ deverá implementar as funções que estão no `src/zoo.js` para passarem em cada um dos testes. O teste `test/animalsByIds.test.js`, por exemplo, testa a função `addEmployee`, que já está criada dentro do `src/zoo.js`, embora ainda não contenha lógica alguma. Para ver o que cada função precisa retornar basta ver o `assert` de cada um dos testes.
+Vocẽ deverá implementar as funções que estão no `src/zoo.js` para passarem em cada um dos testes. O teste `test/animalsByIds.test.js`, por exemplo, testa a função `animalsByIds`, que já está criada dentro do `src/zoo.js`, embora ainda não contenha lógica alguma. Para ver o que cada função precisa retornar basta ver o `assert` de cada um dos testes.
 
 Utilize as novas funcionalidades do ES6 como arrow functions, template literals, spread operator, parâmetro rest, object destructuring, entre as outras. Utilize também as _High Order Functions_.
 
