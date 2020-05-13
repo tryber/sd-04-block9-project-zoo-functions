@@ -26,11 +26,10 @@ const employeeByName = (employeeName = '') => {
 
 const createEmployee = (personalInfo, associatedWith) =>
   Object.assign({}, personalInfo, associatedWith);
-// console.log(employeeByName('Emery'));
-function isManager(id) {
-  // seu código aqui
-}
 
+const isManager = (id) =>
+  data.employees.some(e => e.id === id && e.managers.length <= 1);
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
