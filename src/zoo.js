@@ -46,6 +46,13 @@ function addEmployee(id = '', firstName = '', lastName = '', managers = [], resp
 }
 
 function animalCount(species) {
+  if (!species) {
+    return data.animals.reduce((acc, { name, residents }) => {
+      acc[name] = residents.length;
+      return acc;
+    }, {});
+  }
+  return data.animals.find(({ name }) => name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
