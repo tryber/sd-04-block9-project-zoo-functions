@@ -79,8 +79,18 @@ function animalMap(options) { // preciso refatorar não gostei do resultado por 
   }, {});
 }
 
+function getScheduleString({ open, close }) {
+  return open === 0 && close === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`
+}
+
 function schedule(dayName) {
   // seu código aqui
+  return dayName !== undefined ?
+    { [dayName]: getScheduleString(data.hours[dayName]) } :
+    Object.keys(data.hours).reduce((acc, curr) => {
+      acc[curr] = getScheduleString(data.hours[curr]);
+      return acc;
+    }, {});
 }
 
 function oldestFromFirstSpecies(id) {
