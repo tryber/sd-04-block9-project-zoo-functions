@@ -32,11 +32,18 @@ function animalsOlderThan(animal, age) {
   return isIdadeMinima;
 }
 
-animalsOlderThan('penguins', 10);
+// nimalsOlderThan('penguins', 10);
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  // console.log(employeeName);
+  const ReduceEmployee = data.employees.reduce((accumulator, employee) =>
+    (employee.firstName === employeeName || employee.lastName === employeeName
+      ? employee : accumulator), {});
+  console.log(ReduceEmployee);
+  return ReduceEmployee;
 }
+
+//  employeeByName();
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
