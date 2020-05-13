@@ -14,7 +14,7 @@ const data = require('./data');
 function animalsByIds(...ids) {
   // seu código aqui
   if (!ids) return [];
-  output = data.animals.filter(animal => ids.includes(animal.id));
+  const output = data.animals.filter(animal => ids.includes(animal.id));
   return output;
 }
 
