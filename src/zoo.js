@@ -13,7 +13,9 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const animals = data.animals.filter((elem) => ids.find((id) => id === elem.id));
+  const animals = data.animals.filter((elem) =>
+    ids.find((id) => id === elem.id)
+  );
   return animals;
 }
 
@@ -25,7 +27,8 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(
-    (elem) => (elem.firstName === employeeName || elem.lastName === employeeName));
+    (elem) => elem.firstName === employeeName || elem.lastName === employeeName
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -35,21 +38,28 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(elem => elem.managers.some(ids => ids === id));
+  return data.employees.some((elem) => elem.managers.some((ids) => ids === id));
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = []
+) {
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
   if (!species) {
     const result = {};
-    data.animals.forEach((objeto) =>
-      result[objeto.name] = objeto.residents.length);
+    data.animals.forEach(
+      (objeto) => (result[objeto.name] = objeto.residents.length)
+    );
     return result;
-  } 
-  return data.animals.find(animal => animal.name === species).residents.length;
+  }
+  return data.animals.find((animal) => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
