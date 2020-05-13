@@ -10,8 +10,11 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 function animalsByIds(...ids) {
-  if (typeof (ids) === undefined) return [];
+  if (typeof ids === 'undefined') {
+    return [];
+  }
   return data.animals.filter(xablau => ids.find(identification => xablau.id === identification));
 }
 
