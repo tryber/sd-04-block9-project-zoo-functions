@@ -34,7 +34,11 @@ function employeeByName(employeeName) {
   return result;
 }
 
-function createEmployee(personalInfo, associatedWith) {}
+function createEmployee(personalInfo, associatedWith) {
+  const {id, firstName, lastName} = personalInfo;
+  const {managers, responsibleFor} = associatedWith;
+  return {id, firstName, lastName, managers, responsibleFor};
+}
 
 function isManager(id) {
   // seu código aqui
