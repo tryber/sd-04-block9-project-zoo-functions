@@ -16,12 +16,12 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  let animals = data.animals.find(element => element.name === animal)
-  return animals.residents.every( resident => resident.age > age )
+  const animals = data.animals.find(element => element.name === animal);
+  return animals.residents.every(resident => resident.age > age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  // return data.employees.filter(element => element.firstName === employeeName)
 }
 
 function createEmployee(personalInfo, associatedWith) {
