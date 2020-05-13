@@ -46,14 +46,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   // seu código aqui
   const AllCount = data.animals.reduce((acc, info) => {
-    acc[info.name] = info.residents.length
-    return acc
+    acc[info.name] = info.residents.length;
+    return acc;
   }, {});
   return species === undefined ? AllCount : AllCount[species];
 }
-console.log(animalCount());
+
 function entryCalculator(entrants) {
   // seu código aqui
+  return entrants == null ? 0 :
+    Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * data.prices[curr]), 0);
 }
 
 function animalMap(options) {
