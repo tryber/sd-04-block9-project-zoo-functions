@@ -35,12 +35,27 @@ const createEmployee = (personalInfo, associatedWith) => ({
 const isManager = (id) =>
   data.employees.some(({ managers }) => managers.some((i) => i === id));
 
-const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
-  data.employees.push({id, firstName, lastName, managers, responsibleFor});
+const addEmployee = (
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = []
+) => data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-function animalCount(species) {
-  // seu código aqui
-}
+const createAnimalCountObj = () => {
+  const animalCountObj = {};
+  for (let i = 0; i < data.animals.length; i++) {
+    animalCountObj[data.animals[i].name] = data.animals[i].residents.length;
+  }
+  return animalCountObj;
+};
+
+const animalCount = (species) => {
+  if (species === undefined) return createAnimalCountObj();
+  return data.animals.find((animal) => animal.name === species).residents
+    .length;
+};
 
 function entryCalculator(entrants) {
   // seu código aqui
