@@ -8,11 +8,13 @@ eslint no-unused-vars: [
   }
 ]
 */
+// Iniciando PRojeto
 
 const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
+  return;
 }
 
 function animalsOlderThan(animal, age) {
