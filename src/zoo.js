@@ -69,7 +69,7 @@ function toPushMap(info, options) {
   return result;
 }
 
-function animalMap(options) {// preciso refatorar não gostei do resultado por mais que esteja funcional
+function animalMap(options) {// preciso refatorar não gostei do resultado por mais que funcione
   // seu código aqui
   return data.animals.reduce((acc, curr) => {
     if (!acc[curr.location]) acc[curr.location] = [];
