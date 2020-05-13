@@ -97,11 +97,14 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
   const animalID = data.employees.find(emp => emp.id === id).responsibleFor[0];
   return data.animals.find(info => info.id === animalID)
-    .residents.reduce((acc, curr) => acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc , [,,0]);
+    .residents.reduce((acc, curr) => acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [, , 0]);
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  return Object.keys(data.prices)
+    .forEach(key => data.prices[key] = 
+      Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100);
 }
 
 function employeeCoverage(idOrName) {
