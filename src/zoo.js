@@ -14,9 +14,10 @@ const data = require('./data');
 const animalsByIds = (...ids) =>
   ids.map((id) => data.animals.find((animal) => animal.id === id));
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
+const animalsOlderThan = (animal, age) =>
+  data.animals
+    .find((allResidents) => allResidents.name === animal)
+    .residents.every((anim) => anim.age > age);
 
 function employeeByName(employeeName) {
   // seu código aqui
