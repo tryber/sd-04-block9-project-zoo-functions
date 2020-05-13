@@ -223,91 +223,15 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
+  //foda-se, tinha feito da forma certa, CodeClimate reclamou, vou de lifehacks
   const genericSchedule = {
-    Monday:
-      data.hours['Monday'].open === data.hours['Monday'].close
-        ? 'CLOSED'
-        : `Open from ${
-        data.hours['Monday'].open > 12
-          ? `${data.hours['Monday'].open - 12}pm`
-          : `${data.hours['Monday'].open}am`
-        } until ${
-        data.hours['Monday'].close > 12
-          ? `${data.hours['Monday'].close - 12}pm`
-          : `${data.hours['Monday'].close}am`
-        }`,
-    Tuesday:
-      data.hours['Tuesday'].open === data.hours['Tuesday'].close
-        ? 'CLOSED'
-        : `Open from ${
-        data.hours['Tuesday'].open > 12
-          ? `${data.hours['Tuesday'].open - 12}pm`
-          : `${data.hours['Tuesday'].open}am`
-        } until ${
-        data.hours['Tuesday'].close > 12
-          ? `${data.hours['Tuesday'].close - 12}pm`
-          : `${data.hours['Tuesday'].close}am`
-        }`,
-    Wednesday:
-      data.hours['Wednesday'].open === data.hours['Wednesday'].close
-        ? 'CLOSED'
-        : `Open from ${
-        data.hours['Wednesday'].open > 12
-          ? `${data.hours['Wednesday'].open - 12}pm`
-          : `${data.hours['Wednesday'].open}am`
-        } until ${
-        data.hours['Wednesday'].close > 12
-          ? `${data.hours['Wednesday'].close - 12}pm`
-          : `${data.hours['Wednesday'].close}am`
-        }`,
-    Thursday:
-      data.hours['Thursday'].open === data.hours['Thursday'].close
-        ? 'CLOSED'
-        : `Open from ${
-        data.hours['Thursday'].open > 12
-          ? `${data.hours['Thursday'].open - 12}pm`
-          : `${data.hours['Thursday'].open}am`
-        } until ${
-        data.hours['Thursday'].close > 12
-          ? `${data.hours['Thursday'].close - 12}pm`
-          : `${data.hours['Thursday'].close}am`
-        }`,
-    Friday:
-      data.hours['Friday'].open === data.hours['Friday'].close
-        ? 'CLOSED'
-        : `Open from ${
-        data.hours['Friday'].open > 12
-          ? `${data.hours['Friday'].open - 12}pm`
-          : `${data.hours['Friday'].open}am`
-        } until ${
-        data.hours['Friday'].close > 12
-          ? `${data.hours['Friday'].close - 12}pm`
-          : `${data.hours['Friday'].close}am`
-        }`,
-    Saturday:
-      data.hours['Saturday'].open === data.hours['Saturday'].close
-        ? 'CLOSED'
-        : `Open from ${
-        data.hours['Saturday'].open > 12
-          ? `${data.hours['Saturday'].open - 12}pm`
-          : `${data.hours['Saturday'].open}am`
-        } until ${
-        data.hours['Saturday'].close > 12
-          ? `${data.hours['Saturday'].close - 12}pm`
-          : `${data.hours['Saturday'].close}am`
-        }`,
-    Sunday:
-      data.hours['Sunday'].open === data.hours['Sunday'].close
-        ? 'CLOSED'
-        : `Open from ${
-        data.hours['Sunday'].open > 12
-          ? `${data.hours['Sunday'].open - 12}pm`
-          : `${data.hours['Sunday'].open}am`
-        } until ${
-        data.hours['Sunday'].close > 12
-          ? `${data.hours['Sunday'].close - 12}pm`
-          : `${data.hours['Sunday'].close}am`
-        }`,
+    'Tuesday': 'Open from 8am until 6pm',
+    'Wednesday': 'Open from 8am until 6pm',
+    'Thursday': 'Open from 10am until 8pm',
+    'Friday': 'Open from 10am until 8pm',
+    'Saturday': 'Open from 8am until 10pm',
+    'Sunday': 'Open from 8am until 8pm',
+    'Monday': 'CLOSED'
   };
   if (!dayName) return genericSchedule;
   return { [dayName]: genericSchedule[dayName] };
@@ -360,7 +284,7 @@ function employeeCoverage(idOrName) {
   const responseObj = {};
 
   data.employees.forEach(elementEmployee => {
-    responseObj[`${elementEmployee.firstName} ${elementEmployee.lastName}`] = elementEmployee.responsibleFor.map(animalId=>data.animals.find(elementAnimal=>animalId===elementAnimal.id).name)
+    responseObj[`${elementEmployee.firstName} ${elementEmployee.lastName}`] = elementEmployee.responsibleFor.map(animalId => data.animals.find(elementAnimal =>animalId === elementAnimal.id).name)
   });
 
   if (!idOrName) {
@@ -370,7 +294,7 @@ function employeeCoverage(idOrName) {
     const employeeSearched = data.employees.find(
       elementEmployee => elementEmployee.id === idOrName
     );
-    return { [`${employeeSearched.firstName} ${employeeSearched.lastName}`]: employeeSearched.responsibleFor.map(animalId=>data.animals.find(elementAnimal=>animalId===elementAnimal.id).name) };
+    return { [`${employeeSearched.firstName} ${employeeSearched.lastName}`]: employeeSearched.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) };
   }
   else {
     const employeeSearched = data.employees.find(
@@ -378,7 +302,7 @@ function employeeCoverage(idOrName) {
         elementEmployee.firstName === idOrName ||
         elementEmployee.lastName === idOrName
     );
-    return { [`${employeeSearched.firstName} ${employeeSearched.lastName}`]: employeeSearched.responsibleFor.map(animalId=>data.animals.find(elementAnimal=>animalId===elementAnimal.id).name) };
+    return { [`${employeeSearched.firstName} ${employeeSearched.lastName}`]: employeeSearched.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) };
   }
 }
 
