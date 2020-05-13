@@ -38,9 +38,9 @@ const employeeByName = (employeeName) => {
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   const newInfoWorker = Object.assign(personalInfo, associatedWith); return newInfoWorker;
-  // const newInfoWorker = ({...personalInfo, ...associatedWith}); 
+  // const newInfoWorker = ({...personalInfo, ...associatedWith});
   // return  newInfoWorker; //com spread rest
-};
+}
 
 function isManager(id) {
   // seu código aqui
