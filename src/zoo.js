@@ -23,11 +23,10 @@ const employeeByName = (employeeName = '') => {
   return data.employees.find(e =>
     e.firstName === employeeName || e.lastName === employeeName);
 };
-// console.log(employeeByName('Emery'));
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
 
+const createEmployee = (personalInfo, associatedWith) =>
+  Object.assign({}, personalInfo, associatedWith);
+// console.log(employeeByName('Emery'));
 function isManager(id) {
   // seu código aqui
 }
