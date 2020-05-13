@@ -61,12 +61,13 @@ const animalCount = (species) => {
   const bichos = {};
   data.animals.forEach(
     element => (bichos[element.name] = element.residents.length));
-  if (species) {
-    return bichos[species];
-  }
-  return bichos;
+  return (species) ? bichos[species] : bichos;
 };
 
+// 8- Implemente a função entryCalculator:
+// Returna 0 se nenhum argumento for passado
+// Retorna 0 se um objeto vazio for passado
+// Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
 
 function entryCalculator(entrants) {
   // seu código aqui
