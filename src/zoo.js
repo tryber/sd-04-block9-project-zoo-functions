@@ -42,9 +42,15 @@ const animalCount = (species) => {
   return (species) ? bichos[species] : bichos;
 };
 
-const entryCalculator = (entrants) => {
-  // seu código aqui
+const entryCalculator = function (entrants) {
+  return !entrants || Object.keys(entrants).length === 0 ?
+  0
+  :
+  (data.prices.Adult * entrants.Adult) +
+  (data.prices.Child * entrants.Child) +
+  (data.prices.Senior * entrants.Senior);
 };
+
 
 function animalMap(options) {
   // seu código aqui
