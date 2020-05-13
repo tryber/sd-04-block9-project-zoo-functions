@@ -69,9 +69,14 @@ const animalCount = (species) => {
 // Retorna 0 se um objeto vazio for passado
 // Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+
+const entryCalculator = function (entrants) {
+  return !entrants || Object.keys(entrants).length === 0
+    ? 0
+    : (entrants.Adult * data.prices.Adult) +
+        (entrants.Child * data.prices.Child) +
+        (entrants.Senior * data.prices.Senior);
+};
 
 function animalMap(options) {
   // seu código aqui
