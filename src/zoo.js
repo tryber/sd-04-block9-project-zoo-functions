@@ -24,16 +24,16 @@ const animalsOlderThan = (animal, age) => {
   const pet = data.animals.find(elementoName => elementoName.name === animal)
     .residents.every(elementoIdade => elementoIdade.age >= age);
   return pet;
-}
+};
 
 // function employeeByName(employeeName) {
 // seu código aqui
 const employeeByName = (employeeName) => {
   if (!employeeName) return {};
-  const worker = data.employees.find(functionary => 
+  const worker = data.employees.find(functionary =>
     functionary.firstName === employeeName || functionary.lastName === employeeName);
   return worker;
-}
+};
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
