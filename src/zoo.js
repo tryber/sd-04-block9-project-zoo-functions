@@ -33,9 +33,11 @@ const animalsOlderThan = (animal, age) =>
 //  Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
 //  Quando provido o último nome do funcionário, retorna o objeto do funcionário
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const employeeByName = (employeeName) =>
+  data.employees.find(
+    (anyName) =>
+      anyName.firstName === employeeName || anyName.lastName === employeeName
+  ) || {};
 
 //  4. Implemente a função createEmployee:
 //  Cria um novo colaborador a partir de objetos contendo informações pessoais,
