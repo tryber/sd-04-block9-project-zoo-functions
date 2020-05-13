@@ -9,6 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
+// Filipe de Castro Oliveira
+
 const data = require('./data');
 
 function animalsByIds(ids) {
