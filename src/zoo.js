@@ -45,11 +45,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
-  const AllCount = data.animals.reduce((acc, info) => {
-    acc[info.name] = info.residents.length;
-    return acc;
-  }, {});
-  return species === undefined ? AllCount : AllCount[species];
+  return species !== undefined ?
+    data.animals.find(info => info.name === species).residents.length :
+    data.animals.reduce((acc, info) => {
+      acc[info.name] = info.residents.length;
+      return acc;
+    }, {});
 }
 
 function entryCalculator(entrants) {
@@ -69,7 +70,7 @@ function toPushMap(info, options) {
   return result;
 }
 
-function animalMap(options) {// preciso refatorar não gostei do resultado por mais que funcione
+function animalMap(options) { // preciso refatorar não gostei do resultado por mais que funcione
   // seu código aqui
   return data.animals.reduce((acc, curr) => {
     if (!acc[curr.location]) acc[curr.location] = [];
