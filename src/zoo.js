@@ -61,9 +61,7 @@ const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...
 
 //  Testa se o id passado é de um gerente
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = id => data.employees.some(e => e.managers.includes(id));
 
 //  =======================================================================
 
