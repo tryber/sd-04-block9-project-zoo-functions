@@ -16,6 +16,7 @@ function animalsByIds(...ids) {
     for (let i = 0; i < ids.length; i += 1) {
       if (animal.id === ids[i]) return true;
     }
+    return false;
   });
 }
 
