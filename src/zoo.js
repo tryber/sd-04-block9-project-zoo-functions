@@ -20,7 +20,8 @@ const animalsByIds = (...ids) =>
   data.animals.filter(animal => ids.includes(animal.id));
 
 //  Implemente a função animalsOlderThan:
-//  Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta espécie possuem a idade mínima especificada
+//  Ao passar o nome de uma espécie e uma idade, testa se todos os animais
+//  desta espécie possuem a idade mínima especificada
 
 const animalsOlderThan = (animal, age) =>
   data.animals
