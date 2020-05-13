@@ -2,7 +2,7 @@ const assert = require('assert');
 const zoo = require('../src/zoo');
 
 describe('animalCount', () => {
-  it('test', () => {
+  it('test', () => { 
     let actual, expected;
 
     // sem parâmetros, retorna animais e suas quantidades
