@@ -22,9 +22,11 @@ data.animals.find(elemento => elemento.name === animal)
 const employeeByName = (employeeName) => data.employees.find(({firstName, lastName}) =>
 firstName === employeeName || lastName === employeeName) || {};
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+})
+
 
 function isManager(id) {
   // seu código aqui
