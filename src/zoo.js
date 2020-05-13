@@ -13,11 +13,17 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  return data.animals.filter(animal => ids.includes(animal.id));
+  if (!ids) return [];
+  const results = data.animals.filter(animal => ids.includes(animal.id));
+  return results;
 }
-
+// passados o nome de uma espécie e uma idade, testa se todos os animais desta
+// espécie possuem a idade mínima especificada
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  const results = data.animals.find(animals => animals.name === animal).residents
+  .every(residents => residents.age >= age);
+  return results;
 }
 
 function employeeByName(employeeName) {
