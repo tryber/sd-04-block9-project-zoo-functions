@@ -27,11 +27,11 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // abbreviation object literal
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(obj => obj.managers.some(arr => arr === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
