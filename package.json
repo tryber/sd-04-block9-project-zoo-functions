@@ -21,5 +21,8 @@
   "homepage": "https://github.com/tryber/sd-04-block9-project-zoo-functions#readme",
   "devDependencies": {
     "jest": "^25.2.3"
+  },
+  "dependencies": {
+    "eslint-config-airbnb": "^18.1.0"
   }
 }
