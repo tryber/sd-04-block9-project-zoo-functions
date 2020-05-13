@@ -17,11 +17,14 @@ const animalsByIds = (...ids) =>
 const animalsOlderThan = (animal, age) =>
   data.animals.find(specie => specie.name === animal)
   .residents.every(bicho => bicho.age > age);
-// console.log(animalsOlderThan('otters', 7));
-function employeeByName(employeeName) {
-  // seu código aqui
+
+const employeeByName = (employeeName = '') =>{
+  if (!employeeName) return {};
+  return data.employees.find(e =>
+    e.firstName === employeeName || e.lastName === employeeName);
 }
 
+console.log(employeeByName('Emery'));
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
