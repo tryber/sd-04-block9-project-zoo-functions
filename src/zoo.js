@@ -12,33 +12,33 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 const animalsByIds = (...ids) => {
-  if(!ids) return [];
+  if (!ids) return [];
   return data.animals.filter(animal => ids.includes(animal.id));
-}
-//console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
+};
+// console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
   const animalsName = data.animals.find(eachAnimal => eachAnimal.name === animal);
-  const result = animalsName.residents.every(resident => resident.age > age );
+  const result = animalsName.residents.every(resident => resident.age > age);
   return result;
-
 }
 // console.log(animalsOlderThan('penguins', 10));
 
 function employeeByName(employeeName) {
   // seu código aqui
-  if(!employeeName) return {};
-  const func = data.employees.find(elemento => employeeName === elemento.firstName || employeeName === elemento.lastName);
+  if (!employeeName) return {};
+  const func = data.employees.find(elemento =>
+    employeeName === elemento.firstName || employeeName === elemento.lastName);
   return func;
 }
-//console.log(employeeByName(''));
+// console.log(employeeByName(''));
 
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const create = Object.assign(personalInfo, associatedWith);
-  return create;
+  const employeeObject = Object.assign(personalInfo, associatedWith);
+  return employeeObject;
 }
 
 function isManager(id) {
