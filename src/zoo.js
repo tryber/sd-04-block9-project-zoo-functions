@@ -47,9 +47,12 @@ const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...
 
 const isManager = id => data.employees.some(element => element.managers.includes(id));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// 6- Implemente a função addEmployee:
+// Adiciona um funcionário no fim da lista
+
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+
 
 function animalCount(species) {
   // seu código aqui
