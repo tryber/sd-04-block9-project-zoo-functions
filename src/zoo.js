@@ -31,7 +31,7 @@ const isManager = id =>
   data.employees.some(e => e.id === id && e.managers.length <= 1);
 
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
-  data.employees.push({id, firstName, lastName, managers, responsibleFor});
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
 const animalCount = (species) => {};
 
