@@ -36,16 +36,16 @@ const animalsOlderThan = (animal, age) =>
 const employeeByName = (employeeName) =>
   data.employees.find(
     (anyName) =>
-      anyName.firstName === employeeName || anyName.lastName === employeeName,
-  ) || {};
+      anyName.firstName === employeeName || anyName.lastName === employeeName) || {};
 
 //  4. Implemente a função createEmployee:
 //  Cria um novo colaborador a partir de objetos contendo informações pessoais,
 //  gerentes e animais gerenciados
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+});
 
 //  5. Implemente a função isManager:
 //  Testa se o id passado é de um gerente
