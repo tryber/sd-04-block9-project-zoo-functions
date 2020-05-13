@@ -42,11 +42,9 @@ const animalCount = (species) => {
   return (species) ? bichos[species] : bichos;
 };
 
-console.log(animalCount());
-
-function entryCalculator(entrants) {
+const entryCalculator = (entrants) => {
   // seu código aqui
-}
+};
 
 function animalMap(options) {
   // seu código aqui
