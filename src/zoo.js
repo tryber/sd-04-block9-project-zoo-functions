@@ -69,10 +69,8 @@ const isManager = id => data.employees.some(e => e.managers.includes(id));
 
 //  Adiciona um funcionário no fim da lista
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
-
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
+data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 //  =======================================================================
 
 //  ====REQUISITO 7========================================================
