@@ -56,6 +56,13 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
+  const entries = Object.entries(data.prices);
+  if (!entrants || !Object.keys(entrants).length) return 0;
+  return Object.entries(entrants).reduce((acc, [age, quant], index) => {
+    const price = entries.find(([category]) => category === age);
+    acc += quant * price[1];
+    return acc;
+  }, 0);
 }
 
 function animalMap(options) {
