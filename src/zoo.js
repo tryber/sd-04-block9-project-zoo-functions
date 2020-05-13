@@ -53,10 +53,20 @@ const isManager = id => data.employees.some(element => element.managers.includes
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
+// 7- Implemente a função animalCount:
+// Sem parâmetros, returna animais e suas quantidades
+// Com o nome de uma espécie de animal, retorna somente a quantidade
 
-function animalCount(species) {
-  // seu código aqui
-}
+const animalCount = (species) => {
+  const bichos = {};
+  data.animals.forEach(
+    element => (bichos[element.name] = element.residents.length));
+  if (species) {
+    return bichos[species];
+  }
+  return bichos;
+};
+
 
 function entryCalculator(entrants) {
   // seu código aqui
