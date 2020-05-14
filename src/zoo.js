@@ -108,7 +108,7 @@ function oldestFromFirstSpecies(id) {
   const animalID = getEmployee(id).responsibleFor[0];
   return getAnimal(animalID)
     .residents.reduce((acc, curr) =>
-      (acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [0, 0, 0]));
+      acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [0, 0, 0]);
 }
 
 function increasePrices(percentage) {
