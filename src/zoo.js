@@ -20,7 +20,13 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
+  const selectedEmployee = data.employees
+    .find((employee) => (
+      employee.firstName.includes(employeeName) || employee.lastName.includes(employeeName)
+    ));
+
+  return selectedEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
