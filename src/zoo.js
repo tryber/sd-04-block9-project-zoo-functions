@@ -33,10 +33,13 @@ const isManager = id => data.employees.some(elemento =>
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
 data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-const animalCount = species => {
-  return (species) ?  data.animals.find(({ name }) => name === species).residents.length :
-  data.animals.reduce((acc, elemento) => {acc[elemento.name] = elemento.residents.length;
-  return acc}, {});
+// O codeClimate nao permitiu que eu usasse ArrowFunction com 2 returns
+function animalCount(species) {
+  return (species) ? data.animals.find(({ name }) => name === species).residents.length :
+  data.animals.reduce((acc, elemento) => {
+    acc[elemento.name] = elemento.residents.length;
+    return acc;
+  }, {});
 }
 
 function entryCalculator(entrants) {
