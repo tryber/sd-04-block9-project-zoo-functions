@@ -77,11 +77,11 @@ function schedule(dayName) {
   const obj = {};
   const especifcDay = {};
   const days = Object.keys(data.hours);
-  days.map(
-    (hour) => { const closeHour = data.hours[hour].close - 12;
-    obj[hour] = `Open from ${data.hours[hour].open}am until ${closeHour}pm`;
+  days.map((hour) => {
+    const closeHour = data.hours[hour].close - 12;
+    return obj[hour] = `Open from ${data.hours[hour].open}am until ${closeHour}pm`;
   });
-  obj["Monday"] = 'CLOSED';
+  obj.Monday = 'CLOSED';
   if (!dayName) return obj;
   especifcDay[dayName] = obj[dayName];
   return especifcDay;
