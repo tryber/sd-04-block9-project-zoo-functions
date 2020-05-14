@@ -22,7 +22,12 @@ const animalsOlderThan = (speciesName, age) =>
     .find(species => species.name === speciesName)
     .residents.every(animal => animal.age >= age);
 
-const employeeByName = (employeeName) => {};
+const employeeByName = employeeName =>
+  data.employees
+    .filter(
+      obj => obj.firstName == employeeName || obj.lastName == employeeName
+    )
+    .reduce((acc, employeeObj) => (acc = employeeObj), {});
 
 const createEmployee = (personalInfo, associatedWith) => {};
 
