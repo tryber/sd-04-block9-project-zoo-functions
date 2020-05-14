@@ -133,11 +133,11 @@ function generateFinalResponse(opt) {
   for (let i = 0; i < locations.length; i += 1) {
     if (includeNames && sorted && sex) {
       response[locations[i]] = generateSortedNamesAndSexMap(locations[i]);
-    } else if (includeNames && !sorted && sex) {
+    } else if (includeNames && sorted===false && sex) {
       response[locations[i]] = generateNamesAndSexMap(locations[i], sex);
-    } else if (includeNames && sorted && !sex) {
+    } else if (includeNames && sorted && sex===false) {
       response[locations[i]] = generateSortedNamesMap(locations[i]);
-    } else if (includeNames && !sorted && !sex) {
+    } else if (includeNames && sorted===false && sex===false) {
       response[locations[i]] = generateNamesMap(locations[i]);
     }
   }
