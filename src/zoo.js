@@ -122,8 +122,28 @@ function increasePrices(percentage) {
   });
 }
 
+function responsibleFor(employee) {
+  const objEmployee = {};
+  objEmployee[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
+  .map(id => data.animals.find(animal => animal.id === id).name);
+  return objEmployee;
+}
+
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const employees = {};
+  if (!idOrName) {
+    data.employees.forEach((employee) => {
+      Object.assign(employees, responsibleFor(employee));
+    });
+    return employees;
+  }
+  let key = null;
+  if (data.employees.find(employee => employee.id === idOrName)) key = 'id';
+  if (data.employees.find(employee => employee.firstName === idOrName)) key = 'firstName';
+  if (data.employees.find(employee => employee.lastName === idOrName)) key = 'lastName';
+  const obj = data.employees.find(employee => employee[key] === idOrName);
+  return responsibleFor(obj);
 }
 
 module.exports = {
