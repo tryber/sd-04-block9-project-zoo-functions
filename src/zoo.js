@@ -126,11 +126,11 @@ const oldestFromFirstSpecies = (id) => {
   return [oldest.name, oldest.sex, oldest.age];
 };
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach((person) => {
+    data.prices[person] = Number((data.prices[person] * (1 + (percentage + 0.01) / 100)).toFixed(2));
+  });
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
