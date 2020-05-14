@@ -32,7 +32,7 @@ function employeeByName(employeeName) {
     (elemento.firstName === employeeName || elemento.lastName === employeeName));
 }
 
-// console.log(employeeByName()); //--> TESTE 1
+// console.log(employeeByName()); //-> TESTE 1
 // console.log(employeeByName('Emery')); //--> TESTE 2
 // console.log(employeeByName('Wishart')); //--> TESTE 3
 
