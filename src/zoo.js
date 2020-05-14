@@ -26,11 +26,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(
-    (elem) => {
-      elem.firstName === employeeName || 
-      elem.lastName === employeeName || 
-      elem.id === employeeName
-    });
+    (elem) => elem.firstName === employeeName || elem.lastName === employeeName || elem.id === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -105,35 +101,32 @@ function increasePrices(percentage) {
   // parseFloat((0.2 + 0.1).toPrecision(2))
 }
 
+const arrayDeAnimais = (infoId) => {
+  const animaisId = data.employees.find(elem => elem.id === infoId).responsibleFor;
+  const arrayNomes = [];
+  for (let i = 0; i < animaisId.length; i += 1) {
+    arrayNomes.push(data.animals.find(elem => elem.id === animaisId[i]).name);
+  }
+  return arrayNomes;
+}
+
+const gerandoEmployeesArray = () => {
+  const result = {};
+  for (let i = 0; i < data.employees.length; i += 1) {
+    const name = `${data.employees[i].firstName} ${data.employees[i].lastName}`;
+    result[name] = arrayDeAnimais(data.employees[i].id);
+  }
+  return result;
+}
+
 function employeeCoverage(idOrName) {
   const allEmployees = gerandoEmployeesArray();
   const oneEmployee = {};
   if (!idOrName) return allEmployees;
-  if (idOrName) {
-    const employeeElement = employeeByName(idOrName);
-    const name = `${employeeElement.firstName} ${employeeElement.lastName}`;
-    oneEmployee[name] = allEmployees[name];
-    return oneEmployee;
-  }
-}
-
-const gerandoEmployeesArray = () => {
-    const result = {};
-    for ( let i = 0; i < data.employees.length; i += 1) {
-      let name = `${data.employees[i].firstName} ${data.employees[i].lastName}`;
-      result[name] = arrayDeAnimais(data.employees[i].id);
-    }
-    return result;
-}
-
-const arrayDeAnimais = (infoId) => {
-  const animaisId = data.employees.find(elem => elem.id === infoId).responsibleFor;
-  let arrayNomes = [];
-  for ( let i = 0; i < animaisId.length; i += 1) {
-    arrayNomes.push(data.animals.find(elem => elem.id === animaisId[i]).name);
-  }
-  //const arrayNomes = data.animals.filter(elem => elem.id === animaisId.forEach(index => index)).name;
-  return arrayNomes;
+  const employeeElement = employeeByName(idOrName);
+  const name = `${employeeElement.firstName} ${employeeElement.lastName}`;
+  oneEmployee[name] = allEmployees[name];;
+  return oneEmployee;
 }
 
 module.exports = {
