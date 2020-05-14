@@ -26,7 +26,9 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(
-    (elem) => elem.firstName === employeeName || elem.lastName === employeeName || elem.id === employeeName);
+    (elem) => elem.firstName === employeeName ||
+    elem.lastName === employeeName ||
+    elem.id === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -108,7 +110,7 @@ const arrayDeAnimais = (infoId) => {
     arrayNomes.push(data.animals.find(elem => elem.id === animaisId[i]).name);
   }
   return arrayNomes;
-}
+};
 
 const gerandoEmployeesArray = () => {
   const result = {};
@@ -117,7 +119,7 @@ const gerandoEmployeesArray = () => {
     result[name] = arrayDeAnimais(data.employees[i].id);
   }
   return result;
-}
+};
 
 function employeeCoverage(idOrName) {
   const allEmployees = gerandoEmployeesArray();
@@ -125,7 +127,7 @@ function employeeCoverage(idOrName) {
   if (!idOrName) return allEmployees;
   const employeeElement = employeeByName(idOrName);
   const name = `${employeeElement.firstName} ${employeeElement.lastName}`;
-  oneEmployee[name] = allEmployees[name];;
+  oneEmployee[name] = allEmployees[name];
   return oneEmployee;
 }
 
