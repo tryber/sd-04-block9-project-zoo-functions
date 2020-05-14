@@ -78,7 +78,8 @@ const findResidents = n => animals.find(animal => animal.n === n).residents;
 
 const findAndMapResidents = (name, sex) => {
   if (sex) {
-    return findResidents(name).filter(resident => resident.sex === sex).map(resident => resident.name);
+    const filtResidents = findResidents(name).filter(resident => resident.sex === sex); 
+    return filtResidents.map(resident => resident.name);
   }
   return findResidents(name).map(resident => resident.name);
 };
@@ -111,10 +112,10 @@ const animalMap = (opt) => {
     animalLocations[location] = getResidents(getName(filter(location)));
   });
   return animalLocations;
-}
+};
 
 const checkDate = (open, close) => {
-  let hoursMessage = open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+  const hoursMessage = open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
   return hoursMessage;
 };
 
@@ -183,11 +184,11 @@ const employeeCoverage = (idOrName) => {
       };
     });
     return employeeCoverageObj;
-  };
+  }
   const { firstName, lastName, responsibleFor } = findEmployee(idOrName);
   employeeCoverageObj[`${firstName} ${lastName}`] = createResponsibleArr(responsibleFor);
   return employeeCoverageObj;
-}
+};
 
 module.exports = {
   entryCalculator,
