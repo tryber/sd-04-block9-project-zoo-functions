@@ -112,8 +112,23 @@ function animalMap(options) {
 //  Se um único dia for passado, retorna somente este dia em um formato legível para humanos
 
 function schedule(dayName) {
-  // seu código aqui
+  const sched = {};
+  const ifOpenClose = (day) =>
+    ((day === 'Monday')
+      ? 'CLOSED'
+      : `Open from ${data.hours[day].open}am until ${
+          data.hours[day].close - 12
+        }pm`);
+  if (dayName) {
+    sched[dayName] = ifOpenClose(dayName);
+    return sched;
+  }
+  Object.keys(data.hours).forEach(
+    (element) => (sched[element] = ifOpenClose(element)),
+  );
+  return sched;
 }
+console.log(schedule());
 
 //  11. Implemente a função oldestFromFirstSpecies:
 //  Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo
