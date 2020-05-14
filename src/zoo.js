@@ -57,10 +57,11 @@ function animalCount(species) {
   // seu código aqui
   // if(!species) return data.animals.map(e => `${e.name}: ${e.popularity}`);
   // return data.animals.filter(e => {if (e.name === species){ return e.popularity}})[0].popularity;
-  if (!species) { return data.animals.reduce(function (total, { name, residents }) {
-    total[name] = residents.length;
-    return total;
-  }, {});
+  if (!species) { 
+      return data.animals.reduce(function (total, { name, residents }) {
+      total[name] = residents.length;
+      return total;
+    }, {});
   }
   return data.animals.find(({ name }) => name === species).residents.length;
 }
