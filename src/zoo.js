@@ -36,8 +36,21 @@ function animalsOlderThan(animal, age) {
   return animalAge;
 }
 
-function employeeByName(employeeName) {
+/* Sem parâmetros, retorna um objeto vazio
+Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+Quando provido o último nome do funcionário, retorna o objeto do funcionário
+ */
+
+const funcionario = data.employees;
+function employeeByName(...employeeName) {
   // seu código aqui
+  const funcionarioObj =
+    funcionario.find(
+      element =>
+        element.firstName === `${employeeName}` ||
+        element.lastName === `${employeeName}`,
+    ) || {};
+  return funcionarioObj;
 }
 
 function createEmployee(personalInfo, associatedWith) {
