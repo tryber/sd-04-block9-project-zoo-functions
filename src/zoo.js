@@ -278,27 +278,32 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   function makeResponseObject(employee) {
-    return { [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) };
+    const key = `${employee.firstName} ${employee.lastName}`;
+    const value = employee.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name);
+    return { key, value };
   }
 
   if (!idOrName) {
     const responseObj = {};
     data.employees.forEach(elementEmployee => {
-      responseObj[`${elementEmployee.firstName} ${elementEmployee.lastName}`] = elementEmployee.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name);
+      const response = makeResponseObject(elementEmployee);
+      responseObj[response.key] = response.value;
     });
     return responseObj;
   } else if (idOrName.length === 36) {
     const employeeSearched = data.employees.find(
       elementEmployee => elementEmployee.id === idOrName,
     );
-    return makeResponseObject(employeeSearched);
+    const response = makeResponseObject(employeeSearched);
+    return { [response.key]: response.value };
   }
   const employeeSearched = data.employees.find(
     elementEmployee =>
       elementEmployee.firstName === idOrName ||
       elementEmployee.lastName === idOrName,
   );
-  return makeResponseObject(employeeSearched);
+  const response = makeResponseObject(employeeSearched);
+  return { [response.key]: response.value };
 }
 
 module.exports = {
