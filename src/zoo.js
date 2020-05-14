@@ -39,8 +39,9 @@ const isManager = id => data.employees.some(aux1 => aux1.managers.some(aux2 => a
 //  ////////// CONCLUIDOS ////////////
 //
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const add = { id, firstName, lastName, managers, responsibleFor };
+  return data.employees.push(add);
 }
 
 function animalCount(species) {
