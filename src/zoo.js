@@ -35,13 +35,11 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
-  // Testa se o id passado é de um gerente
   return data.employees.some(element => element.managers.some(man => man === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
