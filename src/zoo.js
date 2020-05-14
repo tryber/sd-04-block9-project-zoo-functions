@@ -53,6 +53,10 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
+  // Pode fazer dom default value?
+  if (!managers) managers = [];
+  if (!responsibleFor) responsibleFor = [];
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
