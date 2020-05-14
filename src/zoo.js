@@ -74,8 +74,8 @@ const filter = location => animals.filter(animal => animal.location === location
 
 const getName = arr => arr.map(animal => animal.name);
 
-const findResidents = n => {
-  const animalFound = animals.find(animal => animal.name === n);
+const findResidents = (name) => {
+  const animalFound = animals.find(animal => animal.name === name);
   return animalFound.residents;
 };
 
@@ -116,8 +116,6 @@ const animalMap = (opt) => {
   });
   return animalLocations;
 };
-
-console.log(animalMap({ includeNames: true }))
 
 const checkDate = (open, close) => {
   const hoursMessage = open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
