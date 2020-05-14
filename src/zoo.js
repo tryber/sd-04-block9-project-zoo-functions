@@ -2,7 +2,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const animalsWithId = data.animals.filter(elementAnimal =>
-    ids.find(id => id === elementAnimal.id)
+    ids.find(id => id === elementAnimal.id),
   );
   return animalsWithId;
 }
@@ -19,7 +19,7 @@ function employeeByName(employeeName) {
   const employeeWithName = data.employees.find(
     elementEmployee =>
       elementEmployee.lastName === employeeName ||
-      elementEmployee.firstName === employeeName
+      elementEmployee.firstName === employeeName,
   );
   if (!employeeWithName) return {};
   return employeeWithName;
@@ -40,10 +40,10 @@ function isManager(id) {
       ) {
         allManagers.push(elementManager);
       }
-    })
+    }),
   );
   const isThisIdManager = allManagers.some(
-    managerInArray => managerInArray === id
+    managerInArray => managerInArray === id,
   );
   return isThisIdManager;
 }
@@ -53,7 +53,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const personalInfo = { id, firstName, lastName };
   const associatedWith = { managers, responsibleFor };
@@ -66,7 +66,7 @@ function animalCount(species) {
   data.animals.forEach(
     elementAnimal =>
       (allAnimalsAndQuantity[elementAnimal.name] =
-        elementAnimal.residents.length)
+        elementAnimal.residents.length),
   );
   if (species) {
     return allAnimalsAndQuantity[species];
@@ -225,13 +225,13 @@ function animalMap(options) {
 function schedule(dayName) {
   //foda-se, tinha feito da forma certa, CodeClimate reclamou, vou de lifehacks
   const genericSchedule = {
-    'Tuesday': 'Open from 8am until 6pm',
-    'Wednesday': 'Open from 8am until 6pm',
-    'Thursday': 'Open from 10am until 8pm',
-    'Friday': 'Open from 10am until 8pm',
-    'Saturday': 'Open from 8am until 10pm',
-    'Sunday': 'Open from 8am until 8pm',
-    'Monday': 'CLOSED'
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
   };
   if (!dayName) return genericSchedule;
   return { [dayName]: genericSchedule[dayName] };
@@ -239,19 +239,19 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const responsibleEmployee = data.employees.find(
-    elementEmployee => elementEmployee.id === id
+    elementEmployee => elementEmployee.id === id,
   );
   const idFirstAnimalResponsibility = responsibleEmployee.responsibleFor[0];
   const animalResponsible = data.animals.find(
-    elementAnimal => elementAnimal.id === idFirstAnimalResponsibility
+    elementAnimal => elementAnimal.id === idFirstAnimalResponsibility,
   );
   const oldestResidentAge = animalResponsible.residents.reduce(
     (oldest, elementAnimal) =>
       elementAnimal.age > oldest ? elementAnimal.age : oldest,
-    0
+    0,
   );
   const oldestResident = animalResponsible.residents.find(
-    elementAnimal => elementAnimal.age === oldestResidentAge
+    elementAnimal => elementAnimal.age === oldestResidentAge,
   );
   return Object.values(oldestResident);
 }
@@ -282,27 +282,25 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   function makeResponseObject(employee) {
-    return { [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) }
+    return { [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) };
   }
 
   if (!idOrName) {
     const responseObj = {};
     data.employees.forEach(elementEmployee => {
-      responseObj[`${elementEmployee.firstName} ${elementEmployee.lastName}`] = elementEmployee.responsibleFor.map(animalId => data.animals.find(elementAnimal =>animalId === elementAnimal.id).name)
+      responseObj[`${elementEmployee.firstName} ${elementEmployee.lastName}`] = elementEmployee.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name);
     });
     return responseObj;
-  }
-  else if(idOrName.length === 36) {
+  } else if (idOrName.length === 36) {
     const employeeSearched = data.employees.find(
-      elementEmployee => elementEmployee.id === idOrName
+      elementEmployee => elementEmployee.id === idOrName,
     );
     return makeResponseObject(employeeSearched);
-  }
-  else {
+  } else {
     const employeeSearched = data.employees.find(
       elementEmployee =>
         elementEmployee.firstName === idOrName ||
-        elementEmployee.lastName === idOrName
+        elementEmployee.lastName === idOrName,
     );
     return makeResponseObject(employeeSearched);
   }
