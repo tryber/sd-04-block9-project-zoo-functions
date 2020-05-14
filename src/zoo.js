@@ -148,9 +148,12 @@ const schedule = function (dayName) {
 //  gerenciado pelo funcionário, e retorna um array com nome, sexo e idade
 //  do animal mais velho dessa espécie
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const oldestFromFirstSpecies = (id) => {
+  const idAnimal = data.employees.filter(employee => employee.id === id)[0].responsibleFor[0];
+  const Animal = data.animals.filter(animal => animal.id === idAnimal);
+  const olderAnimal = Object.values(Animal[0].residents.sort((a, b) => b.age - a.age)[0]);
+  return olderAnimal;
+};
 
 //  =======================================================================
 
