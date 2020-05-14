@@ -78,9 +78,9 @@ function entryCalculator(entrants) {
   let total = 0;
   if (!entrants) return total;
   if (!Object.keys(entrants).length) return total;
-  total += entrants['Adult'] * data.prices['Adult'];
-  total += entrants['Child'] * data.prices['Child'];
-  total += entrants['Senior'] * data.prices['Senior'];
+  total += entrants.Adult * data.prices.Adult;
+  total += entrants.Child * data.prices.Child;
+  total += entrants.Senior * data.prices.Senior;
 
   return total;
 }
@@ -164,25 +164,25 @@ function animalMap(options) {
       return mapWithNamesAndBySex;
     } else if (includeNames && sorted && !sex) {
       const mapWithSortedNames = {
-        NE: genericMap['NE'].map(elementAnimalName => ({
+        NE: genericMap.NE.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name)
             .sort(),
         })),
-        NW: genericMap['NW'].map(elementAnimalName => ({
+        NW: genericMap.NW.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name)
             .sort(),
         })),
-        SE: genericMap['SE'].map(elementAnimalName => ({
+        SE: genericMap.SE.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name)
             .sort(),
         })),
-        SW: genericMap['SW'].map(elementAnimalName => ({
+        SW: genericMap.SW.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name)
@@ -192,22 +192,22 @@ function animalMap(options) {
       return mapWithSortedNames;
     } else if (includeNames && !sorted && !sex) {
       const mapWithNames = {
-        NE: genericMap['NE'].map(elementAnimalName => ({
+        NE: genericMap.NE.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name),
         })),
-        NW: genericMap['NW'].map(elementAnimalName => ({
+        NW: genericMap.NW.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name),
         })),
-        SE: genericMap['SE'].map(elementAnimalName => ({
+        SE: genericMap.SE.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name),
         })),
-        SW: genericMap['SW'].map(elementAnimalName => ({
+        SW: genericMap.SW.map(elementAnimalName => ({
           [elementAnimalName]: data.animals
             .find(elementAnimal => elementAnimalName === elementAnimal.name)
             .residents.map(elementResident => elementResident.name),
@@ -223,7 +223,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  //foda-se, tinha feito da forma certa, CodeClimate reclamou, vou de lifehacks
+  //  foda-se, tinha feito da forma certa, CodeClimate reclamou, vou de lifehacks
   const genericSchedule = {
     Tuesday: 'Open from 8am until 6pm',
     Wednesday: 'Open from 8am until 6pm',
