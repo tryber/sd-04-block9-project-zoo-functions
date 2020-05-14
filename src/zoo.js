@@ -50,7 +50,14 @@ const addEmployee = (
     responsibleFor,
   });
 
-const animalCount = (species) => {};
+const animalCount = species => {
+  if (!species)
+    return data.animals.reduce((acc, animal) => {
+      acc[animal.name] = animal.residents.length;
+      return acc;
+    }, {});
+  return data.animals.find(animal => animal.name === species).residents.length;
+};
 
 const entryCalculator = (entrants) => {};
 
