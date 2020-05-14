@@ -11,8 +11,10 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+// Caso receba nenhum parâmetro, necessário retornar um array vazio
+// Ao receber como parâmetro um único id, retorna os animais com este id
+// Ao receber mais de um id, retorna os animais que têm um desses ids
 function animalsByIds(...ids) {
-  // seu código aqui
   if (!ids) return [];
   const resultado = data.animals.filter(elemento => ids.includes(elemento.id));
   return resultado;
@@ -21,20 +23,32 @@ function animalsByIds(...ids) {
 // Ao passar o nome de uma espécie e uma idade,
 // testa se todos os animais desta espécie possuem a idade mínima especificada
 function animalsOlderThan(animal, age) {
-  // seu código aqui
-  // const filterAnimals = data.animals.filter()
-  //   .filter(element => element.name === animal)
-  //   .every(element => element.age >= age)
+  return data.animals.find(element => element.name === animal)
+    .residents.every(element => element.age >= age);
 }
+
+// Implemente a função employeeByName:
+// Sem parâmetros, retorna um objeto vazio
+// Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+// Quando provido o último nome do funcionário, retorna o objeto do funcionário
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
+  return data.employees.find(element =>
+    element.firstName === employeeName || element.lastName === employeeByName);
+// Não entendi ao certo porque/como está sendo retornado o respectivo elemento
 }
 
+// Implemente a função createEmployee:
+// Cria um novo colaborador a partir de objetos contendo informações pessoais,
+// gerentes e animais gerenciados
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
 
+// Implemente a função isManager:
+// Testa se o id passado é de um gerente
 function isManager(id) {
   // seu código aqui
 }
