@@ -40,24 +40,6 @@ function employeeByName(employeeName) {
 // console.log(employeeByName('Emery')); //--> TESTE 2
 // console.log(employeeByName('Wishart')); //--> TESTE 3
 
-// const personalInfo = {
-//   id: '7ed1c9bb-8570-44f6-b718-0666b869573a',
-//   firstName: 'John',
-//   lastName: 'Doe',
-// };
-
-// const associatedWith = {
-//   managers: [
-//     'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
-//     '9e7d4524-363c-416a-8759-8aa7e50c0992',
-//   ],
-//   responsibleFor: [
-//     '0938aa23-f153-4937-9f88-4858b24d6bce',
-//     '89be95b3-47e4-4c5b-b687-1fabf2afa274',
-//     'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
-//   ],
-// };
-
 function createEmployee(personalInfo, associatedWith) {
   return Object.assign({}, personalInfo, associatedWith);
 }
@@ -73,16 +55,34 @@ function isManager(id) {
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')); --> TESTE 2
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  if (!managers) managers = [];
+  if (!responsibleFor) responsibleFor = [];
+  return data.employees.push(
+    { id,
+      firstName,
+      lastName,
+      managers,
+      responsibleFor,
+    });
 }
+
+// console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
+
+// console.log(data.employees);
 
 function animalCount(species) {
-  // seu código aqui
+  // if(!species) {return obj}
+  // obj -> chaves: nomes dos animais / valores: quantidade residents.length
 }
 
+// console.log(animalCount());
+
 function entryCalculator(entrants) {
-  // seu código aqui
+  // if (!entrants || Object.keys(entrants).length === 0) return 0;
 }
+
+// console.log(entryCalculator()); --> TESTE 1
+// console.log(entryCalculator({})); --> TESTE 2
 
 function animalMap(options) {
   // seu código aqui
