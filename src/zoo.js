@@ -257,27 +257,22 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  data.prices.Adult = (1 + percentage / 100) * data.prices.Adult;
-  data.prices.Senior = (1 + percentage / 100) * data.prices.Senior;
-  data.prices.Child = (1 + percentage / 100) * data.prices.Child;
-  if (data.prices.Adult.toString().endsWith('5')) {
-    data.prices.Adult += 0.001;
-    data.prices.Adult = data.prices.Adult.toPrecision(4);
-  } else {
-    data.prices.Adult = data.prices.Adult.toPrecision(4);
+  data.prices.Adult *= (1 + (percentage / 100));
+  data.prices.Senior *= (1 + (percentage / 100));
+  data.prices.Child *= (1 + (percentage / 100));
+
+  function formatValue(numberAsString) {
+    let returnedNumber = Number(numberAsString);
+    if(numberAsString.endsWith('5')){
+      returnedNumber += 0.001;
+      return returnedNumber.toPrecision(4);
+    }
+    return returnedNumber.toPrecision(4);
   }
-  if (data.prices.Senior.toString().endsWith('5')) {
-    data.prices.Senior += 0.001;
-    data.prices.Senior = data.prices.Senior.toPrecision(4);
-  } else {
-    data.prices.Senior = data.prices.Senior.toPrecision(4);
-  }
-  if (data.prices.Child.toString().endsWith('5')) {
-    data.prices.Child += 0.001;
-    data.prices.Child = data.prices.Child.toPrecision(4);
-  } else {
-    data.prices.Child = data.prices.Child.toPrecision(4);
-  }
+
+  data.prices.Adult = formatValue(data.prices.Adult.toString());
+  data.prices.Senior = formatValue(data.prices.Senior.toString());
+  data.prices.Child = formatValue(data.prices.Child.toString());
 }
 
 function employeeCoverage(idOrName) {
