@@ -109,7 +109,7 @@ function oldestFromFirstSpecies(id) {
   return getAnimal(animalID)
     .residents.reduce((acc, curr) => {
       if (acc[2] < curr.age) return [curr.name, curr.sex, curr.age];
-      else return acc;
+      return acc;
     }, [0, 0, 0]);
 }
 
