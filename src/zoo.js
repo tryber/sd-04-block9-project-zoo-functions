@@ -27,7 +27,10 @@ const employeeByName = employeeName =>
     .filter(obj => obj.firstName === employeeName || obj.lastName === employeeName)
     .reduce((acc, employeeObj) => (acc = employeeObj), {});
 
-const createEmployee = (personalInfo, associatedWith) => {};
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+});
 
 const isManager = (id) => {};
 
