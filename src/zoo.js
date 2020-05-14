@@ -13,31 +13,35 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  return data.animals.filter(({id}) => ids.includes(id));
+  return data.animals.filter(({ id }) => ids.includes(id));
 }
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const animalsAges = data.animals.find(({name}) => name === animal)
-  .residents.map((item) => item.age);
-  return animalsAges.find((item) => item < age) ? false : true;
+  const animalsAges = data.animals.find(({ name }) => name === animal)
+  .residents.map(item => item.age);
+  if (animalsAges.find(item => item < age)) return false;
+  return true;
 }
+
+console.log(animalsOlderThan('lions', 10));
 
 function employeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) return {};
-  return data.employees.find(({firstName, lastName}) => firstName === employeeName || lastName === employeeName);
+  return data.employees.find(({ firstName, lastName }) =>
+  firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  return {...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
   // seu código aqui
-  // return data.employees[0].managers.filter(item => item === id);
-  return data.employees.find(item => item.managers.includes(id)) ? true : false;
+  if (data.employees.find(item => item.managers.includes(id))) return true;
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -47,13 +51,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
-  const animalsArray = data.animals.map(({name, residents}) => ({[name]: residents.length}))
+  const animalsArray = data.animals.map(({ name, residents }) => ({ [name]: residents.length }));
   const animalsList = {};
   animalsArray.forEach(item => Object.assign(animalsList, item));
-  return species === undefined ? animalsList : data.animals.find(({name}) => name === species).residents.length;
+  return species === undefined ? animalsList : data.animals
+  .find(({ name }) => name === species).residents.length;
 }
-
-console.log(animalCount());
 
 function entryCalculator(entrants) {
   // seu código aqui
