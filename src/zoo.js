@@ -129,7 +129,7 @@ const employeeCoverage = (idOrName) => {
   // });
   const funcionario = data.employees.reduce((res, e) =>
     res = (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) ?
-    `${e.firstName} ${e.lastName}`: res
+    `${e.firstName} ${e.lastName}` : res
     , '');
   return { [funcionario]: objEmp[funcionario] };
 };
