@@ -89,9 +89,19 @@ const animalMap = (options = {}) => {
   }, {});
 };
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const legibleSchedule = dayWeek => ((dayWeek === 'Monday')
+  ? 'CLOSED'
+  : `Open from ${data.hours[dayWeek].open}am until ${data.hours[dayWeek].close - 12}pm`);
+
+const schedule = dayName => {
+  const scheduleH = {};
+  if (dayName) {
+    scheduleH[dayName] = legibleSchedule(dayName);
+    return scheduleH;
+  }
+  Object.keys(data.hours).forEach((day) => { scheduleH[day] = legibleSchedule(day); });
+  return scheduleH;
+};
 
 const oldestFromFirstSpecies = id => Object.values(data.animals
   .find(e => e.id === data.employees
