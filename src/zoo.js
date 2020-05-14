@@ -139,14 +139,18 @@ const oldestFromFirstSpecies = id =>
     .find(element => element.id === data.employees
     .find(animal => animal.id === id).responsibleFor[0]).residents
     .sort((x, y) => y.age - x.age)[0]);
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+//  console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 //  12. Implemente a função increasePrices:
 //  Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach((person) => {
+    data.prices[person] = Number(
+      (data.prices[person] * (((percentage + 0.01) / 100) + 1)).toFixed(2),
+    );
+  });
+};
 
 //  13. Implemente a função employeeCoverage:
 //  Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
