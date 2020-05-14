@@ -107,15 +107,15 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
   const animalID = getEmployee(id).responsibleFor[0];
   return getAnimal(animalID)
-    .residents.reduce((acc, curr) =>
-      acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [0, 0, 0]);
+    .residents.reduce((acc, curr) => 
+    { return acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [0, 0, 0] });
 }
 
 function increasePrices(percentage) {
   // seu código aqui
   return Object.keys(data.prices)
-    .forEach(key => data.prices[key] =
-      Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100);
+    .forEach(key => (data.prices[key] =
+      Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100));
 }
 
 function getCoverage(idOrName) {
