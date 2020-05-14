@@ -162,10 +162,15 @@ const oldestFromFirstSpecies = (id) => {
 //  Ao passar uma porcentagem, incrementa todos os preços, arrendondados em
 //  duas casas decimais
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {
+  const adult = data.prices.Adult;
+  const senior = data.prices.Senior;
+  const child = data.prices.Child;
 
+  data.prices.Adult = Math.round(adult * ((percentage / 100) + 1) * 100) / 100;
+  data.prices.Senior = Math.round(senior * ((percentage / 100) + 1) * 100) / 100;
+  data.prices.Child = Math.round(child * ((percentage / 100) + 1) * 100) / 100;
+};
 //  =======================================================================
 
 //  ====REQUISITO 13=======================================================
