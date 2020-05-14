@@ -86,10 +86,9 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  if(options) {
-    var { includeNames, sorted, sex } = options;
-  }
-
+  let includeNames = false
+  let sorted = false
+  let sex = false
   function generateGenericMap(location) {
     return data.animals.filter(elementAnimal => elementAnimal.location === location)
     .map(filteredAnimal => filteredAnimal.name);
@@ -113,9 +112,9 @@ function animalMap(options) {
     return { [animalName]: orderedNames };
   }
   function generateSortedNamesMap(location) {
-    return generateNamesMap(location).map(elementAnimal => {
-      return sortArrayOfTheAnimal(elementAnimal);
-    });
+    return generateNamesMap(location).map(elementAnimal =>
+      sortArrayOfTheAnimal(elementAnimal)
+    );
   }
   function generateNamesAndSexMap(location) {
     return generateNamesMap(location).map(elementAnimal => {
@@ -126,12 +125,15 @@ function animalMap(options) {
     });
   }
   function generateSortedNamesAndSexMap(location) {
-    return generateNamesAndSexMap(location).map(elementAnimal => {
-      return sortArrayOfTheAnimal(elementAnimal);
-    });
+    return generateNamesAndSexMap(location).map(elementAnimal =>
+      sortArrayOfTheAnimal(elementAnimal)
+    );
   }
 
   if (options) {
+    includeNames = options.includeNames;
+    sorted = options.sorted;
+    sex = options.sex;
     if (includeNames && sorted && sex) {
       const mapWithSortedNamesAndBySex = {
         NE: generateSortedNamesAndSexMap('NE'),
