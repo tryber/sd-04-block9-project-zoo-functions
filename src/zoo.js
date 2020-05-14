@@ -83,7 +83,12 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const results = data.prices;
+  const gambiarra = 0.0001;// GAMBIARRA TO ROUND EH NOIS. #GambiarraWins
+  results.Adult = ((results.Adult * (1 + (percentage / 100))) + gambiarra).toPrecision(4);
+  results.Child = ((results.Child * (1 + (percentage / 100))) + gambiarra).toPrecision(4);
+  results.Senior = ((results.Senior * (1 + (percentage / 100))) + gambiarra).toPrecision(4);
+  return results;
 }
 
 function employeeCoverage(idOrName) {
