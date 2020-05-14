@@ -16,15 +16,17 @@ const animalsByIds = (...ids) => data.animals.filter(element => ids.includes(ele
 const animalsOlderThan = (animal, age) => data.animals.find(element => element.name === animal)
   .residents.every(element => element.age > age);
 
+function employeeByName(employeeName) {
+  if (!employeeName) return {};
+  return data.employees.find(element => element.firstName === employeeName ||
+    element.lastName === employeeName);
+}
+
 //
 //
 //
 //
 //  ////////// CONCLUIDOS ////////////
-
-function employeeByName(employeeName) {
-  // seu código aqui
-}
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
