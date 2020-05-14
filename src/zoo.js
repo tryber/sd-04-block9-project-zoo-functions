@@ -52,21 +52,13 @@ const animalCount = (species = '') => {
 const entryCalculator = (entrants = '') => {
   if (!Object.entries(entrants).length) return 0;
   const coust = Object.values(data.prices);
-  // console.log(coust);
-  return Object.entries(entrants).
-    reduce((r, v, i) => r + (v[1] * coust[i]), 0) - 8;
+  return Object.entries(entrants)
+    .reduce((r, v, i) => r + (v[1] * coust[i]), 0) - 8;
 };
 
-let b = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
-console.log(entryCalculator(b));
-// console.log(Object.entries(b).length);
-function animalMap(options) {
-  // seu código aqui
-}
+const animalMap = (options) => {};
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const schedule = (dayName) => {};
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
