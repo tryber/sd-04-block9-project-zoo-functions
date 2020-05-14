@@ -89,6 +89,7 @@ function animalMap(options) {
   let includeNames = false;
   let sorted = false;
   let sex = false;
+
   function generateGenericMap(location) {
     return data.animals.filter(elementAnimal => elementAnimal.location === location)
     .map(filteredAnimal => filteredAnimal.name);
@@ -99,6 +100,7 @@ function animalMap(options) {
     SE: generateGenericMap('SE'),
     SW: generateGenericMap('SW'),
   };
+  const response = genericMap;
   function generateNamesMap(location) {
     return genericMap[location].map(elementAnimalName => ({
       [elementAnimalName]: data.animals
@@ -129,47 +131,27 @@ function animalMap(options) {
       sortArrayOfTheAnimal(elementAnimal),
     );
   }
-
-  if (options) {
-    includeNames = options.includeNames;
-    sorted = options.sorted;
-    sex = options.sex;
-    if (includeNames && sorted && sex) {
-      const mapWithSortedNamesAndBySex = {
-        NE: generateSortedNamesAndSexMap('NE'),
-        NW: generateSortedNamesAndSexMap('NW'),
-        SE: generateSortedNamesAndSexMap('SE'),
-        SW: generateSortedNamesAndSexMap('SW'),
-      };
-      return mapWithSortedNamesAndBySex;
-    } else if (includeNames && !sorted && sex) {
-      const mapWithNamesAndBySex = {
-        SE: generateNamesAndSexMap('SE'),
-        NE: generateNamesAndSexMap('NE'),
-        NW: generateNamesAndSexMap('NW'),
-        SW: generateNamesAndSexMap('SW'),
-      };
-      return mapWithNamesAndBySex;
-    } else if (includeNames && sorted && !sex) {
-      const mapWithSortedNames = {
-        SW: generateSortedNamesMap('SW'),
-        SE: generateSortedNamesMap('SE'),
-        NW: generateSortedNamesMap('NW'),
-        NE: generateSortedNamesMap('NE'),
-      };
-      return mapWithSortedNames;
-    } else if (includeNames && !sorted && !sex) {
-      const mapWithNames = {
-        NW: generateNamesMap('NW'),
-        NE: generateNamesMap('NE'),
-        SW: generateNamesMap('SW'),
-        SE: generateNamesMap('SE'),
-      };
-      return mapWithNames;
+  function generateFinalResponse(opt) {
+    includeNames = opt.includeNames;
+    sorted = opt.sorted;
+    sex = opt.sex;
+    const locations = ['NE', 'NW', 'SE', 'SW'];
+    for (let loc of locations) {
+      if (includeNames && sorted && sex) {
+        response[loc] = generateSortedNamesAndSexMap(loc);
+      } else if (includeNames && !sorted && sex) {
+        response[loc] = generateNamesAndSexMap(loc);
+      } else if (includeNames && sorted && !sex) {
+        response[loc] = generateSortedNamesMap(loc);
+      } else if (includeNames && !sorted && !sex) {
+        response[loc] = generateNamesMap(loc);
+      }
     }
-    return genericMap;
   }
-  return genericMap;
+  if(options) {
+    generateFinalResponse(options);
+  }
+  return response;
 }
 
 function schedule(dayName) {
