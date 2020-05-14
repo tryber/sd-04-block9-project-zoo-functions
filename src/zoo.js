@@ -59,9 +59,11 @@ function isManager(id) {
   return verifyManager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const addNewEmployee = data.employees.push({id,firstName, lastName, managers,responsibleFor});
+  return data.employees;
 }
+// console.log(addEmployee('4444444444445555', 'Juliana', 'Da Silva', ['454544589898632234646', '9797979794646464', '44545d4fsfsfs97+898+8+8996'], ['66565656989898323213131', '64646464648989']));
 
 function animalCount(species) {
   // seu código aqui
