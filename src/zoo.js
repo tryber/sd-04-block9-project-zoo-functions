@@ -24,9 +24,7 @@ const animalsOlderThan = (speciesName, age) =>
 
 const employeeByName = employeeName =>
   data.employees
-    .filter(
-      obj => obj.firstName == employeeName || obj.lastName == employeeName
-    )
+    .filter(obj => obj.firstName === employeeName || obj.lastName === employeeName)
     .reduce((acc, employeeObj) => (acc = employeeObj), {});
 
 const createEmployee = (personalInfo, associatedWith) => {};
