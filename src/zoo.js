@@ -65,19 +65,46 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-
+  console.log(species);
+  const resultAnimalCount = data.animals.reduce((accumulator, animal) => {
+    const { name, residents } = animal; // destructuring do objeto
+    if (species === undefined) {
+      // console.log(animal.name, animal.residents.length):
+      // se não fosse string usaria desta forma [`${name}`]
+      accumulator[name] = residents.length; // adicionando uma nova chave,
+    } else if (name === species) {
+      accumulator = residents.length;
+    }
+    return accumulator;
+  }, {}, // look o reduce se não passado nenhum valor para inicializar o accumulator,
+    // ele inicializa com o primeiro valor que tem no animal
+  );
+  return resultAnimalCount;
 }
+
 // console.log(animalCount());
 
-function entryCalculator(entrants = {}) {
-  return Object.keys(entrants)
+function entryCalculator(entrants = {}) { // defalt paraments
+  return Object.keys(entrants) // a chave vira um array, o return vai receber o resultado de reduce
     .reduce((accumulator, participant, index) =>
       accumulator + (entrants[participant] * data.prices[participant]), 0);
+      // entrants.adult= quantidad
 }
 
 function animalMap(options) {
-  // seu código aqui
+// let obj = {}
+// const returnAnimalMap = data.animals.map(animal => animal.location)
+// return returnAnimalMap.reduce();
 }
+
+// // console.log(animalMap());
+
+// {
+//   NE: ['lions', 'giraffes'],
+//   NW: ['tigers', 'bears', 'elephants'],
+//   SE: ['penguins', 'otters'],
+//   SW: ['frogs', 'snakes']
+// };
 
 function schedule(dayName) {
   // seu código aqui
