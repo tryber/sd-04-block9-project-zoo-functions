@@ -105,12 +105,18 @@ const oldestFromFirstSpecies = (id) => {
   return olderAnimal;
 };
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-// expected = ['Vicky', 'female', 12];
+/* 12- Implemente a função increasePrices:
+Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais*/
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {
+  const adult = data.prices.Adult;
+  const senior = data.prices.Senior;
+  const child = data.prices.Child;
+
+  data.prices.Adult = Math.round(adult * ((percentage / 100) + 1) * 100) / 100;
+  data.prices.Senior = Math.round(senior * ((percentage / 100) + 1) * 100) / 100;
+  data.prices.Child = Math.round(child * ((percentage / 100) + 1) * 100) / 100;
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
