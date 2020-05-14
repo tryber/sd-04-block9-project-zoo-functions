@@ -78,7 +78,7 @@ function entryCalculator(entrants) {
   // });
   // return Object.values(results).reduce((total, currentValue) => total + currentValue, 0);
 }
-console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 function animalMap(options) {
 // seu código aqui
