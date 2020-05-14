@@ -11,6 +11,17 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+
+function getEmployee(idOrName) {
+  return data.employees.find(emp =>
+    emp.firstName === idOrName || emp.lastName === idOrName || emp.id === idOrName);
+}
+
+function getAnimal(idOrName) {
+  return data.animals.find(info =>
+    info.name === idOrName || info.id === idOrName);
+}
+
 function animalsByIds(...ids) {
   // seu código aqui
   return data.animals.filter(info => ids.some(id => info.id === id));
@@ -18,14 +29,13 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  return data.animals.find(info => info.name === animal)
+  return getAnimal(animal)
     .residents.every(resid => resid.age > age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
-  return employeeName === undefined ? {} :
-    data.employees.find(emp => emp.firstName === employeeName || emp.lastName === employeeName);
+  return employeeName === undefined ? {} : getEmployee(employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -46,7 +56,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   // seu código aqui
   return species !== undefined ?
-    data.animals.find(info => info.name === species).residents.length :
+    getAnimal(species).residents.length :
     data.animals.reduce((acc, info) => {
       acc[info.name] = info.residents.length;
       return acc;
@@ -80,7 +90,7 @@ function animalMap(options) { // preciso refatorar não gostei do resultado por 
 }
 
 function getScheduleString({ open, close }) {
-  return open === 0 && close === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`
+  return open === 0 && close === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
 }
 
 function schedule(dayName) {
@@ -95,20 +105,36 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  const animalID = data.employees.find(emp => emp.id === id).responsibleFor[0];
-  return data.animals.find(info => info.id === animalID)
-    .residents.reduce((acc, curr) => acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [, , 0]);
+  const animalID = getEmployee(id).responsibleFor[0];
+  return getAnimal(animalID)
+    .residents.reduce((acc, curr) =>
+      acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [0, 0, 0]);
 }
 
 function increasePrices(percentage) {
   // seu código aqui
   return Object.keys(data.prices)
-    .forEach(key => data.prices[key] = 
+    .forEach(key => data.prices[key] =
       Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100);
+}
+
+function getCoverage(idOrName) {
+  const employee = getEmployee(idOrName);
+  return {
+    [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor.reduce((acc, curr) => {
+      acc.push(getAnimal(curr).name);
+      return acc;
+    }, []),
+  };
 }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  return idOrName !== undefined ? getCoverage(idOrName) :
+    data.employees.reduce((acc, curr) => {
+      Object.assign(acc, getCoverage(curr.firstName));
+      return acc
+    }, {});
 }
 
 module.exports = {
