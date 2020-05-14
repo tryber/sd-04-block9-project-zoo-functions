@@ -69,9 +69,20 @@ const addEmployee = (
 //  Sem parâmetros, returna animais e suas quantidades
 //  Com o nome de uma espécie de animal, retorna somente a quantidade
 
-function animalCount(species) {
-  // seu código aqui
+const animalCount = (species) => {
+  const numberAnimals = {};
+  data.animals.forEach((element) => {
+    numberAnimals[element.name] = element.residents.length;
+  });
+  if (species) {
+    return numberAnimals[species];
+  }
+  return numberAnimals;
 }
+console.log(animalCount('lions'));
+
+
+
 
 //  8. Implemente a função entryCalculator:
 //  Returna 0 se nenhum argumento for passado
