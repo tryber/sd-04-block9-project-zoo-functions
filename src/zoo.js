@@ -40,7 +40,6 @@ function animalsOlderThan(animal, age) {
 Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
 Quando provido o último nome do funcionário, retorna o objeto do funcionário
  */
-
 const funcionario = data.employees;
 function employeeByName(...employeeName) {
   // seu código aqui
@@ -53,18 +52,16 @@ function employeeByName(...employeeName) {
   return funcionarioObj;
 }
 
-
-/* Cria um novo colaborador a partir de objetos contendo informações pessoais, 
-gerentes e animais gerenciados*/
+/* Cria um novo colaborador a partir de objetos contendo informações pessoais,
+gerentes e animais gerenciados
+*/
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-    // seu código aqui
-    const objMontado = Object.assign(personalInfo, associatedWith);
-    return objMontado
-    
+  const objMontado = Object.assign(personalInfo, associatedWith);
+  return objMontado;
 }
 
-
+// Testa se o id passado é de um gerente
 function isManager(id) {
   // seu código aqui
 }
