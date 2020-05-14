@@ -79,7 +79,7 @@ const animalCount = (species) => {
   }
   return numberAnimals;
 };
-console.log(animalCount('lions'));
+//  console.log(animalCount('lions'));
 
 //  8. Implemente a função entryCalculator:
 //  Returna 0 se nenhum argumento for passado
@@ -87,8 +87,14 @@ console.log(animalCount('lions'));
 //  Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  return !entrants || Object.keys(entrants).length === 0
+    ? 0
+    : Object.keys(entrants).reduce(
+        (acc, curr) => acc + (entrants[curr] * data.prices[curr]),
+        0,
+      );
 }
+//  console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 //  9. Implemente a função animalMap:
 //  Sem parâmetros, retorna animais categorizados por localização
