@@ -86,13 +86,16 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  if (options) {
-    var { includeNames, sorted, sex } = options;
-  }
   function generateGenericMap(location) {
     return data.animals.filter(elementAnimal => elementAnimal.location === location)
     .map(filteredAnimal => filteredAnimal.name);
   }
+  const genericMap = {
+    NE: generateGenericMap('NE'),
+    NW: generateGenericMap('NW'),
+    SE: generateGenericMap('SE'),
+    SW: generateGenericMap('SW'),
+  };
   function generateNamesMap(location) {
     return genericMap[location].map(elementAnimalName => ({
       [elementAnimalName]: data.animals
@@ -100,11 +103,14 @@ function animalMap(options) {
         .residents.map(elementResident => elementResident.name),
     }));
   }
+  function sortArrayOfTheAnimal(animal) {
+    const animalName = Object.keys(animal)[0];
+    const orderedNames = animal[animalName].sort();
+    return { [animalName]: orderedNames };
+  }
   function generateSortedNamesMap(location) {
     return generateNamesMap(location).map(elementAnimal => {
-      const animalName = Object.keys(elementAnimal)[0];
-      const orderedNames = elementAnimal[animalName].sort();
-      return { [animalName]: orderedNames };
+      return sortArrayOfTheAnimal(elementAnimal);
     });
   }
   function generateNamesAndSexMap(location) {
@@ -117,17 +123,10 @@ function animalMap(options) {
   }
   function generateSortedNamesAndSexMap(location) {
     return generateNamesAndSexMap(location).map(elementAnimal => {
-      const animalName = Object.keys(elementAnimal)[0];
-      const sorted = elementAnimal[animalName].sort();
-      return { [animalName]: sorted };
-    })
+      return sortArrayOfTheAnimal(elementAnimal);
+    });
   }
-  const genericMap = {
-    NE: generateGenericMap('NE'),
-    NW: generateGenericMap('NW'),
-    SE: generateGenericMap('SE'),
-    SW: generateGenericMap('SW'),
-  };
+
   if (options) {
     if (includeNames && sorted && sex) {
       const mapWithSortedNamesAndBySex = {
