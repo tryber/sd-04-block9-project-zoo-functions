@@ -60,11 +60,18 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // seu código aqui
+  // // seu código aqui
 }
 
 function entryCalculator(entrants) {
   // seu código aqui
+  if (!entrants) return 0;
+  if (Object.keys(entrants).length === 0) return 0;
+  return (
+    (data.prices.Adult * entrants.Adult) +
+    (data.prices.Child * entrants.Child) +
+    (data.prices.Senior * entrants.Senior)
+  );
 }
 
 function animalMap(options) {
