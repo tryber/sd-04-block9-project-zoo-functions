@@ -45,7 +45,7 @@ const animalCount = (species = '') => {
   }
   return data.animals.reduce((r, a) => {
     r[a.name] = a.residents.length;
-      return r;
+    return r;
   }, {});
 }
 
