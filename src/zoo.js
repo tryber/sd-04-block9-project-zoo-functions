@@ -38,15 +38,36 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const employees = data.employees;
+
+  return employees.some(({ managers }) => managers.includes(id));
+
+  // for (let i = 0; i < employees.length; i += 1) {
+  //   if (employees[i].managers.includes(id)) return true;
+  // }
+  // return false;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(newEmployee);
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const allAnimals = data.animals.reduce((acc, curr) => {
+    acc[curr.name] = curr.residents.length;
+    return acc;
+  }
+  , {});
+  if (!species) return allAnimals;
+
+  return data.animals.find(animal => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
