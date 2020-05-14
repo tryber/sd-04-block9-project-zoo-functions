@@ -98,9 +98,15 @@ const schedule = function (dayName) {
   return (dayName) ? objFiltered : obj;
 };
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const oldestFromFirstSpecies = (id) => {
+  const idAnimal = data.employees.filter(employee => employee.id === id)[0].responsibleFor[0];
+  const Animal = data.animals.filter(animal => animal.id === idAnimal);
+  const olderAnimal = Object.values(Animal[0].residents.sort((a, b) => b.age - a.age)[0]);
+  return olderAnimal;
+};
+
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// expected = ['Vicky', 'female', 12];
 
 function increasePrices(percentage) {
   // seu código aqui
