@@ -20,13 +20,15 @@ function animalsOlderThan(animal, age) {
   // seu código aqui
   const species = data.animals.find(({ name }) => name === animal);
   const { residents } = species;
-  return residents.every((e) => e.age > age);
+  return residents.every(e => e.age > age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) return {};
-  return data.employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName);
+  return data.employees.find(
+    ({ firstName, lastName }) => firstName === employeeName || lastName === employeeName,
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
