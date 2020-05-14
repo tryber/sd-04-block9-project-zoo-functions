@@ -27,7 +27,7 @@ const createEmployee = (personalInfo, associatedWith) => ({
   ...associatedWith,
 });
 
-const isManager = id => data.employees.some(elemento => 
+const isManager = id => data.employees.some(elemento =>
   elemento.managers.some(elemento2 => elemento2 === id));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
