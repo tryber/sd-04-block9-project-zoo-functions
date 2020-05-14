@@ -280,7 +280,7 @@ function employeeCoverage(idOrName) {
   function makeResponseObject(employee) {
     const key = `${employee.firstName} ${employee.lastName}`;
     const value = employee.responsibleFor.map(animalId =>
-      data.animals.find(elementAnimal => animalId === elementAnimal.id).name
+      data.animals.find(elementAnimal => animalId === elementAnimal.id).name,
     );
     return { key, value };
   }
