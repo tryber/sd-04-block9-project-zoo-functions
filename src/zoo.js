@@ -77,9 +77,9 @@ function schedule(dayName) {
   const obj = {};
   const especifcDay = {};
   const days = Object.keys(data.hours);
-  days.map((hour) => {
+  days.forEach((hour) => {
     const closeHour = data.hours[hour].close - 12;
-    return obj[hour] = `Open from ${data.hours[hour].open}am until ${closeHour}pm`;
+    obj[hour] = `Open from ${data.hours[hour].open}am until ${closeHour}pm`;
   });
   obj.Monday = 'CLOSED';
   if (!dayName) return obj;
