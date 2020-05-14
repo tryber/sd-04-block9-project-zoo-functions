@@ -78,7 +78,7 @@ const findResidents = n => animals.find(animal => animal.n === n).residents;
 
 const findAndMapResidents = (name, sex) => {
   if (sex) {
-    const filtResidents = findResidents(name).filter(resident => resident.sex === sex); 
+    const filtResidents = findResidents(name).filter(resident => resident.sex === sex);
     return filtResidents.map(resident => resident.name);
   }
   return findResidents(name).map(resident => resident.name);
