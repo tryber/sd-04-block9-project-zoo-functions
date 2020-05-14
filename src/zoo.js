@@ -79,7 +79,8 @@ const Gamb = {
 const employeeCoverage = (idOrName) => {
   if (!idOrName) return Gamb;
   const funcionario = data.employees.reduce((acc, elemento) => {
-    acc = (elemento.id === idOrName || elemento.firstName === idOrName || elemento.lastName === idOrName) ?
+    acc = (elemento.id === idOrName || 
+      elemento.firstName === idOrName || elemento.lastName === idOrName) ?
     `${elemento.firstName} ${elemento.lastName}` : acc;
     return acc;
   }, '');
