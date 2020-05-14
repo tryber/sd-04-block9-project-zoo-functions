@@ -36,7 +36,8 @@ const animalsOlderThan = (animal, age) =>
 const employeeByName = (employeeName) =>
   data.employees.find(
     (anyName) =>
-      anyName.firstName === employeeName || anyName.lastName === employeeName) || {};
+      anyName.firstName === employeeName || anyName.lastName === employeeName,
+  ) || {};
 
 //  4. Implemente a função createEmployee:
 //  Cria um novo colaborador a partir de objetos contendo informações pessoais,
@@ -50,14 +51,19 @@ const createEmployee = (personalInfo, associatedWith) => ({
 //  5. Implemente a função isManager:
 //  Testa se o id passado é de um gerente
 
-const isManager = (id) => data.employees.some(({ managers }) => managers.includes(id));
+const isManager = (id) =>
+  data.employees.some(({ managers }) => managers.includes(id));
 
 //  6. Implemente a função addEmployee:
 //  Adiciona um funcionário no fim da lista
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) => data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
 //  7. Implemente a função animalCount:
 //  Sem parâmetros, returna animais e suas quantidades
