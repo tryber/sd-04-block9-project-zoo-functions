@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 const animalsByIds = (...ids) =>
-  data.animals.filter(animal => ids.find((id) => animal.id === id));
+  data.animals.filter(animal => ids.find(id => animal.id === id));
 
 const animalsOlderThan = (animal, age) =>
   data.animals
@@ -39,15 +39,17 @@ const addEmployee = (
   responsibleFor = [],
 ) => data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-const animalCount = (species = '') =>
-  (species) ?
-  data.animals.find(a => a.name === species).residents.length :
-  data.animals.reduce((r, a) => {
+const animalCount = (species = '') => {
+  if (species) {
+    return data.animals.find(a => a.name === species).residents.length;
+  }
+  return data.animals.reduce((r, a) => {
     r[a.name] = a.residents.length;
       return r;
   }, {});
+}
 
-console.log(animalCount());
+console.log(animalCount('snakes'));
 const entryCalculator = (entrants) => {};
 
 function animalMap(options) {
