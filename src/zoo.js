@@ -21,12 +21,14 @@ function animalsByIds(...ids) { // rest
 }
 
 function animalsOlderThan(animal, age) {
-  return data.animals.filter(species => species.name === animal)[0].residents
-    .every(resident => resident.age >= age);
+  return data.animals.filter(species => species.name === animal)[0].residents // filter
+    .every(resident => resident.age >= age); // every
 }
 
-function employeeByName(employeeName) {
-  // seu código aqui
+function employeeByName(employeeName = {}) { // default params
+  if (Object.keys(employeeName).length === 0) return employeeName;
+  return data.employees.find(employee => employee.firstName === employeeName || // find
+    employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
