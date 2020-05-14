@@ -114,7 +114,7 @@ const entryCalculator = function (entrants) {
 //  Com opções especificadas, retorna somente nomes de animais macho/fêmea
 //  Só retorna informações específicas de gênero se includeNames for setado
 
-const animalMap = (options) => {
+const animalMap = function (options) {
 
 };
 
@@ -126,10 +126,20 @@ const animalMap = (options) => {
 //  Se um único dia for passado, retorna somente este dia em um
 //  formato legível para humanos
 
-function schedule(dayName) {
-  // seu código aqui
-}
-
+const schedule = function (dayName) {
+  const keys = Object.keys(data.hours);
+  const obj = {};
+  keys.forEach(function (cur) {
+    if (data.hours[cur].open === 0) {
+      obj[cur] = 'CLOSED';
+    } else {
+      obj[cur] = `Open from ${data.hours[cur].open}am until ${data.hours[cur].close - 12}pm`;
+    }
+  });
+  const objFiltered = {};
+  objFiltered[dayName] = obj[dayName];
+  return (dayName) ? objFiltered : obj;
+};
 //  =======================================================================
 
 //  ====REQUISITO 11=======================================================
