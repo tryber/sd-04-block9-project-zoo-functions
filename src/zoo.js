@@ -93,7 +93,7 @@ function schedule(dayName) {
     Friday: 'Open from 10am until 8pm',
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED'
+    Monday: 'CLOSED',
   };
   if (!dayName) return operation;
   return { [dayName]: operation[dayName] };
@@ -105,6 +105,7 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+
 }
 
 function employeeCoverage(idOrName) {
