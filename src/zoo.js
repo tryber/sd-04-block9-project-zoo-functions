@@ -122,7 +122,7 @@ function increasePrices(percentage) {
   });
 }
 
-function responsibleFor(employee) {
+function responsible(employee) {
   const objEmployee = {};
   objEmployee[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
   .map(id => data.animals.find(animal => animal.id === id).name);
@@ -134,7 +134,7 @@ function employeeCoverage(idOrName) {
   const employees = {};
   if (!idOrName) {
     data.employees.forEach((employee) => {
-      Object.assign(employees, responsibleFor(employee));
+      Object.assign(employees, responsible(employee));
     });
     return employees;
   }
@@ -143,7 +143,7 @@ function employeeCoverage(idOrName) {
   if (data.employees.find(employee => employee.firstName === idOrName)) key = 'firstName';
   if (data.employees.find(employee => employee.lastName === idOrName)) key = 'lastName';
   const obj = data.employees.find(employee => employee[key] === idOrName);
-  return responsibleFor(obj);
+  return responsible(obj);
 }
 
 module.exports = {
