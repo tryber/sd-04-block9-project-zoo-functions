@@ -53,9 +53,17 @@ function employeeByName(...employeeName) {
   return funcionarioObj;
 }
 
+
+/* Cria um novo colaborador a partir de objetos contendo informações pessoais, 
+gerentes e animais gerenciados*/
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+    // seu código aqui
+    const objMontado = Object.assign(personalInfo, associatedWith);
+    return objMontado
+    
 }
+
 
 function isManager(id) {
   // seu código aqui
