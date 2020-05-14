@@ -47,7 +47,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
+  const animalsArray = data.animals.map(({name, residents}) => ({[name]: residents.length}))
+  const animalsList = {};
+  animalsArray.forEach(item => Object.assign(animalsList, item));
+  return species === undefined ? animalsList : data.animals.find(({name}) => name === species).residents.length;
 }
+
+console.log(animalCount());
 
 function entryCalculator(entrants) {
   // seu código aqui
