@@ -13,21 +13,20 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  if(!ids)
-  return [];
-  const filterIds = data.animals.filter((element) => ids.includes(element.id));
+  const filterIds = data.animals.filter(element => ids.includes(element.id));
   return filterIds;
 }
 // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  return data.animals.find((element) => animal.includes(element.name))
-  // o find() me retorna o array do animal passado como parametro o loop ocorre só dentro desse array.
-                      .residents.every((element) => element.age >= age);
-  
+  return data.animals.find(element => animal.includes(element.name))
+  // o find() me retorna o array do animal passado como parametro
+  // o loop ocorre só dentro desse array.
+                      .residents.every(element => element.age >= age);
 }
-//console.log(animalsOlderThan('penguins', 10));
+
+// console.log(animalsOlderThan('penguins', 10));
 
 
 function employeeByName(employeeName) {
