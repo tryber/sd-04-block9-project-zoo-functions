@@ -96,11 +96,8 @@ function schedule(dayName) {
     'Monday': 'CLOSED'
   };
   if (!dayName) return operation;
-  return {[dayName]: operation[dayName]};
-  
+  return {[dayName]: operation[dayName]};  
 }
-console.log(schedule());
-
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
