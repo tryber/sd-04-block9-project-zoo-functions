@@ -22,15 +22,20 @@ function employeeByName(employeeName) {
     element.lastName === employeeName);
 }
 
-//
-//
-//
+function createEmployee(personalInfo, associatedWith) {
+  const newCreew = {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
+  return newCreew;
+}
+
 //
 //  ////////// CONCLUIDOS ////////////
-
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+//
 
 function isManager(id) {
   // seu código aqui
