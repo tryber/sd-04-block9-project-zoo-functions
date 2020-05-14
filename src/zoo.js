@@ -56,13 +56,42 @@ const entryCalculator = (entrants = '') => {
     .reduce((r, v, i) => r + (v[1] * coust[i]), 0) - 8;
 };
 
-const animalMap = (options) => {};
+// const adjFunc = loc =>
+// console.log(data.animals.filter(a => a.location === loc));
+
+const animalMap = (options) => {
+  // const vet = data.animals.map(a => [a.location, a.name]).sort();
+  // const v = { NE: [], NW: [], SE: [], SW: [] };
+  // const keys = Object.keys(v);
+  // let k = data.animals.find(ani => ani.location === 'NW').name;
+  // let res = data.animals.reduce((r, a) => { ---
+  // if (!r[a.location]) r[a.location] = []; ---
+  // data.animals.find(ani => ani.location === r[a.location])
+  // r[a.location].push( adjFunc(a.location) );
+  // adjFunc(a.location); ---
+  // return r; ---
+  // }, {}); ---
+  // return res;
+};
+// console.log(animalMap());
 
 const schedule = (dayName) => {};
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const oldestFromFirstSpecies = (id) => {
+  const num = data.employees.find(e => id === e.id).responsibleFor[0];
+  const animal = data.animals.find(a => a.id === num);
+  return animal.residents.reduce((m, n) => {
+    if (m[2] < n.age) return [n.name, n.sex, n.age];
+    return m;
+  }, [0, 0, 0]);
+  // animal.residents.reduce((max, n) => Math.max(max, n.age),[]);
+  // return data.animals.reduce((r, a) => {
+  //   if (a.id === num) return a.residents.reduce((one, other) => {
+  //     if (one.age < other.age);
+  //   }, []);
+  // }, []);
+};
+console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function increasePrices(percentage) {
   // seu código aqui
