@@ -67,19 +67,21 @@ function entryCalculator(entrants) {
 
 function animalMap(options = {}) {
   const { includeNames, sorted, sex } = options;
-  
-  if (includeNames) return data.animals.reduce((acc, { name, location, residents }) => {
-    if (!acc[location]) acc[location] = [];
-    if (sex) {
-      const residentsBySex = residents.filter(resident => resident.sex === sex)
-      var residentsNames = residentsBySex.map(resident => resident.name);      
-    } else {
-      var residentsNames = residents.map(resident => resident.name);
-    }
-    if (sorted) residentsNames.sort();
-    acc[location].push({ [name]: residentsNames });    
-    return acc;
-  }, {});
+  if (includeNames) {
+    return data.animals.reduce((acc, { name, location, residents }) => {
+      let residentsNames;
+      if (!acc[location]) acc[location] = [];
+      if (sex) {
+        const residentsBySex = residents.filter(resident => resident.sex === sex);
+        residentsNames = residentsBySex.map(resident => resident.name);
+      } else {
+        residentsNames = residents.map(resident => resident.name);
+      }
+      if (sorted) residentsNames.sort();
+      acc[location].push({ [name]: residentsNames });
+      return acc;
+    }, {});
+  }
 
   return data.animals.reduce((acc, { name, location }) => {
     if (!acc[location]) acc[location] = [];
