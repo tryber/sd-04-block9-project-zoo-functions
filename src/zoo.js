@@ -19,13 +19,13 @@ const animalsOlderThan = (animal, age) =>
     .find((allResidents) => allResidents.name === animal)
     .residents.every((anim) => anim.age > age);
 
-const employeeByName = (employeeName) =>
-  employeeName === undefined
-    ? {}
-    : data.employees.find(
+const employeeByName = (employeeName) => {
+  if (!employeeName) return {};
+  return data.employees.find(
         ({ firstName, lastName }) =>
-          firstName === employeeName || lastName === employeeName
+          firstName === employeeName || lastName === employeeName,
       );
+};
 
 const createEmployee = (personalInfo, associatedWith) => ({
   ...personalInfo,
@@ -40,7 +40,7 @@ const addEmployee = (
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) => data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
 const createAnimalCountObj = () =>
@@ -57,16 +57,15 @@ const animalCount = (species) => {
 const entryCalculator = (entrants) => {
   if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
   return Object.keys(entrants).reduce(
-    (price, person) => price + entrants[person] * data.prices[person],
-    0
+    (price, person) => price + (entrants[person] * data.prices[person]),
+    0,
   );
 };
 
 const createAnimalMapObj = () =>
   data.animals.reduce((obj, { name, location }) => {
-    obj[location] === undefined
-      ? (obj[location] = [name])
-      : obj[location].push(name);
+    if (obj[location]) obj[location].push(name);
+    else obj[location] = [name];
     return obj;
   }, {});
 
@@ -113,22 +112,27 @@ const scheduleObj = {
   Monday: 'CLOSED',
 };
 
-const schedule = (dayName) =>
-  dayName ? { [dayName]: scheduleObj[dayName] } : scheduleObj;
+const schedule = (dayName) => {
+  if (dayName) return { [dayName]: scheduleObj[dayName] };
+  return scheduleObj;
+};
 
 const oldestFromFirstSpecies = (id) => {
   const employee = data.employees.find(({ id: idE }) => idE === id);
   const animalsId = employee.responsibleFor[0];
   const animalsObj = data.animals.find(({ id: idA }) => idA === animalsId);
-  const oldest = animalsObj.residents.reduce((oldestAgeAnimal, animal) =>
-    oldestAgeAnimal.age > animal.age ? oldestAgeAnimal : animal
-  );
+  const oldest = animalsObj.residents.reduce((oldestAgeAnimal, animal) => {
+    if (oldestAgeAnimal.age > animal.age) return oldestAgeAnimal;
+    return animal;
+  });
   return [oldest.name, oldest.sex, oldest.age];
 };
 
 const increasePrices = (percentage) => {
   Object.keys(data.prices).forEach((person) => {
-    data.prices[person] = Number((data.prices[person] * (1 + (percentage + 0.01) / 100)).toFixed(2));
+    data.prices[person] = Number(
+      (data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2),
+    );
   });
 };
 
