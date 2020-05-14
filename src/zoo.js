@@ -35,7 +35,6 @@ function employeeByName(employeeName) {
   const employeeFirstAndLastName = newEmployee.find(
     element => element.firstName === employeeName || element.lastName === employeeName,
   );
-  console.log(employeeFirstAndLastName);
   return employeeFirstAndLastName || [];
 }
 
