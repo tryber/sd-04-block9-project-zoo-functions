@@ -70,8 +70,11 @@ function isManager(id) {
   return verificaGerente;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+// Adiciona um funcionário no fim da lista
+const newEmpregado = data.employees;
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  newEmpregado.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
