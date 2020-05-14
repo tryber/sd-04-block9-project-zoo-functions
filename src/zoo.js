@@ -86,9 +86,9 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  let includeNames = false
-  let sorted = false
-  let sex = false
+  let includeNames = false;
+  let sorted = false;
+  let sex = false;
   function generateGenericMap(location) {
     return data.animals.filter(elementAnimal => elementAnimal.location === location)
     .map(filteredAnimal => filteredAnimal.name);
@@ -113,7 +113,7 @@ function animalMap(options) {
   }
   function generateSortedNamesMap(location) {
     return generateNamesMap(location).map(elementAnimal =>
-      sortArrayOfTheAnimal(elementAnimal)
+      sortArrayOfTheAnimal(elementAnimal),
     );
   }
   function generateNamesAndSexMap(location) {
@@ -126,7 +126,7 @@ function animalMap(options) {
   }
   function generateSortedNamesAndSexMap(location) {
     return generateNamesAndSexMap(location).map(elementAnimal =>
-      sortArrayOfTheAnimal(elementAnimal)
+      sortArrayOfTheAnimal(elementAnimal),
     );
   }
 
@@ -144,26 +144,26 @@ function animalMap(options) {
       return mapWithSortedNamesAndBySex;
     } else if (includeNames && !sorted && sex) {
       const mapWithNamesAndBySex = {
+        SE: generateNamesAndSexMap('SE'),
         NE: generateNamesAndSexMap('NE'),
         NW: generateNamesAndSexMap('NW'),
-        SE: generateNamesAndSexMap('SE'),
         SW: generateNamesAndSexMap('SW'),
       };
       return mapWithNamesAndBySex;
     } else if (includeNames && sorted && !sex) {
       const mapWithSortedNames = {
-        NE: generateSortedNamesMap('NE'),
-        NW: generateSortedNamesMap('NW'),
-        SE: generateSortedNamesMap('SE'),
         SW: generateSortedNamesMap('SW'),
+        SE: generateSortedNamesMap('SE'),
+        NW: generateSortedNamesMap('NW'),
+        NE: generateSortedNamesMap('NE'),
       };
       return mapWithSortedNames;
     } else if (includeNames && !sorted && !sex) {
       const mapWithNames = {
-        NE: generateNamesMap('NE'),
         NW: generateNamesMap('NW'),
-        SE: generateNamesMap('SE'),
+        NE: generateNamesMap('NE'),
         SW: generateNamesMap('SW'),
+        SE: generateNamesMap('SE'),
       };
       return mapWithNames;
     }
