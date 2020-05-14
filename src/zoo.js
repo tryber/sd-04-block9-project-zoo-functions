@@ -32,8 +32,9 @@ const employeeByName = (employeeName) => {
   return data.employees.find(name => name.firstName === employeeName || name.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+// TODO => Cria um novo colaborador a partir de objetos contendo informações pessoais, gerentes e animais gerenciados
+const createEmployee = (personalInfo, associatedWith) => {
+  return {...personalInfo,...associatedWith}
 }
 
 function isManager(id) {
