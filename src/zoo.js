@@ -82,7 +82,6 @@ function animalMap(options = {}) {
       return acc;
     }, {});
   }
-
   return data.animals.reduce((acc, { name, location }) => {
     if (!acc[location]) acc[location] = [];
     acc[location].push(name);
@@ -91,6 +90,19 @@ function animalMap(options = {}) {
 }
 
 function schedule(dayName) {
+  const hours = Object.entries(data.hours);
+
+  if (dayName) {
+    if (dayName === 'Monday') return { [dayName]: 'CLOSED' };
+    const [day, { open, close }] = hours.find(([weekday]) => weekday === dayName);
+    return { [day]: `Open from ${open}am until ${close - 12}pm` };
+  }
+
+  return hours.reduce((acc, [day, { open, close }], index) => {
+    if (day === 'Monday') acc[day] = 'CLOSED';
+    else acc[day] = `Open from ${open}am until ${close - 12}pm`;
+    return acc;
+  }, {});
 }
 
 function oldestFromFirstSpecies(id) {
