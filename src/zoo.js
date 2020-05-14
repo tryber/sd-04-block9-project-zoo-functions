@@ -60,7 +60,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // // seu código aqui
+    // // seu código aqui
 }
 
 function entryCalculator(entrants) {
@@ -79,7 +79,8 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  scheduleFull = {};
+  const scheduleFull = {};
+  let dayopenHours = '';
   Object.keys(data.hours).forEach((days) => {
     if (days === 'Monday') {
       dayopenHours = 'CLOSED';
@@ -91,7 +92,9 @@ function schedule(dayName) {
     scheduleFull[days] = dayopenHours;
   });
   const scheduleOneDay = {};
-  const daychecked = Object.keys(scheduleFull).find((key) => key === dayName);
+  const daychecked = Object.keys(scheduleFull).find(
+    key => key === dayName,
+  );
   scheduleOneDay[daychecked] = scheduleFull[daychecked];
   if (!dayName) return scheduleFull;
   return scheduleOneDay;
