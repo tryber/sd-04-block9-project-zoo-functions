@@ -65,11 +65,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
-}
 
-function entryCalculator(entrants) {
-  // seu código aqui
+}
+// console.log(animalCount());
+
+function entryCalculator(entrants = {}) {
+  return Object.keys(entrants)
+    .reduce((accumulator, participant, index) =>
+      accumulator + (entrants[participant] * data.prices[participant]), 0);
 }
 
 function animalMap(options) {
