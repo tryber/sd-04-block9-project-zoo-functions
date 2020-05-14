@@ -78,13 +78,65 @@ const entryCalculator = function (entrants) {
         (entrants.Senior * data.prices.Senior);
 };
 
-function animalMap(options) {
-  // seu código aqui
-}
+// 9- Implemente a função animalMap:
+// Sem parâmetros, retorna animais categorizados por localização
+// Com opções especificadas, retorna nomes de animais
+// Com opções especificadas, retorna nomes de animais ordenados
+// Com opções especificadas, retorna somente nomes de animais macho/fêmea
+// Só retorna informações específicas de gênero se includeNames for setado
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const animalMap = (options) => {
+  // const obj = { NE: [], NW: [], SE: [], SW: [] };
+  // const createNewObj = (animal) => {
+  //   const newObj = {};
+  //   if (options.sex === 'female' || options.sex === 'male') {
+  //     const array = [];
+  //     animal.residents.forEach((element) => {
+  //       if (element.sex === options.sex) {
+  //         array.push(element.name);
+  //       }
+  //     });
+  //     newObj[animal.name] = array;
+  //   } else {
+  //     newObj[animal.name] = animal.residents.map(element => element.name);
+  //   }
+  //   if (options.sorted) {
+  //     newObj[animal.name].sort();
+  //   }
+  //   return newObj;
+  // };
+  // if (!options || !options.includeNames) {
+  //   data.animals.map(animal => obj[animal.location].push(animal.name));
+  // } else if (options.includeNames === true) {
+  //   data.animals.map(animal => obj[animal.location].push(createNewObj(animal)));
+  // }
+  // return obj;
+};
+
+// Implemente a função schedule:
+// Sem parâmetros, retorna um cronograma legível para humanos
+// Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+
+const schedule = function (dayName) {
+  const keys = Object.keys(data.hours);
+  const obj = {};
+  keys.forEach(function (cur) {
+    if (data.hours[cur].open === 0) {
+      obj[cur] = 'CLOSED';
+    } else {
+      obj[cur] = `Open from ${data.hours[cur].open}am until ${data.hours[cur].close - 12}pm`;
+    }
+  });
+  const objFiltered = {};
+  objFiltered[dayName] = obj[dayName];
+  return (dayName) ? objFiltered : obj;
+};
+
+
+// 11- Implemente a função oldestFromFirstSpecies:
+// Passado o id de um funcionário, encontra a primeira espécie de
+// animal gerenciado pelo funcionário,
+// e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -93,6 +145,7 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
 }
+
 
 function employeeCoverage(idOrName) {
   // seu código aqui
