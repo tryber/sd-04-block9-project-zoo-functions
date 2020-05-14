@@ -130,21 +130,24 @@ function generateFinalResponse(opt) {
   const sorted = opt.sorted;
   const sex = opt.sex;
   const locations = ['NE', 'NW', 'SE', 'SW'];
-  for (let i = 0; i < locations.length; i += 1) {
-    if (includeNames) {
-      if (sorted) {
-        if (sex) {
-          response[locations[i]] = generateSortedNamesAndSexMap(locations[i]);
-        } else {
-          response[locations[i]] = generateSortedNamesMap(locations[i]);
-        }
-      } else {
-        if (sex) {
-          response[locations[i]] = generateNamesAndSexMap(locations[i], sex);
-        } else {
-          response[locations[i]] = generateNamesMap(locations[i]);
-        }
-      }
+  if (includeNames && sorted && sex) {
+    for (let i = 0; i < locations.length; i += 1) {
+      response[locations[i]] = generateSortedNamesAndSexMap(locations[i]);
+    }
+  }
+  if (includeNames && sorted && !sex) {
+    for (let i = 0; i < locations.length; i += 1) {
+      response[locations[i]] = generateSortedNamesMap(locations[i]);
+    }
+  }
+  if (includeNames && !sorted && sex) {
+    for (let i = 0; i < locations.length; i += 1) {
+      response[locations[i]] = generateNamesAndSexMap(locations[i], sex);
+    }
+  }
+  if (includeNames && !sorted && !sex) {
+    for (let i = 0; i < locations.length; i += 1) {
+      response[locations[i]] = generateNamesMap(locations[i]);
     }
   }
   return response;
