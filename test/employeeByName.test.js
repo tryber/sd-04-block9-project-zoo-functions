@@ -26,17 +26,17 @@ describe('employeeByName', () => {
     assert.deepEqual(actual, expected);
 
     // quando provido o último nome do funcionário, retorna o objeto do funcionário
-    // actual = zoo.employeeByName('Wishart');
-    // expected = {
-    //   id: '56d43ba3-a5a7-40f6-8dd7-cbb05082383f',
-    //   firstName: 'Wilburn',
-    //   lastName: 'Wishart',
-    //   managers: ['0e7b460e-acf4-4e17-bcb3-ee472265db83',
-    //     'fdb2543b-5662-46a7-badc-93d960fdc0a8'],
-    //   responsibleFor: ['78460a91-f4da-4dea-a469-86fd2b8ccc84',
-    //     'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
-    // };
+    actual = zoo.employeeByName('Wishart');
+    expected = {
+      id: '56d43ba3-a5a7-40f6-8dd7-cbb05082383f',
+      firstName: 'Wilburn',
+      lastName: 'Wishart',
+      managers: ['0e7b460e-acf4-4e17-bcb3-ee472265db83',
+        'fdb2543b-5662-46a7-badc-93d960fdc0a8'],
+      responsibleFor: ['78460a91-f4da-4dea-a469-86fd2b8ccc84',
+        'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
+    };
 
-    // assert.deepEqual(actual, expected);
+    assert.deepEqual(actual, expected);
   });
 });
