@@ -40,7 +40,7 @@ const addEmployee = (
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) =>
   data.employees.push({
     id,
