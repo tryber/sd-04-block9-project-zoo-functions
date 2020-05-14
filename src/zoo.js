@@ -216,9 +216,8 @@ function animalMap(options) {
       return mapWithNames;
     }
     return genericMap;
-  } else {
-    return genericMap;
   }
+  return genericMap;
 }
 
 function schedule(dayName) {
@@ -245,9 +244,7 @@ function oldestFromFirstSpecies(id) {
     elementAnimal => elementAnimal.id === idFirstAnimalResponsibility,
   );
   const oldestResidentAge = animalResponsible.residents.reduce(
-    (oldest, elementAnimal) => {
-      return elementAnimal.age > oldest ? elementAnimal.age : oldest
-    }, 0
+    (oldest, elementAnimal) => { return elementAnimal.age > oldest ? elementAnimal.age : oldest; }, 0,
   );
   const oldestResident = animalResponsible.residents.find(
     elementAnimal => elementAnimal.age === oldestResidentAge,
@@ -297,7 +294,6 @@ function employeeCoverage(idOrName) {
       elementEmployee.lastName === idOrName,
   );
   return makeResponseObject(employeeSearched);
-
 }
 
 module.exports = {
