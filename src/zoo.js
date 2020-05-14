@@ -49,13 +49,15 @@ function animalCount(species) {
   return data.animals.find(element => element.name === species).residents.length;
 }
 
+function entryCalculator(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const obj = Object.keys(entrants);
+  return obj.reduce((acc, atual) => acc + (data.prices[atual] * entrants[atual]), 0);
+}
+
 //
 //  ////////// CONCLUIDOS ////////////
 //
-
-function entryCalculator(entrants) {
-  // seu código aqui
-}
 
 function animalMap(options) {
   // seu código aqui
