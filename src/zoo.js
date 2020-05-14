@@ -70,27 +70,40 @@ const createAnimalMapObj = () =>
     return obj;
   }, {});
 
-const animalMapIncludeNames = (animalSex) => {
-  // return object
-
-    };
+const animalMapIncludeNames = (animalMapObj, animalSex) => {
+  let names = [];
+  Object.keys(animalMapObj).forEach((location) => {
+    animalMapObj[location].forEach((animName, index) => {
+      const animObj = data.animals.find(({ name }) => name === animName);
+      if (animalSex === undefined) {
+        names = animObj.residents.map(({ name }) => name);
+      } else {
+        names = animObj.residents
+          .filter(({ sex }) => sex === animalSex)
+          .map(({ name }) => name);
+      }
+      animalMapObj[location][index] = { [animName]: names };
+    });
+  });
+  return animalMapObj;
 };
 
 function animalMap(options) {
-  const animalMapObj = createAnimalMapObj();
+  let animalMapObj = createAnimalMapObj();
   if (options === undefined) return animalMapObj;
   const { includeNames, sex, sorted } = options;
-  if (includeNames) {
-        
-      })
-    })
-    return animalMapIncludeNames('lions');
+  if (includeNames) animalMapObj = animalMapIncludeNames(animalMapObj, sex);
+  if (sorted) {
+    Object.keys(animalMapObj).forEach((location) => {
+      animalMapObj[location].forEach((animNamesObj, index) => {
+        animNamesObj[Object.keys(animNamesObj)[0]].sort();
+      });
+    });
   }
-
   return animalMapObj;
 }
 
-console.log(animalMap({ includeNames: true }));
+console.log(animalMap({ includeNames: true, sorted: true, sex: 'male' }));
 
 function schedule(dayName) {
   // seu código aqui
