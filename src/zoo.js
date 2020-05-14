@@ -13,6 +13,10 @@ const data = require('./data');
 
 const animaisObj = data.animals;
 
+// Caso receba nenhum parâmetro, necessário retornar um array vazio
+// Ao receber como parâmetro um único id, retorna os animais com este id
+// Ao receber mais de um id, retorna os animais que têm um desses ids
+
 function animalsByIds(...ids) {
   // seu código aqui
   console.log(ids);
@@ -21,8 +25,15 @@ function animalsByIds(...ids) {
   return animais;
 }
 
+// Ao passar o nome de uma espécie e uma idade,
+// testa se todos os animais desta espécie possuem a idade mínima especificada
+
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  const animalAge = animaisObj
+    .find(element => element.name === animal)
+    .residents.every(element => element.age > age);
+  return animalAge;
 }
 
 function employeeByName(employeeName) {
