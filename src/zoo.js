@@ -131,7 +131,7 @@ const employeeCoverage = (idOrName) => {
     res = (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) ?
     `${e.firstName} ${e.lastName}` : res;
     return res;
-    }, '');
+  }, '');
   return { [funcionario]: objEmp[funcionario] };
 };
 console.log(employeeCoverage('Azevado'));
