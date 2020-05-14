@@ -114,10 +114,25 @@ const entryCalculator = function (entrants) {
 //  Com opções especificadas, retorna somente nomes de animais macho/fêmea
 //  Só retorna informações específicas de gênero se includeNames for setado
 
-function animalMap(options) {
-  // seu código aqui
+const animalMap = (options) => {
+  const obj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+   data.animals.map(animal => (obj[animal.location].push(animal.name)));
+   if (options.includesNames === true) {
+    const getName = element => element.name;
+    const qql = Object.assign({}, { data.animals.name: [data.animals.residents].map(getName) });
+    data.animals.map(animal => {
+      obj[animal.location].push()
+    });
+   }
+   return obj;
 }
 
+console.log(animalMap())
 //  =======================================================================
 
 //  ====REQUISITO 10========================================================
