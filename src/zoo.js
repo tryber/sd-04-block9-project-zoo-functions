@@ -62,8 +62,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 // Testa se o id passado é de um gerente
+const empregado = data.employees;
 function isManager(id) {
+  console.log(id);
   // seu código aqui
+  const verificaGerente = empregado.some(element => element.managers.some(code => code === id));
+  return verificaGerente;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
