@@ -31,10 +31,17 @@ const createEmployee = (personalInfo, associatedWith) => {
 
 const isManager = id => data.employees.some(manager => manager.managers.some(ids => ids === id));
 
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-
-}
+  return data.employees.push(employee);
+};
 
 function animalCount(species) {
   // seu código aqui
