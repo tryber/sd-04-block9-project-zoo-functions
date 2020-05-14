@@ -86,18 +86,17 @@ const oldestFromFirstSpecies = (id) => {
   }, [0, 0, 0]);
 };
 
-const increasePrices = percentage => {
-  const chaves = Object.keys(data.prices);
-  chaves.map(chave => data.prices[chave] = 
-    parseFloat(
-      (data.prices[chave] + data.prices[chave] * ((percentage + 0.01) / 100) )
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach(chave =>  {
+    data.prices[chave] = parseFloat((data.prices[chave] + 
+      data.prices[chave] * ((percentage + 0.01) / 100) )
     .toFixed(2))
-  );
+  });
 };
-// console.log(increasePrices(50));
-// console.log(data.prices);
-// console.log(increasePrices(30));
-// console.log(data.prices);
+console.log(increasePrices(50));
+console.log(data.prices);
+console.log(increasePrices(30));
+console.log(data.prices);
 
 const employeeCoverage = (idOrName) => {};
 
