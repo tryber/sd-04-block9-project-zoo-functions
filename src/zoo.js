@@ -42,6 +42,13 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  // Pode fazer com MAP ??????????
+  // Create array of id of all managers
+  const allManagersIds = [];
+  data.employees.forEach(element => allManagersIds.push(...element.managers));
+  // chek if at leat on id (input) is inside the array of id of all managers
+  const output = allManagersIds.some(allManagersId => allManagersId === id);
+  return output;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
