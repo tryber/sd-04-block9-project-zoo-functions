@@ -86,6 +86,10 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
+  if(options) {
+    var { includeNames, sorted, sex } = options;
+  }
+
   function generateGenericMap(location) {
     return data.animals.filter(elementAnimal => elementAnimal.location === location)
     .map(filteredAnimal => filteredAnimal.name);
