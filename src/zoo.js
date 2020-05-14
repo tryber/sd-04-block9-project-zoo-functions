@@ -60,7 +60,12 @@ const animalCount = (species) => {
   return data.animals.find(animal => animal.name === species).residents.length;
 };
 
-const entryCalculator = (entrants) => {};
+const entryCalculator = (entrants) => {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const { Adult: adultPrice, Child: childPrice, Senior: seniorPrice} = data.prices;
+  const { Adult, Child, Senior } = entrants;
+  return adultPrice * Adult + childPrice * Child + seniorPrice * Senior;
+};
 
 const animalMap = (options) => {};
 
