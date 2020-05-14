@@ -33,9 +33,7 @@ const createEmployee = (personalInfo, associatedWith) => ({
 });
 
 const isManager = id =>
-  data.employees.some(manager =>
-    manager.managers.some(eachManager => eachManager === id)
-  );
+  data.employees.some(manager =>manager.managers.some(eachManager => eachManager === id));
 
 const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {};
 
