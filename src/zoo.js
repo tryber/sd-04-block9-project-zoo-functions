@@ -104,7 +104,7 @@ function oldestFromFirstSpecies(id) {
   // pegar o id e verificar qual animal tem o mesmo ID
   // retornar arr [nome, sex, idade] do animal mais velho.
   const animalId = data.employees.filter(employeeId =>
-     employeeId.id === id)[0].responsibleFor[0]; // retorna o primeiro Id do responseble for
+    employeeId.id === id)[0].responsibleFor[0]; // retorna o primeiro Id do responseble for
   const residents = data.animals.find(animal => animal.id === animalId).residents;
   const result = residents.reduce((cont, atual) => {
     if (cont.age > atual.age) return cont;
