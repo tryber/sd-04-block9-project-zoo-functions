@@ -78,11 +78,8 @@ const animalCount = (species) => {
     return numberAnimals[species];
   }
   return numberAnimals;
-}
+};
 console.log(animalCount('lions'));
-
-
-
 
 //  8. Implemente a função entryCalculator:
 //  Returna 0 se nenhum argumento for passado
