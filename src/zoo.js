@@ -22,9 +22,13 @@ function animalsByIds(...theIds) {
 // 'e8481c1d-42ea-4610-8e11-1752cfc05a46')) --> TESTE 3
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const nomeAnimal = data.animals.find(elemento => elemento.name === animal);
+  const idade = nomeAnimal.residents.every(elemento => elemento.age >= age);
+  return idade;
 }
 
+// console.log(animalsOlderThan('otters', 7)); --> TESTE 1
+// console.log(animalsOlderThan('penguins', 10)); -- TESTE 2
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
