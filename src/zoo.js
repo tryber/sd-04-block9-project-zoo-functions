@@ -96,7 +96,7 @@ function generateGenericAnimalMap() {
 
 function generateNamesForTheAnimalMap(genericMap, options) {
   Object.keys(genericMap).forEach(location => {
-    genericMap[location].forEach((animalName, index )=> {
+    genericMap[location].forEach((animalName,index ) => {
       const names = data.animals.find(animal => animalName === animal.name)
       .residents.filter(resident => !options.sex || options.sex === resident.sex)
       .map(filteredResident => filteredResident.name);
@@ -104,8 +104,8 @@ function generateNamesForTheAnimalMap(genericMap, options) {
         names.sort();
       }
       genericMap[location][index] = { [animalName]: names };
-    })
-  })
+    });
+  });
   return genericMap;
 }
 
