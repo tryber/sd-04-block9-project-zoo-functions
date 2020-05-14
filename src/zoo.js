@@ -93,10 +93,6 @@ const increasePrices = (percentage) => {
     .toFixed(2))
   });
 };
-console.log(increasePrices(50));
-console.log(data.prices);
-console.log(increasePrices(30));
-console.log(data.prices);
 
 const employeeCoverage = (idOrName) => {};
 
