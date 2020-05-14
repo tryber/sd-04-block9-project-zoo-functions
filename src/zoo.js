@@ -57,13 +57,13 @@ function animalCount(species) {
   // seu código aqui
   // if(!species) return data.animals.map(e => `${e.name}: ${e.popularity}`);
   // return data.animals.filter(e => {if (e.name === species){ return e.popularity}})[0].popularity;
-  if(!species) return data.animals.reduce(function(total, {name, residents}) {
+  if (!species) return data.animals.reduce(function(total, { name, residents }) {
     total[name] = residents.length;
     return total;
-  },{});
-   return data.animals.find(({name}) => name === species).residents.length;
+  }, {});
+  return data.animals.find(({ name }) => name === species).residents.length;
 }
- // console.log(animalCount('lions'));
+// console.log(animalCount('lions'));
 
 function entryCalculator(entrants) {
   // seu código aqui
