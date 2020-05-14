@@ -72,15 +72,20 @@ function entryCalculator(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const prices = data.prices;
   const results = {};
-  Object.keys(prices).map(function (valor){
-   return results[valor] = prices[valor] *= entrants[valor];
+  Object.keys(prices).map(function (valor) {
+    results[valor] = prices[valor] *= entrants[valor];    
   });
   return Object.values(results).reduce((total, currentValue) => total + currentValue, 0);
 }
 // console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
+// Sem parâmetros, retorna animais categorizados por localização
+// Com opções especificadas, retorna nomes de animais
+// Com opções especificadas, retorna nomes de animais ordenados
+// Com opções especificadas, retorna somente nomes de animais macho/fêmea
+// Só retorna informações específicas de gênero se includeNames for setado
 function animalMap(options) {
-  // seu código aqui
+  
 }
 
 function schedule(dayName) {
