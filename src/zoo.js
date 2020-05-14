@@ -26,13 +26,13 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName = {}) { // default params
-  if (Object.keys(employeeName).length === 0) return employeeName;
+  if (Object.keys(employeeName).length === 0) return employeeName; // keys
   return data.employees.find(employee => employee.firstName === employeeName || // find
     employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign({}, personalInfo, associatedWith); // assign
 }
 
 function isManager(id) {
