@@ -39,11 +39,34 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  data.employees.push(
+    {
+      id,
+      firstName,
+      lastName,
+      managers,
+      responsibleFor,
+    });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  let animalQuantity;
+  if (species !== undefined) {
+    data.animals.find((nameAnimal) => {
+      if (nameAnimal.name === species) {
+        animalQuantity = nameAnimal.residents.length;
+      }
+      return animalQuantity;
+    });
+  } else {
+    animalQuantity = {};
+    data.animals.forEach((nameAnimal) => {
+      if (nameAnimal.name) {
+        animalQuantity[nameAnimal.name] = nameAnimal.residents.length;
+      }
+    });
+  }
+  return animalQuantity;
 }
 
 function entryCalculator(entrants) {
