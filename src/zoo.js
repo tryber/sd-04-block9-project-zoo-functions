@@ -16,16 +16,13 @@ const data = require('./data');
 // Ao receber como parâmetro um único id, retorna os animais com este id
 // Ao receber mais de um id, retorna os animais que têm um desses ids
 function animalsByIds(...ids) {
-  if(!ids) return [];
+  if (!ids) return [];
   // Parametro REST por default ja atribui a variavel um array vazio caso não receba nada
   //ids - > array
   // const resultado = data.animals.filter(elemento => ids.includes(elemento.id))
   const resultado = data.animals.filter(elemento => ids.includes(elemento.id))
   return resultado
 }
-
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
-      'e8481c1d-42ea-4610-8e11-1752cfc05a46'))
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
@@ -39,7 +36,7 @@ function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
-const isManager = (id) => data.employees.some(( {managers} ) => managers.includes(id))
+const isManager = (id) => data.employees.some(({ managers }) => managers.includes(id))
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -61,12 +58,23 @@ function schedule(dayName) {
   // seu código aqui
 }
 
+function getAnimal(idOrName) {
+  return data.animals.find(info =>
+    info.name === idOrName || info.id === idOrName);
+}
+
+function getEmployee(idOrName) {
+  return data.employees.find(emp =>
+    emp.firstName === idOrName || emp.lastName === idOrName || emp.id === idOrName);
+}
+
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const animalID = getEmployee(id).responsibleFor[0];
   return getAnimal(animalID)
     .residents.reduce((acc, curr) =>
-      acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc, [0, 0, 0]);
+      (acc[2] < curr.age ? [curr.name, curr.sex, curr.age] : acc), [0, 0, 0]
+    );
 }
 
 function increasePrices(percentage) {
