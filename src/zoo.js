@@ -63,9 +63,37 @@ function entryCalculator(entrants) {
   const entrantsKeys = Object.keys(entrants);
   return entrantsKeys.reduce((total, key) => total + (data.prices[key] * entrants[key]), 0);
 }
-console.log(entryCalculator({}));
-function animalMap(options) {
+
+const arrayComNome = (especie, residents, sorted, sex) => {
+  // função para criar as chaves com os nomes e todos os seus
+  const obj = {};
+  obj[especie] = residents.map(resident => resident.name);
+  if (sorted) obj[especie].sort();
+  if (sex) {
+    obj[especie] = [];
+    residents.forEach((resident) => {
+      if (resident.sex === sex) obj[especie].push(resident.name);
+    });
+  }
+  return obj;
+};
+
+function animalMap(options = {}) {
   // seu código aqui
+  const { includeNames, sorted, sex } = options; // desestruturando objeto que vem como parametro
+  const resultado = data.animals.reduce((acumulador, animal) => {
+    if (!acumulador[animal.location]) acumulador[animal.location] = [];
+    // Criando o array em cada chave do objeto acumulador
+    if (!includeNames) {
+      acumulador[animal.location].push(animal.name);
+      // preenchendo o array caso não retorne os nomes dos animais
+    } else {
+      acumulador[animal.location].push(arrayComNome(animal.name, animal.residents, sorted, sex));
+    }
+    // adicionando o objeto com o nome do animal como chave e um array com os residentes
+    return acumulador;
+  }, {});
+  return resultado;
 }
 
 function schedule(dayName) {
