@@ -136,19 +136,19 @@ function animalMap(options) {
     sorted = opt.sorted;
     sex = opt.sex;
     const locations = ['NE', 'NW', 'SE', 'SW'];
-    for (let loc of locations) {
+    for (let i = 0 ; i < locations.length ; i += 1) {
       if (includeNames && sorted && sex) {
-        response[loc] = generateSortedNamesAndSexMap(loc);
+        response[locations[i]] = generateSortedNamesAndSexMap(locations[i]);
       } else if (includeNames && !sorted && sex) {
-        response[loc] = generateNamesAndSexMap(loc);
+        response[locations[i]] = generateNamesAndSexMap(locations[i]);
       } else if (includeNames && sorted && !sex) {
-        response[loc] = generateSortedNamesMap(loc);
+        response[locations[i]] = generateSortedNamesMap(locations[i]);
       } else if (includeNames && !sorted && !sex) {
-        response[loc] = generateNamesMap(loc);
+        response[locations[i]] = generateNamesMap(locations[i]);
       }
     }
   }
-  if(options) {
+  if (options) {
     generateFinalResponse(options);
   }
   return response;
