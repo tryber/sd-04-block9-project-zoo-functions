@@ -114,9 +114,28 @@ const increasePrices = percentage =>
     ((percentage / 100) + 1) * 100) / 100);
   });
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+const animalsResponsible = (attendant) => {
+  const sentence = {};
+  sentence[`${attendant.firstName} ${attendant.lastName}`] = attendant.responsibleFor
+    .map(id => data.animals
+      .find(animal => animal.id === id).name);
+  return sentence;
+};
+
+const employeeCoverage = (idOrName) => {
+  const obj = {};
+  if (idOrName) {
+    Object.assign(obj, animalsResponsible(data.employees
+      .find(attendant => ((attendant.id === idOrName) ||
+      (attendant.firstName === idOrName) ||
+      (attendant.lastName === idOrName)))));
+    return obj;
+  }
+  data.employees.forEach((attendant) => {
+    Object.assign(obj, animalsResponsible(attendant));
+  });
+  return obj;
+};
 
 module.exports = {
   entryCalculator,
