@@ -111,7 +111,7 @@ function generateSortedNamesMap(location) {
     sortArrayOfTheAnimal(elementAnimal),
   );
 }
-function generateNamesAndSexMap(location) {
+function generateNamesAndSexMap(location, sex) {
   return generateNamesMap(location).map(elementAnimal => {
     const animalName = Object.keys(elementAnimal)[0];
     const info = data.animals.find(animal => animal.name === animalName);
@@ -125,21 +125,21 @@ function generateSortedNamesAndSexMap(location) {
   );
 }
 function generateFinalResponse(opt) {
-  let response = {};
-  includeNames = opt.includeNames;
-  sorted = opt.sorted;
-  sex = opt.sex;
+  const response = {};
+  const includeNames = opt.includeNames;
+  const sorted = opt.sorted;
+  const sex = opt.sex;
   const locations = ['NE', 'NW', 'SE', 'SW'];
   for (let i = 0; i < locations.length; i += 1) {
     if (includeNames && sorted && sex) {
       response[locations[i]] = generateSortedNamesAndSexMap(locations[i]);
     } else if (includeNames && !sorted && sex) {
-      response[locations[i]] = generateNamesAndSexMap(locations[i]);
+      response[locations[i]] = generateNamesAndSexMap(locations[i], sex);
     } else if (includeNames && sorted && !sex) {
       response[locations[i]] = generateSortedNamesMap(locations[i]);
     } else if (includeNames && !sorted && !sex) {
-     response[locations[i]] = generateNamesMap(locations[i]);
-   }
+      response[locations[i]] = generateNamesMap(locations[i]);
+    }
   }
   return response;
 }
