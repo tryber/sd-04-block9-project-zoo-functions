@@ -52,39 +52,51 @@ const entryCalculator = function (entrants) {
 };
 
 const animalMap = function (options) {
-  const obj = { NE: [], NW: [], SE: [], SW: [] };
+  // const obj = { NE: [], NW: [], SE: [], SW: [] };
 
-  const createNewObj = (animal) => {
-    const newObj = {};
-    if (options.sex === 'female' || options.sex === 'male') {
-      const array = [];
-      animal.residents.forEach((element) => {
-        if (element.sex === options.sex) {
-          array.push(element.name);
-        }
-      });
-      newObj[animal.name] = array;
-    } else {
-      newObj[animal.name] = animal.residents.map(element => element.name);
-    }
-    if (options.sorted) {
-      newObj[animal.name].sort();
-    }
-    return newObj;
-  };
+  // const createNewObj = (animal) => {
+  //   const newObj = {};
+  //   if (options.sex === 'female' || options.sex === 'male') {
+  //     const array = [];
+  //     animal.residents.forEach((element) => {
+  //       if (element.sex === options.sex) {
+  //         array.push(element.name);
+  //       }
+  //     });
+  //     newObj[animal.name] = array;
+  //   } else {
+  //     newObj[animal.name] = animal.residents.map(element => element.name);
+  //   }
+  //   if (options.sorted) {
+  //     newObj[animal.name].sort();
+  //   }
+  //   return newObj;
+  // };
 
-  if (!options || !options.includeNames) {
-    data.animals.map(animal => obj[animal.location].push(animal.name));
-  } else if (options.includeNames === true) {
-    data.animals.map(animal => obj[animal.location].push(createNewObj(animal)));
-  }
+  // if (!options || !options.includeNames) {
+  //   data.animals.map(animal => obj[animal.location].push(animal.name));
+  // } else {
+  //   data.animals.map(animal => obj[animal.location].push(createNewObj(animal)));
+  // }
 
-  return obj;
+  // return obj;
 };
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const schedule = function (dayName) {
+  const keys = Object.keys(data.hours);
+  const obj = {};
+  keys.forEach(function (cur) {
+    if (data.hours[cur].open === 0) {
+      obj[cur] = 'CLOSED';
+    } else {
+      obj[cur] = `Open from ${data.hours[cur].open}am until ${data.hours[cur].close - 12}pm`;
+    }
+  });
+  const objFiltered = {};
+  objFiltered[dayName] = obj[dayName];
+
+  return (dayName) ? objFiltered : obj;
+};
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
