@@ -86,132 +86,80 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
+  function generateGenericMap(location) {
+    return data.animals.filter(elementAnimal => elementAnimal.location === location)
+    .map(filteredAnimal => filteredAnimal.name);
+  };
   const genericMap = {
-    NE: data.animals
-      .filter(elementAnimal => elementAnimal.location === 'NE')
-      .map(filteredAnimal => filteredAnimal.name),
-    NW: data.animals
-      .filter(elementAnimal => elementAnimal.location === 'NW')
-      .map(filteredAnimal => filteredAnimal.name),
-    SE: data.animals
-      .filter(elementAnimal => elementAnimal.location === 'SE')
-      .map(filteredAnimal => filteredAnimal.name),
-    SW: data.animals
-      .filter(elementAnimal => elementAnimal.location === 'SW')
-      .map(filteredAnimal => filteredAnimal.name),
+    NE: generateGenericMap('NE'),
+    NW: generateGenericMap('NW'),
+    SE: generateGenericMap('SE'),
+    SW: generateGenericMap('SW'),
   };
   if (options) {
     const { includeNames, sorted, sex } = options;
     if (includeNames && sorted && sex) {
+      function generateSortedNamesAndSexMap(location) {
+        return genericMap[location].map(elementAnimalName => ({
+          [elementAnimalName]: data.animals
+          .find(elementAnimal => name === elementAnimal.name)
+          .residents.filter(elementResident => elementResident.sex === sex)
+          .map(elementResident => elementResident.name)
+          .sort(),
+        }));
+      };
       const mapWithSortedNamesAndBySex = {
-        NE: genericMap.NE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name)
-            .sort(),
-        })),
-        NW: genericMap.NW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name)
-            .sort(),
-        })),
-        SE: genericMap.SE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name)
-            .sort(),
-        })),
-        SW: genericMap.SW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name)
-            .sort(),
-        })),
+        NE: generateSortedNamesAndSexMap('NE'),
+        NW: generateSortedNamesAndSexMap('NW'),
+        SE: generateSortedNamesAndSexMap('SE'),
+        SW: generateSortedNamesAndSexMap('SW'),
       };
       return mapWithSortedNamesAndBySex;
     } else if (includeNames && !sorted && sex) {
+      function generateNamesAndSexMap(location) {
+        return genericMap[location].map(elementAnimalName => ({
+          [elementAnimalName]: data.animals
+            .find(elementAnimal => elementAnimalName === elementAnimal.name)
+            .residents.filter(elementResident => elementResident.sex === sex)
+            .map(elementResident => elementResident.name),
+        }));
+      }
       const mapWithNamesAndBySex = {
-        NE: genericMap.NE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name),
-        })),
-        NW: genericMap.NW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name),
-        })),
-        SE: genericMap.SE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name),
-        })),
-        SW: genericMap.SW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name),
-        })),
+        NE: generateNamesAndSexMap('NE'),
+        NW: generateNamesAndSexMap('NW'),
+        SE: generateNamesAndSexMap('SE'),
+        SW: generateNamesAndSexMap('SW'),
       };
       return mapWithNamesAndBySex;
     } else if (includeNames && sorted && !sex) {
+      function generateSortedNamesMap(location) {
+        return genericMap[location].map(elementAnimalName => ({
+          [elementAnimalName]: data.animals
+            .find(elementAnimal => elementAnimalName === elementAnimal.name)
+            .residents.map(elementResident => elementResident.name)
+            .sort(),
+          }));
+      };
       const mapWithSortedNames = {
-        NE: genericMap.NE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name)
-            .sort(),
-        })),
-        NW: genericMap.NW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name)
-            .sort(),
-        })),
-        SE: genericMap.SE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name)
-            .sort(),
-        })),
-        SW: genericMap.SW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name)
-            .sort(),
-        })),
+        NE: generateSortedNamesMap('NE'),
+        NW: generateSortedNamesMap('NW'),
+        SE: generateSortedNamesMap('SE'),
+        SW: generateSortedNamesMap('SW'),
       };
       return mapWithSortedNames;
     } else if (includeNames && !sorted && !sex) {
+      function generateNamesMap(location) {
+        return genericMap[location].map(elementAnimalName => ({
+          [elementAnimalName]: data.animals
+            .find(elementAnimal => elementAnimalName === elementAnimal.name)
+            .residents.map(elementResident => elementResident.name),
+        }));
+      };
       const mapWithNames = {
-        NE: genericMap.NE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name),
-        })),
-        NW: genericMap.NW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name),
-        })),
-        SE: genericMap.SE.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name),
-        })),
-        SW: genericMap.SW.map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name),
-        })),
+        NE: generateNamesMap('NE'),
+        NW: generateNamesMap('NW'),
+        SE: generateNamesMap('SE'),
+        SW: generateNamesMap('SW'),
       };
       return mapWithNames;
     }
