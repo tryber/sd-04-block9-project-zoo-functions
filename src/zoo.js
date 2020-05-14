@@ -73,6 +73,16 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
+  return data.animals.reduce((prev, item) =>
+  {
+    const local = item.location;
+    if (prev[local]) {
+      prev[local].push(item.name);
+    } else {
+      prev[local] = [item.name];
+    }
+    return prev;
+  }, {});
 }
 
 function schedule(dayName) {
