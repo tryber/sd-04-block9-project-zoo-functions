@@ -61,13 +61,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   if (!species) {
-    const result = data.animals
-      .map((animal) => {
-        const count = animal.residents.reduce((previous, current) => previous + 1, 0);
-        return []
-      });
-    console.log(counters);
+    const result = {};
+    data.animals.map((animal) => {
+      const count = animal.residents.reduce((previous) => previous + 1, 0);
+      result[animal.name] = count;
+
+      return true;
+    });
+    return result;
   }
+
+  const [residents] = data.animals.filter((animal) => animal.name === species)
+    .map((animal) => animal.residents);
+  const count = residents.reduce((previous) => previous + 1, 0);
+  return count;
 }
 
 function entryCalculator(entrants) {
