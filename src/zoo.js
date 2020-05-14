@@ -86,7 +86,7 @@ function animalMap(options) {
 
 function printSchedule({ open, close }) {
   return (open === 0 && close === 0) ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
-};
+}
 
 function schedule(dayName) {
   // seu código aqui
