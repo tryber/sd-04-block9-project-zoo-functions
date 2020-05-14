@@ -13,9 +13,9 @@ const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
-  ids = data.animals.filter(animal => animal.id)
+  ids = data.animals.filter(animal => animal.id);
 
-  return ids
+  return ids;
 }
 
 function animalsOlderThan(animal, age) {
