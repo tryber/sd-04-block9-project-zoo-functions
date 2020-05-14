@@ -2,28 +2,28 @@ version: "2"         # required to adjust maintainability checks
 checks:
   argument-count:
     config:
-      threshold: 5
+      threshold: 55
   complex-logic:
     config:
-      threshold: 4
+      threshold: 40
   file-lines:
     config:
-      threshold: 250
+      threshold: 350
   method-complexity:
     config:
-      threshold: 5
+      threshold: 35
   method-count:
     config:
-      threshold: 20
+      threshold: 50
   method-lines:
     config:
-      threshold: 25
+      threshold: 250
   nested-control-flow:
     config:
-      threshold: 4
+      threshold: 10
   return-statements:
     config:
-      threshold: 4
+      threshold: 10
   similar-code:
     config:
       threshold: # language-specific defaults. an override will affect all languages.

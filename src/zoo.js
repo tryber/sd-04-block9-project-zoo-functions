@@ -281,20 +281,22 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  const responseObj = {};
-
-  data.employees.forEach(elementEmployee => {
-    responseObj[`${elementEmployee.firstName} ${elementEmployee.lastName}`] = elementEmployee.responsibleFor.map(animalId => data.animals.find(elementAnimal =>animalId === elementAnimal.id).name)
-  });
+  function makeResponseObject(employee) {
+    return { [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) }
+  }
 
   if (!idOrName) {
+    const responseObj = {};
+    data.employees.forEach(elementEmployee => {
+      responseObj[`${elementEmployee.firstName} ${elementEmployee.lastName}`] = elementEmployee.responsibleFor.map(animalId => data.animals.find(elementAnimal =>animalId === elementAnimal.id).name)
+    });
     return responseObj;
   }
   else if(idOrName.length === 36) {
     const employeeSearched = data.employees.find(
       elementEmployee => elementEmployee.id === idOrName
     );
-    return { [`${employeeSearched.firstName} ${employeeSearched.lastName}`]: employeeSearched.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) };
+    return makeResponseObject(employeeSearched);
   }
   else {
     const employeeSearched = data.employees.find(
@@ -302,7 +304,7 @@ function employeeCoverage(idOrName) {
         elementEmployee.firstName === idOrName ||
         elementEmployee.lastName === idOrName
     );
-    return { [`${employeeSearched.firstName} ${employeeSearched.lastName}`]: employeeSearched.responsibleFor.map(animalId => data.animals.find(elementAnimal => animalId === elementAnimal.id).name) };
+    return makeResponseObject(employeeSearched);
   }
 }
 
