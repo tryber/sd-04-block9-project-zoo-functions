@@ -89,17 +89,17 @@ const animalMap = (options = {}) => {
   }, {});
 };
 
-const legibleSchedule = dayWeek => ((dayWeek === 'Monday')
+const humanSchedule = dayWeek => ((dayWeek === 'Monday')
   ? 'CLOSED'
   : `Open from ${data.hours[dayWeek].open}am until ${data.hours[dayWeek].close - 12}pm`);
 
-const schedule = dayName => {
+const schedule = (dayName) => {
   const scheduleH = {};
   if (dayName) {
-    scheduleH[dayName] = legibleSchedule(dayName);
+    scheduleH[dayName] = humanSchedule(dayName);
     return scheduleH;
   }
-  Object.keys(data.hours).forEach((day) => { scheduleH[day] = legibleSchedule(day); });
+  Object.keys(data.hours).forEach((day) => { scheduleH[day] = humanSchedule(day); });
   return scheduleH;
 };
 
