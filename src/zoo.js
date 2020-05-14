@@ -84,22 +84,22 @@ const oldestFromFirstSpecies = (id) => {
     if (m[2] < n.age) return [n.name, n.sex, n.age];
     return m;
   }, [0, 0, 0]);
-  // animal.residents.reduce((max, n) => Math.max(max, n.age),[]);
-  // return data.animals.reduce((r, a) => {
-  //   if (a.id === num) return a.residents.reduce((one, other) => {
-  //     if (one.age < other.age);
-  //   }, []);
-  // }, []);
 };
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = percentage => {
+  const chaves = Object.keys(data.prices);
+  chaves.map(chave => data.prices[chave] = 
+    parseFloat(
+      (data.prices[chave] + data.prices[chave] * ((percentage + 0.01) / 100) )
+    .toFixed(2))
+  );
+};
+// console.log(increasePrices(50));
+// console.log(data.prices);
+// console.log(increasePrices(30));
+// console.log(data.prices);
 
-function employeeCoverage(idOrName) {
-  // seu código aqui.
-}
+const employeeCoverage = (idOrName) => {};
 
 module.exports = {
   entryCalculator,
