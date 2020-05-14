@@ -1,11 +1,9 @@
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  let animalsResult = [];
-
   if (!ids) return [];
 
-  animalsResult = ids.map((id) => {
+  const animalsResult = ids.map((id) => {
     return data.animals.find((animal) => animal.id === id);
   });
 
