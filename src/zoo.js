@@ -120,13 +120,20 @@ const objEmp = {
 
 const employeeCoverage = (idOrName) => {
   if (!idOrName) return objEmp;
-  let funcionario = '';
-  data.employees.some((e) => {
-    if (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) {
-      funcionario = `${e.firstName} ${e.lastName}`; return undefined;}
-  });
+  // let funcionario = '';
+  // data.employees.some((e) => {
+  //   if (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) {
+  //     funcionario = `${e.firstName} ${e.lastName}`;
+  //     return undefined;
+  //   }
+  // });
+  const funcionario = data.employees.reduce((res, e) =>
+    (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) ?
+    res = `${e.firstName} ${e.lastName}`: res
+    , '');
   return { [funcionario]: objEmp[funcionario] };
 };
+// console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
