@@ -43,18 +43,15 @@ const addEmployee = (
   responsibleFor = []
 ) => data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-const createAnimalCountObj = () => {
-  const animalCountObj = {};
-  for (let i = 0; i < data.animals.length; i++) {
-    animalCountObj[data.animals[i].name] = data.animals[i].residents.length;
-  }
-  return animalCountObj;
-};
+const createAnimalCountObj = () =>
+  data.animals.reduce((obj, animal) => {
+    obj[animal.name] = animal.residents.length;
+    return obj;
+  }, {});
 
 const animalCount = (species) => {
   if (species === undefined) return createAnimalCountObj();
-  return data.animals.find((animal) => animal.name === species).residents
-    .length;
+  return data.animals.find(({ name }) => name === species).residents.length;
 };
 
 const entryCalculator = (entrants) => {
@@ -65,9 +62,35 @@ const entryCalculator = (entrants) => {
   );
 };
 
+const createAnimalMapObj = () =>
+  data.animals.reduce((obj, { name, location }) => {
+    obj[location] === undefined
+      ? (obj[location] = [name])
+      : obj[location].push(name);
+    return obj;
+  }, {});
+
+const animalMapIncludeNames = (animalSex) => {
+  // return object
+
+    };
+};
+
 function animalMap(options) {
-  // seu código aqui
+  const animalMapObj = createAnimalMapObj();
+  if (options === undefined) return animalMapObj;
+  const { includeNames, sex, sorted } = options;
+  if (includeNames) {
+        
+      })
+    })
+    return animalMapIncludeNames('lions');
+  }
+
+  return animalMapObj;
 }
+
+console.log(animalMap({ includeNames: true }));
 
 function schedule(dayName) {
   // seu código aqui
