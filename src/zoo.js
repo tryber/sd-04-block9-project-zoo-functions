@@ -84,72 +84,72 @@ function entryCalculator(entrants) {
 
   return total;
 }
-
+function generateGenericMap(location) {
+  return data.animals.filter(elementAnimal => elementAnimal.location === location)
+  .map(filteredAnimal => filteredAnimal.name);
+}
+const genericMap = {
+  NE: generateGenericMap('NE'),
+  NW: generateGenericMap('NW'),
+  SE: generateGenericMap('SE'),
+  SW: generateGenericMap('SW'),
+};
+function generateNamesMap(location) {
+  return genericMap[location].map(elementAnimalName => ({
+    [elementAnimalName]: data.animals
+    .find(elementAnimal => elementAnimalName === elementAnimal.name)
+    .residents.map(elementResident => elementResident.name),
+  }));
+}
+function sortArrayOfTheAnimal(animal) {
+  const animalName = Object.keys(animal)[0];
+  const orderedNames = animal[animalName].sort();
+  return { [animalName]: orderedNames };
+}
+function generateSortedNamesMap(location) {
+  return generateNamesMap(location).map(elementAnimal =>
+    sortArrayOfTheAnimal(elementAnimal),
+  );
+}
+function generateNamesAndSexMap(location) {
+  return generateNamesMap(location).map(elementAnimal => {
+    const animalName = Object.keys(elementAnimal)[0];
+    const info = data.animals.find(animal => animal.name === animalName);
+    const filtered = info.residents.filter(resident => resident.sex === sex);
+    return { [animalName]: filtered.map(element => element.name) };
+  });
+}
+function generateSortedNamesAndSexMap(location) {
+  return generateNamesAndSexMap(location).map(elementAnimal =>
+    sortArrayOfTheAnimal(elementAnimal),
+  );
+}
+function generateFinalResponse(opt) {
+  let response = {};
+  includeNames = opt.includeNames;
+  sorted = opt.sorted;
+  sex = opt.sex;
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  for (let i = 0; i < locations.length; i += 1) {
+    if (includeNames && sorted && sex) {
+      response[locations[i]] = generateSortedNamesAndSexMap(locations[i]);
+    } else if (includeNames && !sorted && sex) {
+      response[locations[i]] = generateNamesAndSexMap(locations[i]);
+    } else if (includeNames && sorted && !sex) {
+      response[locations[i]] = generateSortedNamesMap(locations[i]);
+    } else if (includeNames && !sorted && !sex) {
+     response[locations[i]] = generateNamesMap(locations[i]);
+   }
+  }
+  return response;
+}
 function animalMap(options) {
-  let includeNames = false;
-  let sorted = false;
-  let sex = false;
-
-  function generateGenericMap(location) {
-    return data.animals.filter(elementAnimal => elementAnimal.location === location)
-    .map(filteredAnimal => filteredAnimal.name);
-  }
-  const genericMap = {
-    NE: generateGenericMap('NE'),
-    NW: generateGenericMap('NW'),
-    SE: generateGenericMap('SE'),
-    SW: generateGenericMap('SW'),
-  };
-  const response = genericMap;
-  function generateNamesMap(location) {
-    return genericMap[location].map(elementAnimalName => ({
-      [elementAnimalName]: data.animals
-        .find(elementAnimal => elementAnimalName === elementAnimal.name)
-        .residents.map(elementResident => elementResident.name),
-    }));
-  }
-  function sortArrayOfTheAnimal(animal) {
-    const animalName = Object.keys(animal)[0];
-    const orderedNames = animal[animalName].sort();
-    return { [animalName]: orderedNames };
-  }
-  function generateSortedNamesMap(location) {
-    return generateNamesMap(location).map(elementAnimal =>
-      sortArrayOfTheAnimal(elementAnimal),
-    );
-  }
-  function generateNamesAndSexMap(location) {
-    return generateNamesMap(location).map(elementAnimal => {
-      const animalName = Object.keys(elementAnimal)[0];
-      const info = data.animals.find(animal => animal.name === animalName);
-      const filtered = info.residents.filter(resident => resident.sex === sex);
-      return { [animalName]: filtered.map(element => element.name) };
-    });
-  }
-  function generateSortedNamesAndSexMap(location) {
-    return generateNamesAndSexMap(location).map(elementAnimal =>
-      sortArrayOfTheAnimal(elementAnimal),
-    );
-  }
-  function generateFinalResponse(opt) {
-    includeNames = opt.includeNames;
-    sorted = opt.sorted;
-    sex = opt.sex;
-    const locations = ['NE', 'NW', 'SE', 'SW'];
-    for (let i = 0; i < locations.length; i += 1) {
-      if (includeNames && sorted && sex) {
-        response[locations[i]] = generateSortedNamesAndSexMap(locations[i]);
-      } else if (includeNames && !sorted && sex) {
-        response[locations[i]] = generateNamesAndSexMap(locations[i]);
-      } else if (includeNames && sorted && !sex) {
-        response[locations[i]] = generateSortedNamesMap(locations[i]);
-      } else if (includeNames && !sorted && !sex) {
-        response[locations[i]] = generateNamesMap(locations[i]);
-      }
-    }
-  }
+  let response = genericMap;
   if (options) {
-    generateFinalResponse(options);
+    response = generateFinalResponse(options);
+  }
+  if (!Object.keys(response).length) {
+    response = genericMap;
   }
   return response;
 }
@@ -209,6 +209,7 @@ function increasePrices(percentage) {
   data.prices.Senior = formatValue(data.prices.Senior.toString());
   data.prices.Child = formatValue(data.prices.Child.toString());
 }
+
 function makeResponseObjectForEmployeeCoverage(employee) {
   const key = `${employee.firstName} ${employee.lastName}`;
   const value = employee.responsibleFor.map(animalId =>
