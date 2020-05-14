@@ -54,7 +54,9 @@ function createEmployee(personalInfo, associatedWith) {
 // console.log(createEmployee({nome: 'teste'}, {idade: 'teste2'}));
 
 function isManager(id) {
-  // seu código aqui
+  const verifyManager = data.employees.some(employee => employee.managers.find(mananger => mananger === id));
+  // console.log(verifyManager);
+  return verifyManager;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
