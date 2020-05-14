@@ -21,12 +21,13 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-    if (employeeName == undefined) return {};
-    return data.employees.find(element => element.firstName === employeeName || element.lastName === employeeName);
+  if (employeeName === undefined) return {};
+  return data.employees.find(element => element.firstName === employeeName ||
+     element.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee(...param) {
+  // return param.reduce((acc,obj)=> acc + obj);
 }
 
 function isManager(id) {
