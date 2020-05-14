@@ -19,8 +19,8 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const animais = data.animals.filter((elem) => elem.name === animal);
-  return animais[0].residents.every((animalAge) => animalAge.age >= age);
+  const animais = data.animals.find((elem) => elem.name === animal);
+  return animais.residents.every((animalAge) => animalAge.age >= age);
 }
 
 function employeeByName(employeeName) {
@@ -74,15 +74,30 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+//  if (!dayName) {
+//    let obj = {};
+//    const days = Object.keys(data.hours);
+//    for (let i =0; i < 6; i += 1) {
+//      obj[days[i]] = `Open from: ${data.hours[i].open}am until ${data.hours[i].close - 12}pm`;
+//    }
+//    obj[days[6]] = 'CLOSED';
+//    return obj;
+//  }
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const idAnimal = data.employees.find(empId => empId === id).responsibleFor[0];
+  const animal = data.animals.find(animal => animal.id === idAnimal);
+  return Object.values(animal.residents.sort((a, b) => b.age - a.age)[0]);
 }
 
 function increasePrices(percentage) {
+  const aumento = (percentage/100) + 1;
+  Object.keys(data.prices).forEach((price) => {
+  (data.prices[price] = Math.round((data.prices[price] * aumento) * 100) / 100);
+  });
   // seu código aqui
+  //parseFloat((0.2 + 0.1).toPrecision(2))
 }
 
 function employeeCoverage(idOrName) {
