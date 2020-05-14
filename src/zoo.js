@@ -71,10 +71,11 @@ function entryCalculator(entrants) {
   // seu código aqui
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const prices = data.prices;
-  let results = {};
-  Object.keys(prices).map(valor => results[valor] = prices[valor] *= entrants[valor]);
-  return Object.values(results).reduce( (total, currentValue) => total + currentValue, 0);
-
+  const results = {};
+  Object.keys(prices).map(function (valor){
+   return results[valor] = prices[valor] *= entrants[valor];
+  });
+  return Object.values(results).reduce((total, currentValue) => total + currentValue, 0);
 }
 // console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
