@@ -62,8 +62,8 @@ const objHorarios = {
 };
 
 const schedule = (dayName) => {
-  if (!dayName) return obj;
-  return { [dayName]: obj[dayName] };
+  if (!dayName) return objHorarios;
+  return { [dayName]: objHorarios[dayName] };
 };
 
 const oldestFromFirstSpecies = id => Object.values(data.animals
