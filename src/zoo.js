@@ -11,14 +11,14 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices, hours } = data
+const { animals, employees, prices, hours } = data;
 
 const animalsByIds = (...ids) => animals.filter(animal => ids.some(id => animal.id === id));
 
 const animalsOlderThan = (name, age) => animals.find(animal => name === animal.name).residents.every(res => res.age >= age);
 
 const employeeByName = (eName) => {
-  const employeeFiltered = employees.find(e => e.firstName === employeeName || e.lastName === eName);
+  const employeeFiltered = employees.find(e => e.firstName === eName || e.lastName === eName);
   return {
     ...employeeFiltered,
   };
@@ -41,7 +41,7 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  }
+  };
   employees.push(employee);
 };
 
@@ -52,16 +52,19 @@ const animalCount = (species = 'all') => {
       animalsNumbers = {
         ...animalsNumbers,
         [name]: residents.length,
-      }
+      };
     });
     return animalsNumbers;
   }
   return animals.find(specie => specie.name === species).residents.length;
 };
 
-const entryCalculator = ({ Adult = 0, Child = 0, Senior = 0 }) => (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+const entryCalculator = ({ Adult = 0, Child = 0, Senior = 0 }) => {
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+};
 
 //funções auxiliares para a animalMap
+
 
 const filter = location => animals.filter(animal => animal.location === location);
 
@@ -69,7 +72,14 @@ const getName = arr => arr.map(animal => animal.name);
 
 //gambiarra feita para filtrar por sexo sem alterar muito as funções, precisa ser refatorada
 
-const findAndMapResidents = (name, sex) => sex ? animals.find(animal => animal.name === name).residents.filter(resident => resident.sex === sex).map(resident => resident.name) : animals.find(animal => animal.name === name).residents.map(resident => resident.name);
+const findResidents = (name) => animals.find(animal => animal.name === name).residents
+
+const findAndMapResidents = (name, sex) => {
+  if (sex) {
+    return findResidents(name).filter(resident => resident.sex === sex).map(resident => resident.name);
+  }
+  return findResidents(name).map(resident => resident.name);
+};
 
 const getResidents = (names, includeNames, sorted, sex) => {
   let residentsObj = [];
@@ -86,17 +96,25 @@ const getResidents = (names, includeNames, sorted, sex) => {
 };
 
 const animalMap = (opt) => {
-  const { includeNames, sorted, sex } = opt ? opt : { includeNames: false, sorted: false, sex: false };
-  const locations = ["NE", "NW", "SE", "SW"];
-  let animalLocations = {};
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  const animalLocations = {};
+  if (opt) {
+    const { includeNames = false, sorted = false, sex = false } = opt
+    locations.forEach((l) => {
+      animalLocations[l] = getResidents(getName(filter(l)), includeNames, sorted, sex);
+    });
+    return animalLocations;
+  };
   locations.forEach(l => {
-    animalLocations[l] = getResidents(getName(filter(l)), includeNames, sorted, sex)
+    animalLocations[l] = getResidents(getName(filter(l)));
   });
   return animalLocations;
 }
-const checkDate = (open, close) => open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`
 
 //função auxiliar para a schedule
+
+
+const checkDate = (open, close) => { return open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`};
 
 const fullschedule = () => {
   let scheduleObj = {};
@@ -104,25 +122,31 @@ const fullschedule = () => {
     scheduleObj = {
       ...scheduleObj,
       [hour]: checkDate(hours[hour].open, hours[hour].close),
-    }
+    };
   });
   return scheduleObj;
 };
 
-const schedule = (dayName) => dayName !== undefined ? { [dayName]: checkDate(hours[dayName].open, hours[dayName].close) } : fullschedule();
+const schedule = (dayName) => {
+  if (dayName !== undefined) {
+    return { [dayName]: checkDate(hours[dayName].open, hours[dayName].close) }
+  }
+  return fullschedule()
+};
 
 //função auxiliar para findAnimalId
 
-const findAnimalId = (id) => employees.find(employee => employee.id === id).responsibleFor[0]
+const findAnimalId = id => employees.find(employee => employee.id === id).responsibleFor[0];
 
-const findAnimalArr = (id) => animals.find(animal => animal.id === findAnimalId(id))
+const findAnimalArr = id => animals.find(animal => animal.id === findAnimalId(id));
 
 const oldestFromFirstSpecies = (id) => {
-  return Object.values(findAnimalArr(id).residents.reduce((older, resident) => {
-    return older = older.age > resident.age ? older : resident;
-  }
-  ))
-}
+  let oldest = Object.values(findAnimalArr(id).residents.reduce((older, resident) => {
+    older = older.age > resident.age ? older : resident;
+    return older;
+  }));
+  return oldest;
+};
 
 const increasePrices = (percentage) => {
   Object.keys(prices).forEach((element) => {
@@ -131,28 +155,29 @@ const increasePrices = (percentage) => {
 };
 
 //funções auxiliares para employeeCoverage
+ 
 
-findEmployee = (idOrName) => {
-  let employee = employees.find(employee => {
-    let { id, firstName, lastName } = employee
+const findEmployee = (idOrName) => {
+  const employeeFound = employees.find((employee) => {
+    const { id, firstName, lastName } = employee;
     if (id === idOrName || firstName === idOrName || lastName === idOrName) {
       return true;
     };
+    return false;
   });
-  return employee
+  return employeeFound;
 };
 
 const createResponsibleArr = (responsibleForArr) => {
-  return responsibleForArr.map((animalId) => {
-    return animals.find(animal => {
-      return animal.id === animalId
-    }
-    ).name
-  })
-}
+  const responsibleArray = responsibleForArr.map((animalId) => {
+    const animalName = animals.find(animal => animal.id === animalId).name;
+    return animalName;
+  });
+  return responsibleArray;
+};
 
 const employeeCoverage = (idOrName) => {
-  let employeeCoverageObj = {}
+  let employeeCoverageObj = {};
   if (!idOrName) {
     employees.forEach(({ firstName, lastName, responsibleFor }) => {
       employeeCoverageObj = {
@@ -162,7 +187,7 @@ const employeeCoverage = (idOrName) => {
     });
     return employeeCoverageObj
   };
-  let { firstName, lastName, responsibleFor } = findEmployee(idOrName);
+  const { firstName, lastName, responsibleFor } = findEmployee(idOrName);
   employeeCoverageObj[`${firstName} ${lastName}`] = createResponsibleArr(responsibleFor);
   return employeeCoverageObj;
 };
