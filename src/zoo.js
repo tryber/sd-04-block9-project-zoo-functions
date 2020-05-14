@@ -84,9 +84,9 @@ function animalMap(options) {
   }, {});
 }
 
-const printSchedule = ({ open, close }) => {
-  return (open === 0 && close === 0) ? 'CLOSED' : `Open from ${open}am until ${close-12}pm`;
-}
+function printSchedule({ open, close }) {
+  return (open === 0 && close === 0) ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+};
 
 function schedule(dayName) {
   // seu código aqui
@@ -96,9 +96,7 @@ function schedule(dayName) {
       return prev;
     }, {});
   }
-  else {
-    return { [dayName]: printSchedule(data.hours[dayName]) };
-  }
+  return { [dayName]: printSchedule(data.hours[dayName]) };
 }
 
 function oldestFromFirstSpecies(id) {
