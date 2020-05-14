@@ -35,7 +35,7 @@ function employeeByName(employeeName) {
   const employeeFirstAndLastName = newEmployee.find(
     element => element.firstName === employeeName || element.lastName === employeeName,
   );
-  return employeeFirstAndLastName || [];
+  return employeeFirstAndLastName || {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
