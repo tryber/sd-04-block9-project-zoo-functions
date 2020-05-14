@@ -209,20 +209,18 @@ function increasePrices(percentage) {
   data.prices.Senior = formatValue(data.prices.Senior.toString());
   data.prices.Child = formatValue(data.prices.Child.toString());
 }
-
+function makeResponseObjectForEmployeeCoverage(employee) {
+  const key = `${employee.firstName} ${employee.lastName}`;
+  const value = employee.responsibleFor.map(animalId =>
+    data.animals.find(elementAnimal => animalId === elementAnimal.id).name,
+  );
+  return { key, value };
+}
 function employeeCoverage(idOrName) {
-  function makeResponseObject(employee) {
-    const key = `${employee.firstName} ${employee.lastName}`;
-    const value = employee.responsibleFor.map(animalId =>
-      data.animals.find(elementAnimal => animalId === elementAnimal.id).name,
-    );
-    return { key, value };
-  }
-
   if (!idOrName) {
     const responseObj = {};
     data.employees.forEach(elementEmployee => {
-      const response = makeResponseObject(elementEmployee);
+      const response = makeResponseObjectForEmployeeCoverage(elementEmployee);
       responseObj[response.key] = response.value;
     });
     return responseObj;
@@ -230,7 +228,7 @@ function employeeCoverage(idOrName) {
     const employeeSearched = data.employees.find(
       elementEmployee => elementEmployee.id === idOrName,
     );
-    const response = makeResponseObject(employeeSearched);
+    const response = makeResponseObjectForEmployeeCoverage(employeeSearched);
     return { [response.key]: response.value };
   }
   const employeeSearched = data.employees.find(
@@ -238,7 +236,7 @@ function employeeCoverage(idOrName) {
       elementEmployee.firstName === idOrName ||
       elementEmployee.lastName === idOrName,
   );
-  const response = makeResponseObject(employeeSearched);
+  const response = makeResponseObjectForEmployeeCoverage(employeeSearched);
   return { [response.key]: response.value };
 }
 
