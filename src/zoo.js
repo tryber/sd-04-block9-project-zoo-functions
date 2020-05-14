@@ -86,10 +86,42 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
+  if (options) {
+    var { includeNames, sorted, sex } = options;
+  }
   function generateGenericMap(location) {
     return data.animals.filter(elementAnimal => elementAnimal.location === location)
     .map(filteredAnimal => filteredAnimal.name);
-  };
+  }
+  function generateNamesMap(location) {
+    return genericMap[location].map(elementAnimalName => ({
+      [elementAnimalName]: data.animals
+        .find(elementAnimal => elementAnimalName === elementAnimal.name)
+        .residents.map(elementResident => elementResident.name),
+    }));
+  }
+  function generateSortedNamesMap(location) {
+    return generateNamesMap(location).map(elementAnimal => {
+      const animalName = Object.keys(elementAnimal)[0];
+      const orderedNames = elementAnimal[animalName].sort();
+      return { [animalName]: orderedNames };
+    });
+  }
+  function generateNamesAndSexMap(location) {
+    return generateNamesMap(location).map(elementAnimal => {
+      const animalName = Object.keys(elementAnimal)[0];
+      const info = data.animals.find(animal => animal.name === animalName);
+      const filtered = info.residents.filter(resident => resident.sex === sex);
+      return { [animalName]: filtered.map(element => element.name) };
+    });
+  }
+  function generateSortedNamesAndSexMap(location) {
+    return generateNamesAndSexMap(location).map(elementAnimal => {
+      const animalName = Object.keys(elementAnimal)[0];
+      const sorted = elementAnimal[animalName].sort();
+      return { [animalName]: sorted };
+    })
+  }
   const genericMap = {
     NE: generateGenericMap('NE'),
     NW: generateGenericMap('NW'),
@@ -97,17 +129,7 @@ function animalMap(options) {
     SW: generateGenericMap('SW'),
   };
   if (options) {
-    const { includeNames, sorted, sex } = options;
     if (includeNames && sorted && sex) {
-      function generateSortedNamesAndSexMap(location) {
-        return genericMap[location].map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-          .find(elementAnimal => name === elementAnimal.name)
-          .residents.filter(elementResident => elementResident.sex === sex)
-          .map(elementResident => elementResident.name)
-          .sort(),
-        }));
-      };
       const mapWithSortedNamesAndBySex = {
         NE: generateSortedNamesAndSexMap('NE'),
         NW: generateSortedNamesAndSexMap('NW'),
@@ -116,14 +138,6 @@ function animalMap(options) {
       };
       return mapWithSortedNamesAndBySex;
     } else if (includeNames && !sorted && sex) {
-      function generateNamesAndSexMap(location) {
-        return genericMap[location].map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.filter(elementResident => elementResident.sex === sex)
-            .map(elementResident => elementResident.name),
-        }));
-      }
       const mapWithNamesAndBySex = {
         NE: generateNamesAndSexMap('NE'),
         NW: generateNamesAndSexMap('NW'),
@@ -132,14 +146,6 @@ function animalMap(options) {
       };
       return mapWithNamesAndBySex;
     } else if (includeNames && sorted && !sex) {
-      function generateSortedNamesMap(location) {
-        return genericMap[location].map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name)
-            .sort(),
-          }));
-      };
       const mapWithSortedNames = {
         NE: generateSortedNamesMap('NE'),
         NW: generateSortedNamesMap('NW'),
@@ -148,13 +154,6 @@ function animalMap(options) {
       };
       return mapWithSortedNames;
     } else if (includeNames && !sorted && !sex) {
-      function generateNamesMap(location) {
-        return genericMap[location].map(elementAnimalName => ({
-          [elementAnimalName]: data.animals
-            .find(elementAnimal => elementAnimalName === elementAnimal.name)
-            .residents.map(elementResident => elementResident.name),
-        }));
-      };
       const mapWithNames = {
         NE: generateNamesMap('NE'),
         NW: generateNamesMap('NW'),
