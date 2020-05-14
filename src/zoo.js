@@ -128,12 +128,12 @@ const employeeCoverage = (idOrName) => {
   //   }
   // });
   const funcionario = data.employees.reduce((res, e) =>
-    (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) ?
-    res = `${e.firstName} ${e.lastName}`: res
+    res = (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) ?
+    `${e.firstName} ${e.lastName}`: res
     , '');
   return { [funcionario]: objEmp[funcionario] };
 };
-// console.log(employeeCoverage('Azevado'));
+console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
