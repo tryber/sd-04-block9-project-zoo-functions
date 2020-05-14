@@ -107,7 +107,26 @@ const increasePrices = (percentage) => {
   });
 };
 
-const employeeCoverage = (idOrName) => {};
+objEmp = {
+  'Nigel Nelson': ['lions', 'tigers'],
+  'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+  'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+  'Wilburn Wishart': ['snakes', 'elephants'],
+  'Stephanie Strauss': ['giraffes', 'otters'],
+  'Sharonda Spry': ['otters', 'frogs'],
+  'Ardith Azevado': ['tigers', 'bears'],
+  'Emery Elser': ['elephants', 'bears', 'lions']
+};
+
+const employeeCoverage = (idOrName) => {
+  if (!idOrName) return objEmp;
+  let funcionario = '';
+  data.employees.find((e) => {
+    if (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName)
+    funcionario = `${e.firstName} ${e.lastName}`;
+  });
+  return { [funcionario]: objEmp[funcionario] };
+};
 
 module.exports = {
   entryCalculator,
