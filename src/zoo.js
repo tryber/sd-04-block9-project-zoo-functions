@@ -27,7 +27,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // abbreviation object literal
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
