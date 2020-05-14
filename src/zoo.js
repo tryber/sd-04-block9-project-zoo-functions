@@ -47,7 +47,7 @@ const animalCount = (species = '') => {
     r[a.name] = a.residents.length;
     return r;
   }, {});
-}
+};
 
 console.log(animalCount('snakes'));
 const entryCalculator = (entrants) => {};
