@@ -73,8 +73,8 @@ function animalCount(species) {
 
   const [residents] = data.animals.filter((animal) => animal.name === species)
     .map((animal) => animal.residents);
-  const count = residents.reduce((previous) => previous + 1, 0);
-  return count;
+  const result = residents.reduce((previous) => previous + 1, 0);
+  return result;
 }
 
 function entryCalculator(entrants) {
