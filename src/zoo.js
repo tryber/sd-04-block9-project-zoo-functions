@@ -73,7 +73,7 @@ function entryCalculator(entrants) {
   const prices = data.prices;
   const results = {};
   Object.keys(prices).map(function (valor) {
-    results[valor] = prices[valor] *= entrants[valor];    
+    return (results[valor] = prices[valor] *= entrants[valor]);    
   });
   return Object.values(results).reduce((total, currentValue) => total + currentValue, 0);
 }
@@ -85,8 +85,12 @@ function entryCalculator(entrants) {
 // Com opções especificadas, retorna somente nomes de animais macho/fêmea
 // Só retorna informações específicas de gênero se includeNames for setado
 function animalMap(options) {
-  
+  if (!options){
+    return data.animals.map(e => Object.keys(e));
+  }
 }
+console.log(animalMap());
+
 
 function schedule(dayName) {
   // seu código aqui
