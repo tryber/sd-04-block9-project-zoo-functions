@@ -120,10 +120,16 @@ function oldestFromFirstSpecies(id) {
   }, []);
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
-
 function increasePrices(percentage) {
+  const keys = Object.keys(data.prices);
+
+  keys.forEach((key) => {
+    const currentPrice = data.prices[key];
+    const increment = 100 + percentage;
+    const newPrice =
+      Math.ceil(currentPrice * increment) / 100;
+    data.prices[key] = newPrice;
+  });
 }
 
 function employeeCoverage(idOrName) {
