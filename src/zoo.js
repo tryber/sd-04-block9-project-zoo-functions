@@ -39,8 +39,7 @@ function isManager(id) {
   let exists = false;
   data.employees.forEach(employee => // forEach
     employee.managers.find((manager) => { // find
-      if (manager === id) exists = true;
-    })
+      return manager === id ? exists = true : exists;})
   );
   return exists;
 }
