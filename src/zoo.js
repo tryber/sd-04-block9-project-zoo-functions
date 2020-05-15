@@ -89,9 +89,12 @@ function residentsPorAnimal(animal, sexo) {
   return animalkey.reduce((finalResult, vector, index) => {
     vector.map((search) => {
       const arrayAnimal = data.animals.find(i => i.name === search);
-      (sexo) ? arrayAnimal.residents.filter(({ sex }) => sex === sexo)
-        .map((dentro) => acc.push(dentro.name)):
+      if (sexo) {
+        arrayAnimal.residents.filter(({ sex }) => sex === sexo)
+        .map((dentro) => acc.push(dentro.name))
+      } else {
       arrayAnimal.residents.map((dentro) => acc.push(dentro.name));
+      }
       result[search] = acc;
       middle.push(result);
       acc = [];
