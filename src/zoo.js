@@ -77,27 +77,22 @@ function animalsNames(loc) {
   for (let i = 0; i < 4; i += 1) {
     const todosAnimais = data.animals.filter(j => j.location === loc[i]);
     result.push(todosAnimais.map(an => an.name));
-  }
-  for (let i = 0; i < 4; i += 1) {
     finalObj[loc[i]] = result[i];
   }
   return finalObj;
 }
 
 function residentsPorAnimal(animal, sexo) {
-  const finalResult = {};
   let [middle, acc] = [[], []];
   let result = {};
   const animalkey = Object.values(animal);
-  animalkey.forEach((vector, index) => {
+  return animalkey.reduce((finalResult, vector, index) => {
     vector.map((search) => {
       const arrayAnimal = data.animals.find(i => i.name === search);
-      if (sexo) {
-        const filtredArr = arrayAnimal.residents.filter(({ sex }) => sex === sexo);
-        filtredArr.map((dentro) => acc.push(dentro.name));
-      } else {
-        arrayAnimal.residents.map((dentro) => acc.push(dentro.name));
-      }
+      (sexo) ?
+      arrayAnimal.residents.filter(({ sex }) => sex === sexo)
+        .map((dentro) => acc.push(dentro.name)):
+      arrayAnimal.residents.map((dentro) => acc.push(dentro.name));
       result[search] = acc;
       middle.push(result);
       acc = [];
@@ -107,8 +102,7 @@ function residentsPorAnimal(animal, sexo) {
     finalResult[Object.keys(animal)[index]] = middle;
     middle = [];
     return finalResult;
-  });
-  return finalResult;
+  }, {});
 }
 
 function animalMap(options) {
@@ -131,8 +125,7 @@ function animalMap(options) {
 function schedule(dayName) {
   const obj = {};
   const especifcDay = {};
-  const days = Object.keys(data.hours);
-  days.forEach((hour) => {
+  Object.keys(data.hours).forEach((hour) => {
     const closeHour = data.hours[hour].close - 12;
     obj[hour] = `Open from ${data.hours[hour].open}am until ${closeHour}pm`;
   });
