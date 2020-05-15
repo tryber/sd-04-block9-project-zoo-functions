@@ -80,15 +80,49 @@ function animalsNames(loc) {
   return result
 }
 
-function animalMap(...options) {
-  const resposta = {};
+function residentsPorAnimal(animal) {
+  const finalResult = [];
+  let middle = [];
+  let result = {};
+  let acc = [];
+  for (let j = 0; j < 4; j += 1) { // ['tigers', 'bears', 'elephants'] = animal[j]
+    animal[j].map((search) => {
+      let arrayAnimal = data.animals.find(i => i.name === search);
+      arrayAnimal.residents.map((dentro) => acc.push(dentro.name))
+      result[search] = acc
+      middle.push(result);
+      acc = [];
+      result = {};
+    });
+    finalResult.push(middle);
+    middle = [];
+  }
+  return finalResult
+}
+
+function animalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
-  if (options.length === 0) {
+  const resposta = {};
+  if (!options) {
     const aniArr = animalsNames(locations);
     for (let i = 0; i < 4; i += 1) {
       resposta[locations[i]] = aniArr[i];
     }
     return resposta;
+  }
+  const { includeNames, sorted, sex } = options;
+  if (includeNames) {
+    const namArr = residentsPorAnimal(animalsNames(locations));
+    for (let i = 0; i < 4; i += 1) {
+      resposta[locations[i]] = namArr[i];
+    }
+    if (sorted) {
+      Object.keys(resposta).forEach(location => resposta[location]
+        .forEach(animalxato => animalxato[Object.keys(animalxato)[0]].sort()));
+    }
+    return resposta;
+  }
+  if (includeNames && sex) {
   }
 }
 
