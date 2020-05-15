@@ -151,9 +151,13 @@ const oldestFromFirstSpecies = (id) => {
   return Object.values(chosenAnimal);
 };
 
-const increasePrices = (percentage) => {};
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach(person => data.prices[person] = 
+    Number(data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2))
+  return data.prices;
+};
 
-const employeeCoverage = (idOrName) => {};
+const employeeCoverage = (idOrN50ame) => {};
 
 module.exports = {
   entryCalculator,
