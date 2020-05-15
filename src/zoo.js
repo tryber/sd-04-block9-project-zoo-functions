@@ -83,6 +83,25 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
+  // Sem parâmetros, retorna animais categorizados por localização
+  // Com opções especificadas, retorna nomes de animais
+  // Com opções especificadas, retorna nomes de animais ordenados
+  // Com opções especificadas, retorna somente nomes de animais macho/fêmea
+  // Só retorna informações específicas de gênero se includeNames for setado
+  const animalLocation = {};
+  data.animals.forEach((element) => {
+    if (element.location) {
+      animalLocation[element.location] = [];
+    }
+  });
+  data.animals.forEach((element) => {
+    if (element.location) {
+      animalLocation[element.location].push(element.name);
+    }
+  });
+
+  console.log(animalLocation);
+  return animalLocation;
 }
 
 function schedule(dayName) {
