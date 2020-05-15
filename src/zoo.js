@@ -71,6 +71,12 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
+  // const entrants = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
+  if (entrants && Object.keys(entrants).length > 0) {
+    return Object.keys(entrants).reduce(
+        (acc, curr) => acc + (data.prices[curr] * entrants[curr]), 0);
+  }
+  return 0;
 }
 
 function animalMap(options) {
@@ -79,14 +85,26 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
+
 }
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const findNoemployee = data.employees.find(idFunc => idFunc.id === id).responsibleFor[0];
+  // encontrado o id do animal gerenciado pelo funcionário deve-se
+  // encontrar esse id no objeto 'animals'.
+  const findNOanimals = data.animals.find(elementos => elementos.id === findNoemployee);
+  return Object.values(findNOanimals.residents.sort((a, b) => b.age - a.age)[0]);
 }
 
+// console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// const data = require('./data');
 function increasePrices(percentage) {
   // seu código aqui
+  return Object.keys(data.prices).forEach((valores) => {
+    (data.prices[valores] =
+      Math.round(data.prices[valores] * (1 + (percentage / 100)) * 100) / 100);
+  });
 }
 
 function employeeCoverage(idOrName) {
