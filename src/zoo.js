@@ -22,7 +22,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   // seu código aqui
   const results = data.animals.find(animals => animals.name === animal).residents
-  .every(residents => residents.age >= age);
+    .every(residents => residents.age >= age);
   return results;
 }
 
@@ -30,7 +30,7 @@ function employeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) return {};
   const results = data.employees
-  .find(employees => employees.firstName === employeeName || employees.lastName === employeeName);
+    .find(employees => employees.firstName === employeeName || employees.lastName === employeeName);
   return results;
 }
 
@@ -43,7 +43,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   const results = data.employees
-  .some(employee => employee.managers.some(manager => manager === id));
+    .some(employee => employee.managers.some(manager => manager === id));
   return results;
 }
 
@@ -82,6 +82,17 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
+  let schdl = Object.assign({}, data.hours);
+  Object.keys(schdl).forEach((key) => {
+    const open = schdl[key].open;
+    const close = schdl[key].close;
+    schdl[key] = `Open from ${open}am until ${close - 12}pm`;
+    if (open === close) schdl[key] = 'CLOSED';
+  });
+  // CC CHATÃO AI
+  if (!dayName) return schdl;
+  schdl = { [dayName]: schdl[dayName] };
+  return schdl;
 }
 
 function oldestFromFirstSpecies(id) {
