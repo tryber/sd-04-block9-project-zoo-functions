@@ -54,7 +54,7 @@ function animalCount(species) {
     data.animals.forEach(element => (obj[element.name] = element.residents.length));
     return obj;
   }
-    return data.animals.find(element => element.name === species).residents.length;
+  return data.animals.find(element => element.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
