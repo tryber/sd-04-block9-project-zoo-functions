@@ -8,6 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
+const assert = require('assert')
 
 const data = require('./data');
 
@@ -74,36 +75,25 @@ function entryCalculator(entrants) {
 function animalAndResidents(name, sorted, sex) {
   const obj = {};
   obj[name] = data.animals.find(item => item.name === name).residents;
-  obj[name] = obj[name].map(resident => resident);
   if (sex) obj[name] = obj[name].filter(item => item.sex === sex);
+  obj[name] = obj[name].map(item => item.name);
   if (sorted) obj[name].sort();
   return obj;
-}
-
-function regions() {
-  return data.animals.reduce((prev, item) => {
-    const local = item.location;
-    if (prev[local]) {
-      prev[local].push(item.name);
-    } else {
-      prev[local] = [item.name];
-    }
-    return prev;
-  }, {});
 }
 
 function animalMap(options = {}) {
   // seu código aqui
   const { includeNames, sex, sorted } = options;
-  if (includeNames) {
-    return data.animals.reduce((prev, animal) => {
-      const local = animal.location;
-      if (!prev[local]) prev[local] = [];
+  return data.animals.reduce((prev, animal) => {
+    const local = animal.location;
+    if (!prev[local]) prev[local] = [];
+    if (!includeNames) {
+      prev[local].push(animal.name);
+    } else {
       prev[local].push(animalAndResidents(animal.name, sorted, sex));
-      return prev;
-    }, {});
-  }
-  return regions();
+    }
+    return prev;
+  }, {});
 }
 
 function printSchedule({ open, close }) {
