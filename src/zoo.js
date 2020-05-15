@@ -90,8 +90,9 @@ function residentsPorAnimal(animal, sexo) {
   let result = {};
   let acc = [];
   const animalkey = Object.values(animal);
-  for (let j = 0; j < 4; j += 1) { // ['tigers', 'bears', 'elephants'] = animal[j]
-    animalkey[j].map((search) => {
+  console.log(animalkey)
+  animalkey.forEach((vector, index) => { 
+    vector.map((search) => {
       const arrayAnimal = data.animals.find(i => i.name === search);
       if (sexo) {
         const filtredArr = arrayAnimal.residents.filter(({ sex }) => sex === sexo);
@@ -105,9 +106,10 @@ function residentsPorAnimal(animal, sexo) {
       result = {};
       return result;
     });
-    finalResult[Object.keys(animal)[j]] = middle;
-    middle = [];
-  }
+  finalResult[Object.keys(animal)[index]] = middle;
+  middle = [];
+  return finalResult;
+  });
   return finalResult;
 }
 
