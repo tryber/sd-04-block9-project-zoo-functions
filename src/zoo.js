@@ -36,16 +36,14 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  let exists = false;
+  let isManager = false;
   data.employees.forEach(employee => // forEach
     employee.managers.find((manager) => { // find
-      if (manager === id) {
-        exists = true;
-      }
-      return exists;
-    }),
+      if (manager === id) isManager = true;
+      return isManager;
+    }), // CC exigiu essa "," no final mas não entendi o porque ???
   );
-  return exists;
+  return isManager;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
