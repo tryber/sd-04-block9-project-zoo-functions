@@ -85,7 +85,7 @@ const animalMap2 = (
     SW,
   };
 };
-const theFunction = (region) => {
+const theFunction = (region, sort) => {
   const chosenAnimals = data.animals.filter(
     (animal) => animal.location === region
   );
@@ -93,24 +93,39 @@ const theFunction = (region) => {
   let arr = [];
   chosenAnimals.forEach((chosen) => {
     object = {};
-    object[chosen.name] = (chosen.residents.map((element) => element.name);
+    if (!sort)
+      object[chosen.name] = chosen.residents.map((element) => element.name);
+    else
+      (object[chosen.name] = chosen.residents.map(
+        (element) => element.name
+      )).sort();
     return arr.push(object);
   });
   return arr;
 };
 
-console.log(theFunction("NE"));
-
+console.log(theFunction("NE", "sort"));
 
 const animalMap = (options) => {
   if (!options) return animalMap2();
   const { includeNames, sorted, sex } = options;
-  if (includeNames && sorted) return 'oi' //const novaVar = theFunction("NE") -> novaVar[0].lions.sort()
-  if (includeNames) return animalMap2(theFunction("NE"), theFunction("NW"), theFunction("SE"), theFunction("SW"))
-
+  if (includeNames && sorted)
+    return animalMap2(
+      theFunction("NE", "sort"),
+      theFunction("NW", "sort"),
+      theFunction("SE", "sort"),
+      theFunction("SW", "sort")
+    );
+  if (includeNames)
+    return animalMap2(
+      theFunction("NE"),
+      theFunction("NW"),
+      theFunction("SE"),
+      theFunction("SW")
+    );
 };
 
-// console.log(animalMap({ includeNames: true }));
+console.log(animalMap({ includeNames: true, sorted: true }));
 
 const schedule = (dayName) => {};
 
