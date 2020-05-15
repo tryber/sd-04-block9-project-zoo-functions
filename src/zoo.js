@@ -73,11 +73,15 @@ function entryCalculator(entrants) {
 
 function animalsNames(loc) {
   const result = [];
+  const finalObj = {};
   for (let i = 0; i < 4; i += 1) {
     const todosAnimais = data.animals.filter(j => j.location === loc[i]);
     result.push(todosAnimais.map(an => an.name));
   }
-  return result
+  for (let i = 0; i < 4; i += 1) {
+    finalObj[loc[i]] = result[i];
+  }
+  return finalObj;
 }
 
 function residentsPorAnimal(animal, sexo) {
@@ -107,17 +111,14 @@ function residentsPorAnimal(animal, sexo) {
 
 function animalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
-  const resposta = {};
+  let resposta = {};
   if (!options || options.includeNames === undefined) {
-    const aniArr = animalsNames(locations);
-    for (let i = 0; i < 4; i += 1) {
-      resposta[locations[i]] = aniArr[i];
-    }
-    return resposta;
+    return animalsNames(locations);
   }
   const { includeNames, sorted, sex } = options;
   if (includeNames) {
-    const namArr = residentsPorAnimal(animalsNames(locations), sex);
+    const parametro = Object.values(animalsNames(locations));
+    const namArr = residentsPorAnimal(parametro, sex);
     for (let i = 0; i < 4; i += 1) {
       resposta[locations[i]] = namArr[i];
     }
