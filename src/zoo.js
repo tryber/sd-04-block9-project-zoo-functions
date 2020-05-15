@@ -8,8 +8,6 @@ eslint no-unused-vars: [
   }
 ]
 */
-const assert = require('assert')
-
 const data = require('./data');
 
 function animalsByIds(...ids) {
