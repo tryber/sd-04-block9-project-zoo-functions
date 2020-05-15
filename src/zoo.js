@@ -85,32 +85,33 @@ const entryCalculator = function (entrants) {
 // Com opções especificadas, retorna somente nomes de animais macho/fêmea
 // Só retorna informações específicas de gênero se includeNames for setado
 
+const createNewObj = (animal, options) => {
+  const newObj = {};
+  if (options.sex === 'female' || options.sex === 'male') {
+    const array = [];
+    animal.residents.forEach((element) => {
+      if (element.sex === options.sex) {
+        array.push(element.name);
+      }
+    });
+    newObj[animal.name] = array;
+  } else {
+    newObj[animal.name] = animal.residents.map(element => element.name);
+  }
+  if (options.sorted) {
+    newObj[animal.name].sort();
+  }
+  return newObj;
+};
+
 const animalMap = (options) => {
-  // const obj = { NE: [], NW: [], SE: [], SW: [] };
-  // const createNewObj = (animal) => {
-  //   const newObj = {};
-  //   if (options.sex === 'female' || options.sex === 'male') {
-  //     const array = [];
-  //     animal.residents.forEach((element) => {
-  //       if (element.sex === options.sex) {
-  //         array.push(element.name);
-  //       }
-  //     });
-  //     newObj[animal.name] = array;
-  //   } else {
-  //     newObj[animal.name] = animal.residents.map(element => element.name);
-  //   }
-  //   if (options.sorted) {
-  //     newObj[animal.name].sort();
-  //   }
-  //   return newObj;
-  // };
-  // if (!options || !options.includeNames) {
-  //   data.animals.map(animal => obj[animal.location].push(animal.name));
-  // } else if (options.includeNames === true) {
-  //   data.animals.map(animal => obj[animal.location].push(createNewObj(animal)));
-  // }
-  // return obj;
+  const obj = { NE: [], NW: [], SE: [], SW: [] };
+  if (!options || !options.includeNames) {
+    data.animals.map(animal => obj[animal.location].push(animal.name));
+  } else if (options.includeNames === true) {
+    data.animals.map(animal => obj[animal.location].push(createNewObj(animal, options)));
+  }
+  return obj;
 };
 
 // Implemente a função schedule:
