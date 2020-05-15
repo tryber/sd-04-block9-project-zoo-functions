@@ -51,35 +51,35 @@ const entryCalculator = function (entrants) {
     (data.prices.Senior * entrants.Senior);
 };
 
+const createNewObj = (animal, options) => {
+  const newObj = {};
+  if (options.sex === 'female' || options.sex === 'male') {
+    const array = [];
+    animal.residents.forEach((element) => {
+      if (element.sex === options.sex) {
+        array.push(element.name);
+      }
+    });
+    newObj[animal.name] = array;
+  } else {
+    newObj[animal.name] = animal.residents.map(element => element.name);
+  }
+  if (options.sorted) {
+    newObj[animal.name].sort();
+  }
+  return newObj;
+};
+
 const animalMap = function (options) {
-  // const obj = { NE: [], NW: [], SE: [], SW: [] };
+  const obj = { NE: [], NW: [], SE: [], SW: [] };
 
-  // const createNewObj = (animal) => {
-  //   const newObj = {};
-  //   if (options.sex === 'female' || options.sex === 'male') {
-  //     const array = [];
-  //     animal.residents.forEach((element) => {
-  //       if (element.sex === options.sex) {
-  //         array.push(element.name);
-  //       }
-  //     });
-  //     newObj[animal.name] = array;
-  //   } else {
-  //     newObj[animal.name] = animal.residents.map(element => element.name);
-  //   }
-  //   if (options.sorted) {
-  //     newObj[animal.name].sort();
-  //   }
-  //   return newObj;
-  // };
+  if (!options || !options.includeNames) {
+    data.animals.map(animal => obj[animal.location].push(animal.name));
+  } else {
+    data.animals.map(animal => obj[animal.location].push(createNewObj(animal, options)));
+  }
 
-  // if (!options || !options.includeNames) {
-  //   data.animals.map(animal => obj[animal.location].push(animal.name));
-  // } else {
-  //   data.animals.map(animal => obj[animal.location].push(createNewObj(animal)));
-  // }
-
-  // return obj;
+  return obj;
 };
 
 const schedule = function (dayName) {
@@ -105,9 +105,6 @@ const oldestFromFirstSpecies = (id) => {
   return olderAnimal;
 };
 
-/* 12- Implemente a função increasePrices:
-Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais*/
-
 const increasePrices = (percentage) => {
   const adult = data.prices.Adult;
   const senior = data.prices.Senior;
@@ -118,9 +115,9 @@ const increasePrices = (percentage) => {
   data.prices.Child = Math.round(child * ((percentage / 100) + 1) * 100) / 100;
 };
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+const employeeCoverage = () => {
+  
+};
 
 module.exports = {
   entryCalculator,
