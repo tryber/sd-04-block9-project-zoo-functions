@@ -60,8 +60,11 @@ const animalCount = (species) => {
   return data.animals.find(element => element.name === species).residents.length
 }
 
-function entryCalculator(entrants) {
-  
+// TODO => Returna 0 se nenhum argumento for passado
+// TODO => Retorna 0 se um objeto vazio for passado
+// TODO => Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
+const entryCalculator = (entrants = {}) => {
+  return Object.keys(entrants).reduce((acc, chave) => acc + (entrants[chave] * data.prices[chave]), 0);
 }
 
 function animalMap(options) {
