@@ -84,8 +84,54 @@ function entryCalculator(entrants) {
   return amountToPay;
 }
 
-function animalMap(options) {
+function findAnimal(location) {
+  const animals = data.animals.filter(animal => animal.location === location);
+  const animalsByLoc = animals.map(animal => animal.name);
+  return animalsByLoc;
+}
 
+function findNames(animal, sex) {
+  const animals = data.animals.find(a => a.name === animal);
+  const { residents } = animals;
+  const animalsArr = residents.map(a => a.name);
+
+  if (sex) {
+    const animalsBySexArr = residents.filter(a => a.sex === sex);
+    return animalsBySexArr.map(a => a.name);
+  }
+  return animalsArr;
+}
+
+const obj = data.animals.reduce((acc, { location }) => {
+  acc[`${location}`] = [];
+  return acc;
+}, {});
+
+function animalMap(options) {
+  Object.keys(obj).forEach((key) => {
+    obj[key] = findAnimal(key);
+  });
+  if (!options) return obj;
+  if (options.includeNames) {
+    Object.keys(obj).forEach((key) => {
+      const animalNames = [];
+      findAnimal(key).forEach((animal) => {
+        const animalObj = {};
+        const sex = options.sex;
+        if (options.sex) {
+          animalObj[animal] = findNames(animal, sex);
+        } else if (options.sorted) {
+          animalObj[animal] = findNames(animal).sort();
+        } else {
+          animalObj[animal] = findNames(animal);
+        }
+        animalNames.push(animalObj);
+      });
+      obj[key] = animalNames;
+    });
+    return obj;
+  }
+  return obj;
 }
 
 function schedule(dayName) {
@@ -122,7 +168,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  function findAnimal(arr) {
+  function find(arr) {
     return arr.map(id => data.animals.find(element => element.id === id).name);
   }
 
@@ -135,7 +181,7 @@ function employeeCoverage(idOrName) {
     return employeeObj;
   }
   const result = data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
-    acc[`${firstName} ${lastName}`] = findAnimal(responsibleFor);
+    acc[`${firstName} ${lastName}`] = find(responsibleFor);
     return acc;
   }, {});
 
@@ -143,7 +189,7 @@ function employeeCoverage(idOrName) {
 
   const employeeInfo = {};
   const { firstName, lastName, responsibleFor } = findEmployee(idOrName);
-  employeeInfo[`${firstName} ${lastName}`] = findAnimal(responsibleFor);
+  employeeInfo[`${firstName} ${lastName}`] = find(responsibleFor);
   return employeeInfo;
 }
 
