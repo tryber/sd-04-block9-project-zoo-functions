@@ -90,7 +90,7 @@ const includeNameSortGender = (region, sort, sex) => {
         if (element.sex === sex) acc.push(element.name);
         return acc;
       }, []);
-    } 
+    }
     if (sort) {
       (object[chosen.name] = chosen.residents.map(element => element.name)).sort();
     }
