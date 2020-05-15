@@ -67,7 +67,50 @@ const entryCalculator = (entrants) => {
   return (adultPrice * Adult) + (childPrice * Child) + (seniorPrice * Senior);
 };
 
-const animalMap = (options) => {};
+const animalMapTest = (region) => {
+  return data.animals
+    .filter((animal) => animal.location === region)
+    .map((animal2) => animal2.name);
+};
+const animalMap2 = (
+  NE = animalMapTest("NE"),
+  NW = animalMapTest("NW"),
+  SE = animalMapTest("SE"),
+  SW = animalMapTest("SW")
+) => {
+  return {
+    NE,
+    NW,
+    SE,
+    SW,
+  };
+};
+const theFunction = (region) => {
+  const chosenAnimals = data.animals.filter(
+    (animal) => animal.location === region
+  );
+  let object = {};
+  let arr = [];
+  chosenAnimals.forEach((chosen) => {
+    object = {};
+    object[chosen.name] = (chosen.residents.map((element) => element.name);
+    return arr.push(object);
+  });
+  return arr;
+};
+
+console.log(theFunction("NE"));
+
+
+const animalMap = (options) => {
+  if (!options) return animalMap2();
+  const { includeNames, sorted, sex } = options;
+  if (includeNames && sorted) return 'oi' //const novaVar = theFunction("NE") -> novaVar[0].lions.sort()
+  if (includeNames) return animalMap2(theFunction("NE"), theFunction("NW"), theFunction("SE"), theFunction("SW"))
+
+};
+
+// console.log(animalMap({ includeNames: true }));
 
 const schedule = (dayName) => {};
 
