@@ -87,9 +87,9 @@ function residentsPorAnimal(animal, sexo) {
   let acc = [];
   for (let j = 0; j < 4; j += 1) { // ['tigers', 'bears', 'elephants'] = animal[j]
     animal[j].map((search) => {
-      let arrayAnimal = data.animals.find(i => i.name === search);
+      const arrayAnimal = data.animals.find(i => i.name === search);
       if (sexo) {
-        let filtredArr = arrayAnimal.residents.filter(({sex}) => sex === sexo);
+        const filtredArr = arrayAnimal.residents.filter(({ sex }) => sex === sexo);
         filtredArr.map((dentro) => acc.push(dentro.name));
       } else {
         arrayAnimal.residents.map((dentro) => acc.push(dentro.name));
@@ -102,7 +102,7 @@ function residentsPorAnimal(animal, sexo) {
     finalResult.push(middle);
     middle = [];
   }
-  return finalResult
+  return finalResult;
 }
 
 function animalMap(options) {
@@ -125,8 +125,8 @@ function animalMap(options) {
       Object.keys(resposta).forEach(location => resposta[location]
         .forEach(animalxato => animalxato[Object.keys(animalxato)[0]].sort()));
     }
-    return resposta;
   }
+  return resposta;
 }
 
 function schedule(dayName) {
