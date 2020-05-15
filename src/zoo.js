@@ -49,9 +49,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   };
   return data.employees.push(novoEmp);
 }
+// console.log(data.animals.map(animal => animal.name).sort())
+// console.log(data.animals.map(animal => animal.residents.length))
+// console.log(data.animals.filter(animal => animal.name === 'lions')[0].residents.length)
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    const vazio = data.animals.reduce((acc, animalAtual) => {
+      acc[animalAtual.name] = animalAtual.residents.length;
+      return acc;
+    }, {});
+    return vazio;
+  }
+  const tata = data.animals.filter(animal => animal.name === species);
+  return tata[0].residents.length;
 }
 
 function entryCalculator(entrants) {
