@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 // Starting
 const data = require('./data');
 
+
 function animalsByIds(...ids) {
   if (!ids) return [];
   return data.animals.filter(({ id }) => ids.includes(id));
@@ -38,6 +39,8 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  const man = data.employees.map(({ managers }) => managers).flat();
+  return man.some(e => e === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
