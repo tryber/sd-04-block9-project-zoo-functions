@@ -78,7 +78,7 @@ const animalMapObject = (
   SW = animalMapDefault('SW'),
 ) => ({ NE, NW, SE, SW });
 
-const includeNamesAndSort = (region, sort, sex) => {
+const includeNameSortGender = (region, sort, sex) => {
   const chosenAnimals = data.animals.filter(
     animal => animal.location === region);
   let object = {};
@@ -90,11 +90,12 @@ const includeNamesAndSort = (region, sort, sex) => {
         if (element.sex === sex) acc.push(element.name);
         return acc;
       }, []);
-    } else {
-      object[chosen.name] = chosen.residents.map(element => element.name);
-    }
+    } 
     if (sort) {
       (object[chosen.name] = chosen.residents.map(element => element.name)).sort();
+    }
+    if (!sex && !sort) {
+      object[chosen.name] = chosen.residents.map(element => element.name);
     }
     return arr.push(object);
   });
@@ -105,18 +106,18 @@ const animalMapCases = (options) => {
   const { includeNames, sorted, sex } = options;
   if (includeNames && sorted) {
     return animalMapObject(
-    includeNamesAndSort('NE', 'sort'), includeNamesAndSort('NW', 'sort'),
-    includeNamesAndSort('SE', 'sort'), includeNamesAndSort('SW', 'sort'));
+    includeNameSortGender('NE', 'sort'), includeNameSortGender('NW', 'sort'),
+    includeNameSortGender('SE', 'sort'), includeNameSortGender('SW', 'sort'));
   }
   if (includeNames && sex) {
     return animalMapObject(
-      includeNamesAndSort('NE', undefined, sex), includeNamesAndSort('NW', undefined, sex),
-      includeNamesAndSort('SE', undefined, sex), includeNamesAndSort('SW', undefined, sex));
+      includeNameSortGender('NE', undefined, sex), includeNameSortGender('NW', undefined, sex),
+      includeNameSortGender('SE', undefined, sex), includeNameSortGender('SW', undefined, sex));
   }
   if (includeNames) {
     return animalMapObject(
-    includeNamesAndSort('NE'), includeNamesAndSort('NW'),
-    includeNamesAndSort('SE'), includeNamesAndSort('SW'));
+    includeNameSortGender('NE'), includeNameSortGender('NW'),
+    includeNameSortGender('SE'), includeNameSortGender('SW'));
   } return animalMapObject();
 };
 
@@ -124,8 +125,6 @@ const animalMap = (options) => {
   if (!options) return animalMapObject();
   return animalMapCases(options);
 };
-
-// console.log(animalMap({ includeNames: true, sex: 'female' }));
 
 const schedule = (dayName) => {};
 
