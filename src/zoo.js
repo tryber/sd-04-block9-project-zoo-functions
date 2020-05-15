@@ -129,8 +129,30 @@ function increasePrices(percentage) {
   .forEach((k) => { data.prices[k] = Math.round((data.prices[k] * percentage) * 100) / 100; });
 }
 
+const arrayOfAnimals = (nome) => {
+  const firstN = nome.split(' ')[0];
+  const pessoa = data.employees.find(element => element.firstName === firstN);
+  return pessoa.responsibleFor.reduce((acc, id) => {
+    acc.push(data.animals.find(animal => animal.id === id).name);
+    return acc;
+  }, []);
+};
+
 function employeeCoverage(idOrName) {
   // seu código aqui
+  if (!idOrName) {
+    return data.employees.reduce((acc, employee) => {
+      const key = `${employee.firstName} ${employee.lastName}`;
+      acc[key] = arrayOfAnimals(key);
+      return acc;
+    }, {});
+  }
+  const funcionario = data.employees.find(emp => emp.id === idOrName
+    || emp.firstName === idOrName || emp.lastName === idOrName);
+  const nomeCompleto = `${funcionario.firstName} ${funcionario.lastName}`;
+  const obj = {};
+  obj[nomeCompleto] = arrayOfAnimals(nomeCompleto);
+  return obj;
 }
 
 module.exports = {
