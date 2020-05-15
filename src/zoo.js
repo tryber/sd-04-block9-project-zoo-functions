@@ -86,12 +86,10 @@ function animalsNames(loc) {
 
 function residentsPorAnimal(animal, sexo) {
   const finalResult = {};
-  let middle = [];
+  let [middle, acc] = [[], []];
   let result = {};
-  let acc = [];
   const animalkey = Object.values(animal);
-  console.log(animalkey)
-  animalkey.forEach((vector, index) => { 
+  animalkey.forEach((vector, index) => {
     vector.map((search) => {
       const arrayAnimal = data.animals.find(i => i.name === search);
       if (sexo) {
@@ -106,9 +104,9 @@ function residentsPorAnimal(animal, sexo) {
       result = {};
       return result;
     });
-  finalResult[Object.keys(animal)[index]] = middle;
-  middle = [];
-  return finalResult;
+    finalResult[Object.keys(animal)[index]] = middle;
+    middle = [];
+    return finalResult;
   });
   return finalResult;
 }
