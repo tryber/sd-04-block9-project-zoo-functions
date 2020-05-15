@@ -97,9 +97,12 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  const firstResponibleSpecie = data.employees.find(employee => employee.id === id).responsibleFor[0];
-  const animalsFromSpecie = data.animals.find(animal => animal.id === firstResponibleSpecie).residents;
-  const elderFromSpecie = animalsFromSpecie.reduce((acc, curr) => (acc.age > curr.age ? acc : curr), []);
+  const firstResponibleSpecie = data.employees
+  .find(employee => employee.id === id).responsibleFor[0];
+  const animalsFromSpecie = data.animals
+  .find(animal => animal.id === firstResponibleSpecie).residents;
+  const elderFromSpecie = animalsFromSpecie
+  .reduce((acc, curr) => (acc.age > curr.age ? acc : curr), []);
   return (Object.values(elderFromSpecie));
 }
 
