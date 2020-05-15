@@ -65,10 +65,11 @@ function animalCount(species) {
     object[animal.name] = animal.residents.length;
     return object;
   }, {});
-  const oneAnimalCountResult = data.animals.find(element => element.name === species).residents;
+  const oneAnimalCountResult = data.animals.find(element => element.name === species).residents.length;
   if (!species) return allAnimalCountResult;
   return oneAnimalCountResult;
 }
+console.log(animalCount('lions'));
 
 function entryCalculator(entrants) {
   // seu código aqui
