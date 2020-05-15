@@ -76,7 +76,7 @@ const animalMapObject = (
   NW = animalMapDefault('NW'),
   SE = animalMapDefault('SE'),
   SW = animalMapDefault('SW'),
-) => ({ NE, NW, SE, SW, });
+) => ({ NE, NW, SE, SW });
 
 const includeNamesAndSort = (region, sort) => {
   const chosenAnimals = data.animals.filter(
