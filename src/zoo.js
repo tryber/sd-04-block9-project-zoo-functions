@@ -41,8 +41,8 @@ function isManager(id) {
     employee.managers.find((manager) => { // find
       if (manager === id) {
         exists = true;
-        return;
       }
+      return exists;
     })
   );
   return exists;
