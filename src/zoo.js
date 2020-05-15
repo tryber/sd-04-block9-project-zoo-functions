@@ -115,7 +115,32 @@ const increasePrices = (percentage) => {
   data.prices.Child = Math.round(child * ((percentage / 100) + 1) * 100) / 100;
 };
 
-const employeeCoverage = () => {
+const createEmployeeObj = () => {
+  const obj = {};
+  data.employees.map((employee) => {
+    const animalNames = [];
+    employee.responsibleFor.map(respId => data.animals.forEach((animal) => {
+      if (respId === animal.id) { animalNames.push(animal.name); }
+    }));
+    obj[`${employee.firstName} ${employee.lastName}`] = animalNames;
+    return animalNames;
+  });
+  return obj;
+};
+
+const employeeCoverage = (ent) => {
+  const obj = createEmployeeObj();
+  if (!ent) {
+    return obj;
+  }
+  const objId = {};
+  data.employees.forEach((employee) => {
+    if (employee.id === ent || employee.firstName === ent || employee.lastName === ent) {
+      const value = obj[`${employee.firstName} ${employee.lastName}`];
+      objId[`${employee.firstName} ${employee.lastName}`] = value;
+    }
+  });
+  return objId;
 };
 
 module.exports = {
