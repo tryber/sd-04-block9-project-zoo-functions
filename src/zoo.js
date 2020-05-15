@@ -90,9 +90,10 @@ const includeNamesAndSort = (region, sort) => {
   const arr = [];
   chosenAnimals.forEach((chosen) => {
     object = {};
-    if (!sort) 
-    { object[chosen.name] = chosen.residents.map(element => element.name);
-     }  else {(object[chosen.name] = chosen.residents.map(element => element.name)).sort();}
+    if (!sort)
+    { 
+      object[chosen.name] = chosen.residents.map(element => element.name);
+    } else { (object[chosen.name] = chosen.residents.map(element => element.name)).sort(); }
     return arr.push(object);
   });
   return arr;
@@ -106,33 +107,38 @@ const filterGender = (region, sex) => {
   chosenAnimals.forEach((chosen) => {
     object = {};
     object[chosen.name] = chosen.residents.reduce((acc, element) => {
-      if (element.sex === sex) acc .push(element.name);
-      return acc
-    },[])
+      if (element.sex === sex) acc.push(element.name);
+      return acc;
+    }, []);
     return arr.push(object);
   });
   return arr;
-  
 };
 
 const animalMapCases = (options) => {
-  const { includeNames, sorted, sex } = options
-  if (includeNames && sorted) 
-  { return animalMapObject(
+  const { includeNames, sorted, sex } = options;
+  if (includeNames && sorted)
+  { 
+    return animalMapObject(
     includeNamesAndSort('NE', 'sort'), includeNamesAndSort('NW', 'sort'),
-    includeNamesAndSort('SE', 'sort'), includeNamesAndSort('SW', 'sort'));
+    includeNamesAndSort('SE', 'sort'), includeNamesAndSort('SW', 'sort')
+    );
   }
-  if (includeNames && sex) 
-  { return animalMapObject(
+  if (includeNames && sex)
+  { 
+    return animalMapObject(
     filterGender('NE', sex), filterGender('NW', sex),
-    filterGender('SE', sex), filterGender('SW', sex));
+    filterGender('SE', sex), filterGender('SW', sex)
+    );
   }
   if (includeNames)
-  { return animalMapObject(
+  { 
+    return animalMapObject(
     includeNamesAndSort('NE'), includeNamesAndSort('NW'),
-    includeNamesAndSort('SE'), includeNamesAndSort('SW'));
+    includeNamesAndSort('SE'), includeNamesAndSort('SW')
+    );
   } return animalMapObject();
-}
+};
 
 const animalMap = (options) => {
   if (!options) return animalMapObject();
