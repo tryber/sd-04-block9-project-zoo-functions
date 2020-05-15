@@ -78,16 +78,24 @@ const animalMapObject = (
   SW = animalMapDefault('SW'),
 ) => ({ NE, NW, SE, SW });
 
-const includeNamesAndSort = (region, sort) => {
+const includeNamesAndSort = (region, sort, sex) => {
   const chosenAnimals = data.animals.filter(
     animal => animal.location === region);
   let object = {};
   const arr = [];
   chosenAnimals.forEach((chosen) => {
     object = {};
-    if (!sort) {
+    if (sex) {
+      object[chosen.name] = chosen.residents.reduce((acc, element) => {
+        if (element.sex === sex) acc.push(element.name);
+        return acc;
+      }, []);
+    } else { 
       object[chosen.name] = chosen.residents.map(element => element.name);
-    } else { (object[chosen.name] = chosen.residents.map(element => element.name)).sort(); }
+    }
+    if (sort) {
+      (object[chosen.name] = chosen.residents.map(element => element.name)).sort();
+    } 
     return arr.push(object);
   });
   return arr;
@@ -118,8 +126,8 @@ const animalMapCases = (options) => {
   }
   if (includeNames && sex) {
     return animalMapObject(
-    filterGender('NE', sex), filterGender('NW', sex),
-    filterGender('SE', sex), filterGender('SW', sex));
+      includeNamesAndSort('NE', undefined, sex), includeNamesAndSort('NW', undefined, sex,),
+      includeNamesAndSort('SE', undefined, sex), includeNamesAndSort('SW', undefined, sex));
   }
   if (includeNames) {
     return animalMapObject(
