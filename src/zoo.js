@@ -77,9 +77,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   newEmpregado.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
+
+/* Sem parâmetros, retorna animais e suas quantidades
+Com o nome de uma espécie de animal, retorna somente a quantidade */
 function animalCount(species) {
   // seu código aqui
+  if (species) return data.animals.find(element => element.name === species).residents.length;
+  return animaisObj.reduce((acc, animal) => {
+    acc[animal.name] = animal.residents.length;
+    return acc;
+  }, {});
 }
+
 
 function entryCalculator(entrants) {
   // seu código aqui
