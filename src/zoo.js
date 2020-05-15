@@ -55,16 +55,25 @@ function entryCalculator(entrants) {
   return obj.reduce((acc, atual) => acc + (data.prices[atual] * entrants[atual]), 0);
 }
 
+function schedule(dayName) {
+  const result = {};
+  Object.entries(data.hours).forEach((days) => {
+    result[days[0]] = `Open from ${days[1].open}am until ${days[1].close - 12}pm`;
+    if (days[0] === 'Monday') {
+      result[days[0]] = 'CLOSED';
+    }
+  });
+  if (dayName) {
+    return { [dayName]: result[dayName] };
+  }
+  return result;
+}
 //
 //  ////////// CONCLUIDOS ////////////
 //
 
 function animalMap(options) {
-  // seu código aqui
-}
-
-function schedule(dayName) {
-  // seu código aqui
+  
 }
 
 function oldestFromFirstSpecies(id) {
