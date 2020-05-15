@@ -79,11 +79,11 @@ const animalMapObject = (
 ) => ({ NE, NW, SE, SW });
 
 const nameSortGender = (region, sort, sex) => {
-  const chosenAnimals = data.animals.filter(
+  const chosenSpeciess = data.animals.filter(
     animal => animal.location === region);
   let object = {};
   const arr = [];
-  chosenAnimals.forEach((chosen) => {
+  chosenSpeciess.forEach((chosen) => {
     object = {};
     if (sex) {
       object[chosen.name] = chosen.residents.reduce((acc, element) => {
@@ -141,7 +141,12 @@ const schedule = (dayName) => {
   } return newObj;
 };
 
-const oldestFromFirstSpecies = (id) => {};
+const oldestFromFirstSpecies = (id) => {
+  const speciesId = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const chosenSpecies = data.animals.find(animal => animal.id === speciesId);
+  const chosenAnimal = chosenSpecies.residents.reduce((oldest, resident) => (oldest.age > resident.age) ? oldest : resident);
+  return Object.values(chosenAnimal);
+};
 
 const increasePrices = (percentage) => {};
 
