@@ -91,9 +91,9 @@ function residentsPorAnimal(animal, sexo) {
       const arrayAnimal = data.animals.find(i => i.name === search);
       if (sexo) {
         arrayAnimal.residents.filter(({ sex }) => sex === sexo)
-        .map((dentro) => acc.push(dentro.name))
+        .map((dentro) => acc.push(dentro.name));
       } else {
-      arrayAnimal.residents.map((dentro) => acc.push(dentro.name));
+        arrayAnimal.residents.map((dentro) => acc.push(dentro.name));
       }
       result[search] = acc;
       middle.push(result);
