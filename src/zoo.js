@@ -112,13 +112,24 @@ function schedule(dayName) {
   //     'Saturday': `Open from ${Saturday.open}am until ${Saturday.close -12}pm`,
   //     'Sunday': `Open from ${Sunday.open}am until ${Sunday.close -12}pm`,
   //     'Monday': `CLOSED`,
-//     }
-//   }
+  //   }
+  // }
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const findById = data.employees.find(elemento => elemento.id === id);
+  const primeiraEspecie = findById.responsibleFor[0];
+  const findAnimal = data.animals.find(elemento => elemento.id === primeiraEspecie);
+  const habitantes = findAnimal.residents;
+  let idade = 0;
+  habitantes.forEach((elemento) => { if (elemento.age > idade) (idade = elemento.age); });
+  let maiorIdade = habitantes.find(elemento => elemento.age === idade);
+  maiorIdade = Object.values(maiorIdade);
+  return maiorIdade;
 }
+
+// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')); --> TESTE 1
+// console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad')); --> TESTE 2
 
 function increasePrices(percentage) {
   const { Adult, Child, Senior } = data.prices;
