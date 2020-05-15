@@ -38,8 +38,15 @@ function isManager(id) {
   return data.employees.some(xablau => xablau.managers[0] === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return data.employees.push(employee);
 }
 
 function animalCount(species) {
