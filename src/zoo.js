@@ -90,12 +90,12 @@ const includeNamesAndSort = (region, sort, sex) => {
         if (element.sex === sex) acc.push(element.name);
         return acc;
       }, []);
-    } else { 
+    } else {
       object[chosen.name] = chosen.residents.map(element => element.name);
     }
     if (sort) {
       (object[chosen.name] = chosen.residents.map(element => element.name)).sort();
-    } 
+    }
     return arr.push(object);
   });
   return arr;
@@ -110,7 +110,7 @@ const animalMapCases = (options) => {
   }
   if (includeNames && sex) {
     return animalMapObject(
-      includeNamesAndSort('NE', undefined, sex), includeNamesAndSort('NW', undefined, sex,),
+      includeNamesAndSort('NE', undefined, sex), includeNamesAndSort('NW', undefined, sex),
       includeNamesAndSort('SE', undefined, sex), includeNamesAndSort('SW', undefined, sex));
   }
   if (includeNames) {
