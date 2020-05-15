@@ -11,6 +11,16 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const namesAni = (nome, sort, sexo) => {
+  const response = {};
+  response[nome] = data.animals.find(animal => animal.name === nome).residents;
+  if (sexo) response[nome] = response[nome]
+  .filter(animal => animal.sex === sexo);
+  response[nome] = response[nome].map(({ name }) => name);
+  if (sort) response[nome].sort();
+  return response;
+};
+
 const animalsByIds = (...ids) =>
   data.animals.filter(animal => ids.find(id => animal.id === id));
 
@@ -56,23 +66,56 @@ const entryCalculator = (entrants = '') => {
     .reduce((r, v, i) => r + (v[1] * coust[i]), 0) - 8;
 };
 
-// const adjFunc = loc =>
-// console.log(data.animals.filter(a => a.location === loc));
+// const mapAni = {
+//   NE: ['lions', 'giraffes'],
+//   NW: ['tigers', 'bears', 'elephants'],
+//   SE: ['penguins', 'otters'],
+//   SW: ['frogs', 'snakes'],
+// };
 
-const animalMap = (options) => {
-  // const vet = data.animals.map(a => [a.location, a.name]).sort();
-  // const v = { NE: [], NW: [], SE: [], SW: [] };
-  // const keys = Object.keys(v);
-  // let k = data.animals.find(ani => ani.location === 'NW').name;
-  // let res = data.animals.reduce((r, a) => { ---
-  // if (!r[a.location]) r[a.location] = []; ---
-  // data.animals.find(ani => ani.location === r[a.location])
-  // r[a.location].push( adjFunc(a.location) );
-  // adjFunc(a.location); ---
-  // return r; ---
-  // }, {}); ---
-  // return res;
+// const response = {
+//   NE: [],
+//   NW: [],
+//   SE: [],
+//   SW: [],
+// };
+
+// const addToMap = (chaves) => {
+//   chaves.forEach(k =>{
+//     mapAni[k].forEach(name => {
+//       const result = data.animals.find(got => got.name === name).residents
+//       .reduce((res, a) => {
+//         res.push(a.name);
+//         return res;
+//       },[]);
+//       response[k].push({ [name]: result });
+//     });
+//   });
+//   return response;
+// };
+
+// // const sort = () => {};
+
+// const animalMap = (...options) => {
+//   const keys = Object.keys(mapAni);
+//   if (!options.length) return mapAni;
+//   // addToMap(keys);
+//   // if (options[0].sorted) return true;
+//   // console.log(options);
+//   return addToMap(keys);
+// };
+
+const animalMap = (options = {}) => {
+  // if (options === undefined) return mapAni;
+  const { includeNames = false, sorted = false, sex = false } = options;
+  return data.animals.reduce((a, { name, location }) => {
+    if (!a[location]) a[location] = [];
+    a[location].push( (!includeNames) ? name : namesAni(name, sorted, sex) );
+    return a;
+  }, {});
 };
+let options = { includeNames: true, sorted: true };
+console.log(animalMap(options));
 // console.log(animalMap());
 
 const obj = {
@@ -120,13 +163,6 @@ const objEmp = {
 
 const employeeCoverage = (idOrName) => {
   if (!idOrName) return objEmp;
-  // let funcionario = '';
-  // data.employees.some((e) => {
-  //   if (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) {
-  //     funcionario = `${e.firstName} ${e.lastName}`;
-  //     return undefined;
-  //   }
-  // });
   const funcionario = data.employees.reduce((res, e) => {
     res = (e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName) ?
     `${e.firstName} ${e.lastName}` : res;
@@ -134,7 +170,6 @@ const employeeCoverage = (idOrName) => {
   }, '');
   return { [funcionario]: objEmp[funcionario] };
 };
-console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
