@@ -78,7 +78,7 @@ const animalMapObject = (
   SW = animalMapDefault('SW'),
 ) => ({ NE, NW, SE, SW });
 
-const includeNameSortGender = (region, sort, sex) => {
+const nameSortGender = (region, sort, sex) => {
   const chosenAnimals = data.animals.filter(
     animal => animal.location === region);
   let object = {};
@@ -106,18 +106,18 @@ const animalMapCases = (options) => {
   const { includeNames, sorted, sex } = options;
   if (includeNames && sorted) {
     return animalMapObject(
-    includeNameSortGender('NE', 'sort'), includeNameSortGender('NW', 'sort'),
-    includeNameSortGender('SE', 'sort'), includeNameSortGender('SW', 'sort'));
+    nameSortGender('NE', 'sort'), nameSortGender('NW', 'sort'),
+    nameSortGender('SE', 'sort'), nameSortGender('SW', 'sort'));
   }
   if (includeNames && sex) {
     return animalMapObject(
-      includeNameSortGender('NE', undefined, sex), includeNameSortGender('NW', undefined, sex),
-      includeNameSortGender('SE', undefined, sex), includeNameSortGender('SW', undefined, sex));
+      nameSortGender('NE', undefined, sex), nameSortGender('NW', undefined, sex),
+      nameSortGender('SE', undefined, sex), nameSortGender('SW', undefined, sex));
   }
   if (includeNames) {
     return animalMapObject(
-    includeNameSortGender('NE'), includeNameSortGender('NW'),
-    includeNameSortGender('SE'), includeNameSortGender('SW'));
+    nameSortGender('NE'), nameSortGender('NW'),
+    nameSortGender('SE'), nameSortGender('SW'));
   } return animalMapObject();
 };
 
@@ -126,7 +126,7 @@ const animalMap = (options) => {
   return animalMapCases(options);
 };
 
-const schedule = (dayName) => {};
+const schedule = () => {};
 
 const oldestFromFirstSpecies = (id) => {};
 
