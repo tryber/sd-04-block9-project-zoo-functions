@@ -91,13 +91,49 @@ function entryCalculator(entrants = {}) { // defalt paraments
       // entrants.adult= quantidad
 }
 
-function animalMap(options) {
-// let obj = {}
-// const returnAnimalMap = data.animals.map(animal => animal.location)
-// return returnAnimalMap.reduce();
+// Refatoração de código-- Criado arrowFucntion para função de Filter
+const FilterAnimals = location =>
+  data.animals.filter(animalFilter => animalFilter.location === location);
+
+const CreateNewAnimalMap = (animal, newObj, options) => {
+  // recebe todos os animais daquela localização
+  const filterAnimal = FilterAnimals(animal.location);
+  newObj[animal.location] = [];
+  filterAnimal.forEach((filtro) => {
+    if (options.includeNames) { // vem do ObjectSpecieName, vem true
+      const ObjectSpecieName = {}; // serve para criar um novo objeto dentro do acumulator
+      ObjectSpecieName[filtro.name] = []; // criando um novo nó, recebendo um array vazio
+      filtro.residents.forEach((resident) => { // Vai alimentar os dados no nó
+        // comparando parametros que vem no options
+        if (options.sex === undefined || resident.sex === options.sex) {
+          ObjectSpecieName[filtro.name].push(resident.name); // vai adicionado
+          if (options.sorted) { // se vier com sorted, ele vai ordenar
+            ObjectSpecieName[filtro.name].sort(); // ordena em ordem crescente
+          }
+        }
+      });
+      // quando true, cria um objeto de arrays que tem um objeto de array
+      newObj[animal.location].push(ObjectSpecieName); // grava dados no newObject
+    } else {
+      // quando false, cria um objeto de arrays
+      newObj[animal.location].push(filtro.name);
+    }
+  });
+  return newObj;
+};
+
+function animalMap(options = {}) { // default Params
+  let newObj = {}; // objeto que vai montar toda a estrutura para depois devolver o resultado
+  data.animals.forEach((animal) => {
+    if (!newObj[animal.location]) { // Pra não duplicar os registros
+      newObj = CreateNewAnimalMap(animal, newObj, options);
+    }
+  });
+
+  return newObj;
 }
 
-// // console.log(animalMap());
+console.log(animalMap({ includeNames: true, sorted: true }));
 
 // {
 //   NE: ['lions', 'giraffes'],
