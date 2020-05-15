@@ -85,12 +85,13 @@ function animalsNames(loc) {
 }
 
 function residentsPorAnimal(animal, sexo) {
-  const finalResult = [];
+  const finalResult = {};
   let middle = [];
   let result = {};
   let acc = [];
+  const animalkey = Object.values(animal);
   for (let j = 0; j < 4; j += 1) { // ['tigers', 'bears', 'elephants'] = animal[j]
-    animal[j].map((search) => {
+    animalkey[j].map((search) => {
       const arrayAnimal = data.animals.find(i => i.name === search);
       if (sexo) {
         const filtredArr = arrayAnimal.residents.filter(({ sex }) => sex === sexo);
@@ -102,8 +103,9 @@ function residentsPorAnimal(animal, sexo) {
       middle.push(result);
       acc = [];
       result = {};
+      return result;
     });
-    finalResult.push(middle);
+    finalResult[Object.keys(animal)[j]] = middle;
     middle = [];
   }
   return finalResult;
@@ -117,11 +119,7 @@ function animalMap(options) {
   }
   const { includeNames, sorted, sex } = options;
   if (includeNames) {
-    const parametro = Object.values(animalsNames(locations));
-    const namArr = residentsPorAnimal(parametro, sex);
-    for (let i = 0; i < 4; i += 1) {
-      resposta[locations[i]] = namArr[i];
-    }
+    resposta = residentsPorAnimal(animalsNames(locations), sex);
     if (sorted) {
       Object.keys(resposta).forEach(location => resposta[location]
         .forEach(animalxato => animalxato[Object.keys(animalxato)[0]].sort()));
