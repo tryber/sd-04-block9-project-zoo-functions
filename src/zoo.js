@@ -23,8 +23,8 @@ function animalsByIds(...ids) {
 // Ao passar o nome de uma espécie e uma idade,
 // testa se todos os animais desta espécie possuem a idade mínima especificada
 function animalsOlderThan(animal, age) {
-  return data.animals.find(element => element.name === animal)
-    .residents.every(element => element.age >= age);
+  return data.animals.find(element =>
+    element.name === animal).residents.every(element => element.age >= age);
 }
 
 // Implemente a função employeeByName:
@@ -36,7 +36,7 @@ function employeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(element =>
     element.firstName === employeeName || element.lastName === employeeByName);
-// Não entendi ao certo porque/como está sendo retornado o respectivo elemento
+  // Não entendi ao certo porque/como está sendo retornado o respectivo elemento
 }
 
 // Implemente a função createEmployee:
@@ -50,15 +50,35 @@ function createEmployee(personalInfo, associatedWith) {
 // Implemente a função isManager:
 // Testa se o id passado é de um gerente
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(element => element.managers.includes(id));
+  // element.managers[0] === id || element.managers[1] === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// Adiciona um funcionário no fim da lista
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // const newEmployee = (...employeeData) => {
+  //   let [id, firstName, lastName, managers, responsibleFor] = employeeData;
+  //   return {id, firstName, lastName, managers, responsibleFor};
+  // }
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  // console.log(`*** ${newEmployee} ***`);
+  data.employees = [...data.employees, newEmployee];
+  return newEmployee;
 }
 
+// Implemente a função animalCount:
+// Sem parâmetros, returna animais e suas quantidades
+// Com o nome de uma espécie de animal, retorna somente a quantidade
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    const output = {}; // https://bit.ly/2Tb42YV
+    data.animals.forEach(function (el) {
+      if (!output[el.name]) output[el.name] = el.residents.length;
+    });
+    return output;
+  }
+  const countSpecie = data.animals.find(animal => animal.name === species);
+  return countSpecie.residents.length;
 }
 
 function entryCalculator(entrants) {
