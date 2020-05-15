@@ -76,10 +76,14 @@ function animalCount(species) {
   return result;
 }
 
-function entryCalculator(entrants) {
-  if (!entrants || entrants === {}) return 0;
-}
+function entryCalculator(entrants = {}) {
+  if (Object.entries(entrants).length === 0) return 0;
 
+  const totalToPay = Object.values(entrants)
+    .reduce((total, qnt, index) => total + qnt * data.prices[Object.keys(entrants)[index]], 0);
+
+  return totalToPay;
+}
 function animalMap(options) {
   // seu código aqui
 }
