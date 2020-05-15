@@ -152,7 +152,8 @@ const oldestFromFirstSpecies = (id) => {
 };
 
 const increasePrices = (percentage) => {
-  Object.keys(data.prices).forEach((person) => { data.prices[person] =
+  Object.keys(data.prices).forEach((person) => {
+    data.prices[person] =
     Number(data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2);
   });
   return data.prices;
