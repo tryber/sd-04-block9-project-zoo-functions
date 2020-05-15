@@ -44,15 +44,34 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  // const isManager = (id) => {
+  //   const gerent = data.employees.find(employee => employee.managers.includes(id));
+  //   return gerent;
+  // };
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
+  const addNewEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers: managers || [],
+    responsibleFor: responsibleFor || [],
+  };
+  return data.employees.push(addNewEmployee)
 }
 
-function animalCount(species) {
-  // seu código aqui
-}
+// function animalCount(species) {
+// seu código aqui
+const animalCount = (species) => {
+  if (species) {
+    return data.animals.find(pet => pet.name === species).residents.length;
+  }
+  const animal = {};
+  data.animals.forEach((pet) => { animal[pet.name] = pet.residents.length; });
+  return animal;
+};
 
 function entryCalculator(entrants) {
   // seu código aqui
