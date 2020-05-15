@@ -43,7 +43,7 @@ function isManager(id) {
         exists = true;
       }
       return exists;
-    })
+    }),
   );
   return exists;
 }
