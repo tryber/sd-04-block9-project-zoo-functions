@@ -71,8 +71,25 @@ function entryCalculator(entrants) {
   return 0;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function animalsNames(loc) {
+  const result = [];
+  for (let i = 0; i < 4; i += 1) {
+    const todosAnimais = data.animals.filter(j => j.location === loc[i]);
+    result.push(todosAnimais.map(an => an.name));
+  }
+  return result
+}
+
+function animalMap(...options) {
+  const resposta = {};
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  if (options.length === 0) {
+    const aniArr = animalsNames(locations);
+    for (let i = 0; i < 4; i += 1) {
+      resposta[locations[i]] = aniArr[i];
+    }
+    return resposta;
+  }
 }
 
 function schedule(dayName) {
