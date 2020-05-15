@@ -14,8 +14,7 @@ const data = require('./data');
 const namesAni = (nome, sort, sexo) => {
   const response = {};
   response[nome] = data.animals.find(animal => animal.name === nome).residents;
-  if (sexo) response[nome] = response[nome]
-  .filter(animal => animal.sex === sexo);
+  if (sexo) response[nome] = response[nome].filter(animal => animal.sex === sexo);
   response[nome] = response[nome].map(({ name }) => name);
   if (sort) response[nome].sort();
   return response;
@@ -106,17 +105,13 @@ const entryCalculator = (entrants = '') => {
 // };
 
 const animalMap = (options = {}) => {
-  // if (options === undefined) return mapAni;
   const { includeNames = false, sorted = false, sex = false } = options;
   return data.animals.reduce((a, { name, location }) => {
     if (!a[location]) a[location] = [];
-    a[location].push( (!includeNames) ? name : namesAni(name, sorted, sex) );
+    a[location].push((!includeNames) ? name : namesAni(name, sorted, sex));
     return a;
   }, {});
 };
-let options = { includeNames: true, sorted: true };
-console.log(animalMap(options));
-// console.log(animalMap());
 
 const obj = {
   Tuesday: 'Open from 8am until 6pm',
