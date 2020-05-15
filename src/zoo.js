@@ -62,7 +62,18 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
+  if (!entrants) return 0;
+  if (Object.keys(entrants).length === 0) return 0;
+  const moneyArray = [data.prices].map(
+    (
+      { Adult, Senior, Child },
+    ) => [Adult * entrants.Adult, Child * entrants.Child, Senior * entrants.Senior],
+  ).flat();
+  return moneyArray.reduce((acc, cur) => acc + cur);
 }
+
+console.log(entryCalculator({ Adult: 2, Child: 3, Senior: 1 }));
+
 
 function animalMap(options) {
   // seu código aqui
