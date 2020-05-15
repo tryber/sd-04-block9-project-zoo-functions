@@ -159,7 +159,29 @@ const increasePrices = (percentage) => {
   return data.prices;
 };
 
-const employeeCoverage = (idOrN50ame) => {};
+const findThings = (employeeFname) => {
+  const responsibleAnimals = data.employees.find(employee => 
+    employee.firstName === employeeFname).responsibleFor;
+  return responsibleAnimals.map(animalId => data.animals
+    .find(animal => animal.id === animalId))
+    .map(animal => animal.name);
+}
+
+const employeeCoverage = (idOrN50ame) => {
+  // finding employee:
+  const fE = data.employees.find(
+    employee => employee.id === idOrN50ame || 
+    employee.firstName === idOrN50ame || 
+    employee.lastName === idOrN50ame);
+    // creating major object:
+    const expectedObj = data.employees.reduce((acc, obj) => {
+    acc[`${obj.firstName} ${obj.lastName}`] = findThings(obj.firstName);
+    return acc;
+  }, {});
+  if (idOrN50ame) {
+    return { [`${fE.firstName} ${fE.lastName}`]: expectedObj[`${fE.firstName} ${fE.lastName}`] };
+  } return expectedObj;
+};
 
 module.exports = {
   entryCalculator,
