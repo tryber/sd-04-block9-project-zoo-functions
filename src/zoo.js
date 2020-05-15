@@ -102,7 +102,18 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  // if (!dayName) {
+  //   const {Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday} = data.hours;
+  //   return {
+  //     'Tuesday': `Open from ${Tuesday.open}am until ${Tuesday.close - 12}pm`,
+  //     'Wednesday': `Open from ${Wednesday.open}am until ${Wednesday.close - 12}pm`,
+  //     'Thursday': `Open from ${Thursday.open}am until ${Thursday.close - 12}pm`,
+  //     'Friday': `Open from ${Friday.open}am until ${Friday.close - 12}pm`,
+  //     'Saturday': `Open from ${Saturday.open}am until ${Saturday.close -12}pm`,
+  //     'Sunday': `Open from ${Sunday.open}am until ${Sunday.close -12}pm`,
+  //     'Monday': `CLOSED`,
+//     }
+//   }
 }
 
 function oldestFromFirstSpecies(id) {
@@ -110,8 +121,15 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Child, Senior } = data.prices;
+  data.prices.Adult = Math.round((Adult + ((percentage / 100) * Adult)) * 100) / 100;
+  data.prices.Child = Math.round((Child + ((percentage / 100) * Child)) * 100) / 100;
+  data.prices.Senior = Math.round((Senior + ((percentage / 100) * Senior)) * 100) / 100;
+  return data.prices;
 }
+
+// console.log(increasePrices(50)); --> TESTE 1
+// console.log(increasePrices(30)); --> TESTE 2
 
 function employeeCoverage(idOrName) {
   // seu código aqui
