@@ -161,8 +161,32 @@ const increasePrices = (percentage) => {
 //  retorna os animais pelos quais o funcionário é responsável
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const staff = staffIdOrName => data.employees.find(
+    employee => employee.id === staffIdOrName
+      || employee.firstName === staffIdOrName
+      || employee.lastName === staffIdOrName,
+  );
+
+  const idAnimals = ids => animalsByIds(...ids)
+    .reduce((acc, curr) => acc.concat(curr.name), []);
+
+  const result = idName => ({
+    [`${staff(idName).firstName} ${staff(idName).lastName}`]:
+      idAnimals(staff(idName).responsibleFor),
+  });
+
+  if (!idOrName) {
+    return data.employees.reduce((acc, curr) =>
+      Object.assign(acc, result(curr.id)),
+      {},
+    );
+  }
+  return result(idOrName);
 }
+
+//  console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+//  console.log(employeeCoverage('Stephanie'));
+//  console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
