@@ -10,13 +10,12 @@ function animalsByIds(...ids) {
   return animalsResult;
 }
 
-function animalsOlderThan(animal, age) {
+function animalsOlderThan(specie, age) {
   const result = data.animals
-    .filter((species) => species.name === animal)
-    .map((selectedSpecies) => selectedSpecies.residents)
-    .find((residents) => residents[0].age > age);
+    .find((selectedSpecie) => selectedSpecie.name === specie)
+    .residents.find((animal) => animal.age < age);
 
-  return !!result;
+  return !(result);
 }
 
 function employeeByName(employeeName) {
@@ -78,7 +77,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants || entrants === {}) return 0;
 }
 
 function animalMap(options) {
