@@ -38,8 +38,11 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   let exists = false;
   data.employees.forEach(employee => // forEach
-    employee.managers.find(function (manager) { // find
-      return manager === id ? exists = true : exists
+    employee.managers.find((manager) => { // find
+      if (manager === id) {
+        exists = true;
+        return;
+      }
     })
   );
   return exists;
