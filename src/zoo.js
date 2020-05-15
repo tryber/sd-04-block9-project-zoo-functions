@@ -71,7 +71,7 @@ const animalMapDefault = region => data.animals
     .filter(animal => animal.location === region)
     .map(animal2 => animal2.name);
 
-const animalMap2 = (
+const animalMapObject = (
   NE = animalMapDefault('NE'),
   NW = animalMapDefault('NW'),
   SE = animalMapDefault('SE'),
@@ -83,7 +83,7 @@ const animalMap2 = (
   SW,
 });
 
-const includeNmaesAndSort = (region, sort) => {
+const includeNamesAndSort = (region, sort) => {
   const chosenAnimals = data.animals.filter(
     animal => animal.location === region);
   let object = {};
@@ -116,25 +116,23 @@ const filterGender = (region, sex) => {
 };
 
 const animalMap = (options) => {
-  if (!options) return animalMap2();
+  if (!options) return animalMapObject();
   const { includeNames, sorted, sex } = options;
   if (includeNames && sorted) 
-  { return animalMap2(
-    includeNmaesAndSort('NE', 'sort'), includeNmaesAndSort('NW', 'sort'),
-    includeNmaesAndSort('SE', 'sort'), includeNmaesAndSort('SW', 'sort'));
+  { return animalMapObject(
+    includeNamesAndSort('NE', 'sort'), includeNamesAndSort('NW', 'sort'),
+    includeNamesAndSort('SE', 'sort'), includeNamesAndSort('SW', 'sort'));
   }
   if (includeNames && sex) 
-  { return animalMap2(
+  { return animalMapObject(
     filterGender('NE', sex), filterGender('NW', sex),
     filterGender('SE', sex), filterGender('SW', sex));
   }
   if (includeNames)
-  { return animalMap2(
-    includeNmaesAndSort('NE'), includeNmaesAndSort('NW'),
-    includeNmaesAndSort('SE'), includeNmaesAndSort('SW'));
-  } else {
-    return animalMap();
-  }
+  { return animalMapObject(
+    includeNamesAndSort('NE'), includeNamesAndSort('NW'),
+    includeNamesAndSort('SE'), includeNamesAndSort('SW'));
+  } return animalMapObject();
 };
 
 // console.log(animalMap({ includeNames: true, sex: 'female' }));
