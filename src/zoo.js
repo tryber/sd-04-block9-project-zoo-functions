@@ -190,8 +190,25 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function employeeCoverage(idOrName = '') {
+  // um reduce recebendo todo o processo
+  const resultEmployeeAnimal = data.employees.reduce((accumulator, employee) => {
+    // validações para cada possível situação
+    if (idOrName === '' || idOrName === employee.id ||
+      idOrName === employee.firstName || idOrName === employee.lastName) {
+      // Criando objeto, com chave nome e sobrenome, recebendo obj vazio
+      accumulator[`${employee.firstName} ${employee.lastName}`] = [];
+      // Fazendo um forEach no id de animal e specieAnimal filtrando dados daquele id
+      employee.responsibleFor.forEach((animalKey) => {
+        const specieAnimal = data.animals.find(animal =>
+          animal.id === animalKey);
+        // Adicionando um novo item no array
+        accumulator[`${employee.firstName} ${employee.lastName}`].push(specieAnimal.name);
+      });
+    }
+    return accumulator;
+  }, {});
+  return resultEmployeeAnimal;
 }
 
 module.exports = {
