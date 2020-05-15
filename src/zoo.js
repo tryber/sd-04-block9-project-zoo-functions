@@ -42,13 +42,13 @@ function createEmployee(personalInfo, associatedWith) {
   // return  newInfoWorker; //com spread rest
 }
 
-function isManager(id) {
-  // seu código aqui
-  // const isManager = (id) => {
-  //   const gerent = data.employees.find(employee => employee.managers.includes(id));
-  //   return gerent;
-  // };
-}
+// function isManager(id) {
+// seu código aqui
+const isManager = (id) => {
+  const gerent = data.employees.some(employee => employee.managers.includes(id));
+  return gerent;
+};
+// }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
