@@ -156,8 +156,30 @@ const increasePrices = (percentage) => {
 };
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const obj = data.employees.reduce(
+    (acc, { firstName, lastName, responsibleFor }) => {
+      acc[`${firstName} ${lastName}`] = responsibleFor.map(
+        ids => data.animals.find(({ id }) => id === ids).name);
+      return acc;
+    },
+    {});
+  if (!idOrName) return obj;
+  const employe = data.employees.find(({ id, firstName, lastName }) =>
+    (id === idOrName || firstName === idOrName || lastName === idOrName));
+  return { [`${employe.firstName} ${employe.lastName}`]: obj[`${employe.firstName} ${employe.lastName}`] };
 }
+
+
+// expected = {
+//   'Nigel Nelson': ['lions', 'tigers'],
+//   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+//   'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+//   'Wilburn Wishart': ['snakes', 'elephants'],
+//   'Stephanie Strauss': ['giraffes', 'otters'],
+//   'Sharonda Spry': ['otters', 'frogs'],
+//   'Ardith Azevado': ['tigers', 'bears'],
+//   'Emery Elser': ['elephants', 'bears', 'lions']
+// };
 
 module.exports = {
   entryCalculator,
