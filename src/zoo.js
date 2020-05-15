@@ -116,7 +116,6 @@ const increasePrices = (percentage) => {
 };
 
 const employeeCoverage = () => {
-  
 };
 
 module.exports = {
