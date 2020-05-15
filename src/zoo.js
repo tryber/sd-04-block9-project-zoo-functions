@@ -59,7 +59,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     managers: managers || [],
     responsibleFor: responsibleFor || [],
   };
-  return data.employees.push(addNewEmployee)
+  return data.employees.push(addNewEmployee);
 }
 
 // function animalCount(species) {
