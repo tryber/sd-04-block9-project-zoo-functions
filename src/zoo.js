@@ -61,14 +61,13 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
     // // seu código aqui
-      const animalCountResult = data.animals.reduce((object, animal) => {
-      object[animal.name] = animal.residents.length
-      return object;
-},{});
-const output = data.animals.find(element => element.name === species);
-
-console.log('avant fin ', output.residents, typeof output);
-if (!species) return animalCountResult;
+  const allAnimalCountResult = data.animals.reduce((object, animal) => {
+    object[animal.name] = animal.residents.length;
+    return object;
+  }, {});
+  const oneAnimalCountResult = data.animals.find(element => element.name === species).residents;
+  if (!species) return allAnimalCountResult;
+  return oneAnimalCountResult;
 }
 
 function entryCalculator(entrants) {
