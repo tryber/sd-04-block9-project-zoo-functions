@@ -131,6 +131,17 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const employeeList = data.employees.reduce((employeeListObject, employe) => {
+    employeeListObject[`${employe.firstName} ${employe.lastName}`] = employe.responsibleFor.map(
+    ids => data.animals.find(({ id }) => (id === ids)).name);
+    return employeeListObject;
+  }, {});
+  const arr = data.employees.find(
+    ({ id, firstName, lastName }) =>
+      id === idOrName || firstName === idOrName || lastName === idOrName,
+  );
+  if (!idOrName) return employeeList;
+  return { [`${arr.firstName} ${arr.lastName}`]: employeeList[`${arr.firstName} ${arr.lastName}`] };
 }
 
 module.exports = {
