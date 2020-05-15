@@ -85,8 +85,11 @@ const oldestFromFirstSpecies = (id) => {
   return [valor.name, valor.sex, valor.age]
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+//TODO => Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
+const increasePrices = (percentage) => {
+  return Object.keys(data.prices).forEach(key => data.prices[key] =
+    Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100)
+
 }
 
 function employeeCoverage(idOrName) {
