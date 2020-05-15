@@ -135,10 +135,11 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   let num;
   Object.entries(data.prices)
-    .map(element => {
+    .map((element) => {
       num = (element[1] + (element[1] * (percentage / 100))).toFixed(3);
-      num = Math.round(num *100)/100;
-      return data.prices[element[0]] = num;
+      num = Math.round(num * 100) / 100;
+      data.prices[element[0]] = num;
+      return data.prices;
     });
 }
 
