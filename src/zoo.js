@@ -172,10 +172,22 @@ function oldestFromFirstSpecies(id) {
   return Object.values(resultOldAnimal);
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
-  // seu código aqui
+  console.log(data.prices);
+  console.log('==============================');
+  // Tranforma o objeto em array, para manipular
+  Object.keys(data.prices).forEach((price) => {
+    // calcula a porcentagem soma com + 0.001 para arredondar para mais
+    data.prices[price] += (data.prices[price] * (percentage / 100)) + 0.001;
+    // coloca para duas casas apenas
+    data.prices[price] = parseFloat(data.prices[price]).toFixed(2);
+    // tranforma em numérico novamente
+    data.prices[price] = parseFloat(data.prices[price]);
+    console.log(data.prices);
+  });
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
