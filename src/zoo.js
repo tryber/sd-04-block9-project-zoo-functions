@@ -127,17 +127,17 @@ const animalMap = (options) => {
 };
 
 const schedule = (dayName) => {
-const arr =Object.entries(data.hours);
-const newObj = arr.reduce((acc, obj) => {
+  const arr = Object.entries(data.hours);
+  const newObj = arr.reduce((acc, obj) => {
   if (obj[1].open !== 0) {
-    acc[obj[0]] = `Open from ${obj[1].open}am until ${obj[1].close -12}pm`;
+    acc[obj[0]] = `Open from ${obj[1].open}am until ${obj[1].close - 12}pm`;
   } else {
     acc[obj[0]] = 'CLOSED';
   }
   return acc;
-}, {})
+}, {});
   if (dayName) {
-    return {[dayName]: newObj[dayName]};
+    return { [dayName]: newObj[dayName] };
   } return newObj;
 };
 
