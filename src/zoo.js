@@ -14,14 +14,14 @@ const data = require('./data');
 function animalsByIds(...ids) { // rest
   return data.animals.filter((animal) => { // filter
     for (let i = 0; i < ids.length; i += 1) {
-      if (animal.id === ids[i]) return true;
+      if (animal.id === ids[i]) return true;  // testar ?:
     }
     return false;
   });
 }
 
 function animalsOlderThan(animal, age) {
-  return data.animals.find(species => species.name === animal).residents // filter
+  return data.animals.find(species => species.name === animal).residents // find
     .every(resident => resident.age >= age); // every
 }
 
@@ -36,7 +36,13 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  let exists = false;
+  data.employees.forEach(employee => // forEach
+    employee.managers.find((manager) => { // find
+      if (manager === id) exists = true;
+    })
+  );
+  return exists;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
