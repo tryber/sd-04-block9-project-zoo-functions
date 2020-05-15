@@ -144,10 +144,10 @@ const schedule = (dayName) => {
 const oldestFromFirstSpecies = (id) => {
   const speciesId = data.employees.find(employee => employee.id === id).responsibleFor[0];
   const chosenSpecies = data.animals.find(animal => animal.id === speciesId);
-  const chosenAnimal = chosenSpecies.residents.reduce( (oldest, resident) => {
-    if (oldest.age > resident.age) return oldest
-    else return resident;
-    });
+  const chosenAnimal = chosenSpecies.residents.reduce((oldest, resident) => {
+    if (oldest.age > resident.age) return oldest;
+    return resident;
+  });
   return Object.values(chosenAnimal);
 };
 
