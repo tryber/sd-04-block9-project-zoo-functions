@@ -160,29 +160,28 @@ const increasePrices = (percentage) => {
 //  Com o último nome de um um funcionário,
 //  retorna os animais pelos quais o funcionário é responsável
 
-function employeeCoverage(idOrName) {
-  const staff = staffIdOrName => data.employees.find(
-    employee => employee.id === staffIdOrName
-      || employee.firstName === staffIdOrName
-      || employee.lastName === staffIdOrName,
-  );
+const filteredEmployee = (element) => {
+  const employeeAndAnimals = {};
+  employeeAndAnimals[`${element.firstName} ${element.lastName}`] = element
+    .responsibleFor.map(elementAnimal => data.animals.find(animal =>
+      animal.id === elementAnimal).name);
 
-  const idAnimals = ids => animalsByIds(...ids)
-    .reduce((acc, curr) => acc.concat(curr.name), []);
+  return employeeAndAnimals;
+};
 
-  const result = idName => ({
-    [`${staff(idName).firstName} ${staff(idName).lastName}`]:
-      idAnimals(staff(idName).responsibleFor),
+const employeeCoverage = (idOrName) => {
+  const listEmployeeAndAnimals = {};
+  if (idOrName) {
+    const findEmployee = data.employees.find(e => e.id === idOrName
+      || e.firstName === idOrName || e.lastName === idOrName);
+    return filteredEmployee(findEmployee);
+  }
+  data.employees.forEach((employee) => {
+    Object.assign(listEmployeeAndAnimals, filteredEmployee(employee));
   });
 
-  if (!idOrName) {
-    return data.employees.reduce((acc, curr) =>
-      Object.assign(acc, result(curr.id)),
-      {},
-    );
-  }
-  return result(idOrName);
-}
+  return listEmployeeAndAnimals;
+};
 
 //  console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 //  console.log(employeeCoverage('Stephanie'));
