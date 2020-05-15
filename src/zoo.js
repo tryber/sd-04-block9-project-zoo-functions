@@ -67,50 +67,77 @@ const entryCalculator = (entrants) => {
   return (adultPrice * Adult) + (childPrice * Child) + (seniorPrice * Senior);
 };
 
-const animalMapTest = region => data.animals
+const animalMapDefault = region => data.animals
     .filter(animal => animal.location === region)
     .map(animal2 => animal2.name);
 
 const animalMap2 = (
-  NE = animalMapTest('NE'),
-  NW = animalMapTest('NW'),
-  SE = animalMapTest('SE'),
-  SW = animalMapTest('SW'),
+  NE = animalMapDefault('NE'),
+  NW = animalMapDefault('NW'),
+  SE = animalMapDefault('SE'),
+  SW = animalMapDefault('SW'),
 ) => ({
-    NE,
-    NW,
-    SE,
-    SW,
-  });
+  NE,
+  NW,
+  SE,
+  SW,
+});
 
-const theFunction = (region, sort) => {
+const includeNmaesAndSort = (region, sort) => {
   const chosenAnimals = data.animals.filter(
     animal => animal.location === region);
   let object = {};
   const arr = [];
   chosenAnimals.forEach((chosen) => {
     object = {};
-    if (!sort) { object[chosen.name] = chosen.residents.map(element => element.name)
-    } else {(object[chosen.name] = chosen.residents.map(element => element.name)).sort()}
+    if (!sort) 
+    { object[chosen.name] = chosen.residents.map(element => element.name);
+     }  else {(object[chosen.name] = chosen.residents.map(element => element.name)).sort();}
     return arr.push(object);
   });
   return arr;
 };
 
-console.log(theFunction('NE', 'sort'));
+const filterGender = (region, sex) => {
+  const chosenAnimals = data.animals.filter(
+    animal => animal.location === region);
+  let object = {};
+  const arr = [];
+  chosenAnimals.forEach((chosen) => {
+    object = {};
+    object[chosen.name] = chosen.residents.reduce((acc, element) => {
+      if (element.sex === sex) acc .push(element.name);
+      return acc
+    },[])
+    return arr.push(object);
+  });
+  return arr;
+  
+};
 
 const animalMap = (options) => {
   if (!options) return animalMap2();
   const { includeNames, sorted, sex } = options;
-  if (includeNames && sorted) { return animalMap2( 
-    theFunction('NE', 'sort'),theFunction('NW', 'sort'),
-    theFunction('SE', 'sort'), theFunction('SW', 'sort'))}
-  if (includeNames){ return animalMap2(
-    theFunction('NE'), theFunction('NW'),
-    theFunction('SE'), theFunction('SW'))}
+  if (includeNames && sorted) 
+  { return animalMap2(
+    includeNmaesAndSort('NE', 'sort'), includeNmaesAndSort('NW', 'sort'),
+    includeNmaesAndSort('SE', 'sort'), includeNmaesAndSort('SW', 'sort'));
+  }
+  if (includeNames && sex) 
+  { return animalMap2(
+    filterGender('NE', sex), filterGender('NW', sex),
+    filterGender('SE', sex), filterGender('SW', sex));
+  }
+  if (includeNames)
+  { return animalMap2(
+    includeNmaesAndSort('NE'), includeNmaesAndSort('NW'),
+    includeNmaesAndSort('SE'), includeNmaesAndSort('SW'));
+  } else {
+    return animalMap();
+  }
 };
 
-console.log(animalMap({ includeNames: true, sorted: true }));
+// console.log(animalMap({ includeNames: true, sex: 'female' }));
 
 const schedule = (dayName) => {};
 
