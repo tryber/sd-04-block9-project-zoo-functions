@@ -107,7 +107,9 @@ function employeeCoverage(idOrName) {
     list[`${employee.firstName} ${employee.lastName}`] = employee
     .responsibleFor.map(functionJob => data.animals.find(animal => animal.id === functionJob).name);
   };
-  const employeeResponsibility = () => {const responsibility = data.employees.filter(employ => employ.id === idOrName
+  const employeeResponsibility = () => {
+    const responsibility = data.employees
+    .filter(employ => employ.id === idOrName
     || employ.firstName === idOrName || employ.lastName === idOrName);
     list[`${responsibility[0].firstName} ${responsibility[0].lastName}`] = [];
     employeeFunction(responsibility[0]);
