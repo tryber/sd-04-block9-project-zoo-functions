@@ -83,7 +83,7 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
-  // Sem parâmetros, retorna animais categorizados por localização
+  // Sem parâmetros, retorna animais categorizados por localização - OK
   // Com opções especificadas, retorna nomes de animais
   // Com opções especificadas, retorna nomes de animais ordenados
   // Com opções especificadas, retorna somente nomes de animais macho/fêmea
@@ -100,12 +100,22 @@ function animalMap(options) {
     }
   });
 
-  console.log(animalLocation);
+  // console.log(animalLocation);
   return animalLocation;
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const obj = {};
+  Object.entries(data.hours).forEach((day) => {
+    obj[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+    if (day[0] === 'Monday') {
+      obj[day[0]] = 'CLOSED';
+    }
+  });
+  if (dayName) {
+    return { [dayName]: obj[dayName] };
+  }
+  return obj;
 }
 
 function oldestFromFirstSpecies(id) {
