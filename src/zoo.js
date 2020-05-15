@@ -36,7 +36,6 @@ function createEmployee(personalInfo, associatedWith) {
   return { id, firstName, lastName, managers, responsibleFor };
 }
 
-
 function isManager(id) {
   // seu código aqui
   return data.employees.some(element => element.managers.some(ids => ids === id));
@@ -105,7 +104,6 @@ function schedule(dayName) {
   if (!dayName) {
     const result = hourKeys.reduce((acumulador, key) => {
       acumulador[key] = oneDay(key);
-      console.log(acumulador[key]);
       return acumulador;
     }, {});
     return result;
