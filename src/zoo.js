@@ -160,21 +160,21 @@ const increasePrices = (percentage) => {
 };
 
 const findThings = (employeeFname) => {
-  const responsibleAnimals = data.employees.find(employee => 
+  const responsibleAnimals = data.employees.find(employee =>
     employee.firstName === employeeFname).responsibleFor;
   return responsibleAnimals.map(animalId => data.animals
     .find(animal => animal.id === animalId))
     .map(animal => animal.name);
-}
+};
 
 const employeeCoverage = (idOrN50ame) => {
   // finding employee:
   const fE = data.employees.find(
-    employee => employee.id === idOrN50ame || 
-    employee.firstName === idOrN50ame || 
+    employee => employee.id === idOrN50ame ||
+    employee.firstName === idOrN50ame ||
     employee.lastName === idOrN50ame);
     // creating major object:
-    const expectedObj = data.employees.reduce((acc, obj) => {
+  const expectedObj = data.employees.reduce((acc, obj) => {
     acc[`${obj.firstName} ${obj.lastName}`] = findThings(obj.firstName);
     return acc;
   }, {});
