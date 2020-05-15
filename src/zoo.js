@@ -133,18 +133,30 @@ function animalMap(options = {}) { // default Params
   return newObj;
 }
 
-console.log(animalMap({ includeNames: true, sorted: true }));
+// console.log(animalMap({ includeNames: true, sorted: true }));
 
 // {
 //   NE: ['lions', 'giraffes'],
 //   NW: ['tigers', 'bears', 'elephants'],
 //   SE: ['penguins', 'otters'],
-//   SW: ['frogs', 'snakes']
+//   SW: ['frogs', 'snakes']\
 // };
 
-function schedule(dayName) {
-  // seu código aqui
+function schedule(dayName = '') {
+  // Transformar o objeto em array com key
+  return Object.keys(data.hours).reduce((accumulator, hour) => {
+    // Verificando o que vem no day name
+    if (dayName === '' || dayName === hour) {
+      accumulator[hour] = hour === 'Monday' ? 'CLOSED'
+        : `Open from ${data.hours[hour].open}am until ${data.hours[hour].close - 12}pm`;
+    }
+    // Criando chave dia da semana que esta dentro de hour, e pegando as informações
+    return accumulator;
+  }, {});
 }
+
+console.log(schedule('Saturday'));
+
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
