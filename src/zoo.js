@@ -132,7 +132,33 @@ function increasePrices(percentage) {
   });
 }
 
+/*
+Se eu usasse esse método, os nomes iriam ficar na ordem do 'animals', e não 'responsibleFor'
+const getAnimals = data.animals.filter(animal => responsibleFor.includes(animal.id))
+const getNames = getAnimals.map(animal => animal.name);
+*/
 function employeeCoverage(idOrName) {
+  const getEmployee =
+    data.employees.find(({ firstName, lastName, id }) =>
+      firstName === idOrName || lastName === idOrName || id === idOrName);
+
+  const getAnimals = responsible =>
+    responsible.reduce((acc, id) => {
+      if (!acc) acc = [];
+      const getNames = data.animals.find(animal => animal.id === id).name;
+      acc.push(getNames);
+      return acc;
+    }, []);
+
+  if (idOrName) {
+    const { firstName, lastName, responsibleFor } = getEmployee;
+    return { [`${firstName} ${lastName}`]: getAnimals(responsibleFor) };
+  }
+
+  return data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
+    acc[`${firstName} ${lastName}`] = getAnimals(responsibleFor);
+    return acc;
+  }, {});
 }
 
 module.exports = {
