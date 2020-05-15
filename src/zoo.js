@@ -115,9 +115,8 @@ const filterGender = (region, sex) => {
   
 };
 
-const animalMap = (options) => {
-  if (!options) return animalMapObject();
-  const { includeNames, sorted, sex } = options;
+const animalMapCases = (options) => {
+  const { includeNames, sorted, sex } = options
   if (includeNames && sorted) 
   { return animalMapObject(
     includeNamesAndSort('NE', 'sort'), includeNamesAndSort('NW', 'sort'),
@@ -133,6 +132,11 @@ const animalMap = (options) => {
     includeNamesAndSort('NE'), includeNamesAndSort('NW'),
     includeNamesAndSort('SE'), includeNamesAndSort('SW'));
   } return animalMapObject();
+}
+
+const animalMap = (options) => {
+  if (!options) return animalMapObject();
+  return animalMapCases(options);
 };
 
 // console.log(animalMap({ includeNames: true, sex: 'female' }));
