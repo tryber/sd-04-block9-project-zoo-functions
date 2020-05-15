@@ -144,7 +144,9 @@ const schedule = (dayName) => {
 const oldestFromFirstSpecies = (id) => {
   const speciesId = data.employees.find(employee => employee.id === id).responsibleFor[0];
   const chosenSpecies = data.animals.find(animal => animal.id === speciesId);
-  const chosenAnimal = chosenSpecies.residents.reduce((oldest, resident) => (oldest.age > resident.age) ? oldest : resident);
+  const chosenAnimal = chosenSpecies.residents.reduce(
+    (oldest, resident) => oldest.age > resident.age ? oldest : resident
+  );
   return Object.values(chosenAnimal);
 };
 
