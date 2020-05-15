@@ -101,22 +101,6 @@ const includeNamesAndSort = (region, sort, sex) => {
   return arr;
 };
 
-const filterGender = (region, sex) => {
-  const chosenAnimals = data.animals.filter(
-    animal => animal.location === region);
-  let object = {};
-  const arr = [];
-  chosenAnimals.forEach((chosen) => {
-    object = {};
-    object[chosen.name] = chosen.residents.reduce((acc, element) => {
-      if (element.sex === sex) acc.push(element.name);
-      return acc;
-    }, []);
-    return arr.push(object);
-  });
-  return arr;
-};
-
 const animalMapCases = (options) => {
   const { includeNames, sorted, sex } = options;
   if (includeNames && sorted) {
