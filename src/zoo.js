@@ -60,7 +60,7 @@ function addEmployee(id, firstName, lastName,
 function animalCount(species) {
   if (!species) {
     return data.animals.reduce((acc, animal) => { // reduce
-      const {name} = animal; // object destructuring
+      const { name } = animal; // object destructuring
       acc[name] = animal.residents.length;
       return acc;
     }, {});
