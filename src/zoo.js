@@ -75,6 +75,16 @@ const animalCount = (species) => {
 
 function entryCalculator(entrants) {
   // seu código aqui
+  if (!entrants || !Object.keys(entrants).length) return 0;
+  const objectPrices = Object.entries(data.prices);
+  const objectEntrants = Object.entries(entrants);
+  let calculatedResult = 0;
+  objectEntrants.forEach(([age, amount]) => {
+    objectPrices.forEach(([category, price]) => {
+      if (category === age) calculatedResult += amount * price;
+    });
+  });
+  return calculatedResult;
 }
 
 function animalMap(options) {
@@ -83,6 +93,10 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
+  // const schedule = (dayName) => {
+  // const objectHours = Object.entries(data.hours);
+  // console.log (objectHours);
+  // };
 }
 
 function oldestFromFirstSpecies(id) {
@@ -105,12 +119,12 @@ function employeeCoverage(idOrName) {
   const list = {};
   const employeeFunction = (employee) => {
     list[`${employee.firstName} ${employee.lastName}`] = employee
-    .responsibleFor.map(functionJob => data.animals.find(animal => animal.id === functionJob).name);
+      .responsibleFor.map(functionJob => data.animals.find(animal => animal.id === functionJob).name);
   };
   const employeeResponsibility = () => {
     const responsibility = data.employees
-    .filter(employ => employ.id === idOrName
-    || employ.firstName === idOrName || employ.lastName === idOrName);
+      .filter(employ => employ.id === idOrName
+        || employ.firstName === idOrName || employ.lastName === idOrName);
     list[`${responsibility[0].firstName} ${responsibility[0].lastName}`] = [];
     employeeFunction(responsibility[0]);
   };
