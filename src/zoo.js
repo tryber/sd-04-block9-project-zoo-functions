@@ -47,7 +47,13 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) { // default params
-  return data.employees.push({id, firstName, lastName, managers, responsibleFor}); // abreviation object literal
+  return data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  }); // abreviation object literal
 }
 
 function animalCount(species) {
