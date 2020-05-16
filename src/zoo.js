@@ -82,7 +82,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 Com o nome de uma espécie de animal, retorna somente a quantidade */
 function animalCount(species) {
   // seu código aqui
-  if (species) return data.animals.find(element => element.name === species).residents.length;
+  if (species) return animaisObj.find(element => element.name === species).residents.length;
   return animaisObj.reduce((acc, animal) => {
     acc[animal.name] = animal.residents.length;
     return acc;
@@ -90,8 +90,19 @@ function animalCount(species) {
 }
 
 
-function entryCalculator(entrants) {
+/* Returna 0 se nenhum argumento for passado
+Retorna 0 se um objeto vazio for passado
+Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos */
+
+const precosObj = data.prices; // VARIÁVEL DO OBJETO PRICES
+
+function entryCalculator(entrants = 0) {
   // seu código aqui
+  if (Object.keys(entrants).length === 0) return 0; // CASO NÃO ENCONTRE VALOR
+  const valorTotal = Object.keys(entrants).reduce((acumulaValor, atual) =>
+    (acumulaValor + (entrants[atual] * precosObj[atual])), 0);
+    // FAZ A SOMA DE VALORES(A PARTIR DE entrants NA CHAVE [atual] QUE É 0 )
+  return valorTotal;
 }
 
 function animalMap(options) {
