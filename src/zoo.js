@@ -119,7 +119,8 @@ function employeeCoverage(idOrName) {
   const list = {};
   const employeeFunction = (employee) => {
     list[`${employee.firstName} ${employee.lastName}`] = employee
-      .responsibleFor.map(functionJob => data.animals.find(animal => animal.id === functionJob).name);
+      .responsibleFor.map(functionJob => data.animals
+        .find(animal => animal.id === functionJob).name);
   };
   const employeeResponsibility = () => {
     const responsibility = data.employees
