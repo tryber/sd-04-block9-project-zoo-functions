@@ -112,8 +112,18 @@ function schedule(dayName) {
   return { Monday: 'CLOSED' };
 }
 
+// Implemente a função oldestFromFirstSpecies:
+// Passado o id de um funcionário, encontra a primeira espécie de animal
+// gerenciado pelo funcionário, e retorna um array com nome, sexo e idade
+// do animal mais velho dessa espécie
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const idManager = data.employees
+    .find(el => el.id === id)
+    .responsibleFor[0];
+  const olderAnimal = data.animals
+    .find(el => el.id === idManager)
+    .residents.sort((a, b) => (a.age < b.age ? 1 : -1));
+  return Object.values(olderAnimal[0]);
 }
 
 function increasePrices(percentage) {
