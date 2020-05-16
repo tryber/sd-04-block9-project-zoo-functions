@@ -62,7 +62,8 @@ function schedule(dayName) {
   const diaSemana = {};
   const obj = Object.entries(data.hours);
   obj.forEach((elemento) => {
-    objeto[elemento[0]] = `Open from ${Object.values(elemento[1])[0]}am until ${Object.values(elemento[1])[1] - 12}pm`;
+    const values = Object.values(elemento[1]);
+    objeto[elemento[0]] = `Open from ${values[0]}am until ${values[1] - 12}pm`;
   });
   objeto.Monday = 'CLOSED';
   diaSemana[dayName] = objeto[dayName];
