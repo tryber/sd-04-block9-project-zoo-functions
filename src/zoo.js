@@ -56,12 +56,7 @@ function isManager(id) {
 
 // Adiciona um funcionário no fim da lista
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // const newEmployee = (...employeeData) => {
-  //   let [id, firstName, lastName, managers, responsibleFor] = employeeData;
-  //   return {id, firstName, lastName, managers, responsibleFor};
-  // }
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  // console.log(`*** ${newEmployee} ***`);
   data.employees = [...data.employees, newEmployee];
   return newEmployee;
 }
@@ -81,16 +76,40 @@ function animalCount(species) {
   return countSpecie.residents.length;
 }
 
+// Implemente a função entryCalculator:
+// Returna 0 se nenhum argumento for passado
+// Retorna 0 se um objeto vazio for passado
+// Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+  if (Object.keys(entrants).length === 0) return 0;
+  return (entrants.Adult * data.prices.Adult) +
+    (entrants.Senior * data.prices.Senior) +
+    (entrants.Child * data.prices.Child);
 }
 
 function animalMap(options) {
   // seu código aqui
 }
 
+// Implemente a função schedule:
+// Sem parâmetros, retorna um cronograma legível para humanos
+// Se um único dia for passado, retorna somente este dia em um formato legível para humanos
 function schedule(dayName) {
-  // seu código aqui
+  if (!dayName) {
+    const week = Object.keys(data.hours).reduce((acc, curr) => {
+      acc[curr] = `Open from ${data.hours[curr].open}am until ${data.hours[curr].close - 12}pm`;
+      if ((acc[curr]) === 'Open from 0am until -12pm') {
+        acc[curr] = 'CLOSED';
+      }
+      return acc;
+    }, {});
+    return week;
+  }
+  if (dayName !== 'Monday') {
+    return { [dayName]: `Open from ${data.hours[dayName].open}am until ${data.hours[dayName].close - 12}pm` };
+  }
+  return { Monday: 'CLOSED' };
 }
 
 function oldestFromFirstSpecies(id) {
