@@ -79,7 +79,6 @@ function oldestFromFirstSpecies(id) {
   const responsible = data.employees.find(element => element.id === id).responsibleFor[0];
   const creation = data.animals.find(specie => specie.id === responsible);
   const oldest = Math.max.apply(null, creation.residents.map(animal => animal.age));
-  
   return Object.values(creation.residents.find(animal => animal.age === oldest));
 }
 
