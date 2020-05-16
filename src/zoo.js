@@ -77,20 +77,18 @@ function entryCalculator(entrants = {}) {
   return totalToPay;
 }
 const animalMap = (options) => {
-  const map = data.animals.reduce((result, { name, location, residents }) => {
+  return data.animals.reduce((result, { name, location, residents }) => {
     if (!result[location]) result[location] = [];
     if (!options) {
       result[location].push(name);
     } else if (options.includeNames) {
-      const resdnts = () => {
-        if (options.sex) {
-          return residents.filter((resident) => resident.sex === options.sex)
-            .map((resident) => resident.name);
-        }
-        return residents.map((resident) => resident.name);
-      };
+      let resdnts = residents.map((resident) => resident.name);
+      if (options.sex) {
+        resdnts = residents.filter((resident) => resident.sex === options.sex)
+          .map((resident) => resident.name);
+      }
       result[location].push(
-        { [name]: resdnts() },
+        { [name]: resdnts },
       );
       if (options.sorted) {
         let specie = result[location].find((animal) => Object.keys(animal)[0] === name);
@@ -102,7 +100,6 @@ const animalMap = (options) => {
     }
     return result;
   }, {});
-  return map;
 };
 
 function schedule(dayName) {
