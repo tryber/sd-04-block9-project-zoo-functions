@@ -46,13 +46,13 @@ function isManager(id) {
   return is;
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) { // default params
+function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) { // default params
   return data.employees.push({
     id,
     firstName,
     lastName,
     managers,
-    responsibleFor
+    responsibleFor,
   }); // abreviation object literal
 }
 
