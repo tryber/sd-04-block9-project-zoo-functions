@@ -17,11 +17,13 @@ function animalsByIds(...ids) {
 }
 
 const animalsOlderThan = (animal, age) =>
-  data.animals.find(a => a.name === animal).residents.every(a => a.age > age);
+  data.animals
+    .find(a => a.name === animal)
+    .residents.every(a => a.age > age);
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const employeeByName = employeeName =>
+  data.employees.find(
+    ({ firstName, lastName }) => firstName === employeeName || lastName === employeeName) || {};
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
