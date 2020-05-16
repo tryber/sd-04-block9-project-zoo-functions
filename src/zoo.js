@@ -23,7 +23,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   return data.employees.find(element => element.firstName === employeeName ||
-      element.lastName === employeeName);
+    element.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -65,17 +65,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // if (options === undefined) {
-  //   const animalNE = data.animals.filter(element => element.location === 'NE').map(animal => animal.name);
-  //   const animalNW = data.animals.filter(element => element.location === 'NW').map(animal => animal.name);
-  //   const animalSE = data.animals.filter(element => element.location === 'SE').map(animal => animal.name);
-  //   const animalSW = data.animals.filter(element => element.location === 'SW').map(animal => animal.name);
-  //   const groups = [ animalNE, animalNW, animalSE, animalSW]
-  //   const obj = {};
-  //   data.animals.forEach(element => (obj[element.location] = 
-  //     data.animals.filter(place => element.location).map(animal => animal.name)));
-  //   console.log(obj);
-  // }
+  // need to think
 }
 
 function schedule(dayName) {
@@ -88,11 +78,10 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   const responsible = data.employees.find(element => element.id === id).responsibleFor[0];
   const creation = data.animals.find(specie => specie.id === responsible);
-  const oldest = Math.max.apply(null, creation.residents.map(animal => animal.age)) ;
+  const oldest = Math.max.apply(null, creation.residents.map(animal => animal.age));
   
-  return Object.values(creation.residents.find(animal => animal.age == oldest));
+  return Object.values(creation.residents.find(animal => animal.age === oldest));
 }
-
 
 function increasePrices(percentage) {
   // seu código aqui
