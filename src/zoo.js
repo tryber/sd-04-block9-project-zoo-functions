@@ -71,13 +71,12 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const filterEmployee = data.employees.find(elemento => elemento.id === id);
-  const animalId = filterEmployee.responsibleFor[0];
-  const filterAnimal = data.animals.find(elemento => elemento.id === animalId);
-  const oldestAnimal = filterAnimal.residents.reduce((acc, value) => {
-    if (value.age > acc.age) return value;
-    return acc;
-  });
+  const animalId = data.employees.find(elemento => elemento.id === id).responsibleFor[0];
+  const oldestAnimal = data.animals.find(elemento =>
+    elemento.id === animalId).residents.reduce((acc, value) => {
+      if (value.age > acc.age) return value;
+      return acc;
+    });
   return Object.values(oldestAnimal);
 }
 
@@ -88,8 +87,24 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
+// função que cria um array contendo nome e sobrenome e busca os animais pelos respectivos ID's
+function reduceEmployeeCoverage(arr) {
+  return arr.reduce((acc, value) => {
+    acc[`${value.firstName} ${value.lastName}`] = value.responsibleFor.map(elemento =>
+      data.animals.find(animal => animal.id === elemento).name);
+    return acc;
+  }, {});
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return reduceEmployeeCoverage(data.employees);
+  }
+  const newArray = [];
+  const mapFunction = data.employees.find(({ firstName, lastName, id }) =>
+    firstName === idOrName || lastName === idOrName || id === idOrName);
+  newArray.push(mapFunction);
+  return reduceEmployeeCoverage(newArray);
 }
 
 module.exports = {
