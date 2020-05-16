@@ -81,9 +81,7 @@ const animalMap = (options) => {
     if (!result[location]) result[location] = [];
     if (!options) {
       result[location].push(name);
-      return result;
-    }
-    if (options.includeNames) {
+    } else if (options.includeNames) {
       const resdnts = () => {
         if (options.sex) {
           return residents.filter((resident) => resident.sex === options.sex)
@@ -98,18 +96,12 @@ const animalMap = (options) => {
         let specie = result[location].find((animal) => Object.keys(animal)[0] === name);
         specie = specie[name].sort();
       }
-      return result;
-    }
-    if (options.sex) {
+    } else if (options.sex) {
       const animal = residents.find((resident) => resident.sex === options.sex);
-      if (animal) {
-        result[location].push(name);
-      }
-      return result;
+      if (animal) result[location].push(name);
     }
     return result;
   }, {});
-
   return map;
 };
 
