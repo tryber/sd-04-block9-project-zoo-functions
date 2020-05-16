@@ -1,22 +1,14 @@
 const data = require('./data');
 
-function animalsByIds(...ids) {
+const animalsByIds = (...ids) => {
   if (!ids) return [];
 
-  const animalsResult = ids.map((id) => {
-    return data.animals.find((animal) => animal.id === id);
-  });
+  return ids.map((id) => data.animals.find((animal) => animal.id === id));
+};
 
-  return animalsResult;
-}
-
-function animalsOlderThan(specie, age) {
-  const result = data.animals
-    .find((selectedSpecie) => selectedSpecie.name === specie)
-    .residents.find((animal) => animal.age < age);
-
-  return !(result);
-}
+const animalsOlderThan = (specie, age) => data.animals
+  .find((selectedSpecie) => selectedSpecie.name === specie)
+  .residents.every((animal) => animal.age > age);
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
@@ -84,9 +76,42 @@ function entryCalculator(entrants = {}) {
 
   return totalToPay;
 }
-function animalMap(options) {
-  // seu código aqui
-}
+const animalMap = (options) => {
+  const map = data.animals.reduce((result, { name, location, residents }) => {
+    if (!result[location]) result[location] = [];
+    if (!options) {
+      result[location].push(name);
+      return result;
+    }
+    if (options.includeNames) {
+      const resdnts = () => {
+        if (options.sex) {
+          return residents.filter((resident) => resident.sex === options.sex)
+            .map((resident) => resident.name);
+        }
+        return residents.map((resident) => resident.name);
+      };
+      result[location].push(
+        { [name]: resdnts() },
+      );
+      if (options.sorted) {
+        let specie = result[location].find((animal) => Object.keys(animal)[0] === name);
+        specie = specie[name].sort();
+      }
+      return result;
+    }
+    if (options.sex) {
+      const animal = residents.find((resident) => resident.sex === options.sex);
+      if (animal) {
+        result[location].push(name);
+      }
+      return result;
+    }
+    return result;
+  }, {});
+
+  return map;
+};
 
 function schedule(dayName) {
   // seu código aqui
