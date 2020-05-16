@@ -105,7 +105,9 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return Object.keys(data.prices).forEach(xablau => {
+    data.prices[xablau] = Math.round(data.prices[xablau]*((percentage/100)+1)*100)/100;
+  });
 }
 
 function employeeCoverage(idOrName) {
