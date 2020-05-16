@@ -17,15 +17,17 @@ function animalsByIds(...ids) {
 }
 function animalsOlderThan(animal, age) {
   const oAnimal = data.animals.find(element => animal === element.name);
-  console.log(oAnimal);
   return oAnimal.residents.every(element => element.age >= age);
   // seu código aqui
 }
-console.log(animalsOlderThan('lions', 4));
 function employeeByName(employeeName) {
-  // seu código aqui
+  // seu código aqui 1 uma busca pelo nome esobrenome 
+  const Person = data.employees.find(element => element.firstName === employeeName || element.lastName === employeeName);
+  return {
+    ...Person,
+  };
 }
-
+console.log(employeeByName('Wishart'));
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
