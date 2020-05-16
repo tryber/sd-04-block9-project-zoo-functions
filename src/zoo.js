@@ -103,9 +103,34 @@ function entryCalculator(entrants) {
 //  Com opções especificadas, retorna somente nomes de animais macho/fêmea
 //  Só retorna informações específicas de gênero se includeNames for setado
 
-function animalMap(options) {
-  // seu código aqui
-}
+const residentsAnimalsName = (animal, sorted, sex) => {
+  const objAnimalMap = {};
+  objAnimalMap[animal] = data.animals.find(
+    (element) => element.name === animal,
+  ).residents;
+
+  if (sex) objAnimalMap[animal] = objAnimalMap[animal].filter((resident) => resident.sex === sex);
+  objAnimalMap[animal] = objAnimalMap[animal].map(({ name }) => name);
+
+
+  if (sorted) objAnimalMap[animal].sort();
+
+  return objAnimalMap;
+};
+
+const animalMap = (options = {}) => {
+  const { includeNames, sex, sorted } = options;
+  return data.animals.reduce((acc, { name, location }) => {
+    if (!acc[location]) acc[location] = [];
+    if (!includeNames) {
+      acc[location].push(name);
+    } else {
+      acc[location].push(residentsAnimalsName(name, sorted, sex));
+    }
+    return acc;
+  }, {});
+};
+//  console.log(animalMap());
 
 //  10. Implemente a função schedule:
 //  Sem parâmetros, retorna um cronograma legível para humanos
@@ -134,11 +159,16 @@ function schedule(dayName) {
 //  Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo
 //  funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
 
-const oldestFromFirstSpecies = id =>
-  Object.values(data.animals
-    .find(element => element.id === data.employees
-    .find(animal => animal.id === id).responsibleFor[0]).residents
-    .sort((x, y) => y.age - x.age)[0]);
+const oldestFromFirstSpecies = (id) =>
+  Object.values(
+    data.animals
+      .find(
+        (element) =>
+          element.id ===
+          data.employees.find((animal) => animal.id === id).responsibleFor[0],
+      )
+      .residents.sort((x, y) => y.age - x.age)[0],
+  );
 //  console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 //  12. Implemente a função increasePrices:
@@ -162,9 +192,12 @@ const increasePrices = (percentage) => {
 
 const filteredEmployee = (element) => {
   const employeeAndAnimals = {};
-  employeeAndAnimals[`${element.firstName} ${element.lastName}`] = element
-    .responsibleFor.map(elementAnimal => data.animals.find(animal =>
-      animal.id === elementAnimal).name);
+  employeeAndAnimals[
+    `${element.firstName} ${element.lastName}`
+  ] = element.responsibleFor.map(
+    (elementAnimal) =>
+      data.animals.find((animal) => animal.id === elementAnimal).name,
+  );
 
   return employeeAndAnimals;
 };
@@ -172,8 +205,12 @@ const filteredEmployee = (element) => {
 const employeeCoverage = (idOrName) => {
   const listEmployeeAndAnimals = {};
   if (idOrName) {
-    const findEmployee = data.employees.find(e => e.id === idOrName
-      || e.firstName === idOrName || e.lastName === idOrName);
+    const findEmployee = data.employees.find(
+      (e) =>
+        e.id === idOrName ||
+        e.firstName === idOrName ||
+        e.lastName === idOrName,
+    );
     return filteredEmployee(findEmployee);
   }
   data.employees.forEach((employee) => {
