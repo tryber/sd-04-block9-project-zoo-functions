@@ -76,6 +76,15 @@ function entryCalculator(entrants = {}) {
 
   return totalToPay;
 }
+
+const filterSex = (residents, sex) => {
+  if (sex) {
+    return residents.filter((resident) => resident.sex === sex)
+      .map((resident) => resident.name);
+  }
+  return [];
+};
+
 const animalMap = (options = {}) => {
   return data.animals.reduce((result, { name, location, residents }) => {
     if (!result[location]) result[location] = [];
@@ -85,8 +94,7 @@ const animalMap = (options = {}) => {
     }
     if (options.includeNames === true && 'sex' in options) {
       result[location].push({
-        [name]: residents.filter((resident) => resident.sex === options.sex)
-          .map((resident) => resident.name),
+        [name]: filterSex(residents, options.sex),
       });
     }
     if (!('includeNames' in options) && 'sex' in options) {
