@@ -102,19 +102,35 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // if (!dayName) {
-  //   const {Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday} = data.hours;
-  //   return {
-  //     'Tuesday': `Open from ${Tuesday.open}am until ${Tuesday.close - 12}pm`,
-  //     'Wednesday': `Open from ${Wednesday.open}am until ${Wednesday.close - 12}pm`,
-  //     'Thursday': `Open from ${Thursday.open}am until ${Thursday.close - 12}pm`,
-  //     'Friday': `Open from ${Friday.open}am until ${Friday.close - 12}pm`,
-  //     'Saturday': `Open from ${Saturday.open}am until ${Saturday.close -12}pm`,
-  //     'Sunday': `Open from ${Sunday.open}am until ${Sunday.close -12}pm`,
-  //     'Monday': `CLOSED`,
-  //   }
-  // }
+  if (!dayName) {
+    const entries = Object.entries(data.hours);
+    for (let i = 0; i < entries.length; i += 1) {
+      entries[i][1] = `Open from ${entries[i][1].open}am until ${entries[i][1].close - 12}pm`;
+      entries[6][1] = 'CLOSED';
+    }
+    const cronograma = entries.reduce((acc, curr) => {
+      // console.log(acc); --> objeto a ser retornado
+      // console.log(curr[0]); --> dias da semana
+      // console.log(curr[1]); --> horario de funcionamento
+      acc[curr[0]] = curr[1];
+      return acc;
+    }, {});
+    return cronograma;
+  }
+  //
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  //
+  const entries = Object.entries(data.hours);
+  const findDay = entries.find(elemento => elemento[0] === dayName);
+  const obj = {};
+  obj[findDay[0]] = `Open from ${findDay[1].open}am until ${findDay[1].close - 12}pm`;
+  return obj;
 }
+
+// console.log(schedule()); //--> TESTE 1
+// console.log(schedule('Monday')); --> TESTE 2
+// console.log(schedule('Tuesday')); -- TESTE 3
+
 
 function oldestFromFirstSpecies(id) {
   const findById = data.employees.find(elemento => elemento.id === id);
@@ -143,8 +159,51 @@ function increasePrices(percentage) {
 // console.log(increasePrices(30)); --> TESTE 2
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+// Primeiro caso: !idOrName
+
+// idOrName = id || firstName || lastName
+// const employee = data.employees.find(elemento =>
+// elemento.id === idOrName || elemento.firstName === idOrName || elemento.lastName === idOrName);
+// const respFor = employee.responsibleFor;
+// const filtroId = data.animals.filter(elemento => Object.values(respFor).includes(elemento.id) ||
+// Object.values(respFor).includes(elemento.firstName) ||
+// Object.values(respFor).includes(elemento.lastName));
+// const mapAnimals = filtroId.map(elemento => elemento.name);
+// let objRetornado = {};
+// let nomeCompleto = (`${employee.firstName} ${employee.lastName}`);
+// objRetornado[nomeCompleto] = mapAnimals;
+// return objRetornado;
 }
+
+// console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// console.log(employeeCoverage('Stephanie'));
+// console.log(employeeCoverage('Azevado'));
+
+// objeto com informacoes do funcionario
+// const employee = data.employees.find(elemento =>
+// elemento.id === idOrName || elemento.firstName === idOrName || elemento.lastName === idOrName);
+// console.log(employee);
+
+// array com id's de animais pelos quais o funcionario é responsavel
+// const respFor = employee.responsibleFor;
+// console.log(respFor);
+
+// array com objs info animais
+// const filtroId = data.animals.filter(elemento => Object.values(respFor).includes(elemento.id) ||
+// Object.values(respFor).includes(elemento.firstName) ||
+// Object.values(respFor).includes(elemento.lastName));
+// console.log(filtroId);
+
+// const mapAnimals = filtroId.map(elemento => elemento.name); // array com nomes dos animais
+// console.log(mapAnimals);
+
+// let objRetornado = {};
+
+// let nomeCompleto = (`${employee.firstName} ${employee.lastName}`); // chave o objeto retornado
+// // console.log(nomeCompleto);
+
+// objRetornado[nomeCompleto] = mapAnimals;
+// console.log(objRetornado);
 
 module.exports = {
   entryCalculator,
