@@ -133,13 +133,12 @@ const incNamGen = () => {
 }
 
 function animalMap(options) {
-  if (!options) return incSpe(incLoc());
+  if (!options || (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0))
+    return incSpe(incLoc());
   if (options.includeNames && options.sorted)
     return incNamSor();
   else if (options.includeNames && options.sex === 'female')
     return inc(incLoc(), incNamGen());
-  else if (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0)
-    return incSpe(incLoc());
   else (options.includeNames)
     return inc(incLoc(), incNam());
 }
