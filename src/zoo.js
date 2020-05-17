@@ -14,7 +14,7 @@ const data = require('./data');
 function animalsByIds(incomingArray) {
   let finalArray = [];
 
-  if (!Array.isArray(incomingArray) || arrayLength === 0) {
+  if (!Array.isArray(incomingArray) || incomingArray.length === 0) {
     return finalArray;
   }
   incomingArray.map((item) => {
