@@ -23,7 +23,9 @@ const animalsOlderThan = (animal, age) =>
 
 const employeeByName = employeeName =>
   data.employees.find(
-    ({ firstName, lastName }) => firstName === employeeName || lastName === employeeName) || {};
+    ({ firstName, lastName }) =>
+      firstName === employeeName || lastName === employeeName,
+  ) || {};
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
@@ -33,7 +35,13 @@ function isManager(id) {
   return data.employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   data.employees.push(newEmployee);
 }
@@ -44,13 +52,17 @@ function animalCount(species) {
     return acumulador;
   }, {});
   if (!species) return allAnimals;
-  return data.animals.find(animal => animal.name === species).residents.length;
+  return data.animals.find(animal => animal.name === species).residents
+    .length;
 }
 
 function entryCalculator(entrants) {
   return !entrants || Object.keys(entrants).length === 0
-  ? 0
-  : Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * data.prices[curr]), 0);
+    ? 0
+    : Object.keys(entrants).reduce(
+        (acc, curr) => acc + (entrants[curr] * data.prices[curr]),
+        0,
+      );
 }
 
 function animalMap(options) {
