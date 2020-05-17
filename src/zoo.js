@@ -122,16 +122,43 @@ function oldestFromFirstSpecies(id) {
     .responsibleFor[0];
   const olderAnimal = data.animals
     .find(el => el.id === idManager)
-    .residents.sort((a, b) => (a.age < b.age ? 1 : -1));
+    .residents.sort((a, b) => (a.age < b.age ? 1 : -1)); // https://bit.ly/2Z9BlPR
   return Object.values(olderAnimal[0]);
 }
 
+// Implemente a função increasePrices:
+// Ao passar uma porcentagem, incrementa todos os preços,
+// arrendondados em duas casas decimais
 function increasePrices(percentage) {
-  // seu código aqui
+  return Object.keys(data.prices).reduce((acc, curr) => {
+    acc[curr] = Math.round(data.prices[curr] * (percentage + 100)) / 100;
+    return acc;
+  }, {});
+}
+
+// Implemente a função employeeCoverage:
+// Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
+// Com o id de um funcionário, retorna os animais pelos quais o funcionário é responsável
+// Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+// Com o último nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+function zooKeeper(list) {
+  const cage = [];
+  list.forEach(item => cage.push(data.animals.find(animal => animal.id === item).name));
+  return cage;
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const zooEmployee = {};
+  if (!idOrName) {
+    return data.employees.reduce((acc, curr) => { // https://bit.ly/2WB7cak
+      acc[`${curr.firstName} ${curr.lastName}`] = zooKeeper(curr.responsibleFor);
+      return acc;
+    }, {});
+  }
+  const aliasEmployee = data.employees.find(e =>
+    e.firstName === idOrName || e.lastName === idOrName || e.id === idOrName);
+  zooEmployee[`${aliasEmployee.firstName} ${aliasEmployee.lastName}`] = zooKeeper(aliasEmployee.responsibleFor);
+  return zooEmployee;
 }
 
 module.exports = {
