@@ -13,10 +13,30 @@ const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
+  
 }
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  const arrayLength = incomingArray.length
+  let finalArray = []
+
+  if (!arrayLength || arrayLength === 0) {
+    return finalArray
+  } else {
+    incomingArray.map(item => {
+      const animals = data.animals.filter(animal => animal.id === item)
+
+      if (animals) {
+        finalArray = [
+          ...finalArray,
+          animals
+        ]
+      }
+      return finalArray
+    })
+    return finalArray
+  }
 }
 
 function employeeByName(employeeName) {
