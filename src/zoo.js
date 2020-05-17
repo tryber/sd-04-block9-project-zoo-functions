@@ -76,27 +76,26 @@ function entryCalculator(entrants = {}) {
 
   return totalToPay;
 }
-const animalMap = (options) => {
+const animalMap = (options = {}) => {
   return data.animals.reduce((result, { name, location, residents }) => {
     if (!result[location]) result[location] = [];
-    if (!options) {
-      result[location].push(name);
-    } else if (options.includeNames) {
-      let resdnts = residents.map((resident) => resident.name);
-      if (options.sex) {
-        resdnts = residents.filter((resident) => resident.sex === options.sex)
-          .map((resident) => resident.name);
-      }
-      result[location].push(
-        { [name]: resdnts },
-      );
-      if (options.sorted) {
-        let specie = result[location].find((animal) => Object.keys(animal)[0] === name);
-        specie = specie[name].sort();
-      }
-    } else if (options.sex) {
+    if (Object.keys(options).length === 0) result[location].push(name);
+    if (options.includeNames === true && !('sex' in options)) {
+      result[location].push({ [name]: residents.map((resident) => resident.name) });
+    }
+    if (options.includeNames === true && 'sex' in options) {
+      result[location].push({
+        [name]: residents.filter((resident) => resident.sex === options.sex)
+          .map((resident) => resident.name),
+      });
+    }
+    if (!('includeNames' in options) && 'sex' in options) {
       const animal = residents.find((resident) => resident.sex === options.sex);
       if (animal) result[location].push(name);
+    }
+    if (options.sorted === true) {
+      let specie = result[location].find((animal) => Object.keys(animal)[0] === name);
+      specie = specie[name].sort();
     }
     return result;
   }, {});
