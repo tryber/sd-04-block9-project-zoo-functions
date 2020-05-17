@@ -133,18 +133,6 @@ const incNamGen = () => {
 }
 
 function animalMap(options) {
-  // switch (options) {
-  //   case undefined:
-  //     return incSpe(incLoc());
-  //   case { includeNames: true }:
-  //     return inc(incLoc(), incNam());
-  //   case { includeNames: true, sorted: true }:
-  //     return incNamSor();
-  //   case { includeNames: true, sex: 'female' }:
-  //     return inc(incLoc(), incNamGen());
-  //   case { sex: 'female' }:
-  //     return incSpe(incLoc());
-  // }
   if (!options || (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0))
     return incSpe(incLoc());
   if (options.includeNames && options.sorted)
