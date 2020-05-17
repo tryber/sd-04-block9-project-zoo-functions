@@ -58,9 +58,11 @@ const animalCount = (species) => {
   return data.animals.find(specie => specie.name === species).residents.length;
 };
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+const entryCalculator = (entrants) => {
+  if (!entrants || !Object.keys(entrants).length) return 0;
+  return Object.keys(entrants).reduce(((acc, cur) =>
+    acc + ((data.prices[cur]) * entrants[cur])), 0);
+};
 
 function animalMap(options) {
   // seu código aqui
