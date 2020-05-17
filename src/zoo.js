@@ -35,8 +35,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(element =>
-    element.firstName === employeeName || element.lastName === employeeByName);
-  // Não entendi ao certo porque/como está sendo retornado o respectivo elemento
+    element.firstName === employeeName || element.lastName === employeeName);
 }
 
 // Implemente a função createEmployee:
