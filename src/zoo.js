@@ -69,16 +69,75 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants = 0) {
-  if (Object.keys(entrants).length === 0) return 0;
-  const { Adult, Senior, Child } = data.prices;
+  if (Object.keys(entrants).length === 0) return 0; // keys
+  const { Adult, Senior, Child } = data.prices; // object destructuring
   const priceChild = entrants.Child * Child;
   const priceAdult = entrants.Adult * Adult;
   const priceSenior = entrants.Senior * Senior;
   return priceChild + priceAdult + priceSenior;
 }
 
+// animalMap functions
+
+const incLoc = () => {
+  const o = {};
+  data.animals.forEach((animal) => {
+    if (!o.hasOwnProperty(animal.location))
+      o[animal.location] = [];
+  });
+  return o;
+};
+
+const incSpe = (incLocF) => {
+  data.animals.forEach((animal) => {
+    if (incLocF.hasOwnProperty(animal.location))
+      incLocF[animal.location].push(animal.name);
+    else
+      incLocF[animal.location] = [animal.name];
+  });
+  return incLocF;
+};
+
+const inc = (oLoc, namGen) => {
+  data.animals.forEach((animal) => {
+    for (let i = 0; i < namGen.length; i += 1) {
+      if (namGen[i].hasOwnProperty(animal.name))
+        oLoc[animal.location].push(namGen[i]);
+    }
+  });
+  return oLoc;
+}
+
+const incNam = () => {
+  const oNam = data.animals.map((animal) => {
+    const o = {};
+    o[animal.name] = animal.residents.map(resident => resident.name);
+    return o;
+  });
+  return oNam;
+};
+
+const incNamGen = () => {
+  const oNamFem = data.animals.map(animal => {
+    const o = {};
+    o[animal.name] = animal.residents.filter(resident => resident.sex === 'female').map(res => res.name);
+    return o;
+  });
+  return oNamFem;
+}
+
 function animalMap(options) {
-  // seu código aqui
+  if (!options) return incSpe(incLoc());
+  if (options.includeNames && options.sorted) {
+    const namOrd = inc(incLoc(), incNam());
+    Object.keys(namOrd).forEach(loc => namOrd[loc].forEach(esp => Object.keys(esp).forEach(pEsp => esp[pEsp].sort())));
+    return namOrd;
+  } else if (options.includeNames && options.sex === 'female')
+    return inc(incLoc(), incNamGen());
+  else if (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0)
+    return incSpe(incLoc());
+  else (options.includeNames)
+    return inc(incLoc(), incNam());
 }
 
 function schedule(dayName) {
