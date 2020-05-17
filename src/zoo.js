@@ -71,8 +71,23 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
+// TODO => Sem parâmetros, retorna um cronograma legível para humanos
+// TODO => Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+
+const openOrClose = ({ open, close }) => {
+  if (open === 0 && close === 0) return 'CLOSED'; 
+  return `Open from ${open}am until ${close - 12}pm`;
+}
+
+const schedule = (dayName) => {
+  const objHours = data.hours;
+  if (!dayName) {
+    return Object.keys(objHours).reduce((newObj, chave) => {
+      newObj[chave] = openOrClose(objHours[chave]);
+      return newObj;
+    }, {})
+  }
+  return { [dayName]: openOrClose(objHours[dayName]) }
 }
 
 //TODO => Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
@@ -89,11 +104,10 @@ const oldestFromFirstSpecies = (id) => {
 const increasePrices = (percentage) => {
   return Object.keys(data.prices).forEach(key => data.prices[key] =
     Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100)
-
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+
 }
 
 module.exports = {
