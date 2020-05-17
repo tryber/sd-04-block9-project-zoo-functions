@@ -14,6 +14,7 @@ const data = require('./data');
 
 const newAnimals = data.animals;
 const newEmployee = data.employees;
+const newPrices = data.prices;
 
 const animalsByIds = (...ids) => {
   const idAnimals = newAnimals.filter(element => ids.includes(element.id));
@@ -61,8 +62,16 @@ function animalCount(species) {
   }, {});
 }
 
-function entryCalculator(entrants) {
+function entryCalculator(entrants = 0) {
   // seu código aqui
+  if (Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const valores = Object.keys(entrants).reduce(
+    (acc, valorAtual) => acc + (entrants[valorAtual] * newPrices[valorAtual]), 0);
+  console.log(valores);
+  console.log('valores das entradas', valores);
+  return valores;
 }
 
 function animalMap(options) {
