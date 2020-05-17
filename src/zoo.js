@@ -74,12 +74,20 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecies = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const animals = data.animals.find(animal => animal.id === firstSpecies).residents;
+  const older = animals.reduce((acc, curr) => (acc.age > curr.age ? acc : curr), []);
+
+  return Object.values(older);
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach((person) => {
+    data.prices[person] = Number(
+      (data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2),
+    );
+  });
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
