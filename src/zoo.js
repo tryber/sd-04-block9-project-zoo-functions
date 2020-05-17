@@ -86,21 +86,24 @@ const filterSex = (residents, sex) => {
 };
 
 const animalMap = (options = {}) => {
-  return data.animals.reduce((result, { name, location, residents }) => {
+  data.animals.reduce((result, { name, location, residents }) => {
     if (!result[location]) result[location] = [];
     if (Object.keys(options).length === 0) result[location].push(name);
-    if (options.includeNames === true && !('sex' in options)) {
-      result[location].push({ [name]: residents.map((resident) => resident.name) });
+    if ('sex' in options) {
+      filterSex();
     }
-    if (options.includeNames === true && 'sex' in options) {
-      result[location].push({
-        [name]: filterSex(residents, options.sex),
-      });
-    }
-    if (!('includeNames' in options) && 'sex' in options) {
-      const animal = residents.find((resident) => resident.sex === options.sex);
-      if (animal) result[location].push(name);
-    }
+    // if (options.includeNames === true && !('sex' in options)) {
+    //   result[location].push({ [name]: residents.map((resident) => resident.name) });
+    // }
+    // if (options.includeNames === true && 'sex' in options) {
+    //   result[location].push({
+    //     [name]: filterSex(residents, options.sex),
+    //   });
+    // }
+    // if (!('includeNames' in options) && 'sex' in options) {
+    //   const animal = residents.find((resident) => resident.sex === options.sex);
+    //   if (animal) result[location].push(name);
+    // }
     if (options.sorted === true) {
       let specie = result[location].find((animal) => Object.keys(animal)[0] === name);
       specie = specie[name].sort();
