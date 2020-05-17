@@ -1,10 +1,10 @@
 /*
 eslint no-unused-vars: [
-  "error",
+  'error',
   {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
+    'args': 'none',
+    'vars': 'local',
+    'varsIgnorePattern': 'data'
   }
 ]
 */
@@ -80,9 +80,67 @@ function entryCalculator(entrants) {
   );
 }
 
+const animaFiltered = (direction => data.animals.filter(animal => animal.location === direction));
+
+const noParameters = (direction => animaFiltered(direction).reduce((acc, cur) => {
+  acc.push(cur.name);
+  return acc;
+}, [])
+);
+
+const listNameAnimals = (animal => animal.residents.reduce((acc, cur) => {
+  acc.push(cur.name);
+  return acc;
+}, [])
+);
+
+const listNameAnimalsSexFiltered = (animal, sexFilter) =>
+  animal.residents
+    .filter(animalToFiltre => animalToFiltre.sex === sexFilter)
+    .reduce((acc, cur) => {
+      acc.push(cur.name);
+      return acc;
+    }, []);
+
+const includeNames = (direction =>
+  animaFiltered(direction).map(animal =>
+    ({ [animal.name]: listNameAnimals(animal) }),
+  ));
+
+const includeNamesSorted = (direction =>
+  animaFiltered(direction).map(animal =>
+    ({ [animal.name]: listNameAnimals(animal).sort() }),
+  ));
+
+const includeNamessexFilter = ((direction, sexFilter) =>
+  animaFiltered(direction).map(animal =>
+    ({ [animal.name]: listNameAnimalsSexFiltered(animal, sexFilter) }),
+  ));
+
 function animalMap(options) {
   // seu código aqui
+  const coord = ['NE', 'NW', 'SE', 'SW'];
+  const map = {};
+
+  for (let index = 0; index < coord.length; index += 1) {
+    let mapValue = {};
+    if (!options) {
+      mapValue = noParameters(coord[index]);
+    } else {
+      if (options.includeNames === true) mapValue = includeNames(coord[index]);
+      if (options.includeNames === true && options.sorted === true) {
+        mapValue = includeNamesSorted(coord[index]);
+      }
+      if (options.includeNames === true && !options.sex) {
+        mapValue = includeNamessexFilter(coord[index], options.sex);
+      }
+      if (options.sorted === true) mapValue = includeNamesSorted(coord[index]);
+    }
+    map[coord[index]] = mapValue;
+  }
+  return map;
 }
+console.log(animalMap({ includeNames: true, sex: 'female' }));
 
 function schedule(dayName) {
   const scheduleFull = {};
