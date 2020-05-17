@@ -12,10 +12,9 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(incomingArray) {
-  const arrayLength = incomingArray.length;
   let finalArray = [];
 
-  if (!arrayLength || arrayLength === 0) {
+  if (!Array.isArray(incomingArray) || arrayLength === 0) {
     return finalArray;
   }
   incomingArray.map((item) => {
