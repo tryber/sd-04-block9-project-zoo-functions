@@ -12,20 +12,22 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // seu código aqui
   return data.animals.filter(element => ids.includes(element.id));
+  // o filter retorna um array com os elementos que satisfaz a condição
+  // se os elementos não satifaz ele retorna um array vazio.
 }
-  // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
+  // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce')); // não acessa
+  // os valores da chave residents:
+  // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce')[0].residents);
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
   return data.animals.find(element => animal.includes(element.name))
-  // o find() me retorna o array do animal passado como parametro
-  // o loop ocorre só dentro desse array.
+  // o find() me retorna o o primeiro elemento o que quer que ele seja.
+  // nesse caso retorna o objeto que o nome está inserido
                       .residents.every(element => element.age >= age);
 }
 
-// console.log(animalsOlderThan('penguins', 10));
+  // console.log(animalsOlderThan('penguins', 10));
 
 function employeeByName(employeeName) {
   // seu código aqui
@@ -46,14 +48,14 @@ function isManager(id) {
   return data.employees.some(elements => elements.managers.find(elemId => elemId === id));
 }
 
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-// console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe', [], []));
+  // console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
 
 function animalCount(species) {
   // seu código aqui
@@ -83,10 +85,26 @@ function animalMap(options) {
   // seu código aqui
 }
 
+function checkSchedule(dia) {
+  if (data.hours[dia].open === 0 && data.hours[dia].close === 0) {
+    return 'CLOSED';
+  }
+  return `Open from ${data.hours[dia].open}am until ${data.hours[dia].close - 12}pm`;
+}
+
 function schedule(dayName) {
   // seu código aqui
-
+  const retorno = {};
+  if (!dayName) {
+    Object.keys(data.hours).forEach((key) => {
+      retorno[key] = checkSchedule(key);
+    });
+    return retorno;
+  }
+  return { [dayName]: checkSchedule(dayName) };
 }
+console.log(schedule('Tuesday'));
+
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -98,7 +116,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 // console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-// const data = require('./data');
+
 function increasePrices(percentage) {
   // seu código aqui
   return Object.keys(data.prices).forEach((valores) => {
