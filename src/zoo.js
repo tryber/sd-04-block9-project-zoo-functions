@@ -81,13 +81,15 @@ function animalMap(options) {
 function schedule(dayName) {
   // seu código aqui
 }
-
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(newPrices).forEach((element) => {
+    (newPrices[element] = Math.round(newPrices[element] *
+  ((percentage / 100) + 1) * 100) / 100);
+  });
 }
 
 function employeeCoverage(idOrName) {
