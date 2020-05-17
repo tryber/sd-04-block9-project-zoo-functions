@@ -18,7 +18,7 @@ function animalsOlderThan(animal, age) {
   const residentsWithAge = findAnimal.residents.filter(item => item.age >= age);
   const totalResidents = findAnimal.residents.length;
 
-  if(residentsWithAge.length === totalResidents){
+  if (residentsWithAge.length === totalResidents) {
     return true;
   }
 
