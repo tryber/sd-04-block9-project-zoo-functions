@@ -128,12 +128,21 @@ function schedule(...dayName) {
   return { [dayName]: diasObjeto[dayName] }; // Apresenta a programação de acordo com o dia passado
 }
 
+
+/* Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo
+funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const encontraFuncionario = funcionario.find(element => element.id === id).responsibleFor[0];
+  const encontraAnimal = animaisObj.find(element =>
+      element.id === encontraFuncionario).residents.reduce((maisVelho, animal) =>
+      (maisVelho.age > animal.age ? maisVelho : animal), 0);
+  return [encontraAnimal.name, encontraAnimal.sex, encontraAnimal.age];
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+
 }
 
 function employeeCoverage(idOrName) {
