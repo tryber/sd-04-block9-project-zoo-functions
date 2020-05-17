@@ -117,6 +117,12 @@ const incNam = () => {
   return oNam;
 };
 
+const incNamSor = () => {
+  const namOrd = inc(incLoc(), incNam());
+  Object.keys(namOrd).forEach(loc => namOrd[loc].forEach(esp => Object.keys(esp).forEach(pEsp => esp[pEsp].sort())));
+  return namOrd;
+}
+
 const incNamGen = () => {
   const oNamFem = data.animals.map(animal => {
     const o = {};
@@ -128,11 +134,9 @@ const incNamGen = () => {
 
 function animalMap(options) {
   if (!options) return incSpe(incLoc());
-  if (options.includeNames && options.sorted) {
-    const namOrd = inc(incLoc(), incNam());
-    Object.keys(namOrd).forEach(loc => namOrd[loc].forEach(esp => Object.keys(esp).forEach(pEsp => esp[pEsp].sort())));
-    return namOrd;
-  } else if (options.includeNames && options.sex === 'female')
+  if (options.includeNames && options.sorted)
+    return incNamSor();
+  else if (options.includeNames && options.sex === 'female')
     return inc(incLoc(), incNamGen());
   else if (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0)
     return incSpe(incLoc());
