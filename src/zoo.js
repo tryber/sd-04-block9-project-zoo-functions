@@ -109,8 +109,23 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
+/* Sem parâmetros, retorna um cronograma legível para humanos
+Se um único dia for passado, retorna somente este dia em um formato legível para humanos */
+
+const diasObjeto = {
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED',
+};
+
+function schedule(...dayName) {
   // seu código aqui
+  if (Object.keys(dayName).length === 0) return diasObjeto; // Caso o parâmetro seja 0, retorna 0
+  return { [dayName]: diasObjeto[dayName] }; // Apresenta a programação de acordo com o dia passado
 }
 
 function oldestFromFirstSpecies(id) {
