@@ -14,13 +14,14 @@ const data = require('./data');
 const animalsByIds = (...ids) => ids.map(id => data.animals.find(animal => animal.id === id));
 
 function animalsOlderThan(animal, age) {
-  const findAnimal = data.animals.find(item => item.name ===  animal)
-  const residentsWithAge = findAnimal.residents.filter(item => item.age >= age)
-  const totalResidents = findAnimal.residents.length
+  const findAnimal = data.animals.find(item => item.name === animal);
+  const residentsWithAge = findAnimal.residents.filter(item => item.age >= age);
+  const totalResidents = findAnimal.residents.length;
 
-  if(residentsWithAge.length === totalResidents) 
+  if(residentsWithAge.length === totalResidents){
     return true;
-    
+  }
+
   return false;
 }
 
