@@ -16,7 +16,7 @@ function animalsByIds(ids) {
 
   ids.map((item) => {
     const animals = data.animals.filter(animal => animal.id === item);
-    return finalArray.push(...animals)
+    return finalArray.push(...animals);
   });
 
   return finalArray;
