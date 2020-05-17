@@ -32,8 +32,6 @@ function animalsByIds(incomingArray) {
     return finalArray
   }
 }
-  
-}
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
