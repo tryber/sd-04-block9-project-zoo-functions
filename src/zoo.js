@@ -31,9 +31,15 @@ const createEmployee = (personalInfo, associatedWith) => ({
 const isManager = id => data.employees.some(item =>
   item.managers.some(value => value === id));
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {  
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+};
 
 function animalCount(species) {
   if (species) {
@@ -99,7 +105,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
