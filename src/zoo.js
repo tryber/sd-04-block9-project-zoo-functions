@@ -20,13 +20,13 @@ const animalsOlderThan = (animal, age) => data.animals.find(item => item.name ==
 const employeeByName = employeeName => data.employees
   .find(item => item.firstName === employeeName || item.lastName === employeeName) || {};
 
-  const createEmployee = (personalInfo, associatedWith) => ({
-    id: personalInfo.id,
-    firstName: personalInfo.firstName,
-    lastName: personalInfo.lastName,
-    managers: associatedWith.managers,
-    responsibleFor: associatedWith.responsibleFor,
-})
+const createEmployee = (personalInfo, associatedWith) => ({
+  id: personalInfo.id,
+  firstName: personalInfo.firstName,
+  lastName: personalInfo.lastName,
+  managers: associatedWith.managers,
+  responsibleFor: associatedWith.responsibleFor,
+});
 
 const isManager = id => data.employees.some(item =>
   item.managers.some(value => value === id));
