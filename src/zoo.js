@@ -82,7 +82,7 @@ function entryCalculator(entrants = 0) {
 const incLoc = () => {
   const o = {};
   data.animals.forEach((animal) => {
-    if (!o.hasOwnProperty(animal.location)) {
+    if (!Object.hasOwnProperty.call(o, animal.location)) {
       o[animal.location] = [];
     }
   });
@@ -91,7 +91,7 @@ const incLoc = () => {
 
 const incSpe = (incLocF) => {
   data.animals.forEach((animal) => {
-    if (incLocF.hasOwnProperty(animal.location)) {
+    if (Object.hasOwnProperty.call(incLocF, animal.location)) {
       incLocF[animal.location].push(animal.name);
     } else {
       incLocF[animal.location] = [animal.name];
@@ -103,7 +103,7 @@ const incSpe = (incLocF) => {
 const inc = (oLoc, namGen) => {
   data.animals.forEach((animal) => {
     for (let i = 0; i < namGen.length; i += 1) {
-      if (namGen[i].hasOwnProperty(animal.name)) {
+      if (Object.hasOwnProperty.call(namGen[i], animal.name)) {
         oLoc[animal.location].push(namGen[i]);
       }
     }
