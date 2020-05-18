@@ -24,9 +24,15 @@ const employeeByName = employeeName => data.employees
 
 // }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  let isManager = false
+
+  data.employees.map(item => {
+    if (item.managers.includes(id)) isManager = true
+  })
+
+  return isManager
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -69,7 +75,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
