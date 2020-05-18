@@ -138,7 +138,7 @@ const incNamGen = () => {
 
 const retAniMap = (opt) => {
   const op = opt && Object.keys(opt);
-  if (!op || op.includes('sex') && op.length === 1) return incSpe(incLoc());
+  if (!op || (op.includes('sex') && (op.length === 1))) return incSpe(incLoc());
   if (op.includes('includeNames') && op.includes('sorted')) return incNamSor();
   if (op.includes('includeNames') && op.includes('sex') && opt.sex === 'female') {
     return inc(incLoc(), incNamGen());
