@@ -24,8 +24,6 @@ function animalsOlderThan(animal, age) {
   return true;
 }
 
-console.log(animalsOlderThan('lions', 10));
-
 function employeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) return {};
@@ -60,6 +58,9 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
+  if (!entrants) return 0;
+  if (entrants.length === 0) return 0;
+  return Object.keys(entrants).reduce((acc, cur) => acc + (entrants[cur] * data.prices[cur]), 0);
 }
 
 function animalMap(options) {
