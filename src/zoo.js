@@ -47,7 +47,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName,
-  managers = [], responsibleFor = []) { 
+  managers = [], responsibleFor = []) {
   return data.employees.push({
     id,
     firstName,
@@ -164,26 +164,29 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  const hOpen = Object.values(data.hours).map(hour =>
-    hour.open === 0 ? 'CLOSED' : hour.open);
-  const hClose = Object.values(data.hours).map(hour =>
-    hour.close).map(h => h === 0 ? 'CLOSED' : h - 12);
+  const hOpen = Object.values(data.hours).map((hour) => {
+    if (hour.open !== 0) return hour.open;
+  });
+  const hClose = Object.values(data.hours).map((hour) => hour.close).map(h => {
+    if (h === 0)
+      return 'CLOSED';
+    else
+      return h - 12;
+  });
   const cron = {
-    'Tuesday': `Open from ${hOpen[0]}am until ${hClose[0]}pm`,
-    'Wednesday': `Open from ${hOpen[1]}am until ${hClose[1]}pm`,
-    'Thursday': `Open from ${hOpen[2]}am until ${hClose[2]}pm`,
-    'Friday': `Open from ${hOpen[3]}am until ${hClose[3]}pm`,
-    'Saturday': `Open from ${hOpen[4]}am until ${hClose[4]}pm`,
-    'Sunday': `Open from ${hOpen[5]}am until ${hClose[5]}pm`,
-    'Monday': hClose[6]
+    Tuesday: `Open from ${hOpen[0]}am until ${hClose[0]}pm`,
+    Wednesday: `Open from ${hOpen[1]}am until ${hClose[1]}pm`,
+    Thursday: `Open from ${hOpen[2]}am until ${hClose[2]}pm`,
+    Friday: `Open from ${hOpen[3]}am until ${hClose[3]}pm`,
+    Saturday: `Open from ${hOpen[4]}am until ${hClose[4]}pm`,
+    Sunday: `Open from ${hOpen[5]}am until ${hClose[5]}pm`,
+    Monday: hClose[6],
   };
   if (!dayName) {
     return cron;
   }
-  return {[dayName]: cron[dayName]};
+  return { [dayName]: cron[dayName] };
 }
-  
-// console.log(hOpen)
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
