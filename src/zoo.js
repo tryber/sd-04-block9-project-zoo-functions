@@ -11,34 +11,34 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(...ids) { // rest
-  return data.animals.filter((animal) => { // filter
+function animalsByIds(...ids) {
+  return data.animals.filter((animal) => {
     for (let i = 0; i < ids.length; i += 1) {
-      if (animal.id === ids[i]) return true;  // testar ?:
+      if (animal.id === ids[i]) return true;
     }
     return false;
   });
 }
 
 function animalsOlderThan(animal, age) {
-  return data.animals.find(species => species.name === animal).residents // find
-    .every(resident => resident.age >= age); // every
+  return data.animals.find(species => species.name === animal).residents
+    .every(resident => resident.age >= age);
 }
 
-function employeeByName(employeeName = {}) { // default params
-  if (Object.keys(employeeName).length === 0) return employeeName; // keys
-  return data.employees.find(employee => employee.firstName === employeeName || // find
+function employeeByName(employeeName = {}) {
+  if (Object.keys(employeeName).length === 0) return employeeName;
+  return data.employees.find(employee => employee.firstName === employeeName ||
     employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return Object.assign({}, personalInfo, associatedWith); // assign
+  return Object.assign({}, personalInfo, associatedWith);
 }
 
 function isManager(id) {
   let is = false;
-  data.employees.forEach(employee => // forEach
-    employee.managers.find((manager) => { // find
+  data.employees.forEach(employee =>
+    employee.managers.find((manager) => {
       if (manager === id) is = true;
       return is;
     }), // CC exigiu essa "," no final mas não entendi o porque ???
@@ -47,8 +47,8 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName,
-  managers = [], responsibleFor = []) { // default params
-  return data.employees.push({ // abreviation object literal
+  managers = [], responsibleFor = []) { 
+  return data.employees.push({
     id,
     firstName,
     lastName,
@@ -59,18 +59,18 @@ function addEmployee(id, firstName, lastName,
 
 function animalCount(species) {
   if (!species) {
-    return data.animals.reduce((acc, animal) => { // reduce
-      const { name } = animal; // object destructuring
+    return data.animals.reduce((acc, animal) => {
+      const { name } = animal;
       acc[name] = animal.residents.length;
       return acc;
     }, {});
   }
-  return data.animals.find(animal => animal.name === species).residents.length; // find
+  return data.animals.find(animal => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants = 0) {
-  if (Object.keys(entrants).length === 0) return 0; // keys
-  const { Adult, Senior, Child } = data.prices; // object destructuring
+  if (Object.keys(entrants).length === 0) return 0;
+  const { Adult, Senior, Child } = data.prices;
   const priceChild = entrants.Child * Child;
   const priceAdult = entrants.Adult * Adult;
   const priceSenior = entrants.Senior * Senior;
@@ -164,8 +164,26 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const hOpen = Object.values(data.hours).map(hour =>
+    hour.open === 0 ? 'CLOSED' : hour.open);
+  const hClose = Object.values(data.hours).map(hour =>
+    hour.close).map(h => h === 0 ? 'CLOSED' : h - 12);
+  const cron = {
+    'Tuesday': `Open from ${hOpen[0]}am until ${hClose[0]}pm`,
+    'Wednesday': `Open from ${hOpen[1]}am until ${hClose[1]}pm`,
+    'Thursday': `Open from ${hOpen[2]}am until ${hClose[2]}pm`,
+    'Friday': `Open from ${hOpen[3]}am until ${hClose[3]}pm`,
+    'Saturday': `Open from ${hOpen[4]}am until ${hClose[4]}pm`,
+    'Sunday': `Open from ${hOpen[5]}am until ${hClose[5]}pm`,
+    'Monday': hClose[6]
+  };
+  if (!dayName) {
+    return cron;
+  }
+  return {[dayName]: cron[dayName]};
 }
+  
+// console.log(hOpen)
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
