@@ -31,8 +31,9 @@ const isManager = id => data.employees.some(item =>
 // }
 
 function animalCount(species) {
-  if (species)
+  if (species) {
     return data.animals.find(item => item.name === species).residents.length;
+  }
 
   const animals = {};
 
@@ -58,10 +59,10 @@ function animalCount(species) {
 
 function oldestFromFirstSpecies(id) {
   const firstSpecie = data.employees.find(item => item.id === id).responsibleFor[0];
-    
+
   const oldestAnimal = data.animals.find(item => item.id === firstSpecie)
     .residents.sort((a, b) => (a.age > b.age) ? -1 : 1)[0];
-  
+
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
@@ -69,9 +70,20 @@ function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  let employees = {};
+
+  if(!idOrName) {
+    data.employees.map((employee) => employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor))
+  } else {
+    const employee = data.employees.find(item => item.id === idOrName || item.firstName === idOrName || item.lastName === idOrName);
+    employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor)
+  }
+  
+  return employees;
+}
+
+const getAnimals = (animalsIds) => animalsIds.map((id) => data.animals.find(animal => animal.id === id).name)
 
 module.exports = {
   // entryCalculator,
@@ -80,7 +92,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   // addEmployee,
   isManager,
   animalsOlderThan,
