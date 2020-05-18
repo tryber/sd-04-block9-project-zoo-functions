@@ -63,9 +63,49 @@ function entryCalculator(entrants) {
   return Object.keys(entrants).reduce((acc, cur) => acc + (entrants[cur] * data.prices[cur]), 0);
 }
 
+// AnimalMap
+const filterNames = local => data.animals.filter(({ location }) =>
+location === local).map(({ name }) => name);
+
+const getNames = local => data.animals.filter(({ location }) =>
+location === local).map(({ name, residents }) => ({ [name]: residents.map(item => item.name) }));
+
+const getNamesSorted = local => data.animals.filter(({ location }) =>
+location === local).map(({ name, residents }) =>
+({ [name]: residents.map(item => item.name).sort() }));
+
+const getGender = (local, animalGender) =>
+data.animals.filter(({ location }) =>
+location === local).map(({ name, residents }) =>
+({ [name]: residents.filter(({ sex }) =>
+sex === animalGender).map(item => item.name) }));
+
+const getLocations = [...new Set(data.animals.map((item => item.location)))];
+
+const checkOptions = (opts) => {
+  if (opts.includeNames === true && opts.sorted === true) {
+    return getLocations.reduce((acc, cur) => ({ ...acc, [cur]: getNamesSorted(cur) }), {});
+  }
+
+  if (opts.includeNames === true && opts.sex) {
+    return getLocations.reduce((acc, cur) => ({ ...acc, [cur]: getGender(cur, opts.sex) }), {});
+  }
+
+  if (opts.includeNames === true) {
+    return getLocations.reduce((acc, cur) => ({ ...acc, [cur]: getNames(cur) }), {});
+  }
+
+  return getLocations.reduce((acc, cur) =>
+  ({ ...acc, [cur]: filterNames(cur) }), {});
+};
+
 function animalMap(options) {
   // seu código aqui
+  return !options ? getLocations.reduce((acc, cur) =>
+    ({ ...acc, [cur]: filterNames(cur) }), {}) : checkOptions(options);
 }
+
+console.log(animalMap());
 
 function schedule(dayName) {
   // seu código aqui
