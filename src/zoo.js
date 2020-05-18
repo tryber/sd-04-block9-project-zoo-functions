@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { sortArray } = require('./sort');
+const { sortArray, getAnimals } = require('./sort');
 
 const animalsByIds = (...ids) => ids.map(id => data.animals.find(animal => animal.id === id));
 
@@ -20,9 +20,13 @@ const animalsOlderThan = (animal, age) => data.animals.find(item => item.name ==
 const employeeByName = employeeName => data.employees
   .find(item => item.firstName === employeeName || item.lastName === employeeName) || {};
 
-// function createEmployee(personalInfo, associatedWith) {
-
-// }
+  const createEmployee = (personalInfo, associatedWith) => ({
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+})
 
 const isManager = id => data.employees.some(item =>
   item.managers.some(value => value === id));
@@ -71,9 +75,6 @@ function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
-const getAnimals = animalsIds => animalsIds.map(id =>
-  data.animals.find(animal => animal.id === id).name);
-
 function employeeCoverage(idOrName) {
   const employees = {};
 
@@ -103,5 +104,5 @@ module.exports = {
   animalsOlderThan,
   oldestFromFirstSpecies,
   // increasePrices,
-  //createEmployee,
+  createEmployee,
 };
