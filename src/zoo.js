@@ -19,14 +19,14 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   // seu código aqui
   return data.animals.find(elemento => elemento.name === animal)
-  .residents.every(elemento => elemento.age >= age);
+    .residents.every(elemento => elemento.age >= age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) return {};
   return data.employees.find(element => (
-  element.firstName === employeeName || element.lastName === employeeName));
+    element.firstName === employeeName || element.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -124,7 +124,7 @@ function increasePrices(percentage) {
   // seu código aqui
   percentage = 1 + (percentage / 100);
   return Object.keys(data.prices)
-  .forEach((k) => { data.prices[k] = Math.round((data.prices[k] * percentage) * 100) / 100; });
+    .forEach((k) => { data.prices[k] = Math.round((data.prices[k] * percentage) * 100) / 100; });
 }
 
 const arrayOfAnimals = (nome) => {
@@ -136,21 +136,17 @@ const arrayOfAnimals = (nome) => {
   }, []);
 };
 
-function employeeCoverage(idOrName) {
+function employeeCoverage(idOrName = '') {
   // seu código aqui
-  if (!idOrName) {
-    return data.employees.reduce((acc, employee) => {
-      const key = `${employee.firstName} ${employee.lastName}`;
+  return data.employees.reduce((acc, emp) => { // emp é cada employee
+    if (emp.id === idOrName || emp.firstName === idOrName
+      || emp.lastName === idOrName || idOrName === '') {
+      const key = `${emp.firstName} ${emp.lastName}`;
       acc[key] = arrayOfAnimals(key);
       return acc;
-    }, {});
-  }
-  const funcionario = data.employees.find(emp => emp.id === idOrName
-    || emp.firstName === idOrName || emp.lastName === idOrName);
-  const nomeCompleto = `${funcionario.firstName} ${funcionario.lastName}`;
-  const obj = {};
-  obj[nomeCompleto] = arrayOfAnimals(nomeCompleto);
-  return obj;
+    }
+    return acc;
+  }, {});
 }
 
 module.exports = {
