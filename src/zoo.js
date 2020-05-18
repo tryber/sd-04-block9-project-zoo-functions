@@ -80,17 +80,19 @@ function oldestFromFirstSpecies(id) {
     });
   return [findAnimal.name, findAnimal.sex, findAnimal.age];
 }
+
+function increasePrices(percentage) {
+  Object.keys(data.prices)
+    .forEach((e) => {
+      data.prices[e] = Math.round((data.prices[e] * ((percentage / 100) + 1)) * 100) / 100;
+    });
+}
 //
 //  ////////// CONCLUIDOS ////////////
 //
 
 function animalMap(options) {
   // kjasd
-}
-
-
-function increasePrices(percentage) {
-  // seu código aqui
 }
 
 function employeeCoverage(idOrName) {
