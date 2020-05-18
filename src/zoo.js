@@ -133,14 +133,12 @@ const incNamGen = () => {
 }
 
 function animalMap(options) {
-  if (!options || (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0))
-    return incSpe(incLoc());
-  if (options.includeNames && options.sorted)
-    return incNamSor();
-  if (options.includeNames && options.sex === 'female')
+  const opt = options && Object.keys(options);
+  if (!opt || opt.includes('sex') && opt.length === 1) return incSpe(incLoc());
+  if (opt.includes('includeNames') && opt.includes('sorted')) return incNamSor();
+  if (opt.includes('includeNames') && opt.includes('sex') && options.sex === 'female')
     return inc(incLoc(), incNamGen());
-  if (options.includeNames)
-    return inc(incLoc(), incNam());
+  if (opt.includes('includeNames')) return inc(incLoc(), incNam());
 }
 
 function schedule(dayName) {
