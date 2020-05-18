@@ -138,15 +138,12 @@ const incNamGen = () => {
 
 function animalMap(options) {
   const opt = options && Object.keys(options);
-  const incL = incLoc();
-  const incN = incNam();
-  const incNG = incNamGen();
-  if (!opt || opt.includes('sex') && opt.length === 1) return incSpe(incL);
+  if (!opt || opt.includes('sex') && opt.length === 1) return incSpe(incLoc());
   if (opt.includes('includeNames') && opt.includes('sorted')) return incNamSor();
   if (opt.includes('includeNames') && opt.includes('sex') && options.sex === 'female') {
-    return inc(incL, incNG);
+    return inc(incLoc(), incNamGen());
   }
-  return inc(incL, incN);
+  return inc(incLoc(), incNam());
 }
 
 function schedule(dayName) {
