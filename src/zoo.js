@@ -203,7 +203,19 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const idAni = data.employees
+    .filter(employee => employee.id === id)
+    .map(emp => emp.responsibleFor[0]);
+  const ani = data.animals
+    .find(animal => animal.id === idAni[0]);
+  const age = ani.residents.reduce((acc, data) => {
+    if (data.age > acc) {
+      acc = data.age;
+    }
+    return acc;
+  }, 0);
+  const infs = ani.residents.filter(resident => resident.age === age);
+  return Object.keys(infs[0]).map(key => infs[0][key]);
 }
 
 function increasePrices(percentage) {
