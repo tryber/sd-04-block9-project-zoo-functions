@@ -70,20 +70,24 @@ function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
-function employeeCoverage(idOrName) {
-  let employees = {};
+const getAnimals = animalsIds => animalsIds.map(id =>
+  data.animals.find(animal => animal.id === id).name);
 
-  if(!idOrName) {
-    data.employees.map((employee) => employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor))
+function employeeCoverage(idOrName) {
+  const employees = {};
+
+  if (!idOrName) {
+    data.employees.map(employee =>
+      employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor));
   } else {
-    const employee = data.employees.find(item => item.id === idOrName || item.firstName === idOrName || item.lastName === idOrName);
-    employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor)
+    const employee = data.employees.find(item =>
+      item.id === idOrName || item.firstName === idOrName || item.lastName === idOrName);
+    employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor);
   }
-  
+
   return employees;
 }
 
-const getAnimals = (animalsIds) => animalsIds.map((id) => data.animals.find(animal => animal.id === id).name)
 
 module.exports = {
   // entryCalculator,
