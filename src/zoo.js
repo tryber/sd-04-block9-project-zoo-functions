@@ -55,13 +55,6 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
 };
 
 function animalCount(species) {
-  /*if ( !species ){
-    //result = data.animals.map( element =>`${element.name} : ${element.residents.length}`, {});
-  }
-  else {
-    const animalC = data.animals.find( element => element.name === species );
-    return animalC.residents.length;
-  } */
   if (!species) {
     const vazio = data.animals.reduce((acc, animalAtual) => {
       acc[animalAtual.name] = animalAtual.residents.length;
@@ -78,23 +71,22 @@ function entryCalculator(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) {
     return 0;
   }
-  const {Adult , Child , Senior} = data.prices;
+  const { Adult , Child , Senior } = data.prices;
   let total= 0;
 
-  if ( entrants.Adult > 0 ) {
+  if (entrants.Adult>0) {
     total += entrants.Adult * Adult;
   }
 
-  if ( entrants.Senior > 0 ) {
+  if (entrants.Senior>0) {
     total += entrants.Senior * Senior;
   }
 
-  if ( entrants.Child > 0 ) {
+  if (entrants.Child>0) {
     total += entrants.Child * Child;
   }
   return total;
-};
-console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+}
 function animalMap(options) {
   // seu código aqui
 }
