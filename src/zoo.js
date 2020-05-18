@@ -31,7 +31,19 @@ const isManager = (id) => data.employees.some((item) =>
 // }
 
 function animalCount(species) {
+  if (species) {
+    const countAnimals = data.animals.find(item => item.name === species).residents.length;
+    return countAnimals;
+  };
 
+  const animals = {};
+
+  data.animals.map(item => {
+    animals[item.name] = item.residents.length;
+    return animals;
+  });
+
+  return animals;
 }
 
 // function entryCalculator(entrants) {
