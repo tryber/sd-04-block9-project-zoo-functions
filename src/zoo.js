@@ -142,7 +142,7 @@ function animalMap(options) {
     if (sex && (Object.keys(options).length === 1)) return incSpe(incLoc());
     if (sorted) return incNamSor();
     if (sex && sex === 'female') return inc(incLoc(), incNamGen());
-    if (includeNames) return inc(incLoc(), incNam());
+    return inc(incLoc(), incNam());
   }
   return incSpe(incLoc());
 }
