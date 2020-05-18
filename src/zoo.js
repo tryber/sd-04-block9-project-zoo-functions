@@ -17,13 +17,8 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const findAnimals = data.animals.find(a => a.name === animal);
-  const residents = findAnimals.residents;
-
-  for (let i = 0; i < residents.length; i += 1) {
-    if (residents[i].age <= age) return false;
-  }
-  return true;
+  return data.animals.find(a => a.name === animal)
+  .residents.every(resident => resident.age > age);
 }
 
 function employeeByName(employeeName) {
@@ -38,56 +33,31 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const employees = data.employees;
-
-  return employees.some(({ managers }) => managers.includes(id));
-
-  // for (let i = 0; i < employees.length; i += 1) {
-  //   if (employees[i].managers.includes(id)) return true;
-  // }
-  // return false;
+  return data.employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployee = {
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  };
-  data.employees.push(newEmployee);
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  const allAnimals = data.animals.reduce((acc, curr) => {
-    acc[curr.name] = curr.residents.length;
-    return acc;
+  if (!species) {
+    return data.animals.reduce((acc, curr) => {
+      acc[curr.name] = curr.residents.length;
+      return acc;
+    }, {});
   }
-  , {});
-  if (!species) return allAnimals;
-
   return data.animals.find(animal => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
   if (!entrants || Object.entries(entrants).length === 0) return 0;
-
-  let amountToPay = 0;
-
-  const adult = data.prices.Adult * entrants.Adult;
-  const child = data.prices.Child * entrants.Child;
-  const senior = data.prices.Senior * entrants.Senior;
-
-  amountToPay = adult + child + senior;
-
-  return amountToPay;
+  return Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * data.prices[curr]), 0);
 }
 
 function findAnimal(location) {
-  const animals = data.animals.filter(animal => animal.location === location);
-  const animalsByLoc = animals.map(animal => animal.name);
-  return animalsByLoc;
+  return data.animals.filter(animal => animal.location === location)
+  .map(animal => animal.name);
 }
 
 function findNames(animal, sex) {
