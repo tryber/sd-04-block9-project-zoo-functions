@@ -78,11 +78,11 @@ function entryCalculator(entrants) {
     total += entrants.Adult * Adult;
   }
 
-  if (entrants.Senior>0) {
+  if (entrants.Senior > 0) {
     total += entrants.Senior * Senior;
   }
 
-  if (entrants.Child>0) {
+  if (entrants.Child > 0) {
     total += entrants.Child * Child;
   }
   return total;
