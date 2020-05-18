@@ -135,9 +135,40 @@ function oldestFromFirstSpecies(id) {
 
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const tabela = data.prices;
+  console.log(tabela);
+  const valorA = ((tabela.Adult + ((tabela.Adult * percentage) / 100) + 0.001));
+  console.log(valorA);
+  const valorC = ((tabela.Child + ((tabela.Child * percentage) / 100) + 0.001));
+  console.log(valorC);
+  const valorS = ((tabela.Senior + ((tabela.Senior * percentage) / 100) + 0.001));
+  console.log(valorS);
+  tabela.Adult = parseFloat(valorA.toFixed(2));
+  tabela.Senior = parseFloat(valorS.toFixed(2));
+  tabela.Child = parseFloat(valorC.toFixed(2));
+  console.log(tabela);
+  return tabela;
 }
-
+//   const tabelaPreco = Object.values(data.prices);
+// console.log(tabelaPreco)
+//   const precoA = (tabelaPreco[0] + ((tabelaPreco[0] * percentage) / 100) + 0.001);
+//   const precoS = (tabelaPreco[1] + ((tabelaPreco[1] * percentage) / 100) + 0.001);
+//   const precoC = (tabelaPreco[2] + ((tabelaPreco[2] * percentage) / 100) + 0.001);
+// console.log(precoA)
+// console.log(precoS)
+// console.log(precoC)
+//   const tabelaPreco1 = data.prices;
+// console.log(tabelaPreco1)
+//   tabelaPreco1.Adult = precoA
+//   tabelaPreco1.Child = precoC;
+//   tabelaPreco1.Senior = precoS;
+// console.log(tabelaPreco1.Adult)
+// console.log(tabelaPreco1.Child)
+// console.log(tabelaPreco1.Senior)
+// console.log(tabelaPreco1)
+//   return tabelaPreco1
+// }
+// console.log(increasePrices(50))
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
