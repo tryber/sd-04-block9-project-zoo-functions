@@ -55,6 +55,8 @@ function entryCalculator(entrants) {
   return obj.reduce((acc, atual) => acc + (data.prices[atual] * entrants[atual]), 0);
 }
 
+// animalMap
+
 function schedule(dayName) {
   const result = {};
   Object.entries(data.hours).forEach((days) => {
@@ -68,17 +70,24 @@ function schedule(dayName) {
   }
   return result;
 }
+
+function oldestFromFirstSpecies(id) {
+  const findEmplo = data.employees.find(e => e.id === id).responsibleFor[0];
+  const findAnimal = data.animals.find(e => e.id === findEmplo).residents
+    .reduce((old, neww) => {
+      if (old.age > neww.age) return old;
+      return neww;
+    });
+  return [findAnimal.name, findAnimal.sex, findAnimal.age];
+}
 //
 //  ////////// CONCLUIDOS ////////////
 //
 
 function animalMap(options) {
-  
+  // kjasd
 }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
 
 function increasePrices(percentage) {
   // seu código aqui
