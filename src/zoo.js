@@ -163,26 +163,38 @@ function animalMap(options) {
   return ret;
 }
 
-function schedule(dayName) {
+// schedule functions
+
+const opn = () => {
   const hOpen = Object.values(data.hours).map((hour) => {
     let h;
     if (hour.open !== 0) h = hour.open;
     return h;
   });
+  return hOpen;
+};
+
+const cls = () => {
   const hClose = Object.values(data.hours).map(hour => hour.close).map((h) => {
     let n;
     if (h === 0) n = 'CLOSED';
     if (h !== 0) n = h - 12;
     return n;
   });
+  return hClose;
+};
+
+function schedule(dayName) {
+  const open = opn();
+  const close = cls();
   const cron = {
-    Tuesday: `Open from ${hOpen[0]}am until ${hClose[0]}pm`,
-    Wednesday: `Open from ${hOpen[1]}am until ${hClose[1]}pm`,
-    Thursday: `Open from ${hOpen[2]}am until ${hClose[2]}pm`,
-    Friday: `Open from ${hOpen[3]}am until ${hClose[3]}pm`,
-    Saturday: `Open from ${hOpen[4]}am until ${hClose[4]}pm`,
-    Sunday: `Open from ${hOpen[5]}am until ${hClose[5]}pm`,
-    Monday: hClose[6],
+    Tuesday: `Open from ${open[0]}am until ${close[0]}pm`,
+    Wednesday: `Open from ${open[1]}am until ${close[1]}pm`,
+    Thursday: `Open from ${open[2]}am until ${close[2]}pm`,
+    Friday: `Open from ${open[3]}am until ${close[3]}pm`,
+    Saturday: `Open from ${open[4]}am until ${close[4]}pm`,
+    Sunday: `Open from ${open[5]}am until ${close[5]}pm`,
+    Monday: close[6],
   };
   if (!dayName) {
     return cron;
