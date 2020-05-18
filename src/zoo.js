@@ -14,7 +14,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   return data.animals.filter((elem) =>
-    ids.find((id) => id === elem.id));
+    ids.includes(elem.id));
 }
 
 function animalsOlderThan(animal, age) {
@@ -31,10 +31,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-//  const { id, firstName, lastName } = personalInfo;
-//  const { managers, responsibleFor } = associatedWith;
-//  return { id, firstName, lastName, managers, responsibleFor };
-  return Object.assign({}, personalInfo, associatedWith)
+  return Object.assign({}, personalInfo, associatedWith);
 }
 
 function isManager(id) {
