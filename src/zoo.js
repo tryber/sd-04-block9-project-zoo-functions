@@ -136,15 +136,11 @@ const incNamGen = () => {
   return oNamFem;
 };
 
-// const retAniMap = (opt) => {
-//   
-// };
-
 function animalMap(options) {
   const op = options && Object.keys(options);
   if (!op || (op.includes('sex') && (op.length === 1))) return incSpe(incLoc());
-  if (op.includes('includeNames') && op.includes('sorted')) return incNamSor();
-  if (op.includes('includeNames') && op.includes('sex') && options.sex === 'female') {
+  if (op.includes('sorted')) return incNamSor();
+  if (op.includes('sex') && options.sex === 'female') {
     return inc(incLoc(), incNamGen());
   }
   return inc(incLoc(), incNam());
