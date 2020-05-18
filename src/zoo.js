@@ -169,12 +169,10 @@ function schedule(dayName) {
     if (hour.open !== 0) h = hour.open;
     return h;
   });
-  const hClose = Object.values(data.hours).map((hour) => hour.close).map(h => {
+  const hClose = Object.values(data.hours).map(hour => hour.close).map((h) => {
     let n;
-    if (h === 0)
-      n = 'CLOSED';
-    else
-      n = h - 12;
+    if (h === 0) n = 'CLOSED';
+    if (h !== 0) n = h - 12;
     return n;
   });
   const cron = {
