@@ -146,7 +146,7 @@ function animalMap(options) {
   if (opt.includes('includeNames') && opt.includes('sex') && options.sex === 'female') {
     return inc(incL, incNG);
   }
-  if (opt.includes('includeNames')) return inc(incL, incN);
+  return inc(incL, incN);
   //   if (!options || (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0))
   //     return incSpe(incLoc());
   //   if (options.includeNames && options.sorted)
