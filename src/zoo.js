@@ -16,6 +16,7 @@ const newAnimals = data.animals;
 const newEmployee = data.employees;
 const newPrices = data.prices;
 
+
 const animalsByIds = (...ids) => {
   const idAnimals = newAnimals.filter(element => ids.includes(element.id));
   console.log(idAnimals);
@@ -80,9 +81,12 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
+
 }
+
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+
 }
 
 function increasePrices(percentage) {
