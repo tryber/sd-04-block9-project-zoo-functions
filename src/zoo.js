@@ -218,33 +218,10 @@ function oldestFromFirstSpecies(id) {
   return Object.keys(infs[0]).map(key => infs[0][key]);
 }
 
-// versão de increasePrices correta
-
-// function increasePrices(percentage) {
-//   // let { Adult, Senior, Child } = data.prices;
-//   // Adult = (Math.round(Adult * (percentage / 100)) + Adult).toFixed(2);
-//   // Senior = (Math.round(Senior * (percentage / 100)) + Senior + 0.50).toFixed(2);
-//   // Child = (Math.round(Child * (percentage / 100)) + Child + 0.50).toFixed(2);
-//   let Adult = 3;
-//   let Senior = 4;
-//   let Child = 5;
-//   // parseFloat(Adult);
-//   // parseFloat(Senior);
-//   // parseFloat(Child);
-//   return {
-//     Adult,
-//     Senior,
-//     Child,
-//   };
-// }
-
-// versão errada
-
 function increasePrices(percentage) {
-  Object.keys(data.prices).forEach((key) => {
-    data.prices[key] = parseFloat((data.prices[key] +
-    (data.prices[key] * ((percentage + 0.01) / 100))).toFixed(2));
-  });
+  Object.keys(data.prices).forEach(price => 
+    data.prices[price] = parseFloat(((data.prices[price] *
+      ((percentage + 0.01) / 100 + 1))).toFixed(2)));
 }
 
 function employeeCoverage(idOrName) {
