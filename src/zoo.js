@@ -160,6 +160,7 @@ function animalMap(options) {
     ret = if2(op);
     return ret;
   }
+  return ret;
 }
 
 function schedule(dayName) {
