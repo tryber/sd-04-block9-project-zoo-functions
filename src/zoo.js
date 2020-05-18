@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { sortArray } = require('./sort');
 
 const animalsByIds = (...ids) => ids.map(id => data.animals.find(animal => animal.id === id));
 
@@ -60,8 +61,8 @@ function animalCount(species) {
 function oldestFromFirstSpecies(id) {
   const firstSpecie = data.employees.find(item => item.id === id).responsibleFor[0];
 
-  const oldestAnimal = data.animals.find(item => item.id === firstSpecie)
-    .residents.sort((a, b) => { return (a.age > b.age) ? -1 : 1 })[0];
+  const animals = data.animals.find(item => item.id === firstSpecie);
+  const oldestAnimal = sortArray(animals.residents);
 
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
@@ -78,7 +79,7 @@ function employeeCoverage(idOrName) {
 
   if (!idOrName) {
     data.employees.forEach(employee =>
-      employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor));
+      (employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor)));
   } else {
     const employee = data.employees.find(item =>
       item.id === idOrName || item.firstName === idOrName || item.lastName === idOrName);
