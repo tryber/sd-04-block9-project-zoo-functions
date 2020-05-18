@@ -71,10 +71,10 @@ function entryCalculator(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) {
     return 0;
   }
-  const { Adult , Child , Senior } = data.prices;
-  let total= 0;
+  const { Adult, Child, Senior } = data.prices;
+  let total = 0;
 
-  if (entrants.Adult>0) {
+  if (entrants.Adult > 0) {
     total += entrants.Adult * Adult;
   }
 
