@@ -140,8 +140,10 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  increasePrices(50)
+  console.log(data.prices);
 }
+employeeCoverage('oi');
 
 module.exports = {
   entryCalculator,
