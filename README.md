@@ -102,7 +102,7 @@ Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão 
   - Sem parâmetros, returna animais e suas quantidades
   - Com o nome de uma espécie de animal, retorna somente a quantidade
 
-### 8- Implemente a função entryCalculator:
+### 8- Implemente a função entryCalculator: 
   - Returna 0 se nenhum argumento for passado
   - Retorna 0 se um objeto vazio for passado
   - Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
