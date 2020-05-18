@@ -55,7 +55,7 @@ function animalCount(species) {
   // seu código aqui
   if (!species) {
     const results = {};
-    data.animals.forEach(animal => (results[animal.name] = animal.residents.length));
+    data.animals.forEach((animal) => { results[animal.name] = animal.residents.length; });
     return results;
   } return data.animals.find(animal => animal.name === species).residents.length;
 }
@@ -98,11 +98,11 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const firstResponibleSpecie = data.employees
-  .find(employee => employee.id === id).responsibleFor[0];
+    .find(employee => employee.id === id).responsibleFor[0];
   const animalsFromSpecie = data.animals
-  .find(animal => animal.id === firstResponibleSpecie).residents;
+    .find(animal => animal.id === firstResponibleSpecie).residents;
   const elderFromSpecie = animalsFromSpecie
-  .reduce((acc, curr) => (acc.age > curr.age ? acc : curr), []);
+    .reduce((acc, curr) => (acc.age > curr.age ? acc : curr), []);
   return (Object.values(elderFromSpecie));
 }
 
@@ -117,6 +117,15 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const employeeList = data.employees.reduce((employeeListObject, employe) => {
+    employeeListObject[`${employe.firstName} ${employe.lastName}`] = employe.responsibleFor
+    .map(ids => data.animals.find(({ id }) => (id === ids)).name);
+    return employeeListObject;
+  }, {});
+  const arr = data.employees.find(({ id, firstName, lastName }) =>
+      id === idOrName || firstName === idOrName || lastName === idOrName);
+  if (!idOrName) return employeeList;
+  return { [`${arr.firstName} ${arr.lastName}`]: employeeList[`${arr.firstName} ${arr.lastName}`] };
 }
 
 module.exports = {
