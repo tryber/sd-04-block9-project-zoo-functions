@@ -147,14 +147,6 @@ function animalMap(options) {
     return inc(incL, incNG);
   }
   return inc(incL, incN);
-  //   if (!options || (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0))
-  //     return incSpe(incLoc());
-  //   if (options.includeNames && options.sorted)
-  //     return incNamSor();
-  //   if (options.includeNames && options.sex === 'female')
-  //     return inc(incLoc(), incNamGen());
-  //   if (options.includeNames)
-  //     return inc(incLoc(), incNam());
 }
 
 function schedule(dayName) {
