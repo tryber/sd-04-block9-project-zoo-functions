@@ -85,8 +85,19 @@ function animalMap(options) {
   // seu código aqui
 }
 
+const montaHorario = (dayname) => {
+  if (dayname === 'Monday') return 'CLOSED';
+  return `Open from ${data.hours[dayname].open}am until ${data.hours[dayname].close - 12}pm`;
+};
+
 function schedule(dayName) {
-  // seu código aqui
+  const resp = {};
+  if (!dayName) Object.keys(data.hours).forEach(element => (resp[element] = montaHorario(element)));
+  else {
+    const aux = Object.keys(data.hours).find(element => element === dayName);
+    resp[dayName] = montaHorario(aux);
+  }
+  return resp;
 }
 
 function oldestFromFirstSpecies(id) {
