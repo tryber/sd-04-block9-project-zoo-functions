@@ -136,18 +136,25 @@ const incNamGen = () => {
   return oNamFem;
 };
 
-const retAniMap = (opt) => {
-  const op = opt && Object.keys(opt);
-  if (!op || (op.includes('sex') && (op.length === 1))) return incSpe(incLoc());
-  if (op.includes('includeNames') && op.includes('sorted')) return incNamSor();
-  if (op.includes('includeNames') && op.includes('sex') && opt.sex === 'female') {
-    return inc(incLoc(), incNamGen());
-  }
-  return inc(incLoc(), incNam());
-};
+// const retAniMap = (opt) => {
+//   const op = opt && Object.keys(opt);
+//   if (!op || (op.includes('sex') && (op.length === 1))) return incSpe(incLoc());
+//   if (op.includes('includeNames') && op.includes('sorted')) return incNamSor();
+//   if (op.includes('includeNames') && op.includes('sex') && opt.sex === 'female') {
+//     return inc(incLoc(), incNamGen());
+//   }
+//   return inc(incLoc(), incNam());
+// };
 
 function animalMap(options) {
-  return retAniMap(options);
+  if (options) {
+    const {includeNames, sorted, sex} = options;
+    if (sex && (Object.keys('sex').length === 1)) return incSpe(incLoc());
+    if (includeNames && sorted) return incNamSor();
+    if (includeNames && sex && sex === 'female') return inc(incLoc(), incNamGen());
+    if (includeNames) return inc(incLoc(), incNam());
+  }
+  return incSpe(incLoc());
 }
 
 function schedule(dayName) {
