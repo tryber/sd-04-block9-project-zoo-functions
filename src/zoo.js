@@ -120,8 +120,23 @@ function oldestFromFirstSpecies(id) {
   return resp;
 }
 
+const calculaPrecos = (preco, percentage) => {
+  const multip = (percentage / 100) + 1.0;
+  const calculo = preco * multip;
+  return (calculo + 0.005).toFixed(2);
+};
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const resp = {};
+  const respA = calculaPrecos(Object.values(data.prices)[0], percentage);
+  const respS = calculaPrecos(Object.values(data.prices)[1], percentage);
+  const respC = calculaPrecos(Object.values(data.prices)[2], percentage);
+
+  resp[Object.keys(data.prices)[0]] = respA;
+  resp[Object.keys(data.prices)[1]] = respS;
+  resp[Object.keys(data.prices)[2]] = respC;
+
+  Object.assign(data.prices, resp);
 }
 
 function employeeCoverage(idOrName) {
