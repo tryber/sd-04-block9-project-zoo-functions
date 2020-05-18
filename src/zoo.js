@@ -1,6 +1,6 @@
 /*
 eslint no-unused-vars: [
-  "error", "1"
+  "error",
   {
     "args": "none",
     "vars": "local",
@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { sortArray, getAnimals } = require('./handlres');
+const { sortArray, getAnimals } = require('./handlers');
 
 const animalsByIds = (...ids) => ids.map(id => data.animals.find(animal => animal.id === id));
 
