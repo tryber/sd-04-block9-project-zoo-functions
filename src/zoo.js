@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+// VARIÁVEL DO OBJETO DE ANIMAIS
 const animaisObj = data.animals;
 
 // Caso receba nenhum parâmetro, necessário retornar um array vazio
@@ -133,6 +134,7 @@ function schedule(...dayName) {
 funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+
   const encontraFuncionario = funcionario.find(element => element.id === id).responsibleFor[0];
   const encontraAnimal = animaisObj.find(element =>
       element.id === encontraFuncionario).residents.reduce((maisVelho, animal) =>
@@ -140,9 +142,16 @@ function oldestFromFirstSpecies(id) {
   return [encontraAnimal.name, encontraAnimal.sex, encontraAnimal.age];
 }
 
+// Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
+
 function increasePrices(percentage) {
   // seu código aqui
-
+  return Object.keys(precosObj).map((element) => {
+      // USA FUNÇÃO MAP PARA ATRIBUIR AS PROPRIEDADES DE ELEMENT NO precosObj
+    precosObj[element] =
+        ((Number(precosObj[element]) / 100) * ((100 + percentage) + 0.001)).toFixed(2);
+    return precosObj[element];
+  });
 }
 
 function employeeCoverage(idOrName) {
