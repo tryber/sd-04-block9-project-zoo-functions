@@ -25,13 +25,7 @@ const employeeByName = employeeName => data.employees
 // }
 
 function isManager(id) {
-  let isManagers = false;
-
-  data.employees.map((item) => {
-    if (item.managers.includes(id)) isManagers = true;
-  });
-
-  return isManagers;
+  return data.employees.some((item) => item.managers.some((value) => value === id))
 }
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
