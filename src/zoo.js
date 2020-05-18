@@ -117,30 +117,58 @@ const includeNamessexFilter = ((direction, sexFilter) =>
     ({ [animal.name]: listNameAnimalsSexFiltered(animal, sexFilter) }),
   ));
 
-function animalMap(options) {
-  // seu código aqui
-  const coord = ['NE', 'NW', 'SE', 'SW'];
-  const map = {};
+const includeNamessexFilter2 = ((direction, sexFilter) =>
+  animaFiltered(direction).map(animal =>
+    animal.name,
+  ));
 
+
+const coord = ['NE', 'NW', 'SE', 'SW'];
+const map = {};
+const mapCreate = (options, mapValueIndex) => {
   for (let index = 0; index < coord.length; index += 1) {
     let mapValue = {};
-    if (!options) {
-      mapValue = noParameters(coord[index]);
-    } else {
-      if (options.includeNames === true) mapValue = includeNames(coord[index]);
-      if (options.includeNames === true && options.sorted === true) {
-        mapValue = includeNamesSorted(coord[index]);
-      }
-      if (options.includeNames === true && !options.sex) {
-        mapValue = includeNamessexFilter(coord[index], options.sex);
-      }
-      if (options.sorted === true) mapValue = includeNamesSorted(coord[index]);
-    }
+    const array = [
+      noParameters(coord[index]),
+      includeNames(coord[index]),
+      includeNamesSorted(coord[index]),
+      includeNamessexFilter(coord[index], 'female'),
+      includeNamessexFilter(coord[index], 'male'),
+      includeNamessexFilter2(coord[index], 'female'),
+      includeNamessexFilter2(coord[index], 'male'),
+    ];
+    mapValue = array[mapValueIndex];
     map[coord[index]] = mapValue;
   }
   return map;
+};
+
+function animalMap(options) {
+  let mapValueIndex = 0;
+  switch (true) {
+    case typeof options === 'undefined':
+      mapValueIndex = 0;
+      break;
+    case options.includeNames && options.sorted:
+      mapValueIndex = 2;
+      break;
+    case options.includeNames && options.sex === 'female':
+      mapValueIndex = 3;
+      break;
+    case options.includeNames === true && options.sex === 'male':
+      mapValueIndex = 4;
+      break;
+    case options.includeNames && !options.sorted:
+      mapValueIndex = 1;
+      break;
+    case options.sex === 'female' && !options.includeNames:
+      mapValueIndex = 5;
+      break;
+    default : mapValueIndex = 6;
+  }
+  return mapCreate(options, mapValueIndex);
 }
-console.log(animalMap({ includeNames: true, sex: 'female' }));
+
 
 function schedule(dayName) {
   const scheduleFull = {};
