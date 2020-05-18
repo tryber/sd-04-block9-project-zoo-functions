@@ -20,8 +20,8 @@ const animalsByIds = (...ids) =>
 // Ao passar o nome de uma espécie e uma idade, testa se todos os animais
 // desta espécie possuem a idade mínima especificada
 const animalsOlderThan = (animal, age) => {
-  data.animals.find(especie => especie.name === animal).residents
-    .every(residente => residente.age >= age);
+  const findAnimal = data.animals.find(especie => especie.name === animal);
+  return findAnimal.residents.every(residente => residente.age >= age);
 };
 
 // 1 - Sem parâmetros, retorna um objeto vazio
@@ -40,9 +40,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 // Testa se o id passado é de um gerente
-const isManager = (id) => {
+const isManager = id =>
   data.employees.some(gerenteID => gerenteID.managers.find(ids => ids === id));
-};
+
 
 // Adiciona um funcionário no fim da lista
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
@@ -64,8 +64,12 @@ const animalCount = (species) => {
 // Retorna 0 se um objeto vazio for passado
 // Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
 // Returna 0 se nenhum argumento for passado
-const entryCalculator = (entrants = {}) => {
-  Object.keys(entrants).reduce((acc, chave) => acc + (entrants[chave] * data.prices[chave]), 0);
+const entryCalculator = (entrants) => {
+  if (entrants === undefined || !Object.keys(entrants).length) {
+    return 0;
+  }
+  return Object.keys(entrants)
+  .reduce((acc, chave) => acc + (entrants[chave] * data.prices[chave]), 0);
 };
 
 function animalMap(options) {
@@ -108,7 +112,7 @@ const increasePrices = percentage =>
   Object.keys(data.prices)
     .forEach((key) => {
       data.prices[key] =
-        Math.round((100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100);
+      Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100;
     });
 
 function employeeCoverage(idOrName) {
