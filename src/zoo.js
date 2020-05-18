@@ -77,7 +77,7 @@ function employeeCoverage(idOrName) {
   const employees = {};
 
   if (!idOrName) {
-    data.employees.map(employee =>
+    data.employees.forEach(employee =>
       employees[`${employee.firstName} ${employee.lastName}`] = getAnimals(employee.responsibleFor));
   } else {
     const employee = data.employees.find(item =>
