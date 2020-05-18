@@ -24,7 +24,7 @@ const employeeByName = employeeName => data.employees
 // }
 
 function isManager(id) {
-  return data.employees.some(item => item.managers.some(value=> value === id));
+  return data.employees.some(item => item.managers.some(value => value === id));
 }
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
