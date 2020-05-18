@@ -93,8 +93,7 @@ const incSpe = (incLocF) => {
   data.animals.forEach((animal) => {
     if (incLocF.hasOwnProperty(animal.location)) {
       incLocF[animal.location].push(animal.name);
-    }
-    else {
+    } else {
       incLocF[animal.location] = [animal.name];
     }
   });
@@ -110,7 +109,7 @@ const inc = (oLoc, namGen) => {
     }
   });
   return oLoc;
-}
+};
 
 const incNam = () => {
   const oNam = data.animals.map((animal) => {
@@ -126,16 +125,16 @@ const incNamSor = () => {
   Object.keys(namOrd).forEach(loc => namOrd[loc].forEach(esp =>
     Object.keys(esp).forEach(pEsp => esp[pEsp].sort())));
   return namOrd;
-}
+};
 
 const incNamGen = () => {
-  const oNamFem = data.animals.map(animal => {
+  const oNamFem = data.animals.map((animal) => {
     const o = {};
     o[animal.name] = animal.residents.filter(resident => resident.sex === 'female').map(res => res.name);
     return o;
   });
   return oNamFem;
-}
+};
 
 function animalMap(options) {
   const opt = options && Object.keys(options);
@@ -144,8 +143,9 @@ function animalMap(options) {
   const incNG = incNamGen();
   if (!opt || opt.includes('sex') && opt.length === 1) return incSpe(incL);
   if (opt.includes('includeNames') && opt.includes('sorted')) return incNamSor();
-  if (opt.includes('includeNames') && opt.includes('sex') && options.sex === 'female')
+  if (opt.includes('includeNames') && opt.includes('sex') && options.sex === 'female') {
     return inc(incL, incNG);
+  }
   if (opt.includes('includeNames')) return inc(incL, incN);
   //   if (!options || (!options.hasOwnProperty('includeNames') && Object.keys(options).length > 0))
   //     return incSpe(incLoc());
