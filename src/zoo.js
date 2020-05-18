@@ -136,12 +136,28 @@ const incNamGen = () => {
   return oNamFem;
 };
 
+const if1 = (opt) => {
+  if (opt.includes('sex')) return incSpe(incLoc());
+  if (opt.includes('includeNames')) return inc(incLoc(), incNam());
+};
+
+const if2 = (opt) => {
+  if (opt.includes('includeNames') && opt.includes('sorted')) return incNamSor();
+  if (opt.includes('includeNames') && opt.includes('sex')) return inc(incLoc(), incNamGen());
+};
+
 function animalMap(options) {
   const op = options && Object.keys(options);
-  if (!op || (op.includes('sex') && (op.length === 1))) return incSpe(incLoc());
-  if (op.includes('sorted')) return incNamSor();
-  if (op.includes('sex') && options.sex === 'female') return inc(incLoc(), incNamGen());
-  return inc(incLoc(), incNam());
+  let ret = {};
+  if (!op) return incSpe(incLoc());
+  if (op.length === 1) {
+    ret = if1(op);
+    return ret;
+  }
+  if (op.length === 2) {
+    ret = if2(op);
+    return ret;
+  }
 }
 
 function schedule(dayName) {
