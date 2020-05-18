@@ -165,13 +165,17 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const hOpen = Object.values(data.hours).map((hour) => {
-    if (hour.open !== 0) return hour.open;
+    let h;
+    if (hour.open !== 0) h = hour.open;
+    return h;
   });
   const hClose = Object.values(data.hours).map((hour) => hour.close).map(h => {
+    let n;
     if (h === 0)
-      return 'CLOSED';
+      n = 'CLOSED';
     else
-      return h - 12;
+      n = h - 12;
+    return n;
   });
   const cron = {
     Tuesday: `Open from ${hOpen[0]}am until ${hClose[0]}pm`,
