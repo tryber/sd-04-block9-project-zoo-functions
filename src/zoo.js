@@ -82,8 +82,9 @@ function entryCalculator(entrants = 0) {
 const incLoc = () => {
   const o = {};
   data.animals.forEach((animal) => {
-    if (!o.hasOwnProperty(animal.location))
+    if (!o.hasOwnProperty(animal.location)) {
       o[animal.location] = [];
+    }
   });
   return o;
 };
@@ -134,11 +135,14 @@ const incNamGen = () => {
 
 function animalMap(options) {
   const opt = options && Object.keys(options);
-  if (!opt || opt.includes('sex') && opt.length === 1) return incSpe(incLoc());
+  const incL = incLoc();
+  const incN = incNam();
+  const incNG = incNamGen();
+  if (!opt || opt.includes('sex') && opt.length === 1) return incSpe(incL);
   if (opt.includes('includeNames') && opt.includes('sorted')) return incNamSor();
   if (opt.includes('includeNames') && opt.includes('sex') && options.sex === 'female')
-    return inc(incLoc(), incNamGen());
-  if (opt.includes('includeNames')) return inc(incLoc(), incNam());
+    return inc(incL, incNG);
+  if (opt.includes('includeNames')) return inc(incL, incN);
 }
 
 function schedule(dayName) {
