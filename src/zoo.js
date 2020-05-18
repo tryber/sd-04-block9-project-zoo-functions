@@ -23,17 +23,16 @@ const employeeByName = employeeName => data.employees
 
 // }
 
-function isManager(id) {
-  return data.employees.some(item => item.managers.some(value => value === id));
-}
+const isManager = (id) => data.employees.some((item) => 
+  item.managers.some((value) => value === id))
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
 // }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+
+}
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -62,7 +61,7 @@ function isManager(id) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
