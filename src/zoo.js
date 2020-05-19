@@ -88,14 +88,44 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
+  /* if (options === undefined) {
+    const NE = data.animals.filter(i => i.location === 'NE').map(indice => indice.name);
+    const NW = data.animals.filter(i => i.location === 'NW').map(indice => indice.name);
+    const SE = data.animals.filter(i => i.location === 'SE').map(indice => indice.name);
+    const SW = data.animals.filter(i => i.location === 'SW').map(indice => indice.name);
+
+    options = {
+      NE: NE,
+      NW: NW,
+      SE: SE,
+      SW: SW
+    };
+
+    return options;
+  };*/
 }
 
 function schedule(dayName) {
   // seu código aqui
+  /* if (dayName === undefined) {
+    dayName = data.hours;
+    return dayName;
+    };*/
 }
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const employee = id;
+  let animal = data.employees.find(i => i.id === employee);
+  animal = animal.responsibleFor[0];
+
+  const carac = data.animals.find(i => i.id === animal);
+  const ordem = carac.residents.sort((a1, a2) => a2.age - a1.age);
+  const name = ordem[0].name;
+  const sex = ordem[0].sex;
+  const age = ordem[0].age;
+
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
