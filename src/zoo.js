@@ -22,16 +22,16 @@ data.animals
 const employeeByName = (employeeName) => {
   if (!employeeName) return {};
   return data.employees
-  .find(e => e.firstName === employeeName || e.lastName === employeeName)
-}
+  .find(e => e.firstName === employeeName || e.lastName === employeeName);
+};
 
 const createEmployee = (personalInfo, associatedWith) => ({
   ...personalInfo,
   ...associatedWith,
 });
 
-const isManager = (id) =>
-  data.employees.some(({ managers }) => managers.some((gerente) => gerente === id));
+const isManager = id =>
+  data.employees.some(({ managers }) => managers.some(gerente => gerente === id));
 
 const addEmployee = (
   id,
