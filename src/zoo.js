@@ -52,8 +52,16 @@ const animalCount = (species) => {
   return data.animals.find(({ name }) => name === species).residents.length;
 };
 
+const entryCalculator = (entrants) => {
+  if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
+  return Object.keys(entrants).reduce(
+    (price, person) => price + (entrants[person] * data.prices[person]),
+    0,
+  );
+};
+
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
