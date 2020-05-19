@@ -108,20 +108,21 @@ function schedule(dayName) {
       ...newO,
       [element]: menssage(data.hours[element].open, data.hours[element].close),
     };
+    return newO
   });
   return newO;
 }
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  const funcionario = data.employees.find(element => element.id === id);
+  const funcionario = data.employees.find((element) => element.id === id);
   let animalRF = funcionario.responsibleFor[0];
   animalRF = data.animals.find(element => element.id === animalRF);
   let maior = animalRF.residents[0];
-  animalRF = animalRF.residents.map(element => {
-    if(element.age > maior.age) {
+  animalRF = animalRF.residents.map((element) => {
+    if (element.age > maior.age) {
       maior = element;
     }
-  return maior;
+    return maior;
   });
   return Object.values(animalRF[animalRF.length - 1]);
 }
