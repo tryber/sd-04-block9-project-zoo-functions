@@ -70,21 +70,19 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const arrayHours = Object.values(data.hours);
-  const message = arrayHours.map(time => {
-    if(time.open === 0 && time.close === 0 ) {
+  const message = arrayHours.map((time) => {
+    if (time.open === 0 && time.close === 0) {
       return 'CLOSED';
-    } else {
-      return `Open from ${ time.open }am until ${ time.close - 12 }pm`
-    }
+    } 
+      return `Open from ${time.open}am until ${time.close - 12}pm`;
   });
   const arrayDays = Object.keys(data.hours);
-  const objDays = {}
-  arrayDays.map((element, index) => objDays[element] = (message[index])); 
+  const objDays = {};
+  arrayDays.map((element, index) => (objDays[element] = (message[index])));
   if (dayName === undefined) {
     return objDays;
-  } else {
+  }  
     return { [dayName]: objDays[dayName] };
-  }
 }
 
 function oldestFromFirstSpecies(id) {
