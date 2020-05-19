@@ -27,7 +27,8 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   // seu código aqui
   if (employeeName == null) return {};
-  const nomeSobrenome = data.employees.find(e => e.firstName === employeeName || e.lastName === employeeName);
+  const nomeSobrenome = data.employees.find(e =>
+    e.firstName === employeeName || e.lastName === employeeName);
   return {
     ...nomeSobrenome
   };
@@ -35,7 +36,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const unificado = Object.assign(personalInfo, associatedWith)
+  const unificado = Object.assign(personalInfo, associatedWith);
   return unificado;
 }
 
@@ -53,7 +54,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     firstName,
     lastName,
     managers,
-    responsibleFor
+    responsibleFor,
   });
 }
 
@@ -62,13 +63,13 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  //seu código aqui
+  // seu código aqui
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const precos = data.prices;
   const {
     Adult,
     Senior,
-    Child
+    Child,
   } = precos;
   const total = ((Adult * 2) + (Senior * 1) + (Child * 3));
   return total;
@@ -79,20 +80,18 @@ function animalMap(options) {
 }
 
 const semanaObj = {
-  'Tuesday': 'Open from 8am until 6pm',
-  'Wednesday': 'Open from 8am until 6pm',
-  'Thursday': 'Open from 10am until 8pm',
-  'Friday': 'Open from 10am until 8pm',
-  'Saturday': 'Open from 8am until 10pm',
-  'Sunday': 'Open from 8am until 8pm',
-  'Monday': 'CLOSED',
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED'
 };
 
 const schedule = (dayName) => {
-  if (dayName == null && dayName == undefined) return semanaObj;
-  return {
-    [dayName]: semanaObj[dayName]
-  };
+  if (!dayName) return semanaObj;
+  return { [dayName]: semanaObj[dayName] };
 };
 
 function oldestFromFirstSpecies(id) {
