@@ -130,6 +130,25 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const aPrice = ((data.prices.Adult * percentage) / 100) + data.prices.Adult;
+  const cPrice = ((data.prices.Child * percentage) / 100) + data.prices.Child;
+  const sPrice = ((data.prices.Senior * percentage) / 100) + data.prices.Senior;
+
+  const afinal = Math.round(aPrice * 100);
+  const afina = Math.ceil(afinal) / 100;
+
+  const cfinal = Math.round(cPrice * 100);
+  const cfina = Math.ceil(cfinal) / 100;
+
+  const sfinal = Math.round(sPrice * 100);
+  const sfina = Math.ceil(sfinal) / 100;
+
+  const total = {
+    Adult: afina,
+    Senior: sfina,
+    Child: cfina,
+  };
+  return Object.assign(data.prices, total);
 }
 
 function employeeCoverage(idOrName) {
