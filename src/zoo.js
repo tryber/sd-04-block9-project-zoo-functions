@@ -13,22 +13,24 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  if(!ids) return [];
+  if (!ids) return [];
   const result = data.animals.filter(e => ids.includes(e.id));
   return result;
 }
 
 function animalsOlderThan(animal, age) {
- // seu código aqui
- const animalFiltro = data.animals.find(e => e.name === animal).residents.every(e => e.age >= age);
- return animalFiltro;
+  // seu código aqui
+  const animalFiltro = data.animals.find(e => e.name === animal).residents.every(e => e.age >= age);
+  return animalFiltro;
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
-  if(employeeName == null) return {};
+  if (employeeName == null) return {};
   const nomeSobrenome = data.employees.find(e => e.firstName === employeeName || e.lastName === employeeName);
-  return {...nomeSobrenome};
+  return {
+    ...nomeSobrenome
+  };
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -43,10 +45,16 @@ function isManager(id) {
   return gerente;
 }
 
-function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-const employee = data.employees;
-return employee.push({id, firstName, lastName, managers, responsibleFor});
+  const employee = data.employees;
+  return employee.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  });
 }
 
 function animalCount(species) {
@@ -55,10 +63,14 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   //seu código aqui
-  if(!entrants || Object.keys(entrants).length === 0) return 0;
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
   const precos = data.prices;
-  const {Adult, Senior, Child} = precos;
-  const total =  ((Adult * 2) + (Senior * 1) + (Child * 3)) ;
+  const {
+    Adult,
+    Senior,
+    Child
+  } = precos;
+  const total = ((Adult * 2) + (Senior * 1) + (Child * 3));
   return total;
 }
 
