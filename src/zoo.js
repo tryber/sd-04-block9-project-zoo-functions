@@ -75,6 +75,17 @@ const schedule = (dayName) => {
   return scheduleObj;
 };
 
+const oldestFromFirstSpecies = (id) => {
+  const employee = data.employees.find(({ id: idE }) => idE === id);
+  const animalsId = employee.responsibleFor[0];
+  const animalsObj = data.animals.find(({ id: idA }) => idA === animalsId);
+  const oldest = animalsObj.residents.reduce((oldestAgeAnimal, animal) => {
+    if (oldestAgeAnimal.age > animal.age) return oldestAgeAnimal;
+    return animal;
+  });
+  return [oldest.name, oldest.sex, oldest.age];
+};
+
 module.exports = {
   entryCalculator,
   schedule,
@@ -86,7 +97,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
