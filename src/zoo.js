@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { sortArray, getAnimals } = require('./handlers');
+const { sortArray, getAnimals, openOrClose } = require('./handlers');
 
 const animalsByIds = (...ids) => ids.map(id => data.animals.find(animal => animal.id === id));
 
@@ -31,7 +31,7 @@ const createEmployee = (personalInfo, associatedWith) => ({
 const isManager = id => data.employees.some(item =>
   item.managers.some(value => value === id));
 
-const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
   data.employees.push({
     id,
     firstName,
@@ -41,7 +41,7 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
   });
 };
 
-function animalCount(species) {
+const animalCount = (species) => {
   if (species) {
     return data.animals.find(item => item.name === species).residents.length;
   }
@@ -54,34 +54,50 @@ function animalCount(species) {
   });
 
   return animals;
-}
+};
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+const entryCalculator = (entrants) => {
+  if (entrants === undefined || !Object.keys(entrants).length) {
+    return 0;
+  }
+  return Object.keys(entrants)
+  .reduce((acc, chave) => acc + (entrants[chave] * data.prices[chave]), 0);
+};
 
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+const schedule = (dayName) => {
+  const date = data.hours;
+  if (!dayName) {
+    return Object.keys(date).reduce((newHours, keys) => {
+      newHours[keys] = openOrClose(date[keys]);
+      return newHours;
+    }, {});
+  }
+  return { [dayName]: openOrClose(date[dayName]) };
+};
 
-function oldestFromFirstSpecies(id) {
+const oldestFromFirstSpecies = (id) => {
   const firstSpecie = data.employees.find(item => item.id === id).responsibleFor[0];
 
   const animals = data.animals.find(item => item.id === firstSpecie);
+
   const oldestAnimal = sortArray(animals.residents);
 
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
-}
+};
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+const increasePrices = (percentage) => {
+  Object.keys(data.prices)
+    .forEach((key) => {
+      data.prices[key] =
+      Math.round(100 * ((data.prices[key] * (percentage / 100)) + data.prices[key])) / 100;
+    });
+};
 
-function employeeCoverage(idOrName) {
+const employeeCoverage = (idOrName) => {
   const employees = {};
 
   if (!idOrName) {
@@ -94,12 +110,11 @@ function employeeCoverage(idOrName) {
   }
 
   return employees;
-}
-
+};
 
 module.exports = {
-  // entryCalculator,
-  // schedule,
+  entryCalculator,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
@@ -109,6 +124,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };

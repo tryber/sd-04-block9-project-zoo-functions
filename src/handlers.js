@@ -6,4 +6,9 @@ const sortArray = incommingArray =>
 const getAnimals = animalsIds => animalsIds.map(id =>
   data.animals.find(animal => animal.id === id).name);
 
-module.exports = { sortArray, getAnimals };
+const openOrClose = ({ open, close }) => {
+  if (open === 0 && close === 0) return 'CLOSED';
+  return `Open from ${open}am until ${close - 12}pm`;
+};
+
+module.exports = { sortArray, getAnimals, openOrClose };
