@@ -149,28 +149,33 @@ function increasePrices(percentage) {
   console.log(tabela);
   return tabela;
 }
-//   const tabelaPreco = Object.values(data.prices);
-// console.log(tabelaPreco)
-//   const precoA = (tabelaPreco[0] + ((tabelaPreco[0] * percentage) / 100) + 0.001);
-//   const precoS = (tabelaPreco[1] + ((tabelaPreco[1] * percentage) / 100) + 0.001);
-//   const precoC = (tabelaPreco[2] + ((tabelaPreco[2] * percentage) / 100) + 0.001);
-// console.log(precoA)
-// console.log(precoS)
-// console.log(precoC)
-//   const tabelaPreco1 = data.prices;
-// console.log(tabelaPreco1)
-//   tabelaPreco1.Adult = precoA
-//   tabelaPreco1.Child = precoC;
-//   tabelaPreco1.Senior = precoS;
-// console.log(tabelaPreco1.Adult)
-// console.log(tabelaPreco1.Child)
-// console.log(tabelaPreco1.Senior)
-// console.log(tabelaPreco1)
-//   return tabelaPreco1
-// }
-// console.log(increasePrices(50))
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const lista = {
+    'Nigel Nelson': ['lions', 'tigers'],
+    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+    'Wilburn Wishart': ['snakes', 'elephants'],
+    'Stephanie Strauss': ['giraffes', 'otters'],
+    'Sharonda Spry': ['otters', 'frogs'],
+    'Ardith Azevado': ['tigers', 'bears'],
+    'Emery Elser': ['elephants', 'bears', 'lions'],
+  };
+  if (!idOrName) return lista;
+  const tratador = data.employees.filter((an) => {
+    if (an.id === idOrName || an.firstName === idOrName || an.lastName === idOrName) {
+      return an.responsibleFor;
+    } return false;
+  });
+  const idBixo = Object.values(tratador[0]);
+  const primeiroNome = idBixo[1];
+  const ultimoNome = idBixo[2];
+  const arrayId = idBixo[4];
+  const tratarAnimal = arrayId.map(e => animalsByIds(e));
+  const nomeAnimal = tratarAnimal.map(e => e[0].name);
+  const nomeCompleto = `${primeiroNome} ${ultimoNome}`;
+  const resultado = { [nomeCompleto]: nomeAnimal };
+  return resultado;
 }
 
 module.exports = {
