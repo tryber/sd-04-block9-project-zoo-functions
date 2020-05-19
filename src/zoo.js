@@ -99,9 +99,40 @@ const increasePrices = (percentage) => {
   });
 };
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function responsible(arrayIds) {
+  return arrayIds.map(id => data.animals.find(bicho => bicho.id === id).name);
 }
+
+
+function employeeCoverage(idOrName) {
+  //  Sem parâmetros, retorna uma lista de funcionários e os
+  //  animais pelos quais eles são responsáveis
+    //  Usando o Reduce iremos passar pelos funcionários, pegar os dados e retornar um objeto.
+      //  no acc acumularemos o firstName e last Name. No curr colocaremos
+
+  if (!idOrName) {
+    const noIdOrName = data.employees.reduce((acc, curr) => {
+      acc[`${curr.firstName} ${curr.lastName}`] = responsible(curr.responsibleFor);
+      return acc;
+    }, {});
+    return noIdOrName;
+  }
+
+  // let key = null;
+  // if (data.employees.find(employee => employee.id === idOrName)) key = 'id';
+  // if (data.employees.find(employee => employee.firstName === idOrName)) key = 'firstName';
+  // if (data.employees.find(employee => employee.lastName === idOrName)) key = 'lastName';
+
+  const obj = data.employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  // const obj = data.employees.find(employee => employee[key] === idOrName);
+  const teste = {};
+  // tivemos que criar um novo objeto e criar as características nele para depois pedir a função.
+  teste[`${obj.firstName} ${obj.lastName}`] = responsible(obj.responsibleFor);
+  return teste;
+}
+console.log(employeeCoverage('Nigel'));
+
 
 module.exports = {
   entryCalculator,
