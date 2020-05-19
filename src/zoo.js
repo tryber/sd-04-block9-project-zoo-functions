@@ -96,7 +96,7 @@ const increasePrices = (percentage) => {
 
 function createEmployeeCoverageObj() {
   return data.employees.reduce((employeeCoverObj, { firstName, lastName, responsibleFor }) => {
-    employeeCoverObj[`${firstName} ${lastName}`] = responsibleFor.map((idAni) =>
+    employeeCoverObj[`${firstName} ${lastName}`] = responsibleFor.map(idAni =>
       data.animals.find(({ id }) => idAni === id).name);
     return employeeCoverObj;
   }, {});
