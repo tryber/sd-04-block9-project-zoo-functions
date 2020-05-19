@@ -11,63 +11,113 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
-}
+const animalsByIds = (...ids) =>
+  data.animals.filter(animal => ids.find(id => animal.id === id));
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
+const animalsOlderThan = (animal, age) =>
+data.animals
+  .find(animalFind => animalFind.name === animal)
+  .residents.every(especie => especie.age > age);
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const employeeByName = (employeeName) => {
+  if (!employeeName) return {};
+  return data.employees
+  .find(e => e.firstName === employeeName || e.lastName === employeeName);
+};
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+});
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = id =>
+  data.employees.some(({ managers }) => managers.some(gerente => gerente === id));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) => data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-function animalCount(species) {
-  // seu código aqui
-}
+const countAnimal = () =>
+  data.animals.reduce((obj, animal) => {
+    obj[animal.name] = animal.residents.length;
+    return obj;
+  }, {});
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+const animalCount = (species) => {
+  if (species === undefined) return countAnimal();
+  return data.animals.find(({ name }) => name === species).residents.length;
+};
 
-function animalMap(options) {
-  // seu código aqui
-}
+const entryCalculator = (entrants) => {
+  if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
+  return Object.keys(entrants).reduce(
+    (price, person) => price + (entrants[person] * data.prices[person]),
+    0,
+  );
+};
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const scheduleObj = {
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED',
+};
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const schedule = (dayName) => {
+  if (dayName) return { [dayName]: scheduleObj[dayName] };
+  return scheduleObj;
+};
 
-function increasePrices(percentage) {
-  // seu código aqui
+const oldestFromFirstSpecies = (id) => {
+  const employee = data.employees.find(({ id: idE }) => idE === id);
+  const animalsId = employee.responsibleFor[0];
+  const animalsObj = data.animals.find(({ id: idA }) => idA === animalsId);
+  const oldest = animalsObj.residents.reduce((oldestAgeAnimal, animal) => {
+    if (oldestAgeAnimal.age > animal.age) return oldestAgeAnimal;
+    return animal;
+  });
+  return [oldest.name, oldest.sex, oldest.age];
+};
+
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach((person) => {
+    data.prices[person] = Number(
+      (data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2),
+    );
+  });
+};
+
+function createEmployeeCoverageObj() {
+  return data.employees.reduce((employeeCoverObj, { firstName, lastName, responsibleFor }) => {
+    employeeCoverObj[`${firstName} ${lastName}`] = responsibleFor.map(idAni =>
+      data.animals.find(({ id }) => idAni === id).name);
+    return employeeCoverObj;
+  }, {});
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const employeeCoverObj = createEmployeeCoverageObj();
+  if (!idOrName) return employeeCoverObj;
+  const employee = data.employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  return {
+    [`${employee.firstName} ${employee.lastName}`]:
+    employeeCoverObj[`${employee.firstName} ${employee.lastName}`],
+  };
 }
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
