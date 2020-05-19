@@ -30,6 +30,8 @@ const createEmployee = (personalInfo, associatedWith) => ({
   ...associatedWith,
 });
 
+const isManager = (id) =>
+  data.employees.some(({ managers }) => managers.some((gerente) => gerente === id));
 
 module.exports = {
   // entryCalculator,
@@ -40,7 +42,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
