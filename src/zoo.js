@@ -86,6 +86,14 @@ const oldestFromFirstSpecies = (id) => {
   return [oldest.name, oldest.sex, oldest.age];
 };
 
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach((person) => {
+    data.prices[person] = Number(
+      (data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2),
+    );
+  });
+};
+
 module.exports = {
   entryCalculator,
   schedule,
@@ -98,6 +106,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
