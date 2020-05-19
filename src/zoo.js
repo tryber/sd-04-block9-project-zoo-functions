@@ -41,10 +41,21 @@ const addEmployee = (
   responsibleFor = [],
 ) => data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
+const countAnimal = () =>
+  data.animals.reduce((obj, animal) => {
+    obj[animal.name] = animal.residents.length;
+    return obj;
+  }, {});
+
+const animalCount = (species) => {
+  if (species === undefined) return countAnimal();
+  return data.animals.find(({ name }) => name === species).residents.length;
+};
+
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
