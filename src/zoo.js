@@ -94,6 +94,25 @@ const increasePrices = (percentage) => {
   });
 };
 
+function createEmployeeCoverageObj() {
+  return data.employees.reduce((employeeCoverObj, { firstName, lastName, responsibleFor }) => {
+    employeeCoverObj[`${firstName} ${lastName}`] = responsibleFor.map((idAni) =>
+      data.animals.find(({ id }) => idAni === id).name);
+    return employeeCoverObj;
+  }, {});
+}
+
+function employeeCoverage(idOrName) {
+  const employeeCoverObj = createEmployeeCoverageObj();
+  if (!idOrName) return employeeCoverObj;
+  const employee = data.employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  return {
+    [`${employee.firstName} ${employee.lastName}`]:
+    employeeCoverObj[`${employee.firstName} ${employee.lastName}`],
+  };
+}
+
 module.exports = {
   entryCalculator,
   schedule,
@@ -101,7 +120,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
