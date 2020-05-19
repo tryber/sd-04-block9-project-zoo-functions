@@ -108,14 +108,14 @@ function schedule(dayName) {
       ...newO,
       [element]: menssage(data.hours[element].open, data.hours[element].close),
     };
-    return newO
+    return newO;
   });
   return newO;
 }
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  const funcionario = data.employees.find((element) => element.id === id);
+  const funcionario = data.employees.find(element => element.id === id);
   let animalRF = funcionario.responsibleFor[0];
   animalRF = data.animals.find(element => element.id === animalRF);
   let maior = animalRF.residents[0];
