@@ -65,7 +65,7 @@ function animalCount(species) {
   const animalC = data.animals.find(animal => animal.name === species);
   return animalC.residents.length;
 }
-
+animalCount();
 function entryCalculator(entrants) {
   // seu código aqui
   if (!entrants || Object.keys(entrants).length === 0) {
@@ -91,12 +91,42 @@ function animalMap(options) {
   // seu código aqui
 }
 
+const menssage = (open, close) => {
+  if (open === 0) {
+    return 'CLOSED';
+  }
+  else {
+    return `Open from ${open}am until ${close - 12}pm`;
+  }
+};
 function schedule(dayName) {
   // seu código aqui
+  if (dayName !== undefined) {
+    return { [dayName]: menssage(data.hours[dayName].open, data.hours[dayName].close) };
+  }
+  let newO = {};
+  Object.keys(data.hours).map((element => {
+    newO = {
+      ...newO,
+      [element]: menssage(data.hours[element].open, data.hours[element].close),
+    };
+  }));
+  return newO;
 }
-
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const funcionario = data.employees.find(element => element.id === id);
+  let animalRF = funcionario.responsibleFor[0];
+  animalRF = data.animals.find(element => element.id === animalRF);
+  let maior = animalRF.residents[0];
+  animalRF = animalRF.residents.map( element => {
+    
+    if( element.age > maior.age) {
+      maior = element;
+    }
+      return maior;
+    })
+  return Object.values(animalRF[animalRF.length - 1]);
 }
 
 function increasePrices(percentage) {
