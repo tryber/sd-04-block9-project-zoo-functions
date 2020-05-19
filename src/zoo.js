@@ -149,16 +149,31 @@ function increasePrices(percentage) {
   });
 }
 
-// const increasePrices = (percentage) => {
-//   Object.keys(data.prices).forEach((person) => {
-//     data.prices[person] = Number(
-//       (data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2),
-//     );
-//   });
-// };
+function getEmployeeByName(name) {
+  const employeeName = data.employees.find(employeeItem =>
+    employeeItem.firstName === name || employeeItem.lastName === name);
+  return employeeName ? `${employeeName.firstName} ${employeeName.lastName}` : undefined;
+}
+
+function employeeById(id) {
+  const employeeId = data.employees.find(employee => employee.id === id);
+  return employeeId ? `${employeeId.firstName} ${employeeId.lastName}` : undefined;
+}
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const findByid = employeeById(idOrName);
+  const findByName = getEmployeeByName(idOrName);
+
+  const employeesResponsiblesFor = data.employees.reduce((acc, cur) => ({ ...acc, [`${cur.firstName} ${cur.lastName}`]: cur.responsibleFor.map(animal => data.animals.find(item => item.id === animal)).map(currentAnimal => currentAnimal.name) }), {});
+
+  if (!idOrName) return employeesResponsiblesFor;
+
+  if (findByid) return { [findByid]: employeesResponsiblesFor[findByid] };
+
+  if (findByName) return { [findByName]: employeesResponsiblesFor[getEmployeeByName(idOrName)] };
+
+  return undefined;
 }
 
 module.exports = {
