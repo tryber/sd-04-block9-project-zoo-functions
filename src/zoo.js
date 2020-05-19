@@ -105,11 +105,28 @@ function animalMap(options) {
     ({ ...acc, [cur]: filterNames(cur) }), {}) : checkOptions(options);
 }
 
-console.log(animalMap());
+// Schedule
+const convertHoursTo12Format = (hours) => {
+  const amOrPm = hours >= 12 ? 'pm' : 'am';
+  const convertedHours = (hours % 12) || 12;
+  return `${convertedHours}${amOrPm}`;
+};
 
 function schedule(dayName) {
   // seu código aqui
+  const daysOfTheWeek = Object.keys(data.hours);
+
+  const createdSchedule = daysOfTheWeek.reduce((a, b) =>
+  ({ ...a, [b]: `Open from ${convertHoursTo12Format(data.hours[b].open)} until ${convertHoursTo12Format(data.hours[b].close)}` }), {});
+
+  createdSchedule.Monday = 'CLOSED';
+
+  if (!dayName) return createdSchedule;
+
+  return (createdSchedule[dayName] !== undefined) ? ({ [dayName]: createdSchedule[dayName] }) : 'Invalid day';
 }
+
+console.log(schedule('Friday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
