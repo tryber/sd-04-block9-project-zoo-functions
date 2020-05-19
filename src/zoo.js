@@ -112,6 +112,7 @@ function schedule(dayName) {
   });
   return newO;
 }
+
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const funcionario = data.employees.find((element) => element.id === id);
