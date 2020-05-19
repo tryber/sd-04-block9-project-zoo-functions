@@ -139,11 +139,45 @@ function increasePrices(percentage) {
   Object.assign(data.prices, resp);
 }
 
+const buscaFuncionario = (informacao) => {
+  let funcionario = {};
+
+  if (data.employees.some(element => informacao === element.id)) {
+    funcionario = data.employees.find(element => element.id === informacao);
+  } else if (data.employees.some(element => informacao === element.firstName)) {
+    funcionario = data.employees.find(element => element.firstName === informacao);
+  } else {
+    funcionario = data.employees.find(element => element.lastName === informacao);
+  }
+  return funcionario;
+};
+
+const buscaAnimal = (funcionario) => {
+  const resp = {};
+  let nome = '';
+  let animals = [];
+
+  animals = funcionario.responsibleFor.map(element => (
+    data.animals.find(animal => animal.id === element).name));
+
+  nome = `${funcionario.firstName} ${funcionario.lastName}`;
+  resp[nome] = animals;
+  return resp;
+};
+
 function employeeCoverage(idOrName) {
-  increasePrices(50)
-  console.log(data.prices);
+  const resp = {};
+  let funcionario = {};
+
+  if (!idOrName) {
+    data.employees.forEach(element => Object.assign(resp, buscaAnimal(element)));
+  } else {
+    funcionario = buscaFuncionario(idOrName);
+    Object.assign(resp, buscaAnimal(funcionario));
+  }
+
+  return resp;
 }
-employeeCoverage('oi');
 
 module.exports = {
   entryCalculator,
