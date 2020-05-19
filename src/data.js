@@ -49,7 +49,7 @@ module.exports = {
     {
       id: 'baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
       name: 'bears',
-      popularity: 5,
+      popularity: 3,
       location: 'NW',
       residents: [
         {
