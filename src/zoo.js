@@ -95,9 +95,7 @@ const menssage = (open, close) => {
   if (open === 0) {
     return 'CLOSED';
   }
-  else {
-    return `Open from ${open}am until ${close - 12}pm`;
-  }
+  return `Open from ${open}am until ${close - 12}pm`;
 };
 function schedule(dayName) {
   // seu código aqui
@@ -105,12 +103,12 @@ function schedule(dayName) {
     return { [dayName]: menssage(data.hours[dayName].open, data.hours[dayName].close) };
   }
   let newO = {};
-  Object.keys(data.hours).map((element => {
+  Object.keys(data.hours).map((element) => {
     newO = {
       ...newO,
       [element]: menssage(data.hours[element].open, data.hours[element].close),
     };
-  }));
+  });
   return newO;
 }
 function oldestFromFirstSpecies(id) {
@@ -120,7 +118,6 @@ function oldestFromFirstSpecies(id) {
   animalRF = data.animals.find(element => element.id === animalRF);
   let maior = animalRF.residents[0];
   animalRF = animalRF.residents.map( element => {
-    
     if( element.age > maior.age) {
       maior = element;
     }
