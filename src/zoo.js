@@ -117,12 +117,12 @@ function oldestFromFirstSpecies(id) {
   let animalRF = funcionario.responsibleFor[0];
   animalRF = data.animals.find(element => element.id === animalRF);
   let maior = animalRF.residents[0];
-  animalRF = animalRF.residents.map( element => {
-    if( element.age > maior.age) {
+  animalRF = animalRF.residents.map(element => {
+    if(element.age > maior.age) {
       maior = element;
     }
-      return maior;
-    })
+  return maior;
+  });
   return Object.values(animalRF[animalRF.length - 1]);
 }
 
