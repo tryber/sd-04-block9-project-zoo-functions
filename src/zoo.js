@@ -19,18 +19,30 @@ data.animals
   .find(animalFind => animalFind.name === animal)
   .residents.every(especie => especie.age > age);
 
+const employeeByName = (employeeName) => {
+  if (!employeeName) return {};
+  return data.employees
+  .find(e => e.firstName === employeeName || e.lastName === employeeName)
+}
+
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+});
+
+
 module.exports = {
   // entryCalculator,
   // schedule,
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
