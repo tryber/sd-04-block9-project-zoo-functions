@@ -71,14 +71,14 @@ const openOrClose = ({ open, close }) => {
   return `Open from ${open}am until ${close - 12}pm`;
 };
 const schedule = (dayName) => {
-    const date = data.hours;
-    if (!dayName) {
-    return Object.keys(date).reduce((newHours, keys) => {
+  const date = data.hours;
+  if (!dayName) {
+      return Object.keys(date).reduce((newHours, keys) => {
       newHours[keys] = openOrClose(date[keys]);
       return newHours;
     }, {});
-  }
-    return { [dayName]: openOrClose(date[dayName]) };
+    }
+  return { [dayName]: openOrClose(date[dayName]) };
 };
 
 function oldestFromFirstSpecies(id) {
