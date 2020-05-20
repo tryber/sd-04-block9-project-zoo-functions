@@ -77,30 +77,29 @@ function entryCalculator(entrants = {}) {
   return totalToPay;
 }
 
-const filterResidents = (residents, sex, includeNames) => {
-  if (sex) {
-    return residents.filter((resident) => resident.sex === sex)
-      .map((resident) => resident.name);
-  }
-  return residents.map((resident) => resident.name);
+const filterSex = (residents, sex) => {
+  if (sex) return residents.filter((resident) => resident.sex === sex);
+  return residents;
+};
+
+const includeNames = (residents, animal, include, sorted) => {
+  let result;
+  let residentsNames = residents.map((resident) => resident.name);
+  if (sorted) residentsNames = residentsNames.sort();
+  if (residentsNames.length > 0) result = animal;
+  if (include) result = { [animal]: residentsNames };
+
+  return result;
 };
 
 const animalMap = (options = {}) => data.animals
-  .reduce((result, { name, location, residents }) => {
-    if (!result[location]) result[location] = [];
+  .reduce((map, { name, location, residents }) => {
+    if (!map[location]) map[location] = [];
+    let mappedResidents = filterSex(residents, options.sex);
+    mappedResidents = includeNames(mappedResidents, name, options.includeNames, options.sorted);
+    if (mappedResidents) map[location].push(mappedResidents);
 
-    if (Object.keys(options).length === 0) {
-      result[location].push(name);
-    } else {
-      result[location].push(
-        { [name]: filterResidents(residents, options.sex, options.includeNames) },
-      );
-    }
-    if (options.sorted === true) {
-      let specie = result[location].find((animal) => Object.keys(animal)[0] === name);
-      specie = specie[name].sort();
-    }
-    return result;
+    return map;
   }, {});
 
 function schedule(dayName) {
