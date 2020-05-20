@@ -65,16 +65,20 @@ function animalMap(options) {
 // muita dificuldade de fazer
 }
 
-//function schedule(dayName) { -> transformar em arrow function
-  const schedule = (dayName) => {
-  const date = data.hours;
-  if (!dayName) {
+// function schedule(dayName) { -> transformar em arrow function
+const openOrClose = ({ open, close }) => {
+  if (open === 0 && close === 0) return 'CLOSED';
+  return `Open from ${open}am until ${close - 12}pm`;
+};
+const schedule = (dayName) => {
+    const date = data.hours;
+    if (!dayName) {
     return Object.keys(date).reduce((newHours, keys) => {
       newHours[keys] = openOrClose(date[keys]);
       return newHours;
     }, {});
   }
-  return { [dayName]: openOrClose(date[dayName]) };
+    return { [dayName]: openOrClose(date[dayName]) };
 };
 
 function oldestFromFirstSpecies(id) {
