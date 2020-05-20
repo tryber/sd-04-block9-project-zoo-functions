@@ -1,5 +1,3 @@
-//comentário
-
 module.exports = {
   animals: [
     {
