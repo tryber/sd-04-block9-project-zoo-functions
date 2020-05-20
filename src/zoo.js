@@ -114,9 +114,15 @@ const animalMap = (options = {}) => data.animals
     return map;
   }, {});
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const schedule = (dayName) => {
+  let scheduleTimes = {};
+  Object.keys(data.hours).forEach((hour) => {
+    scheduleTimes[hour] = (data.hours[hour].open === 0) ? 'CLOSED' : `Open from ${data.hours[hour].open}am until ${(data.hours[hour].close) - 12}pm`;
+  });
+  if (dayName) scheduleTimes = { [dayName]: (data.hours[dayName].open === 0) ? 'CLOSED' : `Open from ${data.hours[dayName].open}am until ${(data.hours[dayName].close) - 12}pm` };
+
+  return scheduleTimes;
+};
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
