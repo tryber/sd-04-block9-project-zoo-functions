@@ -119,7 +119,7 @@ const schedule = (dayName) => {
   Object.keys(data.hours).forEach((hour) => {
     scheduleTimes[hour] = (data.hours[hour].open === 0) ? 'CLOSED' : `Open from ${data.hours[hour].open}am until ${(data.hours[hour].close) - 12}pm`;
   });
-  if (dayName) scheduleTimes = { [dayName]: (data.hours[dayName].open === 0) ? 'CLOSED' : `Open from ${data.hours[dayName].open}am until ${(data.hours[dayName].close) - 12}pm` };
+  if (dayName) scheduleTimes = { [dayName]: scheduleTimes[dayName] };
 
   return scheduleTimes;
 };
