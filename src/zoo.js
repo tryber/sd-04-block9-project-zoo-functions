@@ -17,13 +17,14 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const a = data.animals.find(element => animal.includes(element.name));
-  return a.residents.every((animalAge) => animalAge.age >= age);
+  return a.residents.every(animalAge => animalAge.age >= age);
 }
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  else return data.employees.find((elem) => elem.firstName === employeeName || elem.lastName === employeeName ||
-  elem.id === employeeName);
+  return data.employees.find(element => element.firstName === employeeName || 
+  element.lastName === employeeName ||
+  element.id === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
