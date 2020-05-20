@@ -45,7 +45,7 @@ function isManager(id) {
   return data.employees.some(e => e.managers.some(m => m === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   const employee = {
     id,
