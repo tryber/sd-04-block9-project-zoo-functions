@@ -40,11 +40,11 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({id, firstName, lastName, managers, responsibleFor});
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  const animais = (species) => {
+  const countingAnimals = species => {
     if (!species) {
       return data.animals.reduce((object, element) => {
         object[element.name] = element.residents.length;
@@ -57,11 +57,11 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   if (entrants === undefined || !Object.keys(entrants).length) {
-  return 0;
-  } //se os entrantes forem undefined ou se um objeto vazio for passado, o retorno é zero
+    return 0;
+  }; //se os entrantes forem undefined ou se um objeto vazio for passado, o retorno é zero
   return Object.keys(entrants)
   .reduce((acc, chave) => acc + (entrants[chave] * data.prices[chave]), 0);
-}; //usando o reduce para acumular os valores "preço total a ser cobrado dado o número de adultos, crianças e idosos"
+  }; //usando o reduce para acumular os valores
 
 function animalMap(options) {
   // muita dificuldade de fazer
