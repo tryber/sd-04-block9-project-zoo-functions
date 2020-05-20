@@ -84,21 +84,17 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const humanSchedule = {};
+  const days = Object.keys(data.hours);
+  days.forEach(day => {
+    const { open } = data.hours[day];
+    const close = data.hours[day].close - 12;
+    humanSchedule[day] = `Open from ${open}am until ${close}pm`;
+  });
+  humanSchedule.Monday = "CLOSED";
   if (!dayName) {
-    const days = Object.keys(data.hours);
-    days.forEach(day => {
-      humanSchedule[day] = `Open from ${data.hours[day].open}am until ${data
-        .hours[day].close - 12}pm`;
-    });
-    humanSchedule.Monday = "CLOSED";
     return humanSchedule;
   }
-  humanSchedule[dayName] = `Open from ${data.hours[dayName].open}am until ${data
-    .hours[dayName].close - 12}pm`;
-  if (dayName === "Monday") {
-    humanSchedule.Monday = `CLOSED`;
-  }
-  return humanSchedule;
+  return { [dayName]: humanSchedule[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
@@ -122,7 +118,23 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const employeesList = {};
+  data.employees.forEach(employee => {
+    const name = `${employee.firstName} ${employee.lastName}`;
+    const animals = employee.responsibleFor.map(
+      e => data.animals.find(f => f.id === e).name
+    );
+    employeesList[name] = animals;
+  });
+  if (!idOrName) {
+    return employeesList;
+  }
+  const { firstName, lastName } = data.employees.find(
+    e =>
+      e.firstName === idOrName || e.lastName === idOrName || e.id === idOrName
+  );
+  const name = `${firstName} ${lastName}`;
+  return { [name]: employeesList[name] };
 }
 
 module.exports = {
