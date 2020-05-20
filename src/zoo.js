@@ -11,56 +11,91 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  return data.animals.filter(element => ids.includes(element.id));
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const a = data.animals.find(element => animal.includes(element.name));
+  return a.residents.every(animalAge => animalAge.age >= age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
+  return data.employees.find(element => element.firstName === employeeName ||
+  element.lastName === employeeName ||
+  element.id === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  console.log(personalInfo, associatedWith);
+  const newEmployee = Object.assign(personalInfo, associatedWith);
+  return newEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+  const verifyManager = data.employees.some(employee =>
+  employee.managers.find(mananger => mananger === id));
+  return verifyManager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    return data.animals.reduce((object, element) => {
+      object[element.name] = element.residents.length;
+      return object;
+    }, {});
+  }
+  return data.animals.find(element => element.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || !Object.keys(entrants).length) {
+    return 0;
+  }
+  return Object.keys(entrants)
+  .reduce((acc, chave) => acc + (entrants[chave] * data.prices[chave]), 0);
 }
 
 function animalMap(options) {
-  // seu código aqui
+// muita dificuldade de fazer
 }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function schedule(dayName) { -> transformar em arrow function
+const openOrClose = ({ open, close }) => {
+  if (open === 0 && close === 0) return 'CLOSED';
+  return `Open from ${open}am until ${close - 12}pm`;
+};
+const schedule = (dayName) => {
+  const date = data.hours;
+  if (!dayName) {
+    return Object.keys(date).reduce((newHours, keys) => {
+      newHours[keys] = openOrClose(date[keys]);
+      return newHours;
+    }, {});
+  }
+  return { [dayName]: openOrClose(date[dayName]) };
+};
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const findNoemployee = data.employees.find(idFunc => idFunc.id === id).responsibleFor[0];
+  const findNOanimals = data.animals.find(elementos => elementos.id === findNoemployee);
+  return Object.values(findNOanimals.residents.sort((a, b) => b.age - a.age)[0]);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return Object.keys(data.prices).forEach((valores) => {
+    (data.prices[valores] = Math.round(data.prices[valores] *
+(1 + (percentage / 100)) * 100) / 100);
+  });
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+// refazendo
 }
 
 module.exports = {
