@@ -106,10 +106,12 @@ function oldestFromFirstSpecies(id) {
   }, 0);
   return Object.values(animal.residents[idade]);
 }
-
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// seu código aqui
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach((e) => {
+    data.prices[e] = Number(data.prices[e] * (1 + (percentage + 0.01) / 100)).toFixed(2);
+  });
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
