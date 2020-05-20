@@ -62,7 +62,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // muita dificuldade de fazer
+// muita dificuldade de fazer
 }
 
 function schedule(dayName) {
