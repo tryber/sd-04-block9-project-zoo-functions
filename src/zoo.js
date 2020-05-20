@@ -67,8 +67,7 @@ function animalMap(options) {
 
 function schedule(day) {
   if (data.hours[day].open === 0 && data.hours[day].close === 0) {
-    return 'CLOSED';
-  }
+  return 'CLOSED'};
   return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
 }
 
@@ -86,7 +85,15 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const responsibleFor = {};
+  let employee = {};
+  if (!idOrName) {
+    data.employees.forEach(element => Object.assign(responsibleFor, searchAnimal(element)));
+  } else {
+    employee = searchFuncionario(idOrName);
+    Object.assign(responsibleFor, searchAnimal(employee));
+  }
+  return responsibleFor;
 }
 
 module.exports = {
