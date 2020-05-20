@@ -133,7 +133,7 @@ function increasePrices(percentage) {
   (data.prices[element] = Math.ceil(data.prices[element] * (percentage + 100)) / 100));
 }
 
-function employeeCoverage(idOrName) {
+function employeeCoverage(IdOrName) {
   // seu código aqui
 }
 
