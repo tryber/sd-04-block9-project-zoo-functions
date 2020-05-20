@@ -128,7 +128,8 @@ function oldestFromFirstSpecies(id) {
   return Object.values(animalRF[animalRF.length - 1]);
 }
 
-function increasePrices(percentage) { Object.keys(data.prices).map(element =>
+function increasePrices(percentage) { 
+  return Object.keys(data.prices).map(element =>
   data.prices[element] = Math.ceil(data.prices[element] * (percentage + 100)) / 100);
 }
 
