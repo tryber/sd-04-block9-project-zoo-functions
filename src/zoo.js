@@ -74,9 +74,9 @@ const schedule = (dayName) => {
   const date = data.hours;
   if (!dayName) {
     return Object.keys(date).reduce((newHours, keys) => {
-        newHours[keys] = openOrClose(date[keys]);
-        return newHours;
-      }, {});
+      newHours[keys] = openOrClose(date[keys]);
+      return newHours;
+    }, {});
   }
   return { [dayName]: openOrClose(date[dayName]) };
 };
