@@ -84,33 +84,41 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const humanSchedule = {};
-  if (!dayName || Object.keys(dayName) === 0) {
+  if (!dayName) {
     const days = Object.keys(data.hours);
     days.forEach(day => {
-      if (day === "Monday") {
-        humanSchedule.Monday = `CLOSED`;
-      } else {
-        humanSchedule[day] = `Open from ${data.hours[day].open}am until ${data
-          .hours[day].close - 12}pm`;
-      }
+      humanSchedule[day] = `Open from ${data.hours[day].open}am until ${data
+        .hours[day].close - 12}pm`;
     });
-    return humanSchedule;
-  }
-  if (dayName === "Monday") {
-    humanSchedule.Monday = `CLOSED`;
+    humanSchedule.Monday = "CLOSED";
     return humanSchedule;
   }
   humanSchedule[dayName] = `Open from ${data.hours[dayName].open}am until ${data
     .hours[dayName].close - 12}pm`;
+  if (dayName === "Monday") {
+    humanSchedule.Monday = `CLOSED`;
+  }
   return humanSchedule;
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const { responsibleFor } = data.employees.find(e => e.id === id);
+  const animal = data.animals.find(el => el.id === responsibleFor[0]);
+  const maxAge = animal.residents.reduce(
+    (acc, cur) => Math.max(acc, cur.age),
+    0
+  );
+  return Object.values(animal.residents.find(ind => ind.age === maxAge));
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const newPrices = Object.values(data.prices).map(
+    e => Math.round(e * (1 + percentage / 100) * 100) / 100
+  );
+  Object.keys(data.prices).forEach(
+    (key, ind) => (data.prices[key] = newPrices[ind])
+  );
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
