@@ -26,10 +26,16 @@ const createEmployee = (personalInfo, associatedWith) => ({
   ...associatedWith,
 });
 
-const isManager = id =>
-  data.employees.some(({ managers }) =>
-    managers.find(index => index === id));
-
+// const isManager = id =>
+//   data.employees.some(({ managers }) =>
+//     managers.find(index => index === id));
+function isManager(id){
+const allManagersIds = [];
+data.employees.some(element => allManagersIds.push(...element.managers));
+// chek if at leat on id (input) is inside the array of id of all managers
+const output = allManagersIds.some(allManagersId => allManagersId === id);
+return output;
+}
 
 class Employee {
   constructor(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -42,7 +48,7 @@ class Employee {
 }
 const addEmployee = (...parameters) => data.employees.push(new Employee(...parameters));
 
-  // CC NÃO DEIXA ASSIM
+  // CC NÃO DEIXA ASSIM PQ?
   // const animalCount = species =>
   //   species ? data.animals.find(({ name }) =>
   //     name === species).residents.length : data.animals.reduce((acc, animal) => {
