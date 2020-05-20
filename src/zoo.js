@@ -67,7 +67,7 @@ function animalMap(options) {
 
 function schedule(dayName) {
   if (date.hours[day].open === 0 && date.hours[day].close === 0) {
-    return 'CLOSED';
+    return `CLOSED`;
   }
   return `Open from ${date.hours[day].open}am until ${date.hours[day].close - 12}pm`;
 }
