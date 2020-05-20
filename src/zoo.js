@@ -65,11 +65,11 @@ function animalMap(options) {
   // muita dificuldade de fazer
 }
 
-function schedule(dayName) {
-  if (date.hours[day].open === 0 && date.hours[day].close === 0) {
-    return `CLOSED`;
+function schedule(day) {
+  if (data.hours[day].open === 0 && data.hours[day].close === 0) {
+    return 'CLOSED';
   }
-  return `Open from ${date.hours[day].open}am until ${date.hours[day].close - 12}pm`;
+  return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
 }
 
 function oldestFromFirstSpecies(id) {
