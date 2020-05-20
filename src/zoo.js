@@ -247,15 +247,12 @@ const idOrNameRet = (idOrName) => {
   let key;
   data.employees.forEach((employee) => {
     if (employee.id === idOrName) key = 'id';
-    // return true;
   });
   data.employees.forEach((employee) => {
     if (employee.firstName === idOrName) key = 'firstName';
-    // return true;
   });
   data.employees.forEach((employee) => {
     if (employee.lastName === idOrName) key = 'lastName';
-    // return true;
   });
   const a = oIdOrName();
   const emp = data.employees.find(employee => employee[key] === idOrName);
