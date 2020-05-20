@@ -227,8 +227,47 @@ function increasePrices(percentage) {
   });
 }
 
+// employeeCoverage functions
+
+const oIdOrName = () => {
+  const a = [];
+  data.employees.forEach(employee => {
+    const aNams = [];
+    employee.responsibleFor.forEach(idAni => {
+      const namAni = data.animals.find(animal =>
+        animal.id === idAni).name;
+        aNams.push(namAni);
+    });
+    const oIdAniEmp = {[`${employee.firstName} ${employee.lastName}`]: aNams};
+    a.push(oIdAniEmp);
+  });  
+  return a;
+};
+
+const idOrNameRet = (idOrName) => {
+  let key; 
+  data.employees.some(employee => {
+    if (employee.id === idOrName) key = 'id';
+  });
+  data.employees.some(employee => {
+    if (employee.firstName === idOrName) key = 'firstName';
+  });
+  data.employees.some(employee => {
+    if (employee.lastName === idOrName) key = 'lastName';
+  });
+  const a = oIdOrName();
+  const emp = data.employees.find(employee => employee[key] === idOrName);
+  const empA = a.find(employee => Object.keys(employee)[0] === `${emp.firstName} ${emp.lastName}`);
+  return empA;
+};
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    const o = {};
+    oIdOrName().forEach(emp => Object.assign(o, emp));
+    return o;
+  }
+  return idOrNameRet(idOrName);
 }
 
 module.exports = {
