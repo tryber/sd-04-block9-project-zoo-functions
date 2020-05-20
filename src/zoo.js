@@ -78,15 +78,23 @@ function entryCalculator(entrants = {}) {
 }
 
 const filterSex = (residents, sex) => {
+  // Filter residents by sex if sex parameter are seted;
   if (sex) return residents.filter((resident) => resident.sex === sex);
   return residents;
 };
 
 const includeNames = (residents, animal, include, sorted) => {
   let result;
+  // Get residents names after sex filter
   let residentsNames = residents.map((resident) => resident.name);
+  // Sort names if necessary
   if (sorted) residentsNames = residentsNames.sort();
+  /*
+    Verify with exist residents and add specie name to
+    the result for the cases where name inclusion are not required;
+  */
   if (residentsNames.length > 0) result = animal;
+  // Remove specie and include residents names if includeNames are seted;
   if (include) result = { [animal]: residentsNames };
 
   return result;
@@ -94,11 +102,15 @@ const includeNames = (residents, animal, include, sorted) => {
 
 const animalMap = (options = {}) => data.animals
   .reduce((map, { name, location, residents }) => {
+    // Create map location if doesn't exist;
     if (!map[location]) map[location] = [];
+    // Filter residents by sex;
     let mappedResidents = filterSex(residents, options.sex);
+    // Include residents names or specie;
     mappedResidents = includeNames(mappedResidents, name, options.includeNames, options.sorted);
+    // Add filter result, if returned, to the correct map location;
     if (mappedResidents) map[location].push(mappedResidents);
-
+    // Return the map
     return map;
   }, {});
 
