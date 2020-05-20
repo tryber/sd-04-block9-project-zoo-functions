@@ -65,9 +65,17 @@ function animalMap(options) {
 // muita dificuldade de fazer
 }
 
-function schedule(dayName) {
-// refazendo
-}
+//function schedule(dayName) { -> transformar em arrow function
+  const schedule = (dayName) => {
+  const date = data.hours;
+  if (!dayName) {
+    return Object.keys(date).reduce((newHours, keys) => {
+      newHours[keys] = openOrClose(date[keys]);
+      return newHours;
+    }, {});
+  }
+  return { [dayName]: openOrClose(date[dayName]) };
+};
 
 function oldestFromFirstSpecies(id) {
   const findNoemployee = data.employees.find(idFunc => idFunc.id === id).responsibleFor[0];
