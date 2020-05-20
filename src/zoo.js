@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
 function animalsByIds(...ids) {
   return data.animals.filter((dados) => ids.find((id) => id === dados.id));
@@ -22,11 +22,10 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  if (typeof employeeName === "string") {
+  if (typeof employeeName === 'string') {
     return data.employees.find(
-      (employed) =>
-        employed.firstName === employeeName ||
-        employed.lastName === employeeName
+      (employed) => employed.firstName === employeeName
+      || employed.lastName === employeeName,
     );
   }
   return {};
@@ -39,7 +38,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(ID) {
-  var lengthOfManager = data.employees.filter((dados) => ID === dados.id)[0]
+  const lengthOfManager = data.employees.filter((dados) => ID === dados.id)[0]
     .responsibleFor.length;
   if (lengthOfManager > 2) {
     return true;
@@ -48,10 +47,10 @@ function isManager(ID) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if (typeof managers === "undefined") {
+  if (typeof managers === 'undefined') {
     managers = [];
   }
-  if (typeof responsibleFor === "undefined") {
+  if (typeof responsibleFor === 'undefined') {
     responsibleFor = [];
   }
   return data.employees.push({
@@ -64,7 +63,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  var obj = {};
+  const obj = {};
   if (!species) {
     data.animals.forEach((animal) => {
       obj[animal.name] = animal.residents.length;
@@ -74,21 +73,15 @@ function animalCount(species) {
   return data.animals.find((animal) => animal.name === species).residents
     .length;
 }
+const adult = 49.99;
+const child = 20.99;
+const senior = 24.99;
 
 function entryCalculator(entrants) {
-  var adult = 49.99;
-  var child = 20.99;
-  var senior = 24.99;
-  function isEmpty(obj) {
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
-    }
-    return true;
-  }
-  if (typeof entrants !== "object" || isEmpty(entrants) === true) {
+  if (typeof entrants !== 'object' || Object.entries(entrants).length === 0) {
     return 0;
   }
-  var QuantityOfPeople = Object.values(entrants);
+  const QuantityOfPeople = Object.values(entrants);
   return (
     QuantityOfPeople[0] * adult +
     QuantityOfPeople[1] * child +
@@ -105,7 +98,7 @@ function schedule(dayName) {
     const open = list[key].open;
     const close = list[key].close;
     list[key] = `Open from ${open}am until ${close - 12}pm`;
-    if (open === close) list[key] = "CLOSED";
+    if (open === close) list[key] = 'CLOSED';
   });
   if (!dayName) return list;
   list = { [dayName]: list[dayName] };
@@ -114,14 +107,14 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const firstResponibleSpecie = data.employees.find(
-    (employee) => employee.id === id
+    (employee) => employee.id === id,
   ).responsibleFor[0];
   const animalsFromSpecie = data.animals.find(
-    (animal) => animal.id === firstResponibleSpecie
+    (animal) => animal.id === firstResponibleSpecie,
   ).residents;
   const elderFromSpecie = animalsFromSpecie.reduce(
     (acc, curr) => (acc.age > curr.age ? acc : curr),
-    []
+    [],
   );
   return Object.values(elderFromSpecie);
 }
@@ -130,9 +123,7 @@ function increasePrices(percentage) {
   const results = data.prices;
   results.Adult = (results.Adult * (1.0001 + percentage / 100)).toPrecision(4);
   results.Child = (results.Child * (1.0001 + percentage / 100)).toPrecision(4);
-  results.Senior = (results.Senior * (1.0001 + percentage / 100)).toPrecision(
-    4
-  );
+  results.Senior = (results.Senior * (1.0001 + percentage / 100)).toPrecision(4);
   return results;
 }
 
