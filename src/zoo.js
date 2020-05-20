@@ -116,17 +116,26 @@ const animalMap = (options = {}) => data.animals
 
 const schedule = (dayName) => {
   let scheduleTimes = {};
+  // Check each hour of schedule and formmat to a human readable format
   Object.keys(data.hours).forEach((hour) => {
     scheduleTimes[hour] = (data.hours[hour].open === 0) ? 'CLOSED' : `Open from ${data.hours[hour].open}am until ${(data.hours[hour].close) - 12}pm`;
   });
-  if (dayName) scheduleTimes = { [dayName]: scheduleTimes[dayName] };
-
+  // If a specific day are set get get only this day
+  if (dayName) return { [dayName]: scheduleTimes[dayName] };
+  // Return formated schedule
   return scheduleTimes;
 };
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const oldestFromFirstSpecies = (id) => {
+  const employeeInfo = data.employees.find((info) => info.id === id);
+
+  return data.animals.find((animal) => animal.id === employeeInfo.responsibleFor[0])
+    .residents.reduce((resident, { name, sex, age }) => {
+      if (age > resident[2]) resident = [name, sex, age];
+
+      return resident;
+    }, ['', '', 0]);
+};
 
 function increasePrices(percentage) {
   // seu código aqui
