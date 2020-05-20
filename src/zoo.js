@@ -231,29 +231,31 @@ function increasePrices(percentage) {
 
 const oIdOrName = () => {
   const a = [];
-  data.employees.forEach(employee => {
+  data.employees.forEach((employee) => {
     const aNams = [];
-    employee.responsibleFor.forEach(idAni => {
-      const namAni = data.animals.find(animal =>
-        animal.id === idAni).name;
-        aNams.push(namAni);
+    employee.responsibleFor.forEach((idAni) => {
+      const namAni = data.animals.find(animal => animal.id === idAni).name;
+      aNams.push(namAni);
     });
-    const oIdAniEmp = {[`${employee.firstName} ${employee.lastName}`]: aNams};
+    const oIdAniEmp = { [`${employee.firstName} ${employee.lastName}`]: aNams };
     a.push(oIdAniEmp);
-  });  
+  });
   return a;
 };
 
 const idOrNameRet = (idOrName) => {
-  let key; 
-  data.employees.some(employee => {
+  let key;
+  data.employees.forEach((employee) => {
     if (employee.id === idOrName) key = 'id';
+    // return true;
   });
-  data.employees.some(employee => {
+  data.employees.forEach((employee) => {
     if (employee.firstName === idOrName) key = 'firstName';
+    // return true;
   });
-  data.employees.some(employee => {
+  data.employees.forEach((employee) => {
     if (employee.lastName === idOrName) key = 'lastName';
+    // return true;
   });
   const a = oIdOrName();
   const emp = data.employees.find(employee => employee[key] === idOrName);
