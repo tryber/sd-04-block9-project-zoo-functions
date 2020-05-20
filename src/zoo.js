@@ -66,10 +66,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  if (data.hours[day].open === 0 && data.hours[day].close === 0) {
-    return 'CLOSED'
-  };
-  return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+// refazendo
 }
 
 function oldestFromFirstSpecies(id) {
@@ -86,15 +83,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  const responsavel = {};
-  let funcionario = {};
-  if (!idOrName) {
-    data.employees.forEach(element => Object.assign(responsavel, buscaAnimal(element)));
-  } else {
-    funcionario = buscaFuncionario(idOrName);
-    Object.assign(responsavel, buscaAnimal(funcionario));
-    return responsavel;
-  }
+// refazendo
 }
 
 module.exports = {
