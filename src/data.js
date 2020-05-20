@@ -9,7 +9,7 @@ module.exports = {
         {
           name: 'Zena',
           sex: 'female',
-          age: 12
+          age: 12 
         },
         {
           name: 'Maxwell',
@@ -319,3 +319,4 @@ module.exports = {
     'Child': 20.99
   }
 };
+
