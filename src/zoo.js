@@ -65,7 +65,7 @@ function animalMap(options) {
   // muita dificuldade de fazer
 }
 
-function schedule(day) {
+function schedule(dayName) {
   if (data.hours[day].open === 0 && data.hours[day].close === 0) {
     return 'CLOSED'
   };
@@ -86,15 +86,15 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  const responsibleFor = {};
-  let employee = {};
+  const responsavel = {};
+  let funcionario = {};
   if (!idOrName) {
-    data.employees.forEach(element => Object.assign(responsibleFor, buscaAnimal(element)));
+    data.employees.forEach(element => Object.assign(responsavel, buscaAnimal(element)));
   } else {
-    employee = buscaFuncionario(idOrName);
-    Object.assign(responsibleFor, buscaAnimal(employee));
+    funcionario = buscaFuncionario(idOrName);
+    Object.assign(responsavel, buscaAnimal(funcionario));
+    return responsavel;
   }
-  return responsibleFor;
 }
 
 module.exports = {
