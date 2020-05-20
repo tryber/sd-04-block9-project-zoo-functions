@@ -104,7 +104,7 @@ function oldestFromFirstSpecies(id) {
     const indice = numeros.indexOf(Math.max(...numeros));
     return indice;
   }, 0);
-  return teste = Object.values(animal.residents[idade]);
+  return Object.values(animal.residents[idade]);
 }
 
 function increasePrices(percentage) {
