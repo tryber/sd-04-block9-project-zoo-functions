@@ -95,10 +95,15 @@ function schedule(dayName) {
   return { [dayName]: listDays[dayName] };
 }
 
-function oldestFromFirstSpecies(id) {
+const oldestFromFirstSpecies = (id) => {
   // seu código aqui
-
-}
+  const idEmployee = newEmployee.find(element => element.id === id).responsibleFor[0];
+  console.log(idEmployee);
+  const searchEsp = newAnimals.find(element =>
+    element.id === idEmployee).residents.reduce((oldSpecie, animal) =>
+    (oldSpecie.age > animal.age ? oldSpecie : animal), 0);
+  return [searchEsp.name, searchEsp.sex, searchEsp.age];
+};
 
 function increasePrices(percentage) {
   Object.keys(newPrices).forEach((element) => {
@@ -109,6 +114,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+
 }
 
 module.exports = {
