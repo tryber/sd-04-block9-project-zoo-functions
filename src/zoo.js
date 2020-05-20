@@ -67,7 +67,8 @@ function animalMap(options) {
 
 function schedule(day) {
   if (data.hours[day].open === 0 && data.hours[day].close === 0) {
-  return 'CLOSED'};
+    return 'CLOSED'
+  };
   return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
 }
 
@@ -88,10 +89,10 @@ function employeeCoverage(idOrName) {
   const responsibleFor = {};
   let employee = {};
   if (!idOrName) {
-    data.employees.forEach(element => Object.assign(responsibleFor, searchAnimal(element)));
+    data.employees.forEach(element => Object.assign(responsibleFor, buscaAnimal(element)));
   } else {
-    employee = searchFuncionario(idOrName);
-    Object.assign(responsibleFor, searchAnimal(employee));
+    employee = buscaFuncionario(idOrName);
+    Object.assign(responsibleFor, buscaAnimal(employee));
   }
   return responsibleFor;
 }
