@@ -80,9 +80,64 @@ function entryCalculator(entrants) {
   resp = Object.keys(entrants).reduce((acc, i) => (acc + (data.prices[i] * entrants[i])), 0);
   return resp;
 }
-//----------------------------------------------------------------------------------------------------
-const findAnimalLocal = () => {
+
+const buscaNomeAnimal = (animal, sortin, sex) => {
+  const resp = {};
+  const nomes = [];
+  let tipoAnimal = {};
+  if (sex) {
+    tipoAnimal = data.animals.find(animals => animals.name === animal).residents;
+    tipoAnimal.forEach((bixo) => {
+      if (bixo.sex === sex) {
+        nomes.push(Object.values(bixo)[0]);
+      }
+    });
+  } else {
+    data.animals.forEach((especie) => {
+      if (especie.name === animal) {
+        especie.residents.forEach(bixo => nomes.push(Object.values(bixo)[0]));
+      }
+    });
+  }
+
+  if (sortin) nomes.sort();
+  resp[animal] = nomes;
+  return resp;
+};
+
+const organizaChamadaMap = (aux, i, sortin, sex) => {
+  const resp = [];
+
+  if (sortin) Object.values(aux)[i].forEach(animal => resp.push(buscaNomeAnimal(animal, true)));
+  else if (sex) {
+    Object.values(aux)[i].forEach((animal) => {
+      resp.push(buscaNomeAnimal(animal, false, sex));
+    });
+  } else Object.values(aux)[i].forEach(animal => resp.push(buscaNomeAnimal(animal)));
+
+  return resp;
+};
+
+const OrganizaObjetoMap = (auxNe, auxNw, auxSe, auxSw, estado, aux, options) => {
   const cordenadas = ['NE', 'NW', 'SE', 'SW'];
+  const resp = {};
+
+  if (estado) {
+    auxNe = organizaChamadaMap(aux, 0, false, options.sex);
+    auxNw = organizaChamadaMap(aux, 1, false, options.sex);
+    auxSe = organizaChamadaMap(aux, 2, false, options.sex);
+    auxSw = organizaChamadaMap(aux, 3, false, options.sex);
+  }
+
+  resp[cordenadas[0]] = auxNe;
+  resp[cordenadas[1]] = auxNw;
+  resp[cordenadas[2]] = auxSe;
+  resp[cordenadas[3]] = auxSw;
+
+  return resp;
+};
+
+const findAnimalLocal = () => {
   const objetivo = {};
   const auxNe = [];
   const auxNw = [];
@@ -95,59 +150,41 @@ const findAnimalLocal = () => {
     else if (animal.location === 'SE') auxSe.push(animal.name);
     else if (animal.location === 'SW') auxSw.push(animal.name);
   });
-  objetivo[cordenadas[0]] = auxNe;
-  objetivo[cordenadas[1]] = auxNw;
-  objetivo[cordenadas[2]] = auxSe;
-  objetivo[cordenadas[3]] = auxSw;
+  Object.assign(objetivo, OrganizaObjetoMap(auxNe, auxNw, auxSe, auxSw));
 
   return objetivo;
 };
 
-const buscaNomeAnimal = (animal) => {
-  const resp = {};
-  const nomes = [];
-
-  data.animals.forEach((especie) => {
-    if (especie.name === animal) {
-      especie.residents.forEach(bixo => nomes.push(Object.values(bixo)[0]));
-    }
-  });
-  resp[animal] = nomes;
-  //console.log(resp);
-  return resp;
-};
-
 function animalMap(options) {
-  const cordenadas = ['NE', 'NW', 'SE', 'SW'];
   const resp = {};
   let aux = {};
-  const auxNe = [];
-  const auxNw = [];
-  const auxSe = [];
-  const auxSw = [];
+  let auxNe = [];
+  let auxNw = [];
+  let auxSe = [];
+  let auxSw = [];
 
   aux = findAnimalLocal();
+  Object.assign(resp, aux);
 
-  if (!options) {
-    Object.assign(resp, aux);
-    console.log(resp);
-  } else if (options.includeNames && !options.sorted && !options.sex) {
-    Object.values(aux)[0].forEach(animal => auxNe.push(buscaNomeAnimal(animal)));
-    Object.values(aux)[1].forEach(animal => auxNw.push(buscaNomeAnimal(animal)));
-    Object.values(aux)[2].forEach(animal => auxSe.push(buscaNomeAnimal(animal)));
-    Object.values(aux)[3].forEach(animal => auxSw.push(buscaNomeAnimal(animal)));
-    resp[cordenadas[0]] = auxNe;
-    resp[cordenadas[1]] = auxNw;
-    resp[cordenadas[2]] = auxSe;
-    resp[cordenadas[3]] = auxSw;
-    console.log(resp);
+  if (!options) return resp;
+  if (options.includeNames && !options.sorted && !options.sex) {
+    auxNe = organizaChamadaMap(aux, 0);
+    auxNw = organizaChamadaMap(aux, 1);
+    auxSe = organizaChamadaMap(aux, 2);
+    auxSw = organizaChamadaMap(aux, 3);
+    Object.assign(resp, OrganizaObjetoMap(auxNe, auxNw, auxSe, auxSw, false));
+  } else if (options.includeNames && options.sorted && !options.sex) {
+    auxNe = organizaChamadaMap(aux, 0, true);
+    auxNw = organizaChamadaMap(aux, 1, true);
+    auxSe = organizaChamadaMap(aux, 2, true);
+    auxSw = organizaChamadaMap(aux, 3, true);
+    Object.assign(resp, OrganizaObjetoMap(auxNe, auxNw, auxSe, auxSw, false));
+  } else if (options.includeNames && !options.sorted && options.sex) {
+    Object.assign(resp, OrganizaObjetoMap(auxNe, auxNw, auxSe, auxSw, true, aux, options));
   }
   return resp;
 }
-options = { includeNames: true, sorted: false };
-animalMap(options);
-//buscaNomeAnimal('lions', 'NE');;
-//----------------------------------------------------------------------------------------------------
+
 const montaHorario = (dayname) => {
   if (dayname === 'Monday') return 'CLOSED';
   return `Open from ${data.hours[dayname].open}am until ${data.hours[dayname].close - 12}pm`;
