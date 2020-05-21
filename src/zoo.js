@@ -62,10 +62,33 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
+  //Sem parâmetros, retorna animais categorizados por localização
+  //Com opções especificadas, retorna nomes de animais
+  //Com opções especificadas, retorna nomes de animais ordenados
+  //Com opções especificadas, retorna somente nomes de animais macho/fêmea
+  //Só retorna informações específicas de gênero se includeNames for setado
+  function zooMap(direction) {
+    const jungle = [];
+    data.animals.filter(el => el.location === direction)
+      .forEach(el => jungle.push(el.name)); 
+    return jungle;
 }
 
 function schedule(dayName) {
   // seu código aqui
+  //Sem parâmetros, retorna um cronograma legível para humanos
+  //Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+  const hourKeys = Object.keys(data.hours);
+  if (!dayName) {
+    const result = hourKeys.reduce((acumulador, key) => {
+      acumulador[key] = oneDay(key);
+      return acumulador;
+    }, {});
+    return result;
+  }
+  const obj = {};
+  obj[dayName] = oneDay(dayName);
+  return obj;
 }
 
 function oldestFromFirstSpecies(id) {
