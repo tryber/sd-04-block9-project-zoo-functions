@@ -81,19 +81,15 @@ function entryCalculator(entrants) {
 // console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 // ------------------------------------------------------------------------------------------------
 const animalResidents = (animal, sorted, sex) => {
- 	  const residents = {};
-    residents[animal] = data.animals.find((element) => element.name === animal).residents;
-    if (sex) residents[animal] = residents[animal].filter((resident) => resident.sex === sex);
-    residents[animal] = residents[animal].map(({ name }) => name);
-
-
+  const residents = {};
+  residents[animal] = data.animals.find(element => element.name === animal).residents;
+  if (sex) residents[animal] = residents[animal].filter(resident => resident.sex === sex);
+  residents[animal] = residents[animal].map(({ name }) => name);
   if (sorted) residents[animal].sort();
-
   return residents;
 };
 
 function animalMap(options = {}) {
-
   const { includeNames, sex, sorted } = options;
   return data.animals.reduce((acc, { name, location }) => {
     if (!acc[location]) acc[location] = [];
@@ -105,6 +101,7 @@ function animalMap(options = {}) {
     return acc;
   }, {});
 }
+
 // ----------------------------------------------------------------------------------------------
 function schedule(dayName) {
   const operation = {
@@ -143,11 +140,9 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-  
-
 
 }
-console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+
 module.exports = {
   entryCalculator,
   schedule,
