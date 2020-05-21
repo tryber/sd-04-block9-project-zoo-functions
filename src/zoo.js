@@ -80,34 +80,74 @@ function entryCalculator(entrants) {
   resp = Object.keys(entrants).reduce((acc, i) => (acc + (data.prices[i] * entrants[i])), 0);
   return resp;
 }
-
-function animalMap(options) {
+//----------------------------------------------------------------------------------------------------
+const findAnimalLocal = () => {
   const cordenadas = ['NE', 'NW', 'SE', 'SW'];
-  const resp = {};
+  const objetivo = {};
   const auxNe = [];
   const auxNw = [];
   const auxSe = [];
   const auxSw = [];
 
+  data.animals.forEach((animal) => {
+    if (animal.location === 'NE') auxNe.push(animal.name);
+    else if (animal.location === 'NW') auxNw.push(animal.name);
+    else if (animal.location === 'SE') auxSe.push(animal.name);
+    else if (animal.location === 'SW') auxSw.push(animal.name);
+  });
+  objetivo[cordenadas[0]] = auxNe;
+  objetivo[cordenadas[1]] = auxNw;
+  objetivo[cordenadas[2]] = auxSe;
+  objetivo[cordenadas[3]] = auxSw;
+
+  return objetivo;
+};
+
+const buscaNomeAnimal = (animal) => {
+  const resp = {};
+  const nomes = [];
+
+  data.animals.forEach((especie) => {
+    if (especie.name === animal) {
+      especie.residents.forEach(bixo => nomes.push(Object.values(bixo)[0]));
+    }
+  });
+  resp[animal] = nomes;
+  //console.log(resp);
+  return resp;
+};
+
+function animalMap(options) {
+  const cordenadas = ['NE', 'NW', 'SE', 'SW'];
+  const resp = {};
+  let aux = {};
+  const auxNe = [];
+  const auxNw = [];
+  const auxSe = [];
+  const auxSw = [];
+
+  aux = findAnimalLocal();
+
   if (!options) {
-    data.animals.forEach((animal) => {
-      if (animal.location === 'NE') auxNe.push(animal.name);
-      else if (animal.location === 'NW') auxNw.push(animal.name);
-      else if (animal.location === 'SE') auxSe.push(animal.name);
-      else if (animal.location === 'SW') auxSw.push(animal.name);
-    });
+    Object.assign(resp, aux);
+    console.log(resp);
+  } else if (options.includeNames && !options.sorted && !options.sex) {
+    Object.values(aux)[0].forEach(animal => auxNe.push(buscaNomeAnimal(animal)));
+    Object.values(aux)[1].forEach(animal => auxNw.push(buscaNomeAnimal(animal)));
+    Object.values(aux)[2].forEach(animal => auxSe.push(buscaNomeAnimal(animal)));
+    Object.values(aux)[3].forEach(animal => auxSw.push(buscaNomeAnimal(animal)));
     resp[cordenadas[0]] = auxNe;
     resp[cordenadas[1]] = auxNw;
     resp[cordenadas[2]] = auxSe;
     resp[cordenadas[3]] = auxSw;
-
     console.log(resp);
   }
   return resp;
 }
-
-animalMap();
-
+options = { includeNames: true, sorted: false };
+animalMap(options);
+//buscaNomeAnimal('lions', 'NE');;
+//----------------------------------------------------------------------------------------------------
 const montaHorario = (dayname) => {
   if (dayname === 'Monday') return 'CLOSED';
   return `Open from ${data.hours[dayname].open}am until ${data.hours[dayname].close - 12}pm`;
