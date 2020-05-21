@@ -93,11 +93,20 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
-  // const schedule = (dayName) => {
-  // const objectHours = Object.entries(data.hours);
-  // console.log (objectHours);
-  // };
-}
+  const entries = Object.entries(data.hours);
+  if (dayName) {
+    const objectHours = entries.find(([day]) => day === dayName);
+    const [day, { open, close }] = objectHours;
+    if (dayName === 'Monday') return { [dayName]: 'CLOSED' };
+    return { [day]: `Open from ${open}am until ${close - 12}pm` };
+  }
+  
+  return entries.reduce((acc, [day, { open, close }]) => {
+    acc[day] = `Open from ${open}am until ${close - 12}pm`;
+    if (day === 'Monday') acc[day] = 'CLOSED';
+    return acc;
+  }, {});
+};
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
