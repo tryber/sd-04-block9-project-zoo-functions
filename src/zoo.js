@@ -128,19 +128,15 @@ const schedule = (dayName) => {
 
 const getEmployeeInfo = (search) => data.employees
   .find((info) => {
-    const saerchKeys = ['id', 'name', 'lastName'];
+    const saerchKeys = ['id', 'firstName', 'lastName'];
     let result = false;
     saerchKeys.forEach((key) => {
       if (info[key] === search) result = true;
     });
-    // console.log(result)
     return result;
-    // info[Object.keys(search)[0]] === search[Object.keys(search)[0]]
   });
 
 const oldestFromFirstSpecies = (id) => {
-  // Get employee info
-  // console.log(getEmployeeInfo(id));
   const employeeInfo = getEmployeeInfo(id);
 
   // Reduce first managed animal residents to return de oldest
@@ -159,8 +155,19 @@ const increasePrices = (percentage) => {
   // });
 };
 
+const getAnimalById = (id) => data.animals.find((animal) => animal.id === id);
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  let coverage = {};
+  const employeeInfo = getEmployeeInfo(idOrName);
+  data.employees.forEach((employee) => {
+    coverage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((animlaId) => getAnimalById(animlaId).name);
+  });
+  if (employeeInfo) {
+    coverage = { [`${employeeInfo.firstName} ${employeeInfo.lastName}`]: coverage[`${employeeInfo.firstName} ${employeeInfo.lastName}`] };
+  }
+
+  return coverage;
 }
 
 module.exports = {
