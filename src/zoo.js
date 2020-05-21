@@ -166,7 +166,7 @@ const employeeCoverage = (idOrName) => {
   });
   if (employeeInfo) {
     coverage = {
-      [`${employeeInfo.firstName} ${employeeInfo.lastName}`]: coverage[`${employeeInfo.firstName} ${employeeInfo.lastName}`] 
+      [`${employeeInfo.firstName} ${employeeInfo.lastName}`]: coverage[`${employeeInfo.firstName} ${employeeInfo.lastName}`],
     };
   }
 
