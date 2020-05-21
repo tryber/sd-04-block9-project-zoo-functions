@@ -29,7 +29,7 @@ function animalsOlderThan(animal, age) {
   const animalAge = animaisObj
   .find(element => element.name === animal)
   .residents.every(element => element.age > age);
-return animalAge;
+  return animalAge;
 }
 
 function employeeByName(employeeName) {
@@ -44,7 +44,9 @@ function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   //Cria um novo colaborador a partir de objetos contendo 
   //informações pessoais, gerentes e animais gerenciados
-  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
@@ -55,10 +57,14 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
+  //Adiciona um funcionário no fim da lista
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
   // seu código aqui
+  //Cria um novo colaborador a partir de objetos contendo 
+  //informações pessoais, gerentes e animais gerenciados
   //Sem parâmetros, returna animais e suas quantidades
   //Com o nome de uma espécie de animal, retorna somente a quantidade
   if (!species) {
