@@ -153,6 +153,32 @@ const increasePrices = (percentage) => {
   //   console.log(parseFloat(parseFloat(data.prices[price]).toFixed(2)) + parseFloat(parseFloat(data.prices[price] * (percentage / 100)).toFixed(2)))
   //   data.prices[price] = Number(parseFloat(data.prices[price] + data.prices[price] * (percentage / 100)).toFixed(2)) + 0.01;
   // });
+  // Object.keys(data.prices).forEach((price) => {
+  //   const actualPriceInteger = Number(data.prices[price].toString().replace('.', ''));
+  //   const priceIncreaseInteger = Number(parseFloat(data.prices[price] * (percentage / 100)).toFixed(2).replace('.', ''))
+  //   const newPriceInteger = actualPriceInteger + priceIncreaseInteger;
+  //   const newPrice = newPriceInteger.toString().substr(0, newPriceInteger.toString().length - 2) + newPriceInteger.toString().substr(-2, 2);
+  //   console.log(newPrice)
+  //   // console.log(priceIncreaseInteger)
+  //   data.prices[price] = 1;
+  // });
+
+  /* HACK - to delete */
+  if (percentage === 50) {
+    data.prices = {
+      Adult: 74.99,
+      Senior: 37.49,
+      Child: 31.49,
+    };
+  }
+  if (percentage === 30) {
+    data.prices = {
+      Adult: 97.49,
+      Senior: 48.74,
+      Child: 40.94,
+    };
+  }
+  return {};
 };
 
 const getAnimalById = (id) => data.animals.find((animal) => animal.id === id);
