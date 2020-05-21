@@ -238,16 +238,6 @@ function employeeCoverage(idOrName) {
   zooEmployee[`${aliasEmployee.firstName} ${aliasEmployee.lastName}`] = zooKeeper(aliasEmployee.responsibleFor);
   return zooEmployee;
 }
-console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
-// expected = { 'Sharonda Spry': ['otters', 'frogs'] };
-
-
-console.log(employeeCoverage('Stephanie'));
-// expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
-
-console.log(employeeCoverage('Azevado'));
-// expected = { 'Ardith Azevado': ['tigers', 'bears'] };
-
 
 module.exports = {
   entryCalculator,
