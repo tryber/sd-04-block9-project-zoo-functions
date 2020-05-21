@@ -34,7 +34,7 @@ function animalsOlderThan(animal, age) {
   });
 }
 
-/*function employeeByName(employeeName) {
+/* function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   const funcionarios
   const funcionarioFiltrado = funcionarios.filter((funcionario) => {
@@ -44,7 +44,7 @@ function animalsOlderThan(animal, age) {
     return false;
   });
   return funcionarioFiltrado[0];
-}*/
+} */
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
@@ -92,7 +92,7 @@ module.exports = {
   animalCount,
   animalMap,
   animalsByIds,
-  employeeByName,
+  // employeeByName,
   employeeCoverage,
   addEmployee,
   isManager,
