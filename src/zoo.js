@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const funcionarios = data.employees;// Constante funcionarios recebe a segunda entrada do array em data
+const funcionarios = data.employees;// Constante recebe a segunda entrada do array em data
 const animals = data.animals;// Constante animals recebe a primeira entrada do array em data
 function animalsByIds(...ids) {
   let animaisFiltradosPorId = [];
