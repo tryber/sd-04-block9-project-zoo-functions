@@ -101,6 +101,7 @@ function zooMap(direction) {
 }
 
 function animalNames(direction, sorted) {
+  // console.log(direction, sorted);
   const jungle = zooMap(direction);
   const cage = {};
   let teste = [];
@@ -133,24 +134,24 @@ function animalSex(direction, sorted) {
   return result;
 }
 
-function especifyOptions(sorted, sex) {
+function especifyOptions(sorted) {
   const mapAnimal = {};
   const zooDirection = ['NE', 'NW', 'SE', 'SW'];
   for (let i = 0; i < zooDirection.length; i += 1) {
-    if (!sorted) mapAnimal[zooDirection[i]] = animalSex(zooDirection[i], sex);
+    if (!sorted) mapAnimal[zooDirection[i]] = animalNames(zooDirection[i]);
     else mapAnimal[zooDirection[i]] = animalNames(zooDirection[i], sorted);
   }
   return mapAnimal;
 }
 
-// function especifySex(gene) {
-//   const mapAnimal = {};
-//   const zooDirection = ['NE', 'NW', 'SE', 'SW'];
-//   for (let i = 0; i < zooDirection.length; i += 1) {
-//     mapAnimal[zooDirection[i]] = animalSex(zooDirection[i], gene);
-//   }
-//   return mapAnimal;
-// }
+function especifySex(gene) {
+  const mapAnimal = {};
+  const zooDirection = ['NE', 'NW', 'SE', 'SW'];
+  for (let i = 0; i < zooDirection.length; i += 1) {
+    mapAnimal[zooDirection[i]] = animalSex(zooDirection[i], gene);
+  }
+  return mapAnimal;
+}
 
 function noParameter() {
   const mapAnimal = {};
@@ -163,10 +164,13 @@ function noParameter() {
 
 function animalMap(options) {
   if (!options || !options.includeNames) return noParameter();
-  if (options.sorted || options.sex) return especifyOptions(true, options.sex);
+  console.log(options.includeNames, options.sorted, options.sex);
+  if (options.sex) return especifySex(options.sex);
+  return especifyOptions(options.sorted);
+  // if (options.sorted) return especifyOptions(true);
   // if (options.sex) return especifySex(options.sex);
-  if (options.includeNames) return especifyOptions(false);
-  return true;
+  // if (options.includeNames) return especifyOptions(false);
+  // return true;
 }
 
 // só retorna informações específicas de gênero se includeNames for setado
