@@ -88,6 +88,18 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
+  const cronograma = {};
+  const dias = Object.keys(data.hours);
+  dias.forEach(dia => {
+    const abertura = data.hours[dia].open;
+    const fechamento = data.hours[dia].close - 12;
+    cronograma[dia] = `Open from ${abertura}am until ${fechamento}pm`;
+  });
+  cronograma.Monday = "CLOSED";
+  if (!dayName) {
+    return cronograma;
+  }
+  return { [dayName]: cronograma[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
