@@ -21,21 +21,22 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-if(!employeeName) return {};
-return data.employees.find(({firstName, lastName}) => firstName === employeeName || lastName === employeeName)
-}
+  if (!employeeName) return {};
+  return data.employees.find(({ firstName, lastName }) => {
+    (firstName === employeeName || lastName === employeeName)})
+  }
 
 function createEmployee(personalInfo, associatedWith) {
-  const employee = {...personalInfo, ...associatedWith}
-  return employee
+  const employee = { ...personalInfo, ...associatedWith };
+  return employee;
 }
 
 function isManager(id) {
-return data.employees.some(({managers}) => managers.includes(id))
+  return data.employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push({id, firstName, lastName, managers, responsibleFor});
 }
 
 function animalCount(species) {
