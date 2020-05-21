@@ -10,10 +10,17 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-
-function animalsByIds(ids) {
-  // seu código aqui
-}
+const animals = data.animals; //Declara uma constante (animals) que recebe a primeira entrada do array exportado em data 
+function animalsByIds(...ids) {
+  let animaisFiltradosPorId = [];
+  ids.forEach((id) => {
+    animaisFiltradosPorId = [...animaisFiltradosPorId, ...animals.filter((animal) => {
+      if (animal.id === id) return true;
+      return false;
+    })];
+  });
+  return animaisFiltradosPorId;
+};
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
