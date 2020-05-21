@@ -114,11 +114,49 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const cron = {};
+  if (dayName) {
+    cron[dayName] = cronLeg(dayName);
+    return cron;
+  }
+  Object.keys(data.hours).forEach((element) => { cron[element] = cronLeg(element); });
+  return cron;
 }
 
+const buscaIdDoAnimalGerenciado = (idFiltro) => {
+  const idDoAnimalGerenciado = funcionarios.find((employees) => {
+    if (employees.id === idFiltro) return true;
+    return false;
+  });
+
+  return idDoAnimalGerenciado.responsibleFor[0];
+};
+const filtrarAnimaisPorId = id => animals.find((animal) => {
+  if (animal.id === id) return true;
+  return false;
+});
+const filtrarAnimalMaisVelho = (especie) => {
+  const animalMaisVelho = especie.residents.reduce((maisVelho, atual) => {
+    if (maisVelho < atual.age) {
+      maisVelho = atual.age;
+    }
+    return maisVelho;
+  }, 0);
+  return especie.residents.find((animal) => {
+    if (animal.age === animalMaisVelho) return true;
+    return false;
+  });
+};
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const arrayDeInfo = [];
+  const idDoAnimalGerenciado = buscaIdDoAnimalGerenciado(id);
+  const animais = filtrarAnimaisPorId(idDoAnimalGerenciado);
+  const animalMaisVelho = filtrarAnimalMaisVelho(animais);
+  arrayDeInfo[0] = animalMaisVelho.name;
+  arrayDeInfo[1] = animalMaisVelho.sex;
+  arrayDeInfo[2] = animalMaisVelho.age;
+  return arrayDeInfo;
 }
 
 function increasePrices(percentage) {
