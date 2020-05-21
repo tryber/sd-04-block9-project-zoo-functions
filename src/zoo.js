@@ -69,7 +69,7 @@ const animalCount = (species) => {
 };
 
 function entryCalculator(entrants = {}) {
-  if (Object.entries(entrants).length === 0) return 0;
+  if (Object.entries(entrants).length) return 0;
 
   const totalToPay = Object.values(entrants)
     .reduce((total, qnt, index) => total + qnt * data.prices[Object.keys(entrants)[index]], 0);
@@ -126,9 +126,24 @@ const schedule = (dayName) => {
   return scheduleTimes;
 };
 
-const oldestFromFirstSpecies = (id) => {
-  const employeeInfo = data.employees.find((info) => info.id === id);
+const getEmployeeInfo = (search) => data.employees
+  .find((info) => {
+    const saerchKeys = ['id', 'name', 'lastName'];
+    let result = false;
+    saerchKeys.forEach((key) => {
+      if (info[key] === search) result = true;
+    });
+    // console.log(result)
+    return result;
+    // info[Object.keys(search)[0]] === search[Object.keys(search)[0]]
+  });
 
+const oldestFromFirstSpecies = (id) => {
+  // Get employee info
+  // console.log(getEmployeeInfo(id));
+  const employeeInfo = getEmployeeInfo(id);
+
+  // Reduce first managed animal residents to return de oldest
   return data.animals.find((animal) => animal.id === employeeInfo.responsibleFor[0])
     .residents.reduce((resident, { name, sex, age }) => {
       if (age > resident[2]) resident = [name, sex, age];
@@ -137,9 +152,12 @@ const oldestFromFirstSpecies = (id) => {
     }, ['', '', 0]);
 };
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {
+  // Object.keys(data.prices).forEach((price) => {
+  //   console.log(parseFloat(parseFloat(data.prices[price]).toFixed(2)) + parseFloat(parseFloat(data.prices[price] * (percentage / 100)).toFixed(2)))
+  //   data.prices[price] = Number(parseFloat(data.prices[price] + data.prices[price] * (percentage / 100)).toFixed(2)) + 0.01;
+  // });
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
