@@ -78,8 +78,41 @@ function entryCalculator(entrants) {
   );
 }
 
+function animalMapNoOpt() {
+  const allAnimalsLoc = {};
+  const locations = [...new Set(data.animals.map(({ location }) => location))];
+  locations.forEach(loc => {
+    const animals = data.animals
+      .filter(({ location }) => location === loc)
+      .map(({ name }) => name);
+    allAnimalsLoc[loc] = animals;
+  });
+  return allAnimalsLoc;
+}
+
+function animalMapInclude(options) {
+  const newMap = animalMapNoOpt();
+  const iterableMap = Object.keys(newMap);
+  iterableMap.forEach(loc => {
+    newMap[loc].forEach((animalType, idx) => {
+      const typeNames = data.animals
+        .find(({ name }) => animalType === name)
+        .residents.filter(({ sex }) => !options.sex || options.sex === sex)
+        .map(({ name }) => name);
+      if (options.sorted) {
+        typeNames.sort();
+      }
+      newMap[loc][idx] = { [animalType]: typeNames };
+    });
+  });
+  return newMap;
+}
+
 function animalMap(options) {
-  // seu código aqui
+  const newMap = animalMapNoOpt();
+  if (!options) return newMap;
+  if (options.sex && !options.includeNames) return newMap;
+  return animalMapInclude(options);
 }
 
 function schedule(dayName) {
