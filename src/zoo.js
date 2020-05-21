@@ -95,11 +95,10 @@ function animalMap(options) {
   //Com opções especificadas, retorna nomes de animais ordenados
   //Com opções especificadas, retorna somente nomes de animais macho/fêmea
   //Só retorna informações específicas de gênero se includeNames for setado
-  function zooMap(direction) {
-    const jungle = [];
-    data.animals.filter(el => el.location === direction)
-      .forEach(el => jungle.push(el.name)); 
-    return jungle;
+  if (!options || !options.includeNames) return noParameter();
+  console.log(options.includeNames, options.sorted, options.sex);
+  if (options.sex) return especifySex(options.sex);
+  return especifyOptions(options.sorted);
 }
 
 function schedule(dayName) {
