@@ -13,6 +13,7 @@ const data = require('./data');
 
 const funcionarios = data.employees;// Constante recebe a segunda entrada do array em data
 const animals = data.animals;// Constante animals recebe a primeira entrada do array em data
+const precos = data.prices;
 function animalsByIds(...ids) {
   let animaisFiltradosPorId = [];
   ids.forEach((id) => {
@@ -99,7 +100,13 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  let total = 0;
+  let soma = 0;
+  if (!entrants) return 0;
+  if (Object.keys(entrants).length === 0) return 0;
+  total = Object.values(entrants);
+  soma = (total[0] * precos.Adult) + (total[1] * precos.Child) + (total[2] * precos.Senior);
+  return soma;
 }
 
 function animalMap(options) {
