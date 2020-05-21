@@ -24,7 +24,14 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const animalFiltradoPorEspecie = animals.filter((elementoAnimal) => {
+    if (elementoAnimal.name === animal) return true;
+    return false;
+  });
+  return animalFiltradoPorEspecie[0].residents.every((animalElemento) => {
+    if (animalElemento.age >= age) return true;
+    return false;
+  });
 }
 
 function employeeByName(employeeName) {
