@@ -68,14 +68,14 @@ const animalCount = (species) => {
   return result;
 };
 
-function entryCalculator(entrants = {}) {
-  if (Object.entries(entrants).length) return 0;
+const entryCalculator = (entrants = {}) => {
+  if (Object.entries(entrants).length === 0) return 0;
 
   const totalToPay = Object.values(entrants)
     .reduce((total, qnt, index) => total + qnt * data.prices[Object.keys(entrants)[index]], 0);
 
   return totalToPay;
-}
+};
 
 const filterSex = (residents, sex) => {
   // Filter residents by sex if sex parameter are seted;
@@ -157,18 +157,21 @@ const increasePrices = (percentage) => {
 
 const getAnimalById = (id) => data.animals.find((animal) => animal.id === id);
 
-function employeeCoverage(idOrName) {
+const employeeCoverage = (idOrName) => {
   let coverage = {};
   const employeeInfo = getEmployeeInfo(idOrName);
   data.employees.forEach((employee) => {
-    coverage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((animlaId) => getAnimalById(animlaId).name);
+    coverage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
+      .map((animlaId) => getAnimalById(animlaId).name);
   });
   if (employeeInfo) {
-    coverage = { [`${employeeInfo.firstName} ${employeeInfo.lastName}`]: coverage[`${employeeInfo.firstName} ${employeeInfo.lastName}`] };
+    coverage = {
+      [`${employeeInfo.firstName} ${employeeInfo.lastName}`]: coverage[`${employeeInfo.firstName} ${employeeInfo.lastName}`] 
+    };
   }
 
   return coverage;
-}
+};
 
 module.exports = {
   entryCalculator,
