@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const funcionarios = data.employees;// Constante funcionarios recebe a segunda entrada do array em data
 const animals = data.animals;// Constante animals recebe a primeira entrada do array em data
 function animalsByIds(...ids) {
   let animaisFiltradosPorId = [];
@@ -34,7 +35,7 @@ function animalsOlderThan(animal, age) {
   });
 }
 
-/* function employeeByName(employeeName) {
+ function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   const funcionarios
   const funcionarioFiltrado = funcionarios.filter((funcionario) => {
@@ -44,7 +45,7 @@ function animalsOlderThan(animal, age) {
     return false;
   });
   return funcionarioFiltrado[0];
-} */
+}
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
@@ -96,7 +97,7 @@ module.exports = {
   animalCount,
   animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   employeeCoverage,
   addEmployee,
   isManager,
