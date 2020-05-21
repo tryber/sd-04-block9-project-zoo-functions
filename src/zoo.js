@@ -34,6 +34,10 @@ return animalAge;
 
 function employeeByName(employeeName) {
   // seu código aqui
+  //Sem parâmetros, retorna um objeto vazio
+  //Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+  //Quando provido o último nome do funcionário, retorna o objeto do funcionário
+  return { ...personalInfo, ...associatedWith };
 }
 
 function createEmployee(personalInfo, associatedWith) {
