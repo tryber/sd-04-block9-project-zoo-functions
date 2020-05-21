@@ -23,8 +23,9 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(({ firstName, lastName }) => {
-    (firstName === employeeName || lastName === employeeName)})
-  }
+    return (firstName === employeeName || lastName === employeeName);
+  })
+}
 
 function createEmployee(personalInfo, associatedWith) {
   const employee = { ...personalInfo, ...associatedWith };
@@ -36,21 +37,23 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return data.employees.push({id, firstName, lastName, managers, responsibleFor});
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-if(!species) {
-  const animalsArray = data.animals.map(obj => ({[obj.name]: obj.residents.length }))
-  const animals = {};
-  animalsArray.forEach(animal => Object.assign(animals, animal));
-  return animals;
-};
-return data.animals.find(({name}) => name === species).residents.length
+  if (!species) {
+    const animalsArray = data.animals.map(obj => ({ [obj.name]: obj.residents.length }));
+    const animals = {};
+    animalsArray.forEach(animal => Object.assign(animals, animal));
+    return animals;
+  }
+  return data.animals.find(({ name }) => name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+  if (entrants.length === 0) return 0;
+  return Object.keys(entrants).reduce((acc, cur) => acc + (entrants[cur] * data.prices[cur]), 0);  
 }
 
 function animalMap(options) {
