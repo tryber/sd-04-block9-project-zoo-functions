@@ -55,7 +55,9 @@ function entryCalculator(entrants) {
   return obj.reduce((acc, atual) => acc + (data.prices[atual] * entrants[atual]), 0);
 }
 
-// animalMap
+function animalMap(options) {
+  // kjasd
+}
 
 function schedule(dayName) {
   const result = {};
@@ -87,16 +89,25 @@ function increasePrices(percentage) {
       data.prices[e] = Math.round((data.prices[e] * ((percentage / 100) + 1)) * 100) / 100;
     });
 }
-//
-//  ////////// CONCLUIDOS ////////////
-//
-
-function animalMap(options) {
-  // kjasd
-}
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const list = {};
+  data.employees.forEach((e) => {
+    const retornoAnimal = e.responsibleFor.map(
+      idAnimal => data.animals.find(element => element.id === idAnimal).name);
+    const retornoName = `${e.firstName} ${e.lastName}`;
+    list[retornoName] = retornoAnimal;
+  });
+  if (!idOrName) {
+    return list;
+  }
+  const { firstName, lastName } = data.employees.find(emp =>
+    emp.firstName === idOrName ||
+    emp.lastName === idOrName ||
+    emp.id === idOrName
+  );
+  const name = `${firstName} ${lastName}`;
+  return { [name]: list[name] };
 }
 
 module.exports = {
