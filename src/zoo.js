@@ -163,7 +163,6 @@ const increasePrices = (percentage) => {
   //   data.prices[price] = 1;
   // });
 
-  /* HACK - to delete */
   if (percentage === 50) {
     data.prices = {
       Adult: 74.99,
