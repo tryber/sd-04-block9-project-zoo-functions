@@ -87,26 +87,118 @@ function entryCalculator(entrants) {
     (entrants.Child * data.prices.Child);
 }
 
-function animalMap(options) {
-  // seu código aqui
+// Implemente a função animalMap:
+// Sem parâmetros, retorna animais categorizados por localização
+// Com opções especificadas, retorna nomes de animais
+// Com opções especificadas, retorna nomes de animais ordenados
+// Com opções especificadas, retorna somente nomes de animais macho/fêmea
+// Só retorna informações específicas de gênero se includeNames for setado
+function zooMap(direction) {
+  const jungle = [];
+  data.animals.filter(el => el.location === direction)  // filtra por localidades
+    .forEach(el => jungle.push(el.name)); // inclui espécies no array
+  return jungle;
 }
+
+function animalNames(direction, sorted) {
+  const jungle = zooMap(direction);
+  const cage = {};
+  let teste = [];
+  for (let i = 0; i < jungle.length; i += 1) {
+    teste = data.animals
+      .find(el => el.name === jungle[i]).residents
+      .map(elem => elem.name); // https://bit.ly/2zK857y
+    if (!sorted) cage[jungle[i]] = teste;
+    else cage[jungle[i]] = teste.sort();
+  }
+  const result = Object
+    .keys(cage)
+    .map(k => ({ [k]: cage[k] })); // https://bit.ly/3gbnhv2
+  return result;
+}
+
+function animalSex(direction, sorted) {
+  const jungle = zooMap(direction);
+  const cage = {};
+  let teste = [];
+  for (let i = 0; i < jungle.length; i += 1) {
+    teste = data.animals.find(el => el.name === jungle[i]).residents  // acessa nome dos bichos
+      .filter(elem => elem.sex === sorted)  // filtra por sexo
+      .map(elemento => elemento.name);  // identifica nome dos bichos
+    cage[jungle[i]] = teste;  // atribui os nomes próprios à espécie do animal
+  }
+  const result = Object
+    .keys(cage)
+    .map(k => ({ [k]: cage[k] })); // https://bit.ly/3gbnhv2
+  return result;
+}
+
+function especifyOptions(sorted, sex) {
+  const mapAnimal = {};
+  const zooDirection = ['NE', 'NW', 'SE', 'SW'];
+  for (let i = 0; i < zooDirection.length; i += 1) {
+    if (!sorted) mapAnimal[zooDirection[i]] = animalSex(zooDirection[i], sex);
+    else mapAnimal[zooDirection[i]] = animalNames(zooDirection[i], sorted);
+  }
+  return mapAnimal;
+}
+
+// function especifySex(gene) {
+//   const mapAnimal = {};
+//   const zooDirection = ['NE', 'NW', 'SE', 'SW'];
+//   for (let i = 0; i < zooDirection.length; i += 1) {
+//     mapAnimal[zooDirection[i]] = animalSex(zooDirection[i], gene);
+//   }
+//   return mapAnimal;
+// }
+
+function noParameter() {
+  const mapAnimal = {};
+  const zooDirection = ['NE', 'NW', 'SE', 'SW'];
+  for (let i = 0; i < zooDirection.length; i += 1) {
+    mapAnimal[zooDirection[i]] = zooMap(zooDirection[i]);
+  }
+  return mapAnimal;
+}
+
+function animalMap(options) {
+  if (!options || !options.includeNames) return noParameter();
+  if (options.sorted || options.sex) return especifyOptions(true, options.sex);
+  // if (options.sex) return especifySex(options.sex);
+  if (options.includeNames) return especifyOptions(false);
+  return true;
+}
+
+// só retorna informações específicas de gênero se includeNames for setado
+console.log('1 (no parameter): ', animalMap());
+
+let options = { includeNames: true };
+console.log('2: ', animalMap(options));
+
+options = { includeNames: true, sorted: true };
+console.log('3 (sorted): ', animalMap(options));
+
+options = { includeNames: true, sex: 'female' };
+console.log('4 (by sex): ', animalMap(options));
+
+options = { sex: 'female' };
+// console.log('5: ', animalMap(options)['NE'][0]);
 
 // Implemente a função schedule:
 // Sem parâmetros, retorna um cronograma legível para humanos
 // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
 function schedule(dayName) {
   if (!dayName) {
-    const week = Object.keys(data.hours).reduce((acc, curr) => {
-      acc[curr] = `Open from ${data.hours[curr].open}am until ${data.hours[curr].close - 12}pm`;
+    return Object.keys(data.hours).reduce((acc, curr) => {
+      acc[curr] = `Open from ${data.hours[curr].open} am until ${data.hours[curr].close - 12} pm`;
       if ((acc[curr]) === 'Open from 0am until -12pm') {
         acc[curr] = 'CLOSED';
       }
       return acc;
     }, {});
-    return week;
   }
   if (dayName !== 'Monday') {
-    return { [dayName]: `Open from ${data.hours[dayName].open}am until ${data.hours[dayName].close - 12}pm` };
+    return { [dayName]: `Open from ${data.hours[dayName].open} am until ${data.hours[dayName].close - 12} pm` };
   }
   return { Monday: 'CLOSED' };
 }
@@ -129,11 +221,16 @@ function oldestFromFirstSpecies(id) {
 // Ao passar uma porcentagem, incrementa todos os preços,
 // arrendondados em duas casas decimais
 function increasePrices(percentage) {
-  return Object.keys(data.prices).reduce((acc, curr) => {
-    acc[curr] = Math.round(data.prices[curr] * (percentage + 100)) / 100;
+  const juros = Object.keys(data.prices).reduce((acc, curr) => {
+    acc[curr] = Math.round(data.prices[curr] * ((percentage / 100) + 1) * 100) / 100;
     return acc;
   }, {});
+  data.prices = juros;
+  return juros;
 }
+
+// console.log(increasePrices(50));
+// console.log(increasePrices(30));
 
 // Implemente a função employeeCoverage:
 // Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
@@ -150,13 +247,13 @@ function employeeCoverage(idOrName) {
   const zooEmployee = {};
   if (!idOrName) {
     return data.employees.reduce((acc, curr) => { // https://bit.ly/2WB7cak
-      acc[`${curr.firstName} ${curr.lastName}`] = zooKeeper(curr.responsibleFor);
+      acc[`${curr.firstName} ${curr.lastName} `] = zooKeeper(curr.responsibleFor);
       return acc;
     }, {});
   }
   const aliasEmployee = data.employees.find(e =>
     e.firstName === idOrName || e.lastName === idOrName || e.id === idOrName);
-  zooEmployee[`${aliasEmployee.firstName} ${aliasEmployee.lastName}`] = zooKeeper(aliasEmployee.responsibleFor);
+  zooEmployee[`${aliasEmployee.firstName} ${aliasEmployee.lastName} `] = zooKeeper(aliasEmployee.responsibleFor);
   return zooEmployee;
 }
 
