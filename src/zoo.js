@@ -79,12 +79,33 @@ function entryCalculator(entrants) {
   // return Object.values(results).reduce((total, currentValue) => total + currentValue, 0);
 }
 // console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+// ------------------------------------------------------------------------------------------------
+const animalResidents = (animal, sorted, sex) => {
+ 	  const residents = {};
+    residents[animal] = data.animals.find((element) => element.name === animal).residents;
+    if (sex) residents[animal] = residents[animal].filter((resident) => resident.sex === sex);
+    residents[animal] = residents[animal].map(({ name }) => name);
 
-function animalMap(options) {
-// seu código aqui
 
+  if (sorted) residents[animal].sort();
+
+  return residents;
+};
+
+function animalMap(options = {}) {
+
+  const { includeNames, sex, sorted } = options;
+  return data.animals.reduce((acc, { name, location }) => {
+    if (!acc[location]) acc[location] = [];
+    if (!includeNames) {
+      acc[location].push(name);
+    } else {
+      acc[location].push(animalResidents(name, sorted, sex));
+    }
+    return acc;
+  }, {});
 }
-
+// ----------------------------------------------------------------------------------------------
 function schedule(dayName) {
   const operation = {
     Tuesday: 'Open from 8am until 6pm',
@@ -122,9 +143,11 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  
+
 
 }
-
+console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 module.exports = {
   entryCalculator,
   schedule,
