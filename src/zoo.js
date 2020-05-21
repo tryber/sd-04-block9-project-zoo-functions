@@ -106,7 +106,7 @@ function schedule(dayName) {
     if (day === 'Monday') acc[day] = 'CLOSED';
     return acc;
   }, {});
-};
+}
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
