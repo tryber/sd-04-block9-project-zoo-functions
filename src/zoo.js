@@ -60,6 +60,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
+  const animais = {};
+  if (!species) {
+    return data.animals.reduce((acc, e, ind) => {
+      animais[`${e.name}`] = Object.values(data.animals[ind].residents).length;
+      return animais;
+    }, {});
+  }
+  return data.animals.find(e => species == e.name).residents.length;
 }
 
 function entryCalculator(entrants) {
@@ -128,8 +136,6 @@ function employeeCoverage(idOrName) {
   if (!idOrName) return empregado;
   return { [`${array.firstName} ${array.lastName}`]: empregado[`${array.firstName} ${array.lastName}`] };
 }
-
-console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
