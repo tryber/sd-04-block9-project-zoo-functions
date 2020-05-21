@@ -16,7 +16,6 @@ function animalsByIds(ids) {
   // Caso receba nenhum parâmetro, necessário retornar um array vazio
   // Ao receber como parâmetro um único id, retorna os animais com este id
   // Ao receber mais de um id, retorna os animais que têm um desses ids
-
   function animalsByIds(...ids) {
     if (!ids) return [];
     const resultado = data.animals.filter(elemento => ids.includes(elemento.id));
@@ -25,6 +24,12 @@ function animalsByIds(ids) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  //Ao passar o nome de uma espécie e uma idade, 
+  //testa se todos os animais desta espécie possuem a idade mínima especificada
+  const animalAge = animaisObj
+  .find(element => element.name === animal)
+  .residents.every(element => element.age > age);
+return animalAge;
 }
 
 function employeeByName(employeeName) {
