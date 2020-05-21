@@ -12,7 +12,7 @@ describe('animalsOlderThan', () => {
 
     assert.deepEqual(actual, expected);
 
-    actual = zoo.animalsOlderThan('penguins', 10);
+    actual = zoo.animalsOlderThan('penguins', 12);
     expected = false;
 
     assert.deepEqual(actual, expected);
