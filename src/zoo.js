@@ -121,6 +121,16 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  //Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado 
+  //pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
+  const employee = data.employees.find(item => item.id === id);
+  const firstSpecie = data.animals.find(item => item.id === employee.responsibleFor[0]);
+  const animalsAges = firstSpecie.residents.map(({ age }) => age).sort((a, b) => a - b);
+  const oldestInfo = firstSpecie.residents
+  .filter(item => item.age === animalsAges[animalsAges.length - 1]);
+  const oldestInfoArray = Object.values(oldestInfo[0]);
+  return oldestInfoArray;
+
 }
 
 function increasePrices(percentage) {
