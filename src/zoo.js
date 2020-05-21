@@ -107,10 +107,29 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
-  /* if (dayName === undefined) {
-    dayName = data.hours;
-    return dayName;
-    };*/
+  const escala = [
+    { Tuesday: 'Open from 8am until 6pm' },
+    { Wednesday: 'Open from 8am until 6pm' },
+    { Thursday: 'Open from 10am until 8pm' },
+    { Friday: 'Open from 10am until 8pm' },
+    { Saturday: 'Open from 8am until 10pm' },
+    { Sunday: 'Open from 8am until 8pm' },
+    { Monday: 'CLOSED' },
+  ];
+  if (dayName === 'Monday') {
+    return escala[6];
+  }
+  if (dayName === 'Tuesday') {
+    return escala[0];
+  }
+  return { Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
 }
 
 function oldestFromFirstSpecies(id) {
@@ -153,6 +172,21 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  /* let names = data.employees.map(n => n.firstName + ' ' + n.lastName)
+  let repsFor = data.employees.filter(r => r).map(r => r.responsibleFor)
+  function animalsByIds(...ani) {
+    const [r, b, w, x] = ani;
+    const iden = data.animals.filter(value => value.id === r ||
+     value.id === b || value.id === w || value.id === x)
+    .map(n => n.name);
+
+    return iden
+
+  }
+  let animais = {}
+  animais = animalsByIds(repsFor[0][0], repsFor[0][1], repsFor[0][2], repsFor[0][3]);
+
+  return animais */
 }
 
 module.exports = {
