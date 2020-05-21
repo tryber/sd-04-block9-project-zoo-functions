@@ -42,10 +42,15 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  //Cria um novo colaborador a partir de objetos contendo 
+  //informações pessoais, gerentes e animais gerenciados
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function isManager(id) {
   // seu código aqui
+  //Testa se o id passado é de um gerente
+  return data.employees.some(manager => manager.managers.some(e => e === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -54,10 +59,27 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
   // seu código aqui
+  //Sem parâmetros, returna animais e suas quantidades
+  //Com o nome de uma espécie de animal, retorna somente a quantidade
+  if (!species) {
+    const output = {};
+    data.animals.forEach(function (el) {
+      if (!output[el.name]) output[el.name] = el.residents.length;
+    });
+    return output;
+  }
+  const countSpecie = data.animals.find(animal => animal.name === species);
+  return countSpecie.residents.length;
 }
 
 function entryCalculator(entrants) {
   // seu código aqui
+  //Returna 0 se nenhum argumento for passado
+  //Retorna 0 se um objeto vazio for passado
+  //Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
+  if (!entrants) return 0;
+  if (entrants.length === 0) return 0;
+  return Object.keys(entrants).reduce((acc, cur) => acc + (entrants[cur] * data.prices[cur]), 0);
 }
 
 function animalMap(options) {
