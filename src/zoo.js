@@ -76,6 +76,16 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   });
 }
 
+const listarNomes = () => {
+  const nomes = {};
+  let nome;
+  for (let i = 0; i < animals.length; i += 1) {
+    nome = animals[i].name;
+    nomes[nome] = animals[i].residents.length;
+  }
+  return nomes;
+}
+
 function animalCount(species) {
   if (!species) {
     return listarNomes();
@@ -89,7 +99,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+ // seu código aqui
 }
 
 function animalMap(options) {
