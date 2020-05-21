@@ -84,7 +84,7 @@ const listarNomes = () => {
     nomes[nome] = animals[i].residents.length;
   }
   return nomes;
-}
+};
 
 function animalCount(species) {
   if (!species) {
@@ -99,7 +99,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
- // seu código aqui
+  // seu código aqui
 }
 
 function animalMap(options) {
