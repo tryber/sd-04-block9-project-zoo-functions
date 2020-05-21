@@ -101,7 +101,6 @@ function zooMap(direction) {
 }
 
 function animalNames(direction, sorted) {
-  // console.log(direction, sorted);
   const jungle = zooMap(direction);
   const cage = {};
   let teste = [];
@@ -167,42 +166,24 @@ function animalMap(options) {
   console.log(options.includeNames, options.sorted, options.sex);
   if (options.sex) return especifySex(options.sex);
   return especifyOptions(options.sorted);
-  // if (options.sorted) return especifyOptions(true);
-  // if (options.sex) return especifySex(options.sex);
-  // if (options.includeNames) return especifyOptions(false);
-  // return true;
 }
-
-// só retorna informações específicas de gênero se includeNames for setado
-console.log('1 (no parameter): ', animalMap());
-
-let options = { includeNames: true };
-console.log('2: ', animalMap(options));
-
-options = { includeNames: true, sorted: true };
-console.log('3 (sorted): ', animalMap(options));
-
-options = { includeNames: true, sex: 'female' };
-console.log('4 (by sex): ', animalMap(options));
-
-options = { sex: 'female' };
-// console.log('5: ', animalMap(options)['NE'][0]);
 
 // Implemente a função schedule:
 // Sem parâmetros, retorna um cronograma legível para humanos
 // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
 function schedule(dayName) {
   if (!dayName) {
-    return Object.keys(data.hours).reduce((acc, curr) => {
-      acc[curr] = `Open from ${data.hours[curr].open} am until ${data.hours[curr].close - 12} pm`;
+    const week = Object.keys(data.hours).reduce((acc, curr) => {
+      acc[curr] = `Open from ${data.hours[curr].open}am until ${data.hours[curr].close - 12}pm`;
       if ((acc[curr]) === 'Open from 0am until -12pm') {
         acc[curr] = 'CLOSED';
       }
       return acc;
     }, {});
+    return week;
   }
   if (dayName !== 'Monday') {
-    return { [dayName]: `Open from ${data.hours[dayName].open} am until ${data.hours[dayName].close - 12} pm` };
+    return { [dayName]: `Open from ${data.hours[dayName].open}am until ${data.hours[dayName].close - 12}pm` };
   }
   return { Monday: 'CLOSED' };
 }
@@ -233,9 +214,6 @@ function increasePrices(percentage) {
   return juros;
 }
 
-// console.log(increasePrices(50));
-// console.log(increasePrices(30));
-
 // Implemente a função employeeCoverage:
 // Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
 // Com o id de um funcionário, retorna os animais pelos quais o funcionário é responsável
@@ -251,15 +229,25 @@ function employeeCoverage(idOrName) {
   const zooEmployee = {};
   if (!idOrName) {
     return data.employees.reduce((acc, curr) => { // https://bit.ly/2WB7cak
-      acc[`${curr.firstName} ${curr.lastName} `] = zooKeeper(curr.responsibleFor);
+      acc[`${curr.firstName} ${curr.lastName}`] = zooKeeper(curr.responsibleFor);
       return acc;
     }, {});
   }
   const aliasEmployee = data.employees.find(e =>
     e.firstName === idOrName || e.lastName === idOrName || e.id === idOrName);
-  zooEmployee[`${aliasEmployee.firstName} ${aliasEmployee.lastName} `] = zooKeeper(aliasEmployee.responsibleFor);
+  zooEmployee[`${aliasEmployee.firstName} ${aliasEmployee.lastName}`] = zooKeeper(aliasEmployee.responsibleFor);
   return zooEmployee;
 }
+console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
+// expected = { 'Sharonda Spry': ['otters', 'frogs'] };
+
+
+console.log(employeeCoverage('Stephanie'));
+// expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
+
+console.log(employeeCoverage('Azevado'));
+// expected = { 'Ardith Azevado': ['tigers', 'bears'] };
+
 
 module.exports = {
   entryCalculator,
