@@ -113,6 +113,13 @@ function animalMap(options) {
   // seu código aqui
 }
 
+const cronLeg = (day) => {
+  if (day === 'Monday') {
+    return 'CLOSED';
+  }
+  return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+};
+
 function schedule(dayName) {
   const cron = {};
   if (dayName) {
