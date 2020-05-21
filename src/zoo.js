@@ -82,8 +82,31 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  const cordenadas = ['NE', 'NW', 'SE', 'SW'];
+  const resp = {};
+  const auxNe = [];
+  const auxNw = [];
+  const auxSe = [];
+  const auxSw = [];
+
+  if (!options) {
+    data.animals.forEach((animal) => {
+      if (animal.location === 'NE') auxNe.push(animal.name);
+      else if (animal.location === 'NW') auxNw.push(animal.name);
+      else if (animal.location === 'SE') auxSe.push(animal.name);
+      else if (animal.location === 'SW') auxSw.push(animal.name);
+    });
+    resp[cordenadas[0]] = auxNe;
+    resp[cordenadas[1]] = auxNw;
+    resp[cordenadas[2]] = auxSe;
+    resp[cordenadas[3]] = auxSw;
+
+    console.log(resp);
+  }
+  return resp;
 }
+
+animalMap();
 
 const montaHorario = (dayname) => {
   if (dayname === 'Monday') return 'CLOSED';
