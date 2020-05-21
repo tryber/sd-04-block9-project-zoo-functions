@@ -20,7 +20,7 @@ function animalsByIds(...ids) {
     })];
   });
   return animaisFiltradosPorId;
-};
+}
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
