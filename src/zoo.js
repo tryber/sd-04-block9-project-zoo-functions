@@ -100,7 +100,6 @@ function schedule(dayName) {
     if (dayName === 'Monday') return { [dayName]: 'CLOSED' };
     return { [day]: `Open from ${open}am until ${close - 12}pm` };
   }
-  
   return entries.reduce((acc, [day, { open, close }]) => {
     acc[day] = `Open from ${open}am until ${close - 12}pm`;
     if (day === 'Monday') acc[day] = 'CLOSED';
