@@ -61,9 +61,19 @@ function entryCalculator(entrants = {}) {
 function animalMap(options) {
   // seu código aqui
 }
-
+animalMap()
 function schedule(dayName) {
-  // seu código aqui
+  if (!dayName) {
+    const days = Object.values(data.hours).map((obj, index) => {
+      if (index < 6) {
+        return obj[index] = `Open from ${obj.open}am until ${obj.close}pm`;
+      } else {
+        return obj[index] = `CLOSED`;
+      };
+    });
+    return days
+  }
+
 }
 
 function oldestFromFirstSpecies(id) {
