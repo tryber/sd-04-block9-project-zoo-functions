@@ -70,9 +70,19 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const perc = (100 + percentage) / 100;
+  const prices = Object.keys(data.prices).reduce((acc, cur) => {
+    acc[cur] = Math.round((data.prices[cur] * perc) * 100) / 100;
+    return acc;
+  }, {});
+  data.prices = prices;
+  return prices;
 }
-
+// function entryCalculator(entrants = {}) {
+//   if (entrants.length === 0) return 0;
+//   return Object.keys(entrants).reduce(
+//     (acc, cur) => (acc + entrants[cur]) * data.prices[cur], 0);
+// }
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
