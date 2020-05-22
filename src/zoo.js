@@ -79,11 +79,7 @@ function increasePrices(percentage) {
   data.prices = prices;
   return prices;
 }
-// function entryCalculator(entrants = {}) {
-//   if (entrants.length === 0) return 0;
-//   return Object.keys(entrants).reduce(
-//     (acc, cur) => (acc + entrants[cur]) * data.prices[cur], 0);
-// }
+
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
