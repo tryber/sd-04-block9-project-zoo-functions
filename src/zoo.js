@@ -66,12 +66,12 @@ function schedule(dayName) {
   if (!dayName) {
     const days = Object.values(data.hours).map((obj, index) => {
       if (index < 6) {
-        return obj[index] = `Open from ${obj.open}am until ${obj.close}pm`;
+        return (`Open from ${obj.open}am until ${obj.close}pm`);
       } else {
-        return obj[index] = `CLOSED`;
+        return ('CLOSED');
       };
     });
-    return days
+    return days;
   }
 
 }
