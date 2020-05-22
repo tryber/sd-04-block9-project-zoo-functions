@@ -22,7 +22,7 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  return data.employees.find(({ firstName, lastName }) => (firstName || lastName) === employeeName
+  return data.employees.find(({ obj }) => ((obj.firstName || obj.lastName) === employeeName),
   );
 }
 
@@ -49,12 +49,10 @@ function animalCount(species) {
   return data.animals.find(({ name }) => name === species).residents.length;
 }
 
-function entryCalculator(entrants) {
-  if (!entrants) return 0;
+function entryCalculator(entrants = {}) {
   if (entrants.length === 0) return 0;
-  return Object.keys(entrants).reduce((acc, cur) => {
-    return (acc + (entrants[cur] * data.prices[cur])); 0;
-  })
+  return Object.keys(entrants).reduce(
+    (acc, cur) => (acc + entrants[cur]) * data.prices[cur], 0);
 }
 
 function animalMap(options) {
