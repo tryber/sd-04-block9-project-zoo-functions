@@ -90,10 +90,9 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  if (!idOrName) {
-    const employee = data.employees.filter(({firstName, lastName, responsibleFor}) => { return ([`${firstName} ${lastName}`] = animalsByIds(responsibleFor)[0])});
-return employee  }
+//   if (!idOrName) {
 }
+
 module.exports = {
   entryCalculator,
   schedule,
