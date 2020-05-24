@@ -1,16 +1,12 @@
 const assert = require('assert');
 const zoo = require('../src/zoo');
-
 describe('animalsByIds', () => {
   it('test', () => {
     let actual, expected;
-
     // sem parâmetros, retorna um array vazio
     actual = zoo.animalsByIds();
     expected = [];
-
     assert.deepEqual(actual, expected);
-
     // com um único id, retorna os animais com este id
     actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
     expected = [{
@@ -25,9 +21,7 @@ describe('animalsByIds', () => {
         { name: 'Dee', sex: 'female', age: 14 }
       ]
     }];
-
     assert.deepEqual(actual, expected);
-
     // com mais de um id, retorna os animais que têm um desses ids
     actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
       'e8481c1d-42ea-4610-8e11-1752cfc05a46');
@@ -52,7 +46,6 @@ describe('animalsByIds', () => {
         { name: 'Esther', sex: 'female', age: 17 }
       ]
     }];
-
     assert.deepEqual(actual, expected);
   });
 });

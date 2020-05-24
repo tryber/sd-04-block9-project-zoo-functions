@@ -99,11 +99,11 @@ Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão 
   - Adiciona um funcionário no fim da lista
 
 ### 7- Implemente a função animalCount:
-  - Sem parâmetros, returna animais e suas quantidades
+  - Sem parâmetros, retorna animais e suas quantidades
   - Com o nome de uma espécie de animal, retorna somente a quantidade
 
 ### 8- Implemente a função entryCalculator:
-  - Returna 0 se nenhum argumento for passado
+  - Retorna 0 se nenhum argumento for passado
   - Retorna 0 se um objeto vazio for passado
   - Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
 
