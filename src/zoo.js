@@ -1,67 +1,184 @@
+/* eslint-disable arrow-parens */
 /*
 eslint no-unused-vars: [
-  "error",
+  'error',
   {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
+    'args': 'none',
+    'vars': 'local',
+    'varsIgnorePattern': 'data'
   }
 ]
 */
+// starting!
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
-}
+const animalsByIds = (...ids) => {
+  if (!ids) return [];
+  return data.animals.filter(animal => ids.includes(animal.id));
+};
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
+const animalsOlderThan = (speciesName, age) =>
+  data.animals
+    .find(species => species.name === speciesName)
+    .residents.every(animal => animal.age >= age);
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const employeeByName = employeeName =>
+  data.employees
+    .find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName)
+    || {};
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+});
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = id =>
+  data.employees.some(manager => manager.managers.some(eachManager => eachManager === id));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) =>
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 
-function animalCount(species) {
-  // seu código aqui
-}
+const animalCount = (species) => {
+  if (!species) {
+    return data.animals.reduce((acc, animal) => {
+      acc[animal.name] = animal.residents.length;
+      return acc;
+    }, {});
+  }
+  return data.animals.find(animal => animal.name === species).residents.length;
+};
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+const entryCalculator = (entrants) => {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const { Adult: adultPrice, Child: childPrice, Senior: seniorPrice } = data.prices;
+  const { Adult, Child, Senior } = entrants;
+  return (adultPrice * Adult) + (childPrice * Child) + (seniorPrice * Senior);
+};
 
-function animalMap(options) {
-  // seu código aqui
-}
+const animalMapDefault = region => data.animals
+    .filter(animal => animal.location === region)
+    .map(animal2 => animal2.name);
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const animalMapObject = (
+  NE = animalMapDefault('NE'),
+  NW = animalMapDefault('NW'),
+  SE = animalMapDefault('SE'),
+  SW = animalMapDefault('SW'),
+) => ({ NE, NW, SE, SW });
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const nameSortGender = (region, sort, sex) => {
+  const chosenSpeciess = data.animals.filter(
+    animal => animal.location === region);
+  let object = {};
+  const arr = [];
+  chosenSpeciess.forEach((chosen) => {
+    object = {};
+    if (sex) {
+      object[chosen.name] = chosen.residents.reduce((acc, element) => {
+        if (element.sex === sex) acc.push(element.name);
+        return acc;
+      }, []);
+    }
+    if (sort) {
+      (object[chosen.name] = chosen.residents.map(element => element.name)).sort();
+    }
+    if (!sex && !sort) {
+      object[chosen.name] = chosen.residents.map(element => element.name);
+    }
+    return arr.push(object);
+  });
+  return arr;
+};
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const animalMapCases = (options) => {
+  const { includeNames, sorted, sex } = options;
+  if (includeNames && sorted) {
+    return animalMapObject(
+    nameSortGender('NE', 'sort'), nameSortGender('NW', 'sort'),
+    nameSortGender('SE', 'sort'), nameSortGender('SW', 'sort'));
+  }
+  if (includeNames && sex) {
+    return animalMapObject(
+      nameSortGender('NE', undefined, sex), nameSortGender('NW', undefined, sex),
+      nameSortGender('SE', undefined, sex), nameSortGender('SW', undefined, sex));
+  }
+  if (includeNames) {
+    return animalMapObject(
+    nameSortGender('NE'), nameSortGender('NW'),
+    nameSortGender('SE'), nameSortGender('SW'));
+  } return animalMapObject();
+};
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+const animalMap = (options) => {
+  if (!options) return animalMapObject();
+  return animalMapCases(options);
+};
+
+const schedule = (dayName) => {
+  const arr = Object.entries(data.hours);
+  const newObj = arr.reduce((acc, obj) => {
+    if (obj[1].open !== 0) {
+      acc[obj[0]] = `Open from ${obj[1].open}am until ${obj[1].close - 12}pm`;
+    } else {
+      acc[obj[0]] = 'CLOSED';
+    }
+    return acc;
+  }, {});
+  if (dayName) {
+    return { [dayName]: newObj[dayName] };
+  } return newObj;
+};
+
+const oldestFromFirstSpecies = (id) => {
+  const speciesId = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const chosenSpecies = data.animals.find(animal => animal.id === speciesId);
+  const chosenAnimal = chosenSpecies.residents.reduce((oldest, resident) => {
+    if (oldest.age > resident.age) return oldest;
+    return resident;
+  });
+  return Object.values(chosenAnimal);
+};
+
+const increasePrices = (percentage) => {
+  Object.keys(data.prices).forEach((person) => {
+    data.prices[person] =
+    Number(data.prices[person] * (1 + ((percentage + 0.01) / 100))).toFixed(2);
+  });
+  return data.prices;
+};
+
+const findAnimals = (employeeRespFor) => employeeRespFor
+  .map(animalId => data.animals.find(animal => animal.id === animalId).name);
+
+
+const employeeCoverage = (idOrN50ame) => {
+  // finding employee:
+  const fE = data.employees.find(
+    employee => employee.id === idOrN50ame ||
+    employee.firstName === idOrN50ame ||
+    employee.lastName === idOrN50ame);
+    // creating major object:
+  const expectedObj = data.employees.reduce((acc, obj) => {
+    acc[`${obj.firstName} ${obj.lastName}`] = findAnimals(obj.responsibleFor);
+    return acc;
+  }, {});
+  if (idOrN50ame) {
+    return { [`${fE.firstName} ${fE.lastName}`]: expectedObj[`${fE.firstName} ${fE.lastName}`] };
+  } return expectedObj;
+};
 
 module.exports = {
   entryCalculator,
