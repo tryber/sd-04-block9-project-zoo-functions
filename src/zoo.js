@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 /*
 eslint no-unused-vars: [
   'error',
@@ -24,8 +25,8 @@ const animalsOlderThan = (speciesName, age) =>
 
 const employeeByName = employeeName =>
   data.employees
-    .filter(obj => obj.firstName === employeeName || obj.lastName === employeeName)
-    .reduce((acc, employeeObj) => (acc = employeeObj), {});
+    .find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName)
+    || {};
 
 const createEmployee = (personalInfo, associatedWith) => ({
   ...personalInfo,
@@ -159,13 +160,9 @@ const increasePrices = (percentage) => {
   return data.prices;
 };
 
-const findThings = (employeeFname) => {
-  const responsibleAnimals = data.employees.find(employee =>
-    employee.firstName === employeeFname).responsibleFor;
-  return responsibleAnimals.map(animalId => data.animals
-    .find(animal => animal.id === animalId))
-    .map(animal => animal.name);
-};
+const findAnimals = (employeeRespFor) => employeeRespFor
+  .map(animalId => data.animals.find(animal => animal.id === animalId).name);
+
 
 const employeeCoverage = (idOrN50ame) => {
   // finding employee:
@@ -175,7 +172,7 @@ const employeeCoverage = (idOrN50ame) => {
     employee.lastName === idOrN50ame);
     // creating major object:
   const expectedObj = data.employees.reduce((acc, obj) => {
-    acc[`${obj.firstName} ${obj.lastName}`] = findThings(obj.firstName);
+    acc[`${obj.firstName} ${obj.lastName}`] = findAnimals(obj.responsibleFor);
     return acc;
   }, {});
   if (idOrN50ame) {
