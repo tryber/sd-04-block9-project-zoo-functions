@@ -12,52 +12,27 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const resultMap = ids.map((id) => {
-    console.log(id);
-    const resultFind = data.animals.find(animal => animal.id === id);
-    console.log(resultFind);
-    return resultFind;
-  }); // includes
-  console.log(resultMap);
-  return resultMap;
+  return ids.map(id => data.animals.find(animal => animal.id === id));
 }
-// animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
-// 'e8481c1d-42ea-4610-8e11-1752cfc05a46');
 
 function animalsOlderThan(animal, age) {
-  const nomeEspecie = data.animals.find(especie => especie.name === animal);
-  console.log(nomeEspecie);
-  const isIdadeMinima = nomeEspecie.residents.every(resident => resident.age > age);
-  console.log(isIdadeMinima);
-  return isIdadeMinima;
+  return data.animals.find(especie => especie.name === animal)
+    .residents.every(resident => resident.age > age);
 }
-
-// nimalsOlderThan('penguins', 10);
 
 function employeeByName(employeeName) {
-  // console.log(employeeName);
-  const ReduceEmployee = data.employees.reduce((accumulator, employee) =>
+  return data.employees.reduce((accumulator, employee) =>
     (employee.firstName === employeeName || employee.lastName === employeeName
       ? employee : accumulator), {});
-  console.log(ReduceEmployee);
-  return ReduceEmployee;
 }
-
-//  employeeByName();
 
 function createEmployee(personalInfo, associatedWith) {
-  console.log(personalInfo, associatedWith);
-  const newEmployee = Object.assign(personalInfo, associatedWith);
-  return newEmployee;
+  return Object.assign(personalInfo, associatedWith);
 }
 
-// console.log(createEmployee({nome: 'teste'}, {idade: 'teste2'}));
-
 function isManager(id) {
-  const verifyManager = data.employees.some(employee =>
+  return data.employees.some(employee =>
     employee.managers.find(mananger => mananger === id));
-  // console.log(verifyManager);
-  return verifyManager;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -65,8 +40,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  console.log(species);
-  const resultAnimalCount = data.animals.reduce((accumulator, animal) => {
+  return data.animals.reduce((accumulator, animal) => {
     const { name, residents } = animal; // destructuring do objeto
     if (species === undefined) {
       // console.log(animal.name, animal.residents.length):
@@ -79,14 +53,11 @@ function animalCount(species) {
   }, {}, // look o reduce se não passado nenhum valor para inicializar o accumulator,
     // ele inicializa com o primeiro valor que tem no animal
   );
-  return resultAnimalCount;
 }
-
-// console.log(animalCount());
 
 function entryCalculator(entrants = {}) { // defalt paraments
   return Object.keys(entrants) // a chave vira um array, o return vai receber o resultado de reduce
-    .reduce((accumulator, participant, index) =>
+    .reduce((accumulator, participant) =>
       accumulator + (entrants[participant] * data.prices[participant]), 0);
       // entrants.adult= quantidad
 }
@@ -123,24 +94,13 @@ const CreateNewAnimalMap = (animal, newObj, options) => {
 };
 
 function animalMap(options = {}) { // default Params
-  let newObj = {}; // objeto que vai montar toda a estrutura para depois devolver o resultado
-  data.animals.forEach((animal) => {
-    if (!newObj[animal.location]) { // Pra não duplicar os registros
-      newObj = CreateNewAnimalMap(animal, newObj, options);
+  return data.animals.reduce((accumulator, animal) => {
+    if (!accumulator[animal.location]) { // Pra não duplicar os registros
+      accumulator = CreateNewAnimalMap(animal, accumulator, options);
     }
-  });
-
-  return newObj;
+    return accumulator;
+  }, {});
 }
-
-// console.log(animalMap({ includeNames: true, sorted: true }));
-
-// {
-//   NE: ['lions', 'giraffes'],
-//   NW: ['tigers', 'bears', 'elephants'],
-//   SE: ['penguins', 'otters'],
-//   SW: ['frogs', 'snakes']\
-// };
 
 function schedule(dayName = '') {
   // Transformar o objeto em array com key
@@ -154,9 +114,6 @@ function schedule(dayName = '') {
     return accumulator;
   }, {});
 }
-
-// console.log(schedule('Saturday'));
-
 
 function oldestFromFirstSpecies(id) {
   const resultEmployee = data.employees.find(employee =>
@@ -172,11 +129,7 @@ function oldestFromFirstSpecies(id) {
   return Object.values(resultOldAnimal);
 }
 
-// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
 function increasePrices(percentage) {
-  console.log(data.prices);
-  console.log('==============================');
   // Tranforma o objeto em array, para manipular
   Object.keys(data.prices).forEach((price) => {
     // calcula a porcentagem soma com + 0.001 para arredondar para mais
@@ -185,14 +138,13 @@ function increasePrices(percentage) {
     data.prices[price] = parseFloat(data.prices[price]).toFixed(2);
     // tranforma em numérico novamente
     data.prices[price] = parseFloat(data.prices[price]);
-    console.log(data.prices);
   });
   return data.prices;
 }
 
 function employeeCoverage(idOrName = '') {
   // um reduce recebendo todo o processo
-  const resultEmployeeAnimal = data.employees.reduce((accumulator, employee) => {
+  return data.employees.reduce((accumulator, employee) => {
     // validações para cada possível situação
     if (idOrName === '' || idOrName === employee.id ||
       idOrName === employee.firstName || idOrName === employee.lastName) {
@@ -208,7 +160,6 @@ function employeeCoverage(idOrName = '') {
     }
     return accumulator;
   }, {});
-  return resultEmployeeAnimal;
 }
 
 module.exports = {
