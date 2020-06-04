@@ -24,7 +24,7 @@ function animalsByIds(ids) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  //Ao passar o nome de uma espécie e uma idade, 
+  //Ao passar o nome de uma espécie e uma idade,
   //testa se todos os animais desta espécie possuem a idade mínima especificada
   const animalAge = animaisObj
   .find(element => element.name === animal)
@@ -42,7 +42,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  //Cria um novo colaborador a partir de objetos contendo 
+  //Cria um novo colaborador a partir de objetos contendo
   //informações pessoais, gerentes e animais gerenciados
   const { id, firstName, lastName } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
@@ -63,7 +63,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
   // seu código aqui
-  //Cria um novo colaborador a partir de objetos contendo 
+  //Cria um novo colaborador a partir de objetos contendo
   //informações pessoais, gerentes e animais gerenciados
   //Sem parâmetros, returna animais e suas quantidades
   //Com o nome de uma espécie de animal, retorna somente a quantidade
@@ -120,7 +120,7 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  //Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado 
+  //Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado
   //pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
   const employee = data.employees.find(item => item.id === id);
   const firstSpecie = data.animals.find(item => item.id === employee.responsibleFor[0]);
