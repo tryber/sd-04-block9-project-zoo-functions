@@ -13,8 +13,8 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
     // seu código aqui
-    const animalsByIdz = data.animals.filter(animals => ids.find(id => id === animals.id));
-    return animalsByIdz;
+  const animalsByIdz = data.animals.filter(animals => ids.find(id => id === animals.id));
+  return animalsByIdz;
 }
 
 function animalsOlderThan(animal, age) {
@@ -77,7 +77,7 @@ const pickDay = (day) => {
     return 'CLOSED';
   }
   return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
-}
+};
 function schedule(dayName) {
   // seu código aqui
   const dayObject = {};
