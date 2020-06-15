@@ -49,16 +49,13 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
+  const listEntrants = Object.values(entrants);
+  const valueAdult = data.prices.Adult * listEntrants[0];
+  const valueChild = data.prices.Child * listEntrants[1];
+  const valueSenior = data.prices.Senior * listEntrants[2];
+  return (valueAdult + valueChild + valueSenior);
 }
-const entryCalculator = (entrants) => {
-  if (entrants && Object.keys(entrants).length > 0) {
-    return Object.keys(entrants).reduce(
-      (acc, el) => acc + data.prices[el] * entrants[el],
-      0
-    );
-  }
-  return 0;
-};
 
 function animalMap(options) {
   // seu código aqui
