@@ -27,6 +27,8 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   // seu código aqui
 }
+const employeeByName = employeeName => (employeeName === undefined ? {} : data.employees
+  .find(e => e.firstName === employeeName || e.lastName === employeeName));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -69,21 +71,6 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
-  const obj = Object.entries(data.hours);
-  const valor = obj.reduce((acc, [day, { open, close }]) => {
-    if (open === 0 && close === 0) {
-      acc[day] = 'CLOSED';
-    } else {
-      acc[day] = `Open from ${open}am until ${close - 12}pm`;
-    }
-    return acc;
-  }, {});
-  if (dayName) {
-    const final = {};
-    final[dayName] = valor[dayName];
-    return final;
-  }
-  return test;
 }
 
 function oldestFromFirstSpecies(id) {
