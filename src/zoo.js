@@ -34,7 +34,9 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-}
+  return employees.some(element => data.employees.some(element =>
+      element.managers.find(manId => manId === id),));
+};
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -45,7 +47,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
       lastName,
       managers,
       responsibleFor,
-    });
+    })
+  };
 }
 
 function animalCount(species) {
