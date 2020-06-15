@@ -13,9 +13,8 @@ const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
-  const letsGo = data.animals.find(({ name }) => name === animal);
-  return letsGo.residents.every(({ age: aAge }) => aAge >= age);
-
+  const letsGo = data.animals.filter(animals => ids.find(id => id === animals.id));
+  return letsGo;
 }
 
 function animalsOlderThan(animal, age) {
