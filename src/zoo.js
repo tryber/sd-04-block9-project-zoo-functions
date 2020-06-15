@@ -94,14 +94,14 @@ function animalMap(options = {}) {
     if (sorted === true) specieNames[name].sort();
     return specieNames;
   }
-    const { includeNames = false, ...restOptions } = options;
-    const info = getLocation(data.animals);
-    data.animals.forEach(({ name, location, residents }) => {
+  const { includeNames = false, ...restOptions } = options;
+  const info = getLocation(data.animals);
+  data.animals.forEach(({ name, location, residents }) => {
       if (includeNames === true) name = putNames(name, residents, restOptions);
       info[location].push(name);
     });
-    return info;
-  }
+  return info;
+}
 const pickDay = (day) => {
   if (day === 'Monday') {
     return 'CLOSED';
