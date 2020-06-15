@@ -11,10 +11,11 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
+function animalsByIds(...ids) {
     // seu código aqui
+    const animalsByIdz = data.animals.filter(animals => ids.find(id => id === animals.id));
+    return animalsByIdz;
 }
-const animalsByIds = (...ids) => data.animals.filter(animal => ids.find(id => id === animal.id));
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
@@ -76,7 +77,7 @@ const pickDay = (day) => {
     return 'CLOSED';
   }
   return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
-};
+}
 function schedule(dayName) {
   // seu código aqui
   const dayObject = {};
