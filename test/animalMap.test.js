@@ -40,7 +40,6 @@ describe('animalMap', () => {
     };
 
     assert.deepEqual(actual, expected);
-
     // com opções especificadas, retorna nomes de animais ordenados
     options = { includeNames: true, sorted: true }
     actual = zoo.animalMap(options);
