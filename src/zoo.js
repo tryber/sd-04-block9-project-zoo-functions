@@ -40,10 +40,10 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
     // seu código aqui
-    data.employees.push(id, firstName, lastName, managers, responsibleFor);
-    data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+    function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+      data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  }
 }
 
 function animalCount(species) {
