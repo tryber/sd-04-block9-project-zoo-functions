@@ -13,17 +13,32 @@ const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
+  const letsGo = [];
+  if (ids.length === 0) {return letsGo};
+  if (ids.length >= 1) {
+    for (let i = 0; i < ids.length; i += 1) {
+     letsGo.push(data.animals.find((item) => item.id === `${ids[i]}`));
+     letsGo.push(data.animals.find(item => item.id === `${ids[i]}`));
+    }
+  return letsGo;
+    return letsGo;
+  }
+  return [];
 }
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const listAnimal = data.animals.find(list => list.name === animal);
-  const listAge = listAnimal.residents.every(list => list.age >= age);
-  return listAge;
+  const animals = data.animals.find(list => list.name === animal);
+  const animalsAge = animals.residents.every(list => list.age >= age);
+  return animalsAge;
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
+
+  if (listEmp === undefined) return {};
+  return listEmp;
+
 }
 
 function createEmployee(personalInfo, associatedWith) {
