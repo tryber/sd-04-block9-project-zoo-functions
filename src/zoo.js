@@ -72,7 +72,12 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
-
+const pickDay = (day) => {
+  if (day === 'Monday') {
+    return 'CLOSED';
+  }
+  return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+};
 function schedule(dayName) {
   // seu código aqui
   const dayObject = {};
