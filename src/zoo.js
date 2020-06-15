@@ -97,9 +97,9 @@ function animalMap(options = {}) {
   const { includeNames = false, ...restOptions } = options;
   const info = getLocation(data.animals);
   data.animals.forEach(({ name, location, residents }) => {
-      if (includeNames === true) name = putNames(name, residents, restOptions);
-      info[location].push(name);
-    });
+    if (includeNames === true) name = putNames(name, residents, restOptions);
+    info[location].push(name);
+  });
   return info;
 }
 const pickDay = (day) => {
