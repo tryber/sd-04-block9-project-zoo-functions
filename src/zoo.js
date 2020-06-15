@@ -47,8 +47,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     lastName = [],
     managers = [],
   ) => { const worker = { id, firstName, lastName, managers, responsibleFor };
-  }
-};
+  };
+}
 
 function animalCount(species) {
   // seu código aqui
@@ -72,6 +72,9 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  Object.keys(data.prices).forEach((elem) => {
+    (data.prices[elem] = Math.round(data.prices[elem] * ((percentage / 100) + 1) * 100) / 100);
+  });
 }
 
 function employeeCoverage(idOrName) {
