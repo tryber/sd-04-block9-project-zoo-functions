@@ -76,10 +76,32 @@ function entryCalculator(entrants) {
   const valueSenior = data.prices.Senior * listEntrants[2];
   return (valueAdult + valueChild + valueSenior);
 }
-
-function animalMap(options) {
+function animalMap(options = {}) {
   // seu código aqui
-}
+  function getLocation(animals) {
+    return animals.map(({ location }) => location)
+    .reduce((obj, elem) => {
+      obj[elem] = [];
+      return obj;
+    }, {});
+  }
+  function putNames(name, residents, { sex = '', sorted = false }) {
+    const specieNames = {};
+    if (specieNames[name] === undefined) specieNames[name] = [];
+    specieNames[name] = residents
+    .filter(({ sex: animalSex }) => (sex === '' || sex === animalSex))
+    .map(({ name: animalName }) => animalName);
+    if (sorted === true) specieNames[name].sort();
+    return specieNames;
+  }
+    const { includeNames = false, ...restOptions } = options;
+    const info = getLocation(data.animals);
+    data.animals.forEach(({ name, location, residents }) => {
+      if (includeNames === true) name = putNames(name, residents, restOptions);
+      info[location].push(name);
+    });
+    return info;
+  }
 const pickDay = (day) => {
   if (day === 'Monday') {
     return 'CLOSED';
