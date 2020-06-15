@@ -30,6 +30,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return {...personalInfo, ...associatedWith};
 }
 
 function isManager(id) {
@@ -48,15 +49,6 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
-  if (entrants === 0
-    || entrants === undefined
-    || entrants === null
-    || entrants === Object.keys(entrants).length === 0
-    || entrants === undefined 
-    || Object.keys(entrants).length === 0)
-    return 0;
-  
-  const { Adult, Senior, Child } = entrants;
 }
 
 function animalMap(options) {
