@@ -71,41 +71,19 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
-  function getLocation(animals) {
-    return animals.map(({ location }) => location)
-    .reduce((obj, elem) => {
-      obj[elem] = [];
-      return obj;
-    }, {});
-  }
-  
-  function putNames(name, residents, { sex = '', sorted = false }) {
-    const aniNome = {};
-    if (aniNome[name] === undefined) aniNome[name] = [];
-    aniNome[name] = residents
-    .filter(({ sex: animalSex }) => (sex === '' || sex === animalSex))
-    .map(({ name: animalName }) => animalName);
-  
-    if (sorted === true) aniNome[name].sort();
-  
-    return aniNome;
-  }
-  
-  function animalMap(options = {}) {
-    // seu código aqui
-    const { includeNames = false, ...restOptions } = options;
-    const info = getLocation(data.animals);
-  
-    data.animals.forEach(({ name, location, residents }) => {
-      if (includeNames === true) name = putNames(name, residents, restOptions);
-      info[location].push(name);
-    });
-  
-    return info;
 }
 
 function schedule(dayName) {
   // seu código aqui
+  const dayObject = {};
+  if (dayName) {
+    dayObject[dayName] = pickDay(dayName);
+    return dayObject;
+  }
+  Object.keys(data.hours).forEach((day) => {
+    dayObject[day] = pickDay(day);
+  });
+  return dayObject;
 }
 
 function oldestFromFirstSpecies(id) {
