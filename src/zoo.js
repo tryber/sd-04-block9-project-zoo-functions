@@ -100,8 +100,19 @@ function increasePrices(percentage) {
   data.prices = resultado;
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function employeeCoverage(idOrName = '') {
+  return data.employees.reduce((acc, employee) => {
+    if (idOrName === '' || idOrName === employee.id ||
+      idOrName === employee.firstName || idOrName === employee.lastName) {
+      acc[`${employee.firstName} ${employee.lastName}`] = [];
+      employee.responsibleFor.forEach((animalKey) => {
+        const specAnim = data.animals.find(animal =>
+          animal.id === animalKey);
+        acc[`${employee.firstName} ${employee.lastName}`].push(specAnim.name);
+      });
+    }
+    return acc;
+  }, {});
 }
 
 module.exports = {
